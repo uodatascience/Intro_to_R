@@ -1,0 +1,28 @@
+Lessons (Rough stuff down by 21st)
+1: Introduction -
+[ ] basic syntax (Cory)
+[ ] installation (Kris)
+[ ] Familiarization with RStudio (Kris)
+[ ] packages & importing (Jonny)
+[ ] Chapters 6 & 8 in r for data science (Kris)
+[ ] basic language commands - accessing and reading help files, etc. (Cory)
+[ ] Example of typical workflow, data analysis chain as an overview (Kris + Cory + Jonny)
+[ ] Plug Slack and blog
+2: Data Wrangling - data types, manipulation, subsetting, ordering
+    Reading data
+    Making lists, data frames, converting between them, indexing and selecting
+    Basics on objects - wtf is the dollar sign notation
+    Ordering, subsetting, reshaping
+3: Plotting
+4: Control flow - loops optimized loops & aggregate operations
+5: Functions - how to write them, how to structure your data analysis code, good practices for reusable code
+6: Document creation - RMD & LaTeX
+
+
+Reference pages:
+- Common commands
+- FAQ
+- Style guide
+    https://google.github.io/styleguide/Rguide.xml
+- Helpful links
+
