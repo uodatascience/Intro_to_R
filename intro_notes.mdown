@@ -1,13 +1,14 @@
 Notes based on a reading of [Emmanuel Paradis' R for Beginners](https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf)
 
-# Introduction  
+# 1.
+## Introduction  
 - R is a language  
 - Only objects in active memory are manipulated, not the data on the disk  
 - Objects have attributes that specify what kind of data is represented  
   - 2 intrinsic attributes of all objects  
     - *mode* and *length*  
 
-# Basic syntax
+## Basic syntax
 - a function is always written with parentheses, even if the are empty; e.g.`getwd()`  
   - A function without parentheses will display the content of the function  
 - A value must be assigned to an object or it will not be stored in memory  
@@ -18,31 +19,54 @@ Notes based on a reading of [Emmanuel Paradis' R for Beginners](https://cran.r-p
   - `seq()`  
   - `c()`  
   - `rep()`  
-  - `factor()` & `levels()`  
+  - `factor()` & `levels()` 
+  
 
+## Installation  
 
-# Getting help  
+## RStudio  
+
+## Packages and importing
+
+## Basic language commands
+### Getting help  
 - The on-line help can be accessed from within R with the use of `?`; e.g. `?lm`  
   - `help(lm)` and `help('lm')` are equivalent  
   - These commands only search packages that are loaded in memory. To search all packages, set `try.all.packages = TRUE`  
 - For a more detailed desciption of what the is contained in the help documentation, see page 7 of https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf  
+- 
 
 
-# Installation  
+## Example of a typical workflow
 
-# RStudio  
-
-# Typical workflow  
+## Plug slack & blog
  
-# Working with data  
+#2. 
+## Reading in data
+### Working with data  
 - Basic read in is `read.table()`  
 - Saving data  
   - `write.table()` or `write()` writes an objet in a file  
   - Can record a *group* of objects by making them into a 'workspace' with `save(x, y, z, file= "xyz.RData")`  
   
+
 # Types of data objects
 - Vector: *one dimensional sequence of data elements*
 - Matrix: *a two-dimensional collection of data elements*
   - e.g. 
 - Data frame: *A two-dimensional collection of data elements where vectors must be of the same length but may be of different class*
 - List: *A collection of data elements that may be of different classes and lengths*
+
+# 3. 
+## Plotting
+
+# 4. 
+## Control flow
+
+# 5.
+## Funcions
+
+# 6. 
+## Document creation
+
+
