@@ -50,7 +50,15 @@ Notes based on a reading of [Emmanuel Paradis' R for Beginners](https://cran.r-p
   - Can record a *group* of objects by making them into a 'workspace' with `save(x, y, z, file= "xyz.RData")`  
   
 
-# Types of data objects
+## Making lists, data frames, converting between them
+
+## Indexing and selecting
+### Indexing
+- Single brackets
+	- For example, to select the third value of vector x `x[3]`
+
+## Basics on objects
+### Types of data objects
 - Vector: *one dimensional sequence of data elements*
 - Matrix: *a two-dimensional collection of data elements*
   - e.g. 
@@ -64,9 +72,10 @@ Notes based on a reading of [Emmanuel Paradis' R for Beginners](https://cran.r-p
 ## Control flow
 
 # 5.
-## Funcions
+## Functions
 
 # 6. 
 ## Document creation
+
 
 
