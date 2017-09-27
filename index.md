@@ -1,3 +1,7 @@
+---
+title: R Guide Index
+order: 0
+---
 # UO R Guide
 ## Lessons
 

@@ -35,7 +35,8 @@
         {% endif %}
 
         <h2>Lessons</h2>
-        {% for page in site.pages %}
+        {% assign pages = site.pages | sort:"order" %}
+        {% for page in pages %}
           <a href="{{ page.url }}">{{ page.title }}</a><br>
         {% endfor %}
 
