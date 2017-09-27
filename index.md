@@ -1,7 +1,7 @@
 ---
 title: R Guide Index
 order: 0
-permalink: index.html
+permalink: /R_Guide/index.html
 ---
 # UO R Guide
 ## Lessons

@@ -2,7 +2,7 @@
 title: testing subpage
 date: 2017-09-27
 order: 1
-permalink: 02_index_test.html
+permalink: /R_Guide/02_index_test.html
 ---
 
 # testing that
