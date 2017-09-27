@@ -37,7 +37,7 @@
         <h2>Lessons</h2>
         {% assign pages = site.pages | sort:"order" %}
         {% for page in pages %}
-          {% if page.url contains ".md" %}
+          {% if page.path contains ".md" %}
           <a href="/R_Guide{{ page.url }}">{{ page.title }}</a><br>
           {% endif %}
         {% endfor %}
