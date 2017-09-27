@@ -175,8 +175,8 @@ It worked! We'll spend some time talking about ggplot (led by Jonny) a little la
 
 What happens when two packages have functions with the same name? for example, both dplyr and plyr have functions named "summarise" that behave slightly differently. We can solve these "namespace conflicts" by being specific about where we load the library in our search paths. If we want to load the functions from plyr, but keep all our existing references to dplyr, we could do something like this (although if you've already loaded tidyverse, this won't do anything because these packages are loaded by tidyverse)
 ```{r ordered library load}
-library(dplyr)
 library(plyr, pos=100) # We can put it at an arbitrarily high number, it will be after everything but the base functions
+library(dplyr)
 ```
 
 Or, we could make our code more explicit. We can directly reference a package's functions without loading the library by using `::`, for example with 
