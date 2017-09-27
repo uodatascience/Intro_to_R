@@ -34,13 +34,10 @@
           </ul>
         {% endif %}
 
-        <ol>
+
         {% for page in site.pages %}
-          <li>
-            <a href="{{ page.url }}">{{ page.title }}</a>
-          </li>
+          <a href="{{ page.url }}">{{ page.title }}</a>
         {% endfor %}
-        </ol>
 
       </header>
       <section>
