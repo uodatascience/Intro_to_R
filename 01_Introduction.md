@@ -312,7 +312,6 @@ references to dplyr, we could do something like this (although if you've
 already loaded tidyverse, this won't do anything because these packages
 are loaded by tidyverse)
 
-    library(dplyr)
     library(plyr, pos=100) # We can put it at an arbitrarily high number, it will be after everything but the base functions
 
     ## -------------------------------------------------------------------------
@@ -334,6 +333,8 @@ are loaded by tidyverse)
     ## The following object is masked _by_ 'package:purrr':
     ## 
     ##     compact
+
+    library(dplyr)
 
 Or, we could make our code more explicit. We can directly reference a
 package's functions without loading the library by using `::`, for
