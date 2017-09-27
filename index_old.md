@@ -1,5 +1,6 @@
 ---
 layout: default
+title: R Guide
 ---
 
 # UO R Guide
