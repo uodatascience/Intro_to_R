@@ -1,4 +1,4 @@
 theme: jekyll-theme-minimal
 title: R Guide
 description: Test line 1
-url: https://uodatascience.github.io/R_Guide
+baseurl: https://uodatascience.github.io/R_Guide/
