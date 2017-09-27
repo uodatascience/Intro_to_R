@@ -5,7 +5,6 @@ date: "September 25, 2017"
 output: 
   md_document:
     preserve_yaml: true
-
 order: 1
 ---
 
@@ -182,8 +181,30 @@ Some of the functions that you'll use are already in your install of R.
 You can write your own functions (more on this later on) or you can use
 one's others have written, like sqrt().
 
+Say we are confused about how a function works. We can google it (and
+you should) and we can also use R's built in help. To access the help
+file of a function, you enter a '?' followed by the package name:
+
+    ?sqrt
+
+The help documentation can be pretty confusing if you aren't quite
+familiar with the package/function. The examples (which are typically at
+the bottom) can be very helpful, even for beginners. And some are
+simpler than others:
+
+This one basically just says it computes square root of x, where x is a
+vector or array. It also tells you (subtly) what the function works
+with; square root expects a numerical vector (including a vector of 1,
+or an element). If we give it a vector of non-number objects (like the
+Bands list above), it won't work. Sometimes checking the help
+documentation can tell you if you've given the function the wrong type
+of object.
+
+Packages
+--------
+
 Often times, functions are part of *packages* or *libraries* in R. These
-are basically made by other people and have lots of functions you might
+are usually made by other people and have lots of functions you might
 find useful. One that we will start using soon is called the tidy verse.
 It's actually a set of packages that the authors put together (you can
 also get each of the packages separately, butyou don't need to). To use
@@ -196,6 +217,24 @@ We just used the install.packages() function. This goes to cran, and
 downloads the package into our user library (which is where we store all
 of the packages we install). It requires you to enter the package name
 in quotes, like we did above.
+
+How does `install.packages()` know where to download the package from,
+and where does it go? Check its documentation with `?install.packages`.
+In the list of arguments we see `lib` and `repos = getOption("repos")`.
+Further down we see that `lib` defaults to the first element of
+`.libPaths()`. What do we get when we run those commands?
+
+    getOption("repos")
+
+    ##     CRAN 
+    ## "@CRAN@"
+
+    .libPaths()
+
+    ## [1] "/Library/Frameworks/R.framework/Versions/3.4/Resources/library"
+
+Most packages we use will come from cran, and if you ever need to modify
+or find package files for any reason, there they shall be.
 
 Now we have the package tidyverse, and can use it whenever we want. I'm
 so excited that I'm going touse one of the packages within the tidyverse
@@ -211,14 +250,19 @@ unsatisfying life in SPSS.
 Wait, its no big deal, we just forgot one simple step. In order to use a
 package, we have to call the library, or tell R that we're going to be
 using this library (we're basically telling it to keep it in its working
-memory). Importantly, you have to call all of the libraries you will use
-each time you start a new session in R. You may want to get in the
-habbit of putting a bunch of library calls at the top of your script.
+memory). We load libraries into our environment with the library()
+function. We don't need to put quotes (ie. make it a string) around the
+name in the library function (side note: you will make the mistake of
+quoting things in library and not quoting things in install.packages
+upwards of 100 times). This puts the library in the list of packages to
+search. For example, compare the output of `search()` before and after
+loading a library:
 
-We call libraries with the library() function. Importantly, we don't put
-quotes around the name in the library function (side note: you will make
-the mistake of quoting things in library and not quoting things in
-install.packages upwards of 100 times).
+    search()
+
+    ## [1] ".GlobalEnv"        "package:stats"     "package:graphics" 
+    ## [4] "package:grDevices" "package:utils"     "package:datasets" 
+    ## [7] "package:methods"   "Autoloads"         "package:base"
 
     library(tidyverse)
 
@@ -234,6 +278,21 @@ install.packages upwards of 100 times).
     ## filter(): dplyr, stats
     ## lag():    dplyr, stats
 
+    search()
+
+    ##  [1] ".GlobalEnv"        "package:dplyr"     "package:purrr"    
+    ##  [4] "package:readr"     "package:tidyr"     "package:tibble"   
+    ##  [7] "package:ggplot2"   "package:tidyverse" "package:stats"    
+    ## [10] "package:graphics"  "package:grDevices" "package:utils"    
+    ## [13] "package:datasets"  "package:methods"   "Autoloads"        
+    ## [16] "package:base"
+
+Importantly, you have to call all of the libraries you will use each
+time you start a new session in R. You may want to get in the habit of
+putting a bunch of library calls at the top of your script.
+
+    library(tidyverse)
+
 And now let's try to use ggplot
 
     ggplot(data=amp_volume_dataframe, aes(x=Bands, y = amp_volumes))+
@@ -244,27 +303,46 @@ It worked! We'll spend some time talking about ggplot (led by Jonny) a
 little later on, so don't worry about what that code means. Soon you'll
 know.
 
-One more thing, say we are confused about how a package works. We can
-google it (and you should) and we can also use R's built in help. To
-access the help file of a function, you enter a '?' followed by the
-package name:
+What happens when two packages have functions with the same name? for
+example, both dplyr and plyr have functions named "summarise" that
+behave slightly differently. We can solve these "namespace conflicts" by
+being specific about where we load the library in our search paths. If
+we want to load the functions from plyr, but keep all our existing
+references to dplyr, we could do something like this (although if you've
+already loaded tidyverse, this won't do anything because these packages
+are loaded by tidyverse)
 
-    ?ggplot
+    library(dplyr)
+    library(plyr, pos=100) # We can put it at an arbitrarily high number, it will be after everything but the base functions
 
-The help documentation can be pretty confusing if you aren't quite
-familiar with the package/function. The examples (which are typically at
-the bottom) can be very helpful, even for begginers. And some are
-simpler than others:
+    ## -------------------------------------------------------------------------
 
-    ?sqrt
+    ## You have loaded plyr after dplyr - this is likely to cause problems.
+    ## If you need functions from both plyr and dplyr, please load plyr first, then dplyr:
+    ## library(plyr); library(dplyr)
 
-See, this one basically just says it computes square root of x, where x
-is a vector or array. It also tells you (subtly) what the function works
-with; square root expects a numerical vector (including a vector of 1,
-or an element). If we give it a vector of non-number objects (like the
-Bands list above), it won't work. Sometimes checking the help
-documentation can tell you if you've given the function the wrong type
-of object.
+    ## -------------------------------------------------------------------------
+
+    ## 
+    ## Attaching package: 'plyr'
+
+    ## The following objects are masked _by_ 'package:dplyr':
+    ## 
+    ##     arrange, count, desc, failwith, id, mutate, rename, summarise,
+    ##     summarize
+
+    ## The following object is masked _by_ 'package:purrr':
+    ## 
+    ##     compact
+
+Or, we could make our code more explicit. We can directly reference a
+package's functions without loading the library by using `::`, for
+example with
+
+    ggplot2::ggplot(data=amp_volume_dataframe, ggplot2::aes(x=Bands, y = amp_volumes))+
+      ggplot2::geom_col()
+
+![](01_Introduction_files/figure-markdown_strict/direct%20function%20reference-1.png)
 
 That is all for this basic overview of R. Hopefully it has started to
 make youR adventuRe moRe toleRable!
