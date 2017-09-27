@@ -1,3 +1,4 @@
 theme: jekyll-theme-minimal
 title: R Guide
 description: Test line 1
+permalink: /R_Guide/:title.html
