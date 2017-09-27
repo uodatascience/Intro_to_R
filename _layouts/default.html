@@ -33,12 +33,15 @@
             <li><a href="{{ site.github.repository_url }}">View On <strong>GitHub</strong></a></li>
           </ul>
         {% endif %}
+
+        {% for page in site.pages %}
+        <li><span>{{ page.date | date_to_string }}</span> » <a href="{{ page.url }}" title="{{ page.title }}">{{ page.title }}</a></li>
+        {% endfor %}
+
       </header>
       <section>
 
-      {% for page in site.pages %}
-      <li><span>{{ page.date | date_to_string }}</span> » <a href="{{ page.url }}" title="{{ page.title }}">{{ page.title }}</a></li>
-      {% endfor %}
+      {{ content }}
 
       </section>
       <footer>

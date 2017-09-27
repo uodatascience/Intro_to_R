@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # UO R Guide
 ## Lessons
 
