@@ -36,9 +36,9 @@
       </header>
       <section>
 
-      {% for post in site.pages %}
-      <li><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
-
+      {% for page in site.pages %}
+      <li><span>{{ page.date | date_to_string }}</span> » <a href="{{ page.url }}" title="{{ page.title }}">{{ page.title }}</a></li>
+      {% endfor %}
       </section>
       <footer>
         {% if site.github.is_project_page %}
