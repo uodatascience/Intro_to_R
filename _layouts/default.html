@@ -36,7 +36,8 @@
       </header>
       <section>
 
-      {{ content }}
+      {% for post in site.pages %}
+      <li><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
 
       </section>
       <footer>
