@@ -1,13 +1,6 @@
----
-title: "1 - Introduction "
-author: "Cory Costello"
-date: "September 25, 2017"
-output: 
-  html_document:
-    keep_md: true
-
-order: 2
----
+# 1 - Introduction 
+Cory Costello  
+September 25, 2017  
 #What the F#$% is R and how do I get started with it?
 
 ##Installing R and R Studio 
@@ -24,8 +17,13 @@ Okay, that is all you need to start your gloRious adventuRe.
 R is a programming language designed for statistical computing. So, it is (in many ways) more similar to another programming language (e.g., Python) than it is to statistical software you may have experience with (e.g., SPSS). If you have no experience with programming languages and have only ever used statistical software (e.g., SPSS) for your stats then you will probably feel overwhelmed and confused by R for a little while. That's fine and normal. Speaking for myself, I think I installed and opened R studio about a half dozen times over the course of a year before I ever used it becuase I had no idea where to get started. Hopefully this (and the next few weeks of the Data Science Club) helps you with that.
 
 How do we use R. Lots of ways! For starters, it's like a calculator. Sort of like the graphing calculators that you may have been fascinated by at 16 (or at least I was for some reason). Because it's like a calculator, we can use it like one.
-```{r R is a fu$%ing calculator}
+
+```r
 5+6
+```
+
+```
+## [1] 11
 ```
 Okay, but now we all have calculators in our phones, so this isn't that cool. What else can R do?
 
@@ -35,21 +33,34 @@ Lots of stuff. Almost all of it revolves around *assigning* and then later *call
 ##Objects
 How do we get R to represent some information as an object? We tell it to, using the assignment operator '<-'. Whatever we put on the left side of the arrow becomes the name of the object and whatever is on the right side of the arrow becomes the definition of that object. For example, we may want to store what we had done earlier into an object.
 
-```{r objects}
+
+```r
 spinal_tap_amps <- 5 + 6
 ```
 Now, we can tell R to do something with this object. For example, we could get its sqaure root:
 
-```{r using objects 1 - math}
+
+```r
 sqrt(spinal_tap_amps)
+```
+
+```
+## [1] 3.316625
 ```
 Or we could use it in a logical statement
 
-```{r using objects 2 - logical}
+
+```r
 if (spinal_tap_amps == 11) {
   print("But these go up to 11")
 }
+```
 
+```
+## [1] "But these go up to 11"
+```
+
+```r
 # And we could do this with other objects:
 other_amps <- 10
 
@@ -61,14 +72,24 @@ I know the above had some new stuff in it (like wtf is with the curly brackets),
 
 We now have 2 different objects: spinal_tap_amps and other_amps. We can put these together into an object called amps. We'll do this like so:
 
-```{r combining objects}
+
+```r
 amp_volumes <- c(spinal_tap_amps, other_amps)
 amp_volumes
 ```
+
+```
+## [1] 11 10
+```
 What happens if we take the sqrt of our new object?
 
-```{r operating on our new object}
+
+```r
 sqrt(amp_volumes)
+```
+
+```
+## [1] 3.316625 3.162278
 ```
 Would you look at that! It gave us the square roots of each of the values in our new object. How did it know?
 
@@ -76,30 +97,35 @@ It knows because when we took two single-element objects and put them together, 
 
 Now I know what you're thinking. I don't work with vectors I work with datasets! Just like we combined individual elements into a vector, we can combine vectors into a dataset. Since we've been working with the volume capacity of guitar amps (in case this hasn't been obvious, this has all been a reference to spinal tap; see <https://en.wikipedia.org/wiki/Spinal_Tap_(band)>), let's make a vector for the names of the bands we're considering.
 
-```{r character vector}
+
+```r
 Bands <- c("Spinal Tap", "Everyone Else")
 ```
 
 Now let's put that and our vector of numbers together
 
-```{r combining vectors 2}
+
+```r
 amp_volume_dataset <- cbind(amp_volumes, Bands)
-``` 
+```
 And voila! We have a very simple dataset. Notice in the environment, R studio knows that this new object is data rather than values (values includes single objects/elements and vectors).
 
 R has a few different formats for data. We'll likely talk more about these in later weeks as they become relevant. But check this out anyway:
-```{r changing data format}
+
+```r
 amp_volume_dataset <- as.data.frame(amp_volume_dataset)
 ```
 See, now it's a data frame. We could also change it to a data table (with as.table()) or other formats.
 
 The above illustrates another thing about r. If you use the same name for a new object, it will overwrite the old object. Now we can't get our old unformatted data object. We will have to make it again if we want to:
-```{r returing to unformatted}
+
+```r
 amp_volume_dataset <- cbind(amp_volumes, Bands)
 ```
 And if we wanted both, we can just assign the dataframe to a new object
 
-```{r dataframe too}
+
+```r
 amp_volume_dataframe <- as.data.frame(amp_volume_dataset)
 ```
 
@@ -122,14 +148,16 @@ Some of the functions that you'll use are already in your install of R. You can 
 
 Often times, functions are part of *packages* or *libraries* in R. These are basically made by other people and have lots of functions you might find useful. One that we will start using soon is called the tidy verse. It's actually a set of packages that the authors put together (you can also get each of the packages separately, butyou don't need to). To use a new package, you'll first need to install it. Let's install the tidyverse:
 
-```{r installing a package, eval=FALSE, echo=TRUE}
+
+```r
 #install.packages("tidyverse")
 ```
 We just used the install.packages() function. This goes to cran, and downloads the package into our user library (which is where we store all of the packages we install). It requires you to enter the package name in quotes, like we did above.
 
 Now we have the package tidyverse, and can use it whenever we want. I'm so excited that I'm going touse one of the packages within the tidyverse called ggplot to make a simple plot of our spinal tap influenced dataset!!!!!
 
-```{r GGPlot, eval=FALSE, echo=TRUE}
+
+```r
 ggplot(data=amp_volume_dataframe, aes(x=Bands, y = amp_volumes))+
   geom_col()
 ```
@@ -139,24 +167,48 @@ Wait, its no big deal, we just forgot one simple step. In order to use a package
 
 We call libraries with the library() function. Importantly, we don't put quotes around the name in the library function (side note: you will make the mistake of quoting things in library and not quoting things in install.packages upwards of 100 times).
 
-```{r call a library}
+
+```r
 library(tidyverse)
 ```
+
+```
+## Loading tidyverse: ggplot2
+## Loading tidyverse: tibble
+## Loading tidyverse: tidyr
+## Loading tidyverse: readr
+## Loading tidyverse: purrr
+## Loading tidyverse: dplyr
+```
+
+```
+## Conflicts with tidy packages ----------------------------------------------
+```
+
+```
+## filter(): dplyr, stats
+## lag():    dplyr, stats
+```
 And now let's try to use ggplot
-```{r GGPlot works!}
+
+```r
 ggplot(data=amp_volume_dataframe, aes(x=Bands, y = amp_volumes))+
   geom_col()
 ```
+
+![](03_Welcome_to_R_Datascienceclub_F2017_files/figure-html/GGPlot works!-1.png)<!-- -->
 It worked! We'll spend some time talking about ggplot (led by Jonny) a little later on, so don't worry about what that code means. Soon you'll know.
 
 One more thing, say we are confused about how a package works. We can google it (and you should) and we can also use R's built in help. To access the help file of a function, you enter a '?' followed by the package name:
 
-```{r help function}
+
+```r
 ?ggplot
 ```
 
 The help documentation can be pretty confusing if you aren't quite familiar with the package/function. The examples (which are typically at the bottom) can be very helpful, even for begginers. And some are simpler than others:
-```{r help function easier}
+
+```r
 ?sqrt
 ```
 See, this one basically just says it computes square root of x, where x is a vector or array. It also tells you (subtly) what the function works with; square root expects a numerical vector (including a vector of 1, or an element). If we give it a vector of non-number objects (like the Bands list above), it won't work. Sometimes checking the help documentation can tell you if you've given the function the wrong type of object.
