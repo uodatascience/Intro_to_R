@@ -29,15 +29,85 @@ Okay, that is all you need to start your gloRious adventuRe.
 How do I R?!
 ------------
 
+### Using RStudio
+
+There are four main panels in the RStudio window.
+
+The **top right** panel is the **workspace**. Here you will find a list
+of all objects currently in memory.
+
+The bottom right window displays files in your working directory, plot
+output, available packages, and help documentation.
+
+The **bottom left** panel is the **console**. You can type code directly
+into the console and hit enter to execute it.
+
+The **top left** panel is the **code editor**. This is where you will
+write most of your code. In the code editor, you can write multiple
+lines of code and run chunks or the full script. The toolbar at the top
+of the panel allows you to interact with the code in the editor in some
+important ways. Hover your mouse pointer over the icons to see what each
+button does.
+
+There are also shortcuts that allow you to use the toolbar functions
+without ever taking your fingers from the keyboard. Here are some of the
+most commonly used:
+
+<table>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Keys</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Run highlighted code</td>
+<td><code>Cmd+Enter</code></td>
+</tr>
+<tr class="even">
+<td>Insert &lt;-</td>
+<td><code>option+-</code></td>
+</tr>
+<tr class="odd">
+<td>(Un)comment lines</td>
+<td><code>Cmd+Shift+C</code></td>
+</tr>
+<tr class="even">
+<td>Knit document</td>
+<td><code>Cmd+Shift+K</code></td>
+</tr>
+<tr class="odd">
+<td>Run from start to current line</td>
+<td><code>Cmd+Option+B</code></td>
+</tr>
+<tr class="even">
+<td>Keyboard shortcut quick reference</td>
+<td><code>Option+Shift+K</code></td>
+</tr>
+</tbody>
+</table>
+
+For a more complete list, check out the RStudio IDE Cheat Sheet. Find it
+online by going to `Help>Cheatsheets>RStudio IDE Cheatsheet`, or by
+clicking the following URL
+<https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf>
+
+Another important shortcut is `Tab` to autocomplete functions or file
+names.
+
+For a more complete list, check out the [RStudio IDE Cheat
+Sheet](https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf)
+
 Getting help
 ------------
 
-There are a couple different ways to get help within R.
-
-To access the help documentation, use either `help()`. `?`, or `??`
-
 Check out the [r-project site](https://www.r-project.org/help.html) for
 more on help documentation.
+
+Within R, use `?functionName` or `??functionName`. The single `?` will
+search for a function of that name whereas `??` will use your input as a
+keyword to search in all R documentation.
 
 What is R?
 ==========
@@ -172,20 +242,28 @@ And if we wanted both, we can just assign the dataframe to a new object
 Functions
 ---------
 
-Now that you know about *objects*, you'll want to know about
-*functions*. In R, we use functions to do stuff to objects. Functions
-take in some input, perform some operation, and then provide some
-output. We've already covered several functions: *c() is a function for
-putting things together +it stands for concatenate(mneumonic: it also
-shares an initial with combine) +it takes objects as the input, combines
-them, and provides the combined object as an output *sqrt() is a
-function +it takes numeric objects as inputs (elements, vectors,
-matrices), calculates square-root of each, and outputs the calculated
-square root. *as.data.frame() is a function +it takes some object and
-formats it as a dataframe *print() is a function +it takes some object
-as input, and the output is that object printed to the console \*cbind()
-is a fucntion +it takes at least two objects, and combines them
-column-wise
+-   c() is a function for putting things together
+    -   it stands for concatenate(mneumonic: it also shares an initial
+        with combine)
+    -   it takes objects as the input, combines them, and provides the
+        combined object as an output
+-   sqrt() is a function
+    -   it takes numeric objects as inputs (elements, vectors,
+        matrices), calculates square-root of each, and outputs the
+        calculated square root.
+-   as.data.frame() is a function
+    -   it takes some object and formats it as a dataframe
+-   print() is a function
+    -   it takes some object as input, and the output is that object
+        printed to the console
+-   cbind() is a fucntion
+    -   it takes at least two objects, and combines them column-wise
+    -   this is a good example of arguments separated by a comma. If you
+        glance back to the cbind() function we used, we passed it two
+        vectors, separated by a comma. cbind() expects you to provide
+        two objects that you want to combine column-wise; these two
+        objects are the first two arguments of cbind, and we separate
+        them with a comma.
 
 Some of the functions that you'll use are already in your install of R.
 You can write your own functions (more on this later on) or you can use
@@ -354,6 +432,69 @@ example with
       ggplot2::geom_col()
 
 ![](01_Introduction_files/figure-markdown_strict/direct%20function%20reference-1.png)
+
+Some more useful basic syntax
+-----------------------------
+
+We've covered some of the basics of R syntax (e.g., the assignment
+operator '&lt;-')
+
+Here are a few more aspects of R syntax that are helpful to keep in mind
+
+-   R is case sensitive. So a and A would be two different objects
+    -   A very common syntax mistake is using the wrong case (e.g., you
+        assigned an object to a, and try to call it with A)
+-   R is newline terminated, meaning that things on the same line are
+    considered a single statement. However, if a statement is incomplete
+    (e.g., ends in an open parenthesis, or ends with a comma), R will
+    search on the next line for the resolution. See the example below
+
+<!-- -->
+
+    # Create 2 example vectors
+    example_part1 <- runif(100)
+    example_part2 <- runif(100)
+
+    # All three of these are equivalent:
+
+    example <- cbind(example_part1, example_part2)
+    example <- cbind(example_part1, 
+                example_part2)
+    example <- cbind(example_part1
+                ,example_part2)
+
+-   You can typically subset objects using \[\]. If the object is a
+    matrix (i.e., has rows and columns), the argument order is
+    \[rows, columns\]. If the object is a vector, then only one number
+    goes in the bracket \[rows\]. Here are some examples of subsetting
+    the example object from above
+    -   example\[1:50,\]
+        -   This would give us the first 50 rows, and all columns
+    -   example\[1:50, 1\]
+        -   This would give us the first 50 rows and just the first
+            column
+    -   example\[,1\]
+        -   This would give us all rows, just the first column
+-   If you are using logical statements, you use "==" for is equal to.
+    So, if we wanted to see if any elements in example is equal to 1, we
+    would use the following:
+    -   example == 1
+        -   This would provide us with an object the same dimensions as
+            example, with TRUE or FALSE in every cell, where TRUE means
+            the value in the cell was equal to 1 and FALSE means the
+            value in the cell was not equal to 1.
+    -   One reason for this is that '=' can be used as an assignment
+        operator (it is equivalent to '&lt;-') and is also used in
+        defining arguments in functions (e.g., instead of sqrt(example)
+        we could write sqrt(x=example) because the first argument in
+        sqrt is called x, so we can use an '=' to define it).
+-   Some other logical statements:
+    -   "==" means is equal to (from above)
+    -   "!=" means not equal to
+    -   "&gt;" means greater than
+    -   "&lt;" means less than
+    -   "&lt;=" means less than or equal to
+    -   "&gt;=" means greater than or equal to
 
 That is all for this basic overview of R. Hopefully it has started to
 make youR adventuRe moRe toleRable!
