@@ -5,8 +5,21 @@ date: "September 25, 2017"
 output: 
   md_document:
     preserve_yaml: true
+    toc: true
+    toc_depth: 2
 order: 1
 ---
+
+-   [What the F\#$% is R and how do I get started with
+    it?](#what-the-f-is-r-and-how-do-i-get-started-with-it)
+    -   [Installing R and R Studio](#installing-r-and-r-studio)
+    -   [How do I R?!](#how-do-i-r)
+    -   [Getting help](#getting-help)
+-   [What is R?](#what-is-r)
+    -   [Objects](#objects)
+    -   [Functions](#functions)
+    -   [Packages](#packages)
+    -   [Some more useful basic syntax](#some-more-useful-basic-syntax)
 
 What the F\#$% is R and how do I get started with it?
 =====================================================

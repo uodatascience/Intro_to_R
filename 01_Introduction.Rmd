@@ -5,6 +5,8 @@ date: "September 25, 2017"
 output: 
   md_document:
     preserve_yaml: true
+    toc: true
+    toc_depth: 2
 order: 1
 ---
 #What the F#$% is R and how do I get started with it?
