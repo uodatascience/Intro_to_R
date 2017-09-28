@@ -29,6 +29,16 @@ Okay, that is all you need to start your gloRious adventuRe.
 How do I R?!
 ------------
 
+Getting help
+------------
+
+There are a couple different ways to get help within R.
+
+To access the help documentation, use either `help()`. `?`, or `??`
+
+Check out the [r-project site](https://www.r-project.org/help.html) for
+more on help documentation.
+
 What is R?
 ==========
 
