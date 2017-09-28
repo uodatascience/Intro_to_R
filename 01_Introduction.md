@@ -272,6 +272,8 @@ file of a function, you enter a '?' followed by the package name:
 
     ?sqrt
 
+    ## starting httpd help server ... done
+
 The help documentation can be pretty confusing if you aren't quite
 familiar with the package/function. The examples (which are typically at
 the bottom) can be very helpful, even for beginners. And some are
@@ -311,12 +313,13 @@ Further down we see that `lib` defaults to the first element of
 
     getOption("repos")
 
-    ##     CRAN 
-    ## "@CRAN@"
+    ##                                 CRAN                            CRANextra 
+    ##                             "@CRAN@" "http://www.stats.ox.ac.uk/pub/RWin"
 
     .libPaths()
 
-    ## [1] "/Library/Frameworks/R.framework/Versions/3.4/Resources/library"
+    ## [1] "C:/Users/Cory/Documents/R/win-library/3.4"
+    ## [2] "C:/Program Files/R/R-3.4.1/library"
 
 Most packages we use will come from cran, and if you ever need to modify
 or find package files for any reason, there they shall be.
@@ -441,6 +444,13 @@ Here are a few more aspects of R syntax that are helpful to keep in mind
 -   R is case sensitive. So a and A would be two different objects
     -   A very common syntax mistake is using the wrong case (e.g., you
         assigned an object to a, and try to call it with A)
+-   A '\#' in R used for commenting. Once you place a '\#', everything
+    on that lines that follows will be ignored by R. There are two main
+    uses for this:
+    1.  Putting comments into your code to explain it to people reading
+        it (including your future self)
+    2.  Removing code you don't want to run but want to keep in the
+        script for record keeping's sake.
 -   R is newline terminated, meaning that things on the same line are
     considered a single statement. However, if a statement is incomplete
     (e.g., ends in an open parenthesis, or ends with a comma), R will
