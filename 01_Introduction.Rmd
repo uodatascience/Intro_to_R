@@ -135,18 +135,18 @@ amp_volume_dataframe <- as.data.frame(amp_volume_dataset)
 
 ##Functions
 
-Now that you know about *objects*, you'll want to know about *functions*. In R, we use functions to do stuff to objects. Functions take in some input, perform some operation, and then provide some output. We've already covered several functions:
-*c() is a function for putting things together 
-+it stands for concatenate(mneumonic: it also shares an initial with combine)
-+it takes objects as the input, combines them, and provides the combined object as an output
-*sqrt() is a function
-+it takes numeric objects as inputs (elements, vectors, matrices), calculates square-root of each, and outputs the calculated square root.
-*as.data.frame() is a function
-+it takes some object and formats it as a dataframe
-*print() is a function
-+it takes some object as input, and the output is that object printed to the console
-*cbind() is a fucntion
-+it takes at least two objects, and combines them column-wise
+* c() is a function for putting things together 
+    + it stands for concatenate(mneumonic: it also shares an initial with combine)
+    + it takes objects as the input, combines them, and provides the combined object as an output
+* sqrt() is a function
+    + it takes numeric objects as inputs (elements, vectors, matrices), calculates square-root of each, and outputs the calculated square root.
+* as.data.frame() is a function
+    + it takes some object and formats it as a dataframe
+* print() is a function
+    + it takes some object as input, and the output is that object printed to the console
+* cbind() is a fucntion
+    + it takes at least two objects, and combines them column-wise
+    + this is a good example of arguments separated by a comma. If you glance back to the cbind() function we used, we passed it two vectors, separated by a comma. cbind() expects you to provide two objects that you want to combine column-wise; these two objects are the first two arguments of cbind, and we separate them with a comma.
 
 Some of the functions that you'll use are already in your install of R. You can write your own functions (more on this later on) or you can use one's others have written, like sqrt(). 
 
@@ -215,5 +215,50 @@ Or, we could make our code more explicit. We can directly reference a package's 
 ggplot2::ggplot(data=amp_volume_dataframe, ggplot2::aes(x=Bands, y = amp_volumes))+
   ggplot2::geom_col()
 ```
+
+##Some more useful basic syntax
+
+We've covered some of the basics of R syntax (e.g., the assignment operator '<-')
+
+Here are a few more aspects of R syntax that are helpful to keep in mind
+
+* R is case sensitive. So a and A would be two different objects
+    + A very common syntax mistake is using the wrong case (e.g., you assigned an object to a, and try to call it with A)
+
+* R is newline terminated, meaning that things on the same line are considered a single statement. However, if a statement is incomplete (e.g., ends in an open parenthesis, or ends with a comma), R will search on the next line for the resolution. See the example below
+```{r}
+# Create 2 example vectors
+example_part1 <- runif(100)
+example_part2 <- runif(100)
+
+# All three of these are equivalent:
+
+example <- cbind(example_part1, example_part2)
+example <- cbind(example_part1, 
+            example_part2)
+example <- cbind(example_part1
+            ,example_part2)
+```
+
+* You can typically subset objects using []. If the object is a matrix (i.e., has rows and columns), the argument order is [rows, columns]. If the object is a vector, then only one number goes in the bracket [rows]. Here are some examples of subsetting the example object from above 
+    + example[1:50,]
+        + This would give us the first 50 rows, and all columns
+    + example[1:50, 1]
+        + This would give us the first 50 rows and just the first column
+    + example[,1]
+        + This would give us all rows, just the first column
+
+* If you are using logical statements, you use "==" for is equal to. So, if we wanted to see if any elements in  example is equal to 1, we would use the following:
+    + example == 1
+        + This would provide us with an object the same dimensions as example, with TRUE or FALSE in every cell, where TRUE means the value in the cell was equal to 1 and FALSE means the value in the cell was not equal to 1.
+    + One reason for this is that '=' can be used as an assignment operator (it is equivalent to '<-') and is also used in defining arguments in functions (e.g., instead of sqrt(example) we could write sqrt(x=example) because the first argument in sqrt is called x, so we can use an '=' to define it).
+
+* Some other logical statements:
+    + "==" means is equal to (from above)
+    + "!=" means not equal to
+    + ">" means greater than
+    + "<" means less than
+    + "<=" means less than or equal to
+    + ">=" means greater than or equal to
 
 That is all for this basic overview of R. Hopefully it has started to make youR adventuRe moRe toleRable!
