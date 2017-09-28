@@ -36,8 +36,8 @@ There are four main panels in the RStudio window.
 The **top right** panel is the **workspace**. Here you will find a list
 of all objects currently in memory.
 
-The bottom right window displays files in your working directory, plot
-output, available packages, and help documentation.
+The **bottom right** window displays files in your working directory,
+plot output, available packages, and help documentation.
 
 The **bottom left** panel is the **console**. You can type code directly
 into the console and hit enter to execute it.
