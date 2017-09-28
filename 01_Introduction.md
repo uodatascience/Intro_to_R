@@ -88,16 +88,13 @@ most commonly used:
 </tbody>
 </table>
 
+Another important shortcut is `Tab` to autocomplete functions or file
+names.
+
 For a more complete list, check out the RStudio IDE Cheat Sheet. Find it
 online by going to `Help>Cheatsheets>RStudio IDE Cheatsheet`, or by
 clicking the following URL
 <https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf>
-
-Another important shortcut is `Tab` to autocomplete functions or file
-names.
-
-For a more complete list, check out the [RStudio IDE Cheat
-Sheet](https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf)
 
 Getting help
 ------------

@@ -41,11 +41,9 @@ Knit document | `Cmd+Shift+K`
 Run from start to current line | `Cmd+Option+B`
 Keyboard shortcut quick reference | `Option+Shift+K`
 
-For a more complete list, check out the RStudio IDE Cheat Sheet. Find it online by going to `Help>Cheatsheets>RStudio IDE Cheatsheet`, or by clicking the following URL <https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf>  
-
 Another important shortcut is `Tab` to autocomplete functions or file names.  
 
-For a more complete list, check out the [RStudio IDE Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf)
+For a more complete list, check out the RStudio IDE Cheat Sheet. Find it online by going to `Help>Cheatsheets>RStudio IDE Cheatsheet`, or by clicking the following URL <https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf>  
 
 
 ## Getting help 
