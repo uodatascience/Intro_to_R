@@ -11,6 +11,7 @@ order: 2
 ---
 
 -   [What are Objects?](#what-are-objects)
+    -   [Object terminology](#object-terminology)
 -   [Objects in R](#objects-in-r)
 -   [S3 Objects](#s3-objects)
     -   [Extending S3 Objects](#extending-s3-objects)
@@ -50,13 +51,17 @@ Let's see what `typeof` variables `1` and `"a"` are :
 > class that an R object is stored as. All R objects are composed of
 > base objects, we'll get to the types of objects in the next section)
 
-\*\* Object terminology A **class** is the description, or 'blueprint'
-of how individual **objects** are made, including their **attributes** -
-which data should be kept and what it should be named, and **methods**,
-the functions that they are capable of calling on their stored data or
-attributes.
+Object terminology
+------------------
+
+A **class** is the description, or 'blueprint' of how individual
+**objects** are made, including their **attributes** - which data should
+be kept and what it should be named, and **methods**, the functions that
+they are capable of calling on their stored data or attributes.
 
 See this example class ():
+
+> do the example class
 
 \*classes define the behavior of objects ** Describe attributes and
 relationship to other classes ** Methods are functions that depend on
@@ -66,20 +71,27 @@ Objects in R
 ============
 
 > "In R functions are objects and can be manipulated in much the same
-> way as any other object." - R language guide 2.1.5
+> way as any other object." - R language guide 2.1.5 "S3 objects are
+> functions that call the functions of their objects" - Also R
 
-R has three object-oriented systems and the base types. \* **S3 -
-"Casual objects":** Objects that use **generic functions**. Rather than
-asking an object what method to call, the generic function decides which
-method to call based on the argument classes. Functions contain the
-**UseMethod("function\_name", object)** function (see `?UseMethod`),
-which searches the object's namespace for "function\_name" and passes
-computation to it. \*\* Find example of S3 object \* **S4 - "Formal
-objects":** Formal classes with inheritance and means by which methods
-can be shared between classes. \* **Reference classes:** Objects that
-use **message passing** - or the method 'belongs to' the class rather
-than a function. This is the common `dataframe$column_name` syntax. \*
-**Base types:** Low-level C types. Build the other object systems.
+R has three object-oriented systems and the base types.
+
+-   **S3 - "Casual objects":** Objects that use **generic functions**.
+    Rather than asking an object what method to call, the generic
+    function decides which method to call based on the argument classes.
+    Functions contain the **UseMethod("function\_name", object)**
+    function (see `?UseMethod`), which searches the object's namespace
+    for "function\_name" and passes computation to it. \*\* Find example
+    of S3 object
+
+-   **S4 - "Formal objects":** Formal classes with inheritance and means
+    by which methods can be shared between classes.
+
+-   **Reference classes:** Objects that use **message passing** - or the
+    method 'belongs to' the class rather than a function. This is the
+    common `dataframe$column_name` syntax.
+
+-   **Base types:** Low-level C types. Build the other object systems.
 
 R has a useful package `pryr` for inspecting objects and other
 meta-linguistic needs. Let's get that now.
@@ -171,7 +183,7 @@ points on a scatterplot, the actual function that is called is
     ##             ...)
     ##     invisible()
     ## }
-    ## <bytecode: 0x7f98c3c79070>
+    ## <bytecode: 0x7fbe3c1e1510>
     ## <environment: namespace:graphics>
 
 If the first argument to `plot` has its own `plot` method (ie. that it
