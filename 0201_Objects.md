@@ -71,8 +71,10 @@ Objects in R
 ============
 
 > "In R functions are objects and can be manipulated in much the same
-> way as any other object." - R language guide 2.1.5 "S3 objects are
-> functions that call the functions of their objects" - Also R
+> way as any other object." - *R language guide 2.1.5*
+
+> "S3 objects are functions that call the functions of their objects" -
+> *Also R*
 
 R has three object-oriented systems and the base types.
 
@@ -183,7 +185,7 @@ points on a scatterplot, the actual function that is called is
     ##             ...)
     ##     invisible()
     ## }
-    ## <bytecode: 0x7fbe3c1e1510>
+    ## <bytecode: 0x7ff96992e4a0>
     ## <environment: namespace:graphics>
 
 If the first argument to `plot` has its own `plot` method (ie. that it
