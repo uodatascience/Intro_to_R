@@ -1,0 +1,157 @@
+---
+title: "2.1 - Objects"
+author: "Jonny Saunders"
+date: "October 5, 2017"
+output: 
+  md_document:
+    preserve_yaml: true
+    toc: true
+    toc_depth: 2
+order: 2
+---
+
+# What are Objects?
+
+Objects are, roughly, data (or more generally a stored state) that know what it can do. 
+
+We know what happens when we put this troublesome one between numbers
+
+```{r}
+1 + 1 # ud better b sitting down
+```
+
+But it's less clear what it means to `+` letters
+
+```{r, error=TRUE}
+"a" + "b"
+```
+
+Let's see what `typeof` variables `1` and `"a"` are  :
+```{r}
+typeof(1)
+typeof("a")
+```
+>(note this is a little misleading, `typeof` determines the base object class that an R object is stored as. All R objects are composed of base objects, we'll get to the types of objects in the next section)
+
+
+## Object terminology
+A **class** is the description, or 'blueprint' of how individual **objects** are made, including their **attributes** - which data should be kept and what it should be named, and **methods**, the functions that they are capable of calling on their stored data or attributes. 
+
+See this example class ():
+
+> do the example class
+
+
+*classes define the behavior of objects
+** Describe attributes and relationship to other classes
+** Methods are functions that depend on the class of their input. try methods(object) (`?methods`)
+
+
+
+# Objects in R
+>"In R functions are objects and can be manipulated in much the same way as any other object." - *R language guide 2.1.5*
+
+>"S3 objects are functions that call the functions of their objects" - *Also R*
+
+
+R has three object-oriented systems and the base types.
+
+* **S3 - "Casual objects":** Objects that use **generic functions**. Rather than asking an object what method to call, the generic function decides which method to call based on the argument classes. Functions contain the **UseMethod("function_name", object)** function (see `?UseMethod`), which searches the object's namespace for "function_name" and passes computation to it.
+** Find example of S3 object
+
+* **S4 - "Formal objects":** Formal classes with inheritance and means by which methods can be shared between classes.
+
+* **Reference classes:** Objects that use **message passing** - or the method 'belongs to' the class rather than a function. This is the common `dataframe$column_name` syntax.
+
+* **Base types:** Low-level C types. Build the other object systems.
+
+R has a useful package `pryr` for inspecting objects and other meta-linguistic needs. Let's get that now.
+```{r}
+# install.packages("pryr")
+```
+
+We can query any object's type with pryr's `otype`
+```{r}
+pryr::otype(c(1,2,3,4,5)) # A vector is a base object
+pryr::otype(data.frame(x=c(1,2,3,4,5))) # A dataframe is an S3 object
+
+```
+
+
+
+
+# S3 Objects
+S3 objects "belong to" functions, S4 objects "have" functions (methods). 
+
+S3 objects are defined by a series of functions that themselves contain the `UseMethod()` function - this is described briefly above, try `?UseMethod` for more detail. These functions extend the generic function, typically using the syntax `generic.class()` as in the case of `mean.Date()` for taking the mean of dates. One can list the methods of an S3 class with `methods()`
+
+By default, the source code of S3 methods is not visible to R, one can retreive it with `utils::getS3method``
+
+The `plot` base function is an s3 generic method.
+```{r}
+pryr::ftype(plot) # get a function's type
+```
+
+By default, if the first argument is a base type compatible with being points on a scatterplot, the actual function that is called is `plot.default`, whose source behaves like you'd expect:
+
+```{r}
+plot.default
+```
+
+If the first argument to `plot` has its own `plot` method (ie. that it is exported by the object's package namespace, more about this in section 5), that function is called instead. That's why 
+
+```{r}
+aq <- datasets::airquality
+plot(lm(Ozone ~ Month, data=aq))
+```
+
+is different than this nonsensical model
+
+```{r}
+plot(lme4::lmer(Ozone ~ 0 + (Day | Month), data=aq))
+```
+
+## Extending S3 Objects
+> http://adv-r.had.co.nz/OO-essentials.html "Creating new methods and generics"
+
+```{r, error=TRUE}
+f <- function(x){
+    UseMethod("f")
+}
+f.a <- function(x) "Class a"
+a <- list()
+class(a)
+class(a) = "a"
+class(a)
+
+f(a)
+
+b <- list()
+f(b)
+
+```
+
+
+
+# S4 Objects
+
+
+# Base Types
+http://adv-r.had.co.nz/Data-structures.html#data-structures
+
+# References
+* http://manuals.bioinformatics.ucr.edu/home/programming-in-r#TOC-Object-Oriented-Programming-OOP-
+* http://www.stat.ucla.edu/%7Ecocteau/stat202a/resources/docs/S4Objects.pdf
+* http://adv-r.had.co.nz/OO-essentials.html
+
+
+-------------------
+
+```{r}
+# S4 Methods are stored in environments 
+nM <- asNamespace("Matrix")
+sort(grep("^[.]__T__", names(nM), value=TRUE))
+meth.Ops <- nM$`.__T__Ops:base`
+head(sort(names(meth.Ops)))
+```
+

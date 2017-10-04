@@ -1,0 +1,51 @@
+---
+title: "2.2 - Data"
+author: "Jonny Saunders"
+date: "10/2/2017"
+output: 
+  md_document:
+    preserve_yaml: true
+    toc: true
+    toc_depth: 2
+order: 3
+---
+# Getting your Data into R
+
+Most of the time we have a datafile (either on our hard drive or on the internet) that we want to work with in R. To do that, we can use a function to read the data into R. For instance, the `read.table()` is a flexible function for reading in data in various formats. 
+
+## Reading in CSVs
+In order to use `read.table()`, you will typically need to specify some of the arguments, such as the argument `sep = `, which is where you specify the thing that seperates values in your data file. For example, if you are working with a data file in the comma seperated values (csv) format, you would need to specify that commas are the seperator with `sep = ","`. Thankfully, other people have done this for us, and have created functions that have the proper defaults to work with common formats like csv fles. For csv files, `read.csv()` can be used, which is basically a version of `read.table()` with the defaults set up to work well with csv files. These defaults include setting "," as the seperator, and setting header to true, which means that R will read in the first row in the csv file as being a header row, and treat that row as the row of column names. These defaults can be changed though, so if you had a file with no header, you would indicate that with `header = FALSE`, like so `read.csv(file_path/file_name.csv, header = FALSE)` where file_path is the full path to the file, and file_name is the name of the data file. Take a look at the documentation for `read.csv()` with `?read.csv()` to see the different arguments and defaults.
+
+### A brief interlude into formats for data in R
+There are lots of options for reading data into R, even for a single format. For example, we could instead use `read_csv()` from the `readr` package. The main difference between `read.csv()` and `read_csv()` is that they load the data into different formats in R. `read.csv()` will read your data in as a `data.frame`, which is a common format of data in R. `read_csv()` will read your data in as a `tibble`, which is the data format associated with the tidyverse. There are a couple of differences between these formats. They have different printing defaults, there are differences in subsetting, and differences in recycling. Check out the documentation by running the code `vignette("tibble")` or by checking out the chapter on tibbles in the R for Data Science Book <http://r4ds.had.co.nz/tibbles.html>. 
+
+Outside of these differences, they are mostly interchangeable (for most purposes), but occassionally a function will only work properly with one or the other. For example, the `reshape()` function only works properly with data.frames (unless that has changed in an update). So, in some rare cases, you may be getting an error due to differences between how your data is formatted in R and what format the function you're attempting to use works with. This will sometimes be spelled out in the documentation (e.g., `reshape` says it takes data frames as the first argument), but its not always clear; sometimes, you just need to test it out. If you do need to go between different formats, that is easy to do in R with a couple of functions. `as.data.frame()` will turn an object that can be a dataframe into a dataframe. `as_tibble` will turn an object that can be a tibble into a tibble. 
+
+## Reading in .sav files
+
+R can also work with datafiles that are formatted for SPSS, which have the extension '.sav'. Like csv's, there are a few options. The one that seems to work the best is `read_spss()` from the haven package (also a part of the tidyverse). There is also a function called `read.spss()` from the `foreign` package, but it is no longer being maintained and may stop working; it also had some frustrating qualities, so probably best to stick to `read_spss()`. It's worth noting that `read_spss()` will format your data as a `tibble`. If you don't want it as a `tibble`, you can always use the `as.data.frame()` function to turn it into a generic `data.frame`.
+
+## A very flexible and easy-to-use function for reading in data
+
+Another function worth knowing about for reading in data is the `import()` function from the `rio` package. The nice thing about `import()` is that it works with lots of different types of datafiles, and very little has to be changed for each type of datafile. For example, if our data (let's say its name is 'df') were a .sav file, we would read it in with the following command:
+`import(df.sav)`
+
+If it were instead a csv, we would use the following command:
+`import(df.csv)`
+
+Note that virtually nothing changed, just the file extension (which is part of the name of the file). `import()` is able to figure out the format of the file based on that extension.
+
+## Remember to save your data as an object!
+
+A pretty common and frustrating mistake people make when starting with R is not saving their data file as an object. For example, if we were loading in our datafile called 'df', we may want to run some code like this:
+
+`import(df.csv)`
+
+However, this is telling R to just read the data. If you run code like that, it will simply read the data, and print out the data (or some subset of it) into the console. Then, when you go to work with the data, it won't be in your global environment. That's because you didn't save it as an object. You would do that the same way you save anything as an object, with the assignment operator: `<-`. So instead of the above, you'd instead want to run something like the following:
+
+`df <- import(df.csv)`
+
+Now R has read our data and stored it as an object called `df`, that we can start running our models on.
+
+
+good shit here: http://zoonek2.free.fr/UNIX/48_R/02.html

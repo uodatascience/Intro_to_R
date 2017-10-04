@@ -1,0 +1,23 @@
+---
+title: "Ref - Useful Functions"
+author: "Jonny Saunders"
+date: "October 5, 2017"
+output: 
+  md_document:
+    preserve_yaml: true
+    toc: true
+    toc_depth: 2
+order: 100
+---
+
+# Workspace
+
+Function | Function function
+---------- | ----------
+
+# Objects
+Function | Function function
+---------- | ----------
+typeof | Get object's base type
+pryr::otype | Get object's type system (base, S3, S4, RC)
+
