@@ -73,10 +73,6 @@ monster\_trucks also have the attributes engine\_size, etc. and the
 method go\_faster(), but they also have additional attributes like
 mythical\_backstory and methods like monster\_jam().
 
-\*classes define the behavior of objects ** Describe attributes and
-relationship to other classes ** Methods are functions that depend on
-the class of their input.
-
 Objects in R
 ============
 
@@ -133,6 +129,7 @@ summarizes them:
 <table>
 <thead>
 <tr class="header">
+<th></th>
 <th>Homogenous data</th>
 <th>Heterogenous data</th>
 </tr>
@@ -151,6 +148,7 @@ summarizes them:
 <tr class="odd">
 <td>N-Dimensional</td>
 <td>Array</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -269,7 +267,7 @@ points on a scatterplot, the actual function that is called is
     ##             ...)
     ##     invisible()
     ## }
-    ## <bytecode: 0x7fca852d3070>
+    ## <bytecode: 0x7fbe28a9a0e0>
     ## <environment: namespace:graphics>
 
 If the first argument to `plot` has its own `plot` method (ie. that it
