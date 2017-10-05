@@ -14,7 +14,7 @@ order: 2
 
 Objects are, roughly, data (or more generally a stored state) that know what it can do. 
 
-We know what happens when we put this troublesome one between numbers
+We know what happens when we put this troublesome `+` guy between numbers
 
 ```{r}
 1 + 1 # ud better b sitting down
@@ -81,7 +81,15 @@ pryr::otype(data.frame(x=c(1,2,3,4,5))) # A dataframe is an S3 object
 
 
 # S3 Objects
-S3 objects "belong to" functions, S4 objects "have" functions (methods). 
+S3 objects "belong to" functions, S4 objects "have" functions (methods). S3 classes don't really "exist," but are assigned as an object's "class" attribute.
+
+```{r, echo=TRUE}
+x <- 1
+attr(x, "class")
+class(x) <- "letters"
+attr(x, "class")
+```
+
 
 S3 objects are defined by a series of functions that themselves contain the `UseMethod()` function - this is described briefly above, try `?UseMethod` for more detail. These functions extend the generic function, typically using the syntax `generic.class()` as in the case of `mean.Date()` for taking the mean of dates. One can list the methods of an S3 class with `methods()`
 
@@ -111,24 +119,38 @@ is different than this nonsensical model
 plot(lme4::lmer(Ozone ~ 0 + (Day | Month), data=aq))
 ```
 
-## Extending S3 Objects
+## Example: Extending S3 Objects
 > http://adv-r.had.co.nz/OO-essentials.html "Creating new methods and generics"
 
 ```{r, error=TRUE}
-f <- function(x){
-    UseMethod("f")
-}
-f.a <- function(x) "Class a"
-a <- list()
-class(a)
-class(a) = "a"
-class(a)
+pryr::ftype(mean) # mean is an s3 generic function
 
-f(a)
 
-b <- list()
-f(b)
+x <- 1
+class(x) <- "just_one"
 
+# We give our "just_one" class a mean method:
+mean.just_one <- function(x, ...) print("that's just a one you maniac")
+
+# Mean behaves like it should for numbers and lists of numbers
+mean(1)
+mean(c(1,1.5))
+
+# Other objects have their own mean() method
+methods(mean)
+
+# like Date objects
+dates <- c("01jan2000","15jan2000")
+attr(dates,"class")
+mean(dates) # Don't work
+
+
+# turn it into "Date" object
+dates <- as.Date(dates, "%d%b%Y") # base has a set of "as" methods to convert types
+attr(dates,"class")
+mean(dates) # will call its method
+
+mean.Date(dates) # which can also be called directly
 ```
 
 

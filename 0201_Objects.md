@@ -14,7 +14,7 @@ order: 2
     -   [Object terminology](#object-terminology)
 -   [Objects in R](#objects-in-r)
 -   [S3 Objects](#s3-objects)
-    -   [Extending S3 Objects](#extending-s3-objects)
+    -   [Example: Extending S3 Objects](#example-extending-s3-objects)
 -   [S4 Objects](#s4-objects)
 -   [Base Types](#base-types)
 -   [References](#references)
@@ -25,7 +25,8 @@ What are Objects?
 Objects are, roughly, data (or more generally a stored state) that know
 what it can do.
 
-We know what happens when we put this troublesome one between numbers
+We know what happens when we put this troublesome `+` guy between
+numbers
 
     1 + 1 # ud better b sitting down
 
@@ -114,6 +115,18 @@ S3 Objects
 ==========
 
 S3 objects "belong to" functions, S4 objects "have" functions (methods).
+S3 classes don't really "exist," but are assigned as an object's "class"
+attribute.
+
+    x <- 1
+    attr(x, "class")
+
+    ## NULL
+
+    class(x) <- "letters"
+    attr(x, "class")
+
+    ## [1] "letters"
 
 S3 objects are defined by a series of functions that themselves contain
 the `UseMethod()` function - this is described briefly above, try
@@ -185,7 +198,7 @@ points on a scatterplot, the actual function that is called is
     ##             ...)
     ##     invisible()
     ## }
-    ## <bytecode: 0x7ff96992e4a0>
+    ## <bytecode: 0x7fb35d142d18>
     ## <environment: namespace:graphics>
 
 If the first argument to `plot` has its own `plot` method (ie. that it
@@ -195,42 +208,75 @@ section 5), that function is called instead. That's why
     aq <- datasets::airquality
     plot(lm(Ozone ~ Month, data=aq))
 
-![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-8-1.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-8-2.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-8-3.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-8-4.png)
+![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-9-1.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-9-2.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-9-3.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-9-4.png)
 
 is different than this nonsensical model
 
     plot(lme4::lmer(Ozone ~ 0 + (Day | Month), data=aq))
 
-![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-9-1.png)
+![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-10-1.png)
 
-Extending S3 Objects
---------------------
+Example: Extending S3 Objects
+-----------------------------
 
 > <http://adv-r.had.co.nz/OO-essentials.html> "Creating new methods and
 > generics"
 
-    f <- function(x){
-        UseMethod("f")
-    }
-    f.a <- function(x) "Class a"
-    a <- list()
-    class(a)
+    pryr::ftype(mean) # mean is an s3 generic function
 
-    ## [1] "list"
+    ## [1] "s3"      "generic"
 
-    class(a) = "a"
-    class(a)
+    x <- 1
+    class(x) <- "just_one"
 
-    ## [1] "a"
+    # We give our "just_one" class a mean method:
+    mean.just_one <- function(x, ...) print("that's just a one you maniac")
 
-    f(a)
+    # Mean behaves like it should for numbers and lists of numbers
+    mean(1)
 
-    ## [1] "Class a"
+    ## [1] 1
 
-    b <- list()
-    f(b)
+    mean(c(1,1.5))
 
-    ## Error in UseMethod("f"): no applicable method for 'f' applied to an object of class "list"
+    ## [1] 1.25
+
+    # Other objects have their own mean() method
+    methods(mean)
+
+    ##  [1] mean,ANY-method          mean,Matrix-method      
+    ##  [3] mean,sparseMatrix-method mean,sparseVector-method
+    ##  [5] mean.Date                mean.default            
+    ##  [7] mean.difftime            mean.just_one           
+    ##  [9] mean.POSIXct             mean.POSIXlt            
+    ## see '?methods' for accessing help and source code
+
+    # like Date objects
+    dates <- c("01jan2000","15jan2000")
+    attr(dates,"class")
+
+    ## NULL
+
+    mean(dates) # Don't work
+
+    ## Warning in mean.default(dates): argument is not numeric or logical:
+    ## returning NA
+
+    ## [1] NA
+
+    # turn it into "Date" object
+    dates <- as.Date(dates, "%d%b%Y") # base has a set of "as" methods to convert types
+    attr(dates,"class")
+
+    ## [1] "Date"
+
+    mean(dates) # will call its method
+
+    ## [1] "2000-01-08"
+
+    mean.Date(dates) # which can also be called directly
+
+    ## [1] "2000-01-08"
 
 S4 Objects
 ==========
