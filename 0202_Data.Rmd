@@ -16,7 +16,10 @@ Most of the time we have a datafile (either on our hard drive or on the internet
 ## Reading in CSVs
 In order to use **`read.table()`**, you will typically need to specify some of the arguments, such as the argument **`sep = `**, which is where you specify the thing that seperates values in your data file.   
 
-For example, if you are working with a data file in the comma seperated values (csv) format, you would need to specify that commas are the seperator with **`sep = ","`**. Thankfully, other people have done this for us, and have created functions that have the proper defaults to work with common formats like csv fles. For csv files, To see the defaults, simply check the documentation with e.g.  **`?read.table`**  
+For example, if you are working with a data file in the comma seperated values (csv) format, you would need to specify that commas are the seperator with **`sep = ","`**. 
+
+### Defaults 
+Thankfully, other people have done this for us, and have created functions that have the proper defaults to work with common formats like csv fles. For csv files, To see the defaults, simply check the documentation with e.g.  **`?read.table`**  
 
 **`read.csv()`** is basically a version of **`read.table()`** with the defaults set up to work well with csv files. These defaults include setting **","** as the seperator, and setting **`header = TRUE`**, which means that R will read in the first row in the csv file as being a header row, and treat that row as the row of column names. These defaults can be changed though, so if you had a file with no header, you would indicate that with **`header = FALSE`**, like so  
 
@@ -34,7 +37,8 @@ For example, we could instead use **`read_csv()`** from the **`readr`** package.
 
 Outside of these differences, they are mostly interchangeable (for most purposes), but occassionally a function will only work properly with one or the other. For example, the **`reshape()`** function only works properly with *data.frames* (unless that has changed in an update).  
 
-**In some rare cases, you may be getting an error due to differences between how your data is formatted in R and what format the function you're attempting to use works with.**  
+#### Format issues?
+In some rare cases, you may be getting an error due to differences between how your data is formatted in R and what format the function you're attempting to use works with.  
 
 This will sometimes be spelled out in the documentation (e.g., **`reshape`** says it takes data frames as the first argument), but its not always clear; sometimes, you just need to test it out. If you do need to go between different formats, that is easy to do in R with a couple of functions. **`as.data.frame()`** will turn an object that can be a dataframe into a dataframe. **`as_tibble`** will turn an object that can be a tibble into a tibble. 
 
@@ -50,7 +54,7 @@ Another function worth knowing about for reading in data is the **`import()`** f
 
 `import(df.sav)`
 
-If it were instead a csv, we would use the following command:
+If it were instead a csv, we would use the following command:  
 
 `import(df.csv)`
 
