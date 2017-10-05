@@ -82,10 +82,10 @@ Every R object is built out of basic C structures that define how it is stored a
 This table from [Advanced R - Data Structures](http://adv-r.had.co.nz/Data-structures.html#data-structures) summarizes them:
 
  | Homogenous data | Heterogenous data
----------------- | ------------------
-1 Dimensional | Atomic Vector | List
-2 Dimensional | Matrix | Data frame
-nd | Array
+------------|---------------- | ------------------
+1-Dimensional | Atomic Vector | List
+2-Dimensional | Matrix | Data frame
+N-Dimensional | Array
 
 ## Atomic Vectors
 

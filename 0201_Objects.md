@@ -139,15 +139,17 @@ summarizes them:
 </thead>
 <tbody>
 <tr class="odd">
-<td>1 Dimensional</td>
+<td>1-Dimensional</td>
 <td>Atomic Vector</td>
+<td>List</td>
 </tr>
 <tr class="even">
-<td>2 Dimensional</td>
+<td>2-Dimensional</td>
 <td>Matrix</td>
+<td>Data frame</td>
 </tr>
 <tr class="odd">
-<td>nd</td>
+<td>N-Dimensional</td>
 <td>Array</td>
 </tr>
 </tbody>
@@ -267,7 +269,7 @@ points on a scatterplot, the actual function that is called is
     ##             ...)
     ##     invisible()
     ## }
-    ## <bytecode: 0x7f8e10c9e870>
+    ## <bytecode: 0x7fca852d3070>
     ## <environment: namespace:graphics>
 
 If the first argument to `plot` has its own `plot` method (ie. that it
