@@ -121,21 +121,21 @@ Getting help
     RStudio toolbar to access some great built in resources. Under help,
     you'll find a bunch of useful stuff. Some of the highlights are:
 
--   **RStudio Docs**, which will take you to RStudio's online
-    documentation page where you can likely find answers to many of your
-    questions.  
--   **Cheatseets**. An easy way to access the highly recommended online
-    cheatsheets for:
-    -   The RStudio IDE
-    -   dplyr and tidyr
-    -   ggplot2
-    -   R Markdown
-    -   Shiny
-    -   devtools
--   **Keyboard Shortcuts help**
--   **Markdown Quick Reference**
+    -   *RStudio Docs*, which will take you to RStudio's online
+        documentation page where you can likely find answers to many of
+        your questions.  
+    -   *Cheatseets*. An easy way to access the highly recommended
+        online cheatsheets for:
+        -   The RStudio IDE
+        -   dplyr and tidyr
+        -   ggplot2
+        -   R Markdown
+        -   Shiny
+        -   devtools
+    -   *Keyboard Shortcuts help*
+    -   *Markdown Quick Reference*
 
-1.  Check out the [r-project site](https://www.r-project.org/help.html)
+3.  Check out the [r-project site](https://www.r-project.org/help.html)
     for more on help documentation.
 
 What is R?
