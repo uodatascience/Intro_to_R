@@ -13,6 +13,8 @@ order: 2
 -   [What are Objects?](#what-are-objects)
     -   [Object terminology](#object-terminology)
 -   [Objects in R](#objects-in-r)
+    -   [Object Systems](#object-systems)
+    -   [Attributes](#attributes)
 -   [Base Types](#base-types)
     -   [Vectors](#vectors)
     -   [Matrices & Arrays](#matrices-arrays)
@@ -57,6 +59,11 @@ Let's see what `typeof` variables `1` and `"a"` are :
 > class that an R object is stored as. All R objects are composed of
 > base objects, we'll get to the types of objects in the next section)
 
+R has a useful package `pryr` for inspecting objects and other
+meta-linguistic needs. Let's get that now.
+
+    # install.packages("pryr")
+
 Object terminology
 ------------------
 
@@ -84,9 +91,13 @@ Objects in R
 > "S3 objects are functions that call the functions of their objects" -
 > *Also R*
 
-R has base types and three object-oriented systems. We'll spend more
-time on Base types and S3 objects in this lesson, and return to S4 and
-reference classes when we start building bigger code.
+Object Systems
+--------------
+
+R has base types and three object-oriented systems (also called
+**types**). We'll spend more time on Base types and S3 objects in this
+lesson, and return to S4 and reference classes when we start building
+bigger code.
 
 -   **Base types:** Low-level C types. Build the other object systems.
 
@@ -99,7 +110,7 @@ reference classes when we start building bigger code.
     "belong to" functions, but classes are more rigorously defined.
 
 -   **Reference classes:** Objects that use **message passing** - or the
-    method 'belongs to' the object instance rather than the class.
+    method finally 'belongs to' the class rather than a function.
 
 The easiest way to see everything about an object is to use the str()
 function, short for structure. For example we can see everything about
@@ -166,12 +177,7 @@ the lamest linear model ever
     ##   .. .. .. ..- attr(*, "names")= chr [1:2] "c(1, 2, 3)" "c(4, 5, 6)"
     ##  - attr(*, "class")= chr "lm"
 
-R has a useful package `pryr` for inspecting objects and other
-meta-linguistic needs. Let's get that now.
-
-    # install.packages("pryr")
-
-We can query any object's type with pryr's `otype`
+We can query any object's base type with pryr's `otype`
 
     pryr::otype(c(1,2,3,4,5)) # A vector is a base object
 
@@ -180,6 +186,76 @@ We can query any object's type with pryr's `otype`
     pryr::otype(data.frame(x=c(1,2,3,4,5))) # A dataframe is an S3 object
 
     ## [1] "S3"
+
+    pryr::otype(lame_model) # as is our lame model.
+
+    ## [1] "S3"
+
+and its class with `class`
+
+    class(c(1,2,3,4,5))
+
+    ## [1] "numeric"
+
+    class(lame_model)
+
+    ## [1] "lm"
+
+Confusingly, R's object system means that a given object will have both
+a **class** and a **type**, for example:
+
+    pryr::otype(c(1)) # The vector "c(1)" is a base type object
+
+    ## [1] "base"
+
+    class(c(1))       # whose class is 'numeric'
+
+    ## [1] "numeric"
+
+Attributes
+----------
+
+Object can also have arbitrarily many **attributes**. The most important
+and common are
+
+-   **`names`** - which give the object the ability to refer to its
+    elements by name. for example:
+
+<!-- -->
+
+    # We can construct named vectors like this
+    named_vector <- c("apples"=1, "bananas"=2, "cherries" = 3)
+    names(named_vector)
+
+    ## [1] "apples"   "bananas"  "cherries"
+
+    named_vector["apples"]
+
+    ## apples 
+    ##      1
+
+    # or this
+    named_vector <- c(1,2,3)
+    names(named_vector) <- c("apples", "bananas", "cherries")
+
+-   **`class`** - which is used by the S3 object system, we'll see that
+    in a moment
+
+-   **`dim`** - short for dimensions, which is used by multidimensional
+    base objects. We'll see that in a moment too.
+
+You can query a specific attribute with `attr`
+
+    attr(named_vector, "names")
+
+    ## [1] "apples"   "bananas"  "cherries"
+
+or list all attributes with `attributes`
+
+    attributes(named_vector)
+
+    ## $names
+    ## [1] "apples"   "bananas"  "cherries"
 
 Base Types
 ==========
@@ -698,7 +774,7 @@ points on a scatterplot, the actual function that is called is
     ##             ...)
     ##     invisible()
     ## }
-    ## <bytecode: 0x7ffc512522b0>
+    ## <bytecode: 0x7f8b6628b278>
     ## <environment: namespace:graphics>
 
 If the first argument to `plot` has its own `plot` method (ie. that it
@@ -708,13 +784,13 @@ section 5), that function is called instead. That's why
     aq <- datasets::airquality
     plot(lm(Ozone ~ Month, data=aq))
 
-![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-24-1.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-24-2.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-24-3.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-24-4.png)
+![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-29-1.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-29-2.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-29-3.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-29-4.png)
 
 is different than this nonsensical model
 
     plot(lme4::lmer(Ozone ~ 0 + (Day | Month), data=aq))
 
-![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-25-1.png)
+![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-30-1.png)
 
 Example: Extending S3 Objects
 -----------------------------

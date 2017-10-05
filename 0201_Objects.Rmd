@@ -33,6 +33,11 @@ typeof("a")
 ```
 >(note this is a little misleading, `typeof` determines the base object class that an R object is stored as. All R objects are composed of base objects, we'll get to the types of objects in the next section)
 
+R has a useful package `pryr` for inspecting objects and other meta-linguistic needs. Let's get that now.
+```{r}
+# install.packages("pryr")
+```
+
 
 ## Object terminology
 A **class** is the description, or 'blueprint' of how individual **objects** or **instances** are made, including their **attributes** - which data should be kept and what it should be named, and **methods**, the functions that they are capable of calling on their stored data or attributes. Objects can have a nested structure, and sub-classes can **inherit** the attributes and methods of their parent classes.
@@ -44,8 +49,9 @@ For example: As a class, trucks have attributes like engine_size, number_of_whee
 
 >"S3 objects are functions that call the functions of their objects" - *Also R*
 
+## Object Systems
 
-R has base types and three object-oriented systems. We'll spend more time on Base types and S3 objects in this lesson, and return to S4 and reference classes when we start building bigger code.
+R has base types and three object-oriented systems (also called **types**). We'll spend more time on Base types and S3 objects in this lesson, and return to S4 and reference classes when we start building bigger code.
 
 
 * **Base types:** Low-level C types. Build the other object systems.
@@ -54,7 +60,7 @@ R has base types and three object-oriented systems. We'll spend more time on Bas
 
 * **S4 - "Formal objects":** Formal classes with inheritance and means by which methods can be shared between classes. S4 methods still "belong to" functions, but classes are more rigorously defined. 
 
-* **Reference classes:** Objects that use **message passing** - or the method 'belongs to' the object instance rather than the class.
+* **Reference classes:** Objects that use **message passing** - or the method finally 'belongs to' the class rather than a function.
 
 The easiest way to see everything about an object is to use the str() function, short for structure. For example we can see everything about the lamest linear model ever
 ```{r}
@@ -62,16 +68,57 @@ lame_model <- lm(c(1,2,3) ~ c(4,5,6))
 str(lame_model)
 ```
 
-R has a useful package `pryr` for inspecting objects and other meta-linguistic needs. Let's get that now.
-```{r}
-# install.packages("pryr")
-```
 
-We can query any object's type with pryr's `otype`
+We can query any object's base type with pryr's `otype`
 ```{r}
 pryr::otype(c(1,2,3,4,5)) # A vector is a base object
 pryr::otype(data.frame(x=c(1,2,3,4,5))) # A dataframe is an S3 object
+pryr::otype(lame_model) # as is our lame model.
 ```
+
+and its class with `class`
+```{r}
+class(c(1,2,3,4,5))
+class(lame_model)
+```
+
+
+Confusingly, R's object system means that a given object will have both a **class** and a **type**, for example:
+```{r}
+pryr::otype(c(1)) # The vector "c(1)" is a base type object
+class(c(1))       # whose class is 'numeric'
+```
+
+## Attributes
+
+Object can also have arbitrarily many **attributes**. The most important and common are 
+
+* **`names`** - which give the object the ability to refer to its elements by name. for example:
+```{r}
+# We can construct named vectors like this
+named_vector <- c("apples"=1, "bananas"=2, "cherries" = 3)
+names(named_vector)
+named_vector["apples"]
+
+# or this
+named_vector <- c(1,2,3)
+names(named_vector) <- c("apples", "bananas", "cherries")
+```
+
+* **`class`** - which is used by the S3 object system, we'll see that in a moment
+
+* **`dim`** - short for dimensions, which is used by multidimensional base objects. We'll see that in a moment too.
+
+You can query a specific attribute with `attr`
+```{r}
+attr(named_vector, "names")
+```
+
+or list all attributes with `attributes`
+```{r}
+attributes(named_vector)
+```
+
 
 # Base Types
 Every R object is built out of basic C structures that define how it is stored and managed in memory.
@@ -89,8 +136,6 @@ Recall that we can use `typeof()` to find an object's base type
 typeof(1)
 typeof(list(1,2,3))
 ```
-
-
 
 ## Vectors
 
