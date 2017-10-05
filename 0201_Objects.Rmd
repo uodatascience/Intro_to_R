@@ -203,13 +203,30 @@ dfs can be used like lists of vectors
 df[1]
 df[[1]]
 df[[1]][1] # as above
-
 ```
 
+Or using `names`, which we'll cover in more detail in 2.2.
 
-# We'll cover this syntax in more detail later
+```{r}
+names(df)
+colnames(df)
+rownames(df)
+
 df$little_ones 
 df$big_ones
+```
+
+Data frames also inherit the methods of lists and vectors
+
+```{r}
+df2 <- data.frame(medium_ones = c(3,4,5,6,7))
+cbind(df, df2)
+
+df_squared <- cbind(df2, df2)
+names(df_squared) <- names(df)
+rbind(df,df_squared)
+```
+
 
 
 ```
@@ -217,7 +234,7 @@ df$big_ones
 
 ## Etc.
 
-But also functions, environments, etc. that we'll learn about in 5.
+Functions, environments, and other stuff that we'll learn about in our section on Functions are also base objects, but we'll discuss them then.
 
 
 # S3 Objects

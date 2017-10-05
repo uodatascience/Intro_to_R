@@ -17,8 +17,6 @@ order: 2
     -   [Vectors](#vectors)
     -   [Matrices & Arrays](#matrices-arrays)
     -   [Data Frames](#data-frames)
--   [We'll cover this syntax in more detail
-    later](#well-cover-this-syntax-in-more-detail-later)
     -   [Etc.](#etc.)
 -   [S3 Objects](#s3-objects)
     -   [Example: Extending S3 Objects](#example-extending-s3-objects)
@@ -516,17 +514,63 @@ dfs can be used like lists of vectors
 
     ## [1] 0
 
-We'll cover this syntax in more detail later
-============================================
+Or using `names`, which we'll cover in more detail in 2.2.
 
-df*l**i**t**t**l**e*<sub>*o*</sub>*n**e**s**d**f*big\_ones
+    names(df)
+
+    ## [1] "little_ones" "big_ones"
+
+    colnames(df)
+
+    ## [1] "little_ones" "big_ones"
+
+    rownames(df)
+
+    ## [1] "1" "2" "3" "4" "5"
+
+    df$little_ones 
+
+    ## [1] 0 1 2 3 4
+
+    df$big_ones
+
+    ## [1] 5 6 7 8 9
+
+Data frames also inherit the methods of lists and vectors
+
+    df2 <- data.frame(medium_ones = c(3,4,5,6,7))
+    cbind(df, df2)
+
+    ##   little_ones big_ones medium_ones
+    ## 1           0        5           3
+    ## 2           1        6           4
+    ## 3           2        7           5
+    ## 4           3        8           6
+    ## 5           4        9           7
+
+    df_squared <- cbind(df2, df2)
+    names(df_squared) <- names(df)
+    rbind(df,df_squared)
+
+    ##    little_ones big_ones
+    ## 1            0        5
+    ## 2            1        6
+    ## 3            2        7
+    ## 4            3        8
+    ## 5            4        9
+    ## 6            3        3
+    ## 7            4        4
+    ## 8            5        5
+    ## 9            6        6
+    ## 10           7        7
 
 \`\`\`
 
 Etc.
 ----
 
-But also functions, environments, etc. that we'll learn about in 5.
+Functions, environments, and other stuff that we'll learn about in our
+section on Functions are also base objects, but we'll discuss them then.
 
 S3 Objects
 ==========
@@ -633,7 +677,7 @@ points on a scatterplot, the actual function that is called is
     ##             ...)
     ##     invisible()
     ## }
-    ## <bytecode: 0x7fad559f57b8>
+    ## <bytecode: 0x7fbcb08928a0>
     ## <environment: namespace:graphics>
 
 If the first argument to `plot` has its own `plot` method (ie. that it
@@ -643,13 +687,13 @@ section 5), that function is called instead. That's why
     aq <- datasets::airquality
     plot(lm(Ozone ~ Month, data=aq))
 
-![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-21-1.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-21-2.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-21-3.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-21-4.png)
+![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-23-1.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-23-2.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-23-3.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-23-4.png)
 
 is different than this nonsensical model
 
     plot(lme4::lmer(Ozone ~ 0 + (Day | Month), data=aq))
 
-![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-22-1.png)
+![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-24-1.png)
 
 Example: Extending S3 Objects
 -----------------------------
