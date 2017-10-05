@@ -255,7 +255,6 @@ methods(class="list")
 methods(class="matrix")
 ```
 
-
 ## Data Frames
 Data frames are one of the gems of R. A data frame is a list of equal length vectors. 
 
@@ -366,6 +365,7 @@ mean.just_one <- function(x, ...) print("that's just a one you maniac")
 # Mean behaves like it should for numbers and lists of numbers
 mean(1)
 mean(c(1,1.5))
+mean(x) # Even though "x" is just 1, because we have given it a "class" attribute it calls mean.just_one rather than mean.default
 
 # Other objects have their own mean() method
 methods(mean)

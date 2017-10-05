@@ -879,7 +879,7 @@ points on a scatterplot, the actual function that is called is
     ##             ...)
     ##     invisible()
     ## }
-    ## <bytecode: 0x7f97de04db50>
+    ## <bytecode: 0x7f977c4c28e0>
     ## <environment: namespace:graphics>
 
 If the first argument to `plot` has its own `plot` method (ie. that it
@@ -924,6 +924,10 @@ different types of objects with the same command.
     mean(c(1,1.5))
 
     ## [1] 1.25
+
+    mean(x) # Even though "x" is just 1, because we have given it a "class" attribute it calls mean.just_one rather than mean.default
+
+    ## [1] "that's just a one you maniac"
 
     # Other objects have their own mean() method
     methods(mean)
