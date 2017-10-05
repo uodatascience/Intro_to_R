@@ -49,9 +49,26 @@ For a more complete list, check out the RStudio IDE Cheat Sheet. Find it online 
 
 
 ## Getting help 
-Check out the [r-project site](https://www.r-project.org/help.html) for more on help documentation.  
 
-Within R, use `?functionName` or `??functionName`. The single `?` will search for a function of that name whereas `??` will use your input as a keyword to search in all R documentation.  
+1. For help with functions, in the console use the `?` or `??` before a function name (e.g. `?functionName` or `??functionName`). The single `?` will search for a function of that name whereas `??` will use your input as a keyword to search in all R documentation.  
+2. RStudio's **Help**. With RStudio open, click on `Help` in the RStudio toolbar to access some great built in resources. Under help, you'll find a bunch of useful stuff. Some of the highlights are:  
++*RStudio Docs*, which will take you to RStudio's online documentation page where you can likely find answers to many of your questions.  
++ *Cheatseets*. An easy way to access the highly recommended online cheatsheets for:  
+    + The RStudio IDE
+    + dplyr and tidyr
+    + ggplot2
+    + R Markdown
+    + Shiny
+    + devtools
++ *Keyboard Shortcuts help*
++ *Markdown Quick Reference*
+3. Ask a question on the [UO Data Science Club Slack](uorclub.slack.com). All you need to join is a UO email address. 
+4. Browse the golden nuggets left behind on the old website from when we were the [UO R Club](https://blogs.uoregon.edu/rclub/). <- good stuff there.
+5. Check out the [r-project site](https://www.r-project.org/help.html) for more on help documentation.  
+6. Search for answers to your questions on [Stack Overflow](https://stackoverflow.com/). It's likely someone has already asked and answered your question, and if not, you can post it and have a helpful stranger help you in likely very few minutes.If you do ask a question, make sure it's a [good one!](https://stackoverflow.com/help/how-to-ask)  
+7. For `tidyverse` related questions, you may want to check out Hadley Wickham's ["R for Data Science"](http://r4ds.had.co.nz/)  
+8. Or this online text, ["R for beginners"](https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf), by Emmanuel Paradis.  
+
 
 #What is R?
 R is a programming language designed for statistical computing. So, it is (in many ways) more similar to another programming language (e.g., Python) than it is to statistical software you may have experience with (e.g., SPSS). If you have no experience with programming languages and have only ever used statistical software (e.g., SPSS) for your stats then you will probably feel overwhelmed and confused by R for a little while. That's fine and normal. Speaking for myself, I think I installed and opened R studio about a half dozen times over the course of a year before I ever used it becuase I had no idea where to get started. Hopefully this (and the next few weeks of the Data Science Club) helps you with that.

@@ -112,12 +112,47 @@ clicking the following URL
 Getting help
 ------------
 
-Check out the [r-project site](https://www.r-project.org/help.html) for
-more on help documentation.
+1.  For help with functions, in the console use the `?` or `??` before a
+    function name (e.g. `?functionName` or `??functionName`). The single
+    `?` will search for a function of that name whereas `??` will use
+    your input as a keyword to search in all R documentation.  
+2.  RStudio's **Help**. With RStudio open, click on `Help` in the
+    RStudio toolbar to access some great built in resources. Under help,
+    you'll find a bunch of useful stuff. Some of the highlights are:  
+    +*RStudio Docs*, which will take you to RStudio's online
+    documentation page where you can likely find answers to many of your
+    questions.  
 
-Within R, use `?functionName` or `??functionName`. The single `?` will
-search for a function of that name whereas `??` will use your input as a
-keyword to search in all R documentation.
+-   *Cheatseets*. An easy way to access the highly recommended online
+    cheatsheets for:
+    -   The RStudio IDE
+    -   dplyr and tidyr
+    -   ggplot2
+    -   R Markdown
+    -   Shiny
+    -   devtools
+-   *Keyboard Shortcuts help*
+-   *Markdown Quick Reference*
+
+1.  Ask a question on the [UO Data Science Club
+    Slack](uorclub.slack.com). All you need to join is a UO
+    email address.
+2.  Browse the golden nuggets left behind on the old website from when
+    we were the [UO R Club](https://blogs.uoregon.edu/rclub/). &lt;-
+    good stuff there.
+3.  Check out the [r-project site](https://www.r-project.org/help.html)
+    for more on help documentation.  
+4.  Search for answers to your questions on [Stack
+    Overflow](https://stackoverflow.com/). It's likely someone has
+    already asked and answered your question, and if not, you can post
+    it and have a helpful stranger help you in likely very few
+    minutes.If you do ask a question, make sure it's a [good
+    one!](https://stackoverflow.com/help/how-to-ask)  
+5.  For `tidyverse` related questions, you may want to check out Hadley
+    Wickham's ["R for Data Science"](http://r4ds.had.co.nz/)  
+6.  Or this online text, ["R for
+    beginners"](https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf),
+    by Emmanuel Paradis.
 
 What is R?
 ==========
@@ -454,6 +489,13 @@ Here are a few more aspects of R syntax that are helpful to keep in mind
 -   R is case sensitive. So a and A would be two different objects
     -   A very common syntax mistake is using the wrong case (e.g., you
         assigned an object to a, and try to call it with A)
+-   A '\#' in R used for commenting. Once you place a '\#', everything
+    on that lines that follows will be ignored by R. There are two main
+    uses for this:
+    1.  Putting comments into your code to explain it to people reading
+        it (including your future self)
+    2.  Removing code you don't want to run but want to keep in the
+        script for record keeping's sake.
 -   R is newline terminated, meaning that things on the same line are
     considered a single statement. However, if a statement is incomplete
     (e.g., ends in an open parenthesis, or ends with a comma), R will
