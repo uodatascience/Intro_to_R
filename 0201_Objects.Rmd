@@ -190,6 +190,30 @@ abind::abind(by_columns, by_rows, along=3)
 ```
 
 ## Data Frames
+Data frames are one of the gems of R. A data frame is a list of equal length vectors. 
+
+```{r}
+df <- data.frame(little_ones = c(0,1,2,3,4),
+                 big_ones = c(5,6,7,8,9))
+df
+```
+
+dfs can be used like lists of vectors
+```{r}
+df[1]
+df[[1]]
+df[[1]][1] # as above
+
+```
+
+
+# We'll cover this syntax in more detail later
+df$little_ones 
+df$big_ones
+
+
+```
+
 
 ## Etc.
 
