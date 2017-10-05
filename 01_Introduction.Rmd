@@ -50,20 +50,18 @@ For a more complete list, check out the RStudio IDE Cheat Sheet. Find it online 
 
 ## Getting help 
 
-1. For help with functions, in the console use the `?` or `??` before a function name (e.g. `?functionName` or `??functionName`). The single `?` will search for a function of that name whereas `??` will use your input as a keyword to search in all R documentation.    
-
+1. For help with functions, in the console use the `?` or `??` before a function name (e.g. `?functionName` or `??functionName`). The single `?` will search for a function of that name whereas `??` will use your input as a keyword to search in all R documentation.  
 2. RStudio's **Help**. With RStudio open, click on `Help` in the RStudio toolbar to access some great built in resources. Under help, you'll find a bunch of useful stuff. Some of the highlights are:  
-
-    - *RStudio Docs*, which will take you to RStudio's online documentation page where you can likely find answers to many of your questions.  
-    - *Cheatseets*. An easy way to access the highly recommended online cheatsheets for:  
-        + The RStudio IDE
-        + dplyr and tidyr
-        + ggplot2
-        + R Markdown
-        + Shiny
-        + devtools
-    - *Keyboard Shortcuts help*
-    - *Markdown Quick Reference*
++*RStudio Docs*, which will take you to RStudio's online documentation page where you can likely find answers to many of your questions.  
++ *Cheatseets*. An easy way to access the highly recommended online cheatsheets for:  
+    + The RStudio IDE
+    + dplyr and tidyr
+    + ggplot2
+    + R Markdown
+    + Shiny
+    + devtools
++ *Keyboard Shortcuts help*
++ *Markdown Quick Reference*
     
 3. Check out the [r-project site](https://www.r-project.org/help.html) for more on help documentation.  
 
