@@ -104,11 +104,11 @@ R has no 0-dimensional, scalar types, so individual characters or numbers are le
 | Logical   | `booleans <- c(TRUE, FALSE, NA)` |
 | Integer   | `integers <- c(1L, 2L, 3L)`  |
 | Double    | `doubles <- c(1, 2.5, 0.005)` |
-| Character | `characters <- c("apple", "banana") |
+| Character | `characters <- c("apple", "banana")` |
 
 `raw` and `complex` types also exist, but they are rare.
 
-Note that vectors are constructed with `c()`. When heterogeneous vectors are constructed with `c()`, they are *coerced* to the most permissive vector type (an integer can be both a double (floating point numbers with decimal points) and character "1") - the table above is ordered from least to most permissive.
+Vectors are constructed with `c()`. When heterogeneous vectors are constructed with `c()`, they are *coerced* to the most permissive vector type (an integer can be both a double (floating point numbers with decimal points) and character "1") - the table above is ordered from least to most permissive.
 
 ```{r}
 vect_1 <- c(1L, 2L, 3L)
@@ -134,7 +134,7 @@ typeof(a_list[[2]])
 typeof(a_list[[3]])
 ```
 
-Notice the double bracket notation `[[]]`. Lists are commonly recursive - they store other lists. Since the elements of our list are themselves lists, single bracket indexing `[]` returns lists, and `[[]]` returns the the elements in that list.
+Notice the double bracket notation `[[]]`. Lists are commonly recursive, ie. they store other lists. Since the elements of our list are themselves lists, single bracket indexing `[]` returns lists, and `[[]]` returns the the elements in that list.
 
 ```{r}
 is.recursive(a_list)
@@ -166,7 +166,28 @@ Because they are the most general form of vector, lists are used as the base typ
 typeof(data.frame(c(1,2,3)))
 ```
 
-## Matrices
+## Matrices & Arrays
+**Arrays** are atomic vectors with a `dim` attribute (more about attributes in 2.2). **Matrices** are arrays with `dim = 2`. 
+
+```{r}
+array_1 <- array(1:24, dim=c(2,3,4))
+array_2 <- matrix(1:24, ncol=3, nrow=8)
+array_3 <- c(1:24)
+dim(array_3) <- c(2,3,4)
+# or attr(array_3, "dim") <- c(2,3,4)
+```
+
+In higher dimensions, c() becomes `cbind(), rbind()`, and `abind()`; column and row bind for matrices and array bind for arrays.
+```{r}
+by_columns <- cbind(c(1,2,3), c(4,5,6), c(7,8,9))
+by_columns
+by_rows <- rbind(c(1,2,3), c(4,5,6), c(7,8,9))
+by_rows
+
+abind::abind(by_columns, by_rows, along=1)
+abind::abind(by_columns, by_rows, along=2)
+abind::abind(by_columns, by_rows, along=3)
+```
 
 ## Data Frames
 

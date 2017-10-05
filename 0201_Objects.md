@@ -15,7 +15,7 @@ order: 2
 -   [Objects in R](#objects-in-r)
 -   [Base Types](#base-types)
     -   [Vectors](#vectors)
-    -   [Matrices](#matrices)
+    -   [Matrices & Arrays](#matrices-arrays)
     -   [Data Frames](#data-frames)
     -   [Etc.](#etc.)
 -   [S3 Objects](#s3-objects)
@@ -261,18 +261,18 @@ numbers are length=one atomic vectors. They are:
 </tr>
 <tr class="even">
 <td>Character</td>
-<td>`characters &lt;- c(&quot;apple&quot;, &quot;banana&quot;)</td>
+<td><code>characters &lt;- c(&quot;apple&quot;, &quot;banana&quot;)</code></td>
 </tr>
 </tbody>
 </table>
 
 `raw` and `complex` types also exist, but they are rare.
 
-Note that vectors are constructed with `c()`. When heterogeneous vectors
-are constructed with `c()`, they are *coerced* to the most permissive
-vector type (an integer can be both a double (floating point numbers
-with decimal points) and character "1") - the table above is ordered
-from least to most permissive.
+Vectors are constructed with `c()`. When heterogeneous vectors are
+constructed with `c()`, they are *coerced* to the most permissive vector
+type (an integer can be both a double (floating point numbers with
+decimal points) and character "1") - the table above is ordered from
+least to most permissive.
 
     vect_1 <- c(1L, 2L, 3L)
     vect_2 <- c(1L, 2L, 3)
@@ -326,10 +326,10 @@ instead
 
     ## [1] "character"
 
-Notice the double bracket notation `[[]]`. Lists are commonly recursive
-- they store other lists. Since the elements of our list are themselves
-lists, single bracket indexing `[]` returns lists, and `[[]]` returns
-the the elements in that list.
+Notice the double bracket notation `[[]]`. Lists are commonly recursive,
+ie. they store other lists. Since the elements of our list are
+themselves lists, single bracket indexing `[]` returns lists, and `[[]]`
+returns the the elements in that list.
 
     is.recursive(a_list)
 
@@ -414,8 +414,69 @@ base type for many derived classes, like data frames
 
     ## [1] "list"
 
-Matrices
---------
+Matrices & Arrays
+-----------------
+
+**Arrays** are atomic vectors with a `dim` attribute (more about
+attributes in 2.2). **Matrices** are arrays with `dim = 2`.
+
+    array_1 <- array(1:24, dim=c(2,3,4))
+    array_2 <- matrix(1:24, ncol=3, nrow=8)
+    array_3 <- c(1:24)
+    dim(array_3) <- c(2,3,4)
+    # or attr(array_3, "dim") <- c(2,3,4)
+
+In higher dimensions, c() becomes `cbind(), rbind()`, and `abind()`;
+column and row bind for matrices and array bind for arrays.
+
+    by_columns <- cbind(c(1,2,3), c(4,5,6), c(7,8,9))
+    by_columns
+
+    ##      [,1] [,2] [,3]
+    ## [1,]    1    4    7
+    ## [2,]    2    5    8
+    ## [3,]    3    6    9
+
+    by_rows <- rbind(c(1,2,3), c(4,5,6), c(7,8,9))
+    by_rows
+
+    ##      [,1] [,2] [,3]
+    ## [1,]    1    2    3
+    ## [2,]    4    5    6
+    ## [3,]    7    8    9
+
+    abind::abind(by_columns, by_rows, along=1)
+
+    ##      [,1] [,2] [,3]
+    ## [1,]    1    4    7
+    ## [2,]    2    5    8
+    ## [3,]    3    6    9
+    ## [4,]    1    2    3
+    ## [5,]    4    5    6
+    ## [6,]    7    8    9
+
+    abind::abind(by_columns, by_rows, along=2)
+
+    ##      [,1] [,2] [,3] [,4] [,5] [,6]
+    ## [1,]    1    4    7    1    2    3
+    ## [2,]    2    5    8    4    5    6
+    ## [3,]    3    6    9    7    8    9
+
+    abind::abind(by_columns, by_rows, along=3)
+
+    ## , , 1
+    ## 
+    ##      [,1] [,2] [,3]
+    ## [1,]    1    4    7
+    ## [2,]    2    5    8
+    ## [3,]    3    6    9
+    ## 
+    ## , , 2
+    ## 
+    ##      [,1] [,2] [,3]
+    ## [1,]    1    2    3
+    ## [2,]    4    5    6
+    ## [3,]    7    8    9
 
 Data Frames
 -----------
@@ -530,7 +591,7 @@ points on a scatterplot, the actual function that is called is
     ##             ...)
     ##     invisible()
     ## }
-    ## <bytecode: 0x7f91ee04cbf8>
+    ## <bytecode: 0x7fec52015fc8>
     ## <environment: namespace:graphics>
 
 If the first argument to `plot` has its own `plot` method (ie. that it
@@ -540,13 +601,13 @@ section 5), that function is called instead. That's why
     aq <- datasets::airquality
     plot(lm(Ozone ~ Month, data=aq))
 
-![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-17-1.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-17-2.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-17-3.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-17-4.png)
+![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-19-1.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-19-2.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-19-3.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-19-4.png)
 
 is different than this nonsensical model
 
     plot(lme4::lmer(Ozone ~ 0 + (Day | Month), data=aq))
 
-![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-18-1.png)
+![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-20-1.png)
 
 Example: Extending S3 Objects
 -----------------------------

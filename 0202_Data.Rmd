@@ -74,3 +74,5 @@ Now R has read our data and stored it as an object called `df`, that we can star
 
 
 good shit here: http://zoonek2.free.fr/UNIX/48_R/02.html
+
+rmmmbr to add attributes, naming and factors in data.
