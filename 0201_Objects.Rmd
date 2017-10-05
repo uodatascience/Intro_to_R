@@ -12,6 +12,8 @@ order: 2
 
 # What are Objects?
 
+(Brief aside): When using R, only objects in active memory are manipulated, not the data on the disk. So your data files are always available in their raw format, which means your analyses can be reproduces and altered without ever touching the raw data files.   
+
 Objects are, roughly, data (or more generally a stored state) that know what it can do. 
 
 We know what happens when we put this troublesome one between numbers
