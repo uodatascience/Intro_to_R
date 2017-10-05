@@ -188,6 +188,13 @@ abind::abind(by_columns, by_rows, along=2)
 abind::abind(by_columns, by_rows, along=3)
 ```
 
+Arrays and matrices also have new methods that lists and vectors dont.
+```{r}
+methods(class="list")
+methods(class="matrix")
+```
+
+
 ## Data Frames
 Data frames are one of the gems of R. A data frame is a list of equal length vectors. 
 

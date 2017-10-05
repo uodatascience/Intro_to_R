@@ -21,6 +21,7 @@ order: 2
 -   [S3 Objects](#s3-objects)
     -   [Example: Extending S3 Objects](#example-extending-s3-objects)
 -   [S4 Objects](#s4-objects)
+-   [Reference Classes](#reference-classes)
 -   [References](#references)
 
 What are Objects?
@@ -83,7 +84,9 @@ Objects in R
 > "S3 objects are functions that call the functions of their objects" -
 > *Also R*
 
-R has base types and three object-oriented systems.
+R has base types and three object-oriented systems. We'll spend more
+time on Base types and S3 objects in this lesson, and return to S4 and
+reference classes when we start building bigger code.
 
 -   **Base types:** Low-level C types. Build the other object systems.
 
@@ -96,8 +99,7 @@ R has base types and three object-oriented systems.
     "belong to" functions, but classes are more rigorously defined.
 
 -   **Reference classes:** Objects that use **message passing** - or the
-    method 'belongs to' the object instance rather than the class. This
-    is the common `dataframe$column_name` syntax.
+    method 'belongs to' the object instance rather than the class.
 
 The easiest way to see everything about an object is to use the str()
 function, short for structure. For example we can see everything about
@@ -475,6 +477,22 @@ column and row bind for matrices and array bind for arrays.
     ## [2,]    4    5    6
     ## [3,]    7    8    9
 
+Arrays and matrices also have new methods that lists and vectors dont.
+
+    methods(class="list")
+
+    ## [1] all.equal     as.data.frame coerce        Ops           relist       
+    ## [6] within       
+    ## see '?methods' for accessing help and source code
+
+    methods(class="matrix")
+
+    ##  [1] anyDuplicated as.data.frame as.raster     boxplot       coerce       
+    ##  [6] determinant   duplicated    edit          head          initialize   
+    ## [11] isSymmetric   Math          Math2         Ops           relist       
+    ## [16] subset        summary       tail          unique       
+    ## see '?methods' for accessing help and source code
+
 Data Frames
 -----------
 
@@ -511,7 +529,9 @@ dfs can be used like lists of vectors
 
     ## [1] 0
 
-Or using `names`, which we'll cover in more detail in 2.2.
+Or using `names`, which we'll cover in more detail in 2.2. In short, the
+`$` operator allows us to index by an object's `names`. see `?Extract`
+for more information.
 
     names(df)
 
@@ -585,6 +605,10 @@ attribute.
     attr(x, "class")
 
     ## [1] "letters"
+
+One can find an articulation of the reasoning behind this
+"function-and-class" programming can be found here:
+<https://developer.r-project.org/howMethodsWork.pdf>
 
 S3 objects are defined by a series of functions that themselves contain
 the `UseMethod()` function - this is described briefly above, try
@@ -674,7 +698,7 @@ points on a scatterplot, the actual function that is called is
     ##             ...)
     ##     invisible()
     ## }
-    ## <bytecode: 0x7fd66b2d6ff8>
+    ## <bytecode: 0x7ffc512522b0>
     ## <environment: namespace:graphics>
 
 If the first argument to `plot` has its own `plot` method (ie. that it
@@ -684,13 +708,13 @@ section 5), that function is called instead. That's why
     aq <- datasets::airquality
     plot(lm(Ozone ~ Month, data=aq))
 
-![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-23-1.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-23-2.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-23-3.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-23-4.png)
+![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-24-1.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-24-2.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-24-3.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-24-4.png)
 
 is different than this nonsensical model
 
     plot(lme4::lmer(Ozone ~ 0 + (Day | Month), data=aq))
 
-![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-24-1.png)
+![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-25-1.png)
 
 Example: Extending S3 Objects
 -----------------------------
@@ -758,8 +782,10 @@ S4 Objects
 ==========
 
 S4 objects have a single class definition with specifically defined
-fields and functions. So we could pretend for awhile we're another class
-with S3 functions
+fields and functions. They are too complicated for us to cover in much
+detail yet, so we will return to them again later.
+
+We could pretend for awhile we're another class with S3 objects
 
     a <- data.frame(a="test")
     class(a)
@@ -767,6 +793,96 @@ with S3 functions
     ## [1] "data.frame"
 
     class(a) <- "lm"
+    a
+
+    ## 
+    ## Call:
+    ## NULL
+    ## 
+    ## No coefficients
+
+    summary(a)
+
+    ## Error in if (p == 0) {: argument is of length zero
+
+Not so with S4 objects.
+
+We can finally implement our truck classes
+
+    setClass("truck",
+      slots = list(engine_size = "numeric",
+        n_wheels = "numeric",
+        n_jumps  = "numeric"))
+      
+    setClass("monster_truck",
+      slots = list(mythical_backstory = "character"),
+      contains = "truck")
+      
+    getClass("monster_truck")
+
+    ## Class "monster_truck" [in ".GlobalEnv"]
+    ## 
+    ## Slots:
+    ##                                                                
+    ## Name:  mythical_backstory        engine_size           n_wheels
+    ## Class:          character            numeric            numeric
+    ##                          
+    ## Name:             n_jumps
+    ## Class:            numeric
+    ## 
+    ## Extends: "truck"
+
+S4 objects have `slots`, accessible with `@` (which behaves like `$`) or
+`slot()`. We create new instances of S4 objects with `new()`
+
+    my_truck <- new("truck", engine_size = 4, n_wheels = 4, n_jumps = 40)
+
+    my_truck@engine_size
+
+    ## [1] 4
+
+    slot(my_truck, "n_jumps")
+
+    ## [1] 40
+
+S4 Methods are a headache (and we will skip them in the class). One has
+to create a generic function if it does not yet exist with
+`setGeneric()`, then set the method, classes and function separately
+with `setMethod()`. An example for your edification:
+
+    setGeneric("go_faster", function(which_truck, how_fast) {standardGeneric("go_faster")})
+
+    ## [1] "go_faster"
+
+    setMethod("go_faster",
+      signature = c(which_truck = "truck",
+        how_fast = "character"),
+      function(which_truck, how_fast){
+        print("your truck is now going:")
+        print(how_fast)
+        print("in MPH:")
+        print(which_truck@engine_size * 4)
+      }
+    )
+
+    ## [1] "go_faster"
+
+    go_faster(my_truck, "2 fast 4 u 2 c")
+
+    ## [1] "your truck is now going:"
+    ## [1] "2 fast 4 u 2 c"
+    ## [1] "in MPH:"
+    ## [1] 16
+
+Try extending that to have the monster trucks tell their
+mythical\_backstory as they accelerate.
+
+We will return to S4 objects in more detail in section 5.
+
+Reference Classes
+=================
+
+<http://adv-r.had.co.nz/OO-essentials.html#rc>
 
 References
 ==========
@@ -776,68 +892,3 @@ References
 -   <http://adv-r.had.co.nz/OO-essentials.html>
 
 ------------------------------------------------------------------------
-
-    # S4 Methods are stored in environments 
-    nM <- asNamespace("Matrix")
-    sort(grep("^[.]__T__", names(nM), value=TRUE))
-
-    ##   [1] ".__T__-:base"                ".__T__!:base"               
-    ##   [3] ".__T__[:base"                ".__T__[<-:base"             
-    ##   [5] ".__T__*:base"                ".__T__/:base"               
-    ##   [7] ".__T__&:base"                ".__T__%*%:base"             
-    ##   [9] ".__T__%/%:base"              ".__T__%&%:Matrix"           
-    ##  [11] ".__T__%%:base"               ".__T__^:base"               
-    ##  [13] ".__T__+:base"                ".__T__all:base"             
-    ##  [15] ".__T__all.equal:base"        ".__T__any:base"             
-    ##  [17] ".__T__anyNA:base"            ".__T__Arith:base"           
-    ##  [19] ".__T__as.array:base"         ".__T__as.integer:base"      
-    ##  [21] ".__T__as.logical:base"       ".__T__as.matrix:base"       
-    ##  [23] ".__T__as.numeric:base"       ".__T__as.vector:base"       
-    ##  [25] ".__T__band:Matrix"           ".__T__BunchKaufman:Matrix"  
-    ##  [27] ".__T__cbind2:methods"        ".__T__chol:base"            
-    ##  [29] ".__T__chol2inv:base"         ".__T__Cholesky:Matrix"      
-    ##  [31] ".__T__coerce:methods"        ".__T__coerce<-:methods"     
-    ##  [33] ".__T__colMeans:base"         ".__T__colSums:base"         
-    ##  [35] ".__T__Compare:methods"       ".__T__cov2cor:stats"        
-    ##  [37] ".__T__crossprod:base"        ".__T__determinant:base"     
-    ##  [39] ".__T__diag:base"             ".__T__diag<-:base"          
-    ##  [41] ".__T__diff:base"             ".__T__dim:base"             
-    ##  [43] ".__T__dim<-:base"            ".__T__dimnames:base"        
-    ##  [45] ".__T__dimnames<-:base"       ".__T__drop:base"            
-    ##  [47] ".__T__expand:Matrix"         ".__T__expm:Matrix"          
-    ##  [49] ".__T__facmul:Matrix"         ".__T__forceSymmetric:Matrix"
-    ##  [51] ".__T__format:base"           ".__T__head:utils"           
-    ##  [53] ".__T__image:graphics"        ".__T__initialize:methods"   
-    ##  [55] ".__T__is.finite:base"        ".__T__is.infinite:base"     
-    ##  [57] ".__T__is.na:base"            ".__T__isDiagonal:Matrix"    
-    ##  [59] ".__T__isSymmetric:base"      ".__T__isTriangular:Matrix"  
-    ##  [61] ".__T__kronecker:base"        ".__T__length:base"          
-    ##  [63] ".__T__Logic:base"            ".__T__lu:Matrix"            
-    ##  [65] ".__T__Math:base"             ".__T__Math2:methods"        
-    ##  [67] ".__T__mean:base"             ".__T__nnzero:Matrix"        
-    ##  [69] ".__T__norm:base"             ".__T__Ops:base"             
-    ##  [71] ".__T__pack:Matrix"           ".__T__print:base"           
-    ##  [73] ".__T__prod:base"             ".__T__qr:base"              
-    ##  [75] ".__T__qr.coef:base"          ".__T__qr.fitted:base"       
-    ##  [77] ".__T__qr.Q:base"             ".__T__qr.qty:base"          
-    ##  [79] ".__T__qr.qy:base"            ".__T__qr.R:base"            
-    ##  [81] ".__T__qr.resid:base"         ".__T__rbind2:methods"       
-    ##  [83] ".__T__rcond:base"            ".__T__rep:base"             
-    ##  [85] ".__T__rowMeans:base"         ".__T__rowSums:base"         
-    ##  [87] ".__T__Schur:Matrix"          ".__T__show:methods"         
-    ##  [89] ".__T__skewpart:Matrix"       ".__T__solve:base"           
-    ##  [91] ".__T__sum:base"              ".__T__summary:base"         
-    ##  [93] ".__T__Summary:base"          ".__T__symmpart:Matrix"      
-    ##  [95] ".__T__t:base"                ".__T__tail:utils"           
-    ##  [97] ".__T__tcrossprod:base"       ".__T__toeplitz:stats"       
-    ##  [99] ".__T__tril:Matrix"           ".__T__triu:Matrix"          
-    ## [101] ".__T__unname:base"           ".__T__unpack:Matrix"        
-    ## [103] ".__T__update:stats"          ".__T__updown:Matrix"        
-    ## [105] ".__T__which:base"            ".__T__writeMM:Matrix"       
-    ## [107] ".__T__zapsmall:base"
-
-    meth.Ops <- nM$`.__T__Ops:base`
-    head(sort(names(meth.Ops)))
-
-    ## [1] "abIndex#abIndex" "abIndex#ANY"     "ANY#abIndex"     "ANY#ddiMatrix"  
-    ## [5] "ANY#ldiMatrix"   "ANY#Matrix"
