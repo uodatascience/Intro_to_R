@@ -112,12 +112,31 @@ clicking the following URL
 Getting help
 ------------
 
-Check out the [r-project site](https://www.r-project.org/help.html) for
-more on help documentation.
+1.  For help with functions, in the console use the `?` or `??` before a
+    function name (e.g. `?functionName` or `??functionName`). The single
+    `?` will search for a function of that name whereas `??` will use
+    your input as a keyword to search in all R documentation.
 
-Within R, use `?functionName` or `??functionName`. The single `?` will
-search for a function of that name whereas `??` will use your input as a
-keyword to search in all R documentation.
+2.  RStudio's **Help**. With RStudio open, click on `Help` in the
+    RStudio toolbar to access some great built in resources. Under help,
+    you'll find a bunch of useful stuff. Some of the highlights are:
+
+-   **RStudio Docs**, which will take you to RStudio's online
+    documentation page where you can likely find answers to many of your
+    questions.  
+-   **Cheatseets**. An easy way to access the highly recommended online
+    cheatsheets for:
+    -   The RStudio IDE
+    -   dplyr and tidyr
+    -   ggplot2
+    -   R Markdown
+    -   Shiny
+    -   devtools
+-   **Keyboard Shortcuts help**
+-   **Markdown Quick Reference**
+
+1.  Check out the [r-project site](https://www.r-project.org/help.html)
+    for more on help documentation.
 
 What is R?
 ==========
@@ -285,8 +304,6 @@ file of a function, you enter a '?' followed by the package name:
 
     ?sqrt
 
-    ## starting httpd help server ... done
-
 The help documentation can be pretty confusing if you aren't quite
 familiar with the package/function. The examples (which are typically at
 the bottom) can be very helpful, even for beginners. And some are
@@ -326,13 +343,12 @@ Further down we see that `lib` defaults to the first element of
 
     getOption("repos")
 
-    ##                                 CRAN                            CRANextra 
-    ##                             "@CRAN@" "http://www.stats.ox.ac.uk/pub/RWin"
+    ##     CRAN 
+    ## "@CRAN@"
 
     .libPaths()
 
-    ## [1] "C:/Users/Cory/Documents/R/win-library/3.4"
-    ## [2] "C:/Program Files/R/R-3.4.1/library"
+    ## [1] "/Library/Frameworks/R.framework/Versions/3.4/Resources/library"
 
 Most packages we use will come from cran, and if you ever need to modify
 or find package files for any reason, there they shall be.
