@@ -147,12 +147,12 @@ R has no 0-dimensional, scalar types, so individual characters or numbers are le
 | ------------------ | ------- |
 | Logical   | `booleans <- c(TRUE, FALSE, NA)` |
 | Integer   | `integers <- c(1L, 2L, 3L)`  |
-| Double    | `doubles <- c(1, 2.5, 0.005)` |
+| Double (== `numeric`)    | `doubles <- c(1, 2.5, 0.005)` |
 | Character | `characters <- c("apple", "banana")` |
 
 `raw` and `complex` types also exist, but they are rare.
 
-Vectors are constructed with `c()`. When heterogeneous vectors are constructed with `c()`, they are *coerced* to the most permissive vector type (an integer can be both a double (floating point numbers with decimal points) and character "1") - the table above is ordered from least to most permissive.
+Vectors are constructed with `c()`. When heterogeneous vectors are constructed with `c()`, they are **coerced** to the most permissive vector type (an integer can be both a double (floating point numbers with decimal points) and character "1") - the table above is ordered from least to most permissive.
 
 ```{r}
 vect_1 <- c(1L, 2L, 3L)
@@ -167,6 +167,12 @@ typeof(vect_3)
 vect_1[1]
 vect_3[1]
 
+```
+
+Each of the different atomic vector types has different methods (we'll come back to how methods work in a bit), which explains why we can `1 + 1` but not `"1" + "1"`. Notice how the `integer` class has a set of methods called "Arith" (see `?Arith`, an S4 group of generic functions, something we won't talk about until section 5) but `character` doesn't. 
+```{r}
+methods(class="integer")
+methods(class="character")
 ```
 
 To make a vector that preserves the types of its elements, make a `list` instead
@@ -188,17 +194,17 @@ typeof(a_list[1])
 # Indexing recursive lists
 b_list <- list(1:3, c("apple", "banana", "cucumber"))
 b_list
-b_list[1]
-b_list[1][1]
-b_list[[1]]
-b_list[[1]][1]
+b_list[1]    # gets the first list
+b_list[1][1] # doesn't work
+b_list[[1]]  # gets the contents of the first list
+b_list[[1]][1] # gets the first element of the contents of the first list
 ```
 
 Similarly to coersion among atomic vectors, vectors that contain lists will be coerced to lists.
 ```{r}
 c(1,2,3)
-c(c(1),c(2,3))
-c(c(1),list(2,3))
+c(c(1),c(2,3)) # vectors can't be recursive, so they get flattened
+c(c(1),list(2,3)) # if one element is a list, the whole object will become a list
 list(c(1,2,3), c("a","b","c"))
 
 # Unlist turns lists back into (flat) atomic vectors
@@ -211,14 +217,24 @@ typeof(data.frame(c(1,2,3)))
 ```
 
 ## Matrices & Arrays
-**Arrays** are atomic vectors with a `dim` attribute (more about attributes in 2.2). **Matrices** are arrays with `dim = 2`. 
+**Arrays** are atomic vectors with a `dim` attribute. **Matrices** are arrays with `dim = 2`. 
 
 ```{r}
+# General way of making arrays
 array_1 <- array(1:24, dim=c(2,3,4))
+array_1
+typeof(array_1)
+attributes(array_1)
+
+# Matrices have their own syntax
 array_2 <- matrix(1:24, ncol=3, nrow=8)
+array_2
+
+# A vector can be made an array afterwards by setting the 'dim' attribute
 array_3 <- c(1:24)
 dim(array_3) <- c(2,3,4)
 # or attr(array_3, "dim") <- c(2,3,4)
+array_3
 ```
 
 In higher dimensions, c() becomes `cbind(), rbind()`, and `abind()`; column and row bind for matrices and array bind for arrays.
@@ -247,16 +263,17 @@ Data frames are one of the gems of R. A data frame is a list of equal length vec
 df <- data.frame(little_ones = c(0,1,2,3,4),
                  big_ones = c(5,6,7,8,9))
 df
+attributes(df)
 ```
 
-dfs can be used like lists of vectors
+data frames can be used like lists of vectors
 ```{r}
 df[1]
 df[[1]]
 df[[1]][1] # as above
 ```
 
-Or using `names`, which we'll cover in more detail in 2.2. In short, the `$` operator allows us to index by an object's `names`. see `?Extract` for more information.
+Or using `names` with the `$` operator (see `?Extract` for more information).
 
 ```{r}
 names(df)
@@ -279,17 +296,13 @@ rbind(df,df_squared)
 ```
 
 
-
-```
-
-
 ## Etc.
 
 Functions, environments, and other stuff that we'll learn about in our section on Functions are also base objects, but we'll discuss them then.
 
 
 # S3 Objects
-S3 objects "belong to" functions, S4 objects "have" functions (methods). S3 classes don't really "exist," but are assigned as an object's "class" attribute.
+S3 objects "belong to" functions, which become their methods. S3 classes don't really "exist," but are assigned as an object's "class" attribute. S3 classes are one of the worst things about R, but are also responsible for some of its flexibility.
 
 ```{r, echo=TRUE}
 x <- 1
@@ -298,17 +311,16 @@ class(x) <- "letters"
 attr(x, "class")
 ```
 
-One can find an articulation of the reasoning behind this "function-and-class" programming can be found here: https://developer.r-project.org/howMethodsWork.pdf
+One can find an articulation of the reasoning behind this "function-and-class" programming can be found here: https://developer.r-project.org/howMethodsWork.pdf. We'll talk more about this in later sections.
 
 
 S3 objects are defined by a series of functions that themselves contain the `UseMethod()` function - this is described briefly above, try `?UseMethod` for more detail. These functions extend the generic function, typically using the syntax `generic.class()` as in the case of `mean.Date()` for taking the mean of dates. One can list the objects that have a generic method, and the methods that an object has with `methods()`
 
 ```{r}
-methods(mean)
+methods(mean) # list the classes that have this method
 
-methods(class="Date")
+methods(class="Date") # list the methods that this class has
 ```
-
 
 By default, the source code of S3 methods is not visible to R, one can retreive it with `utils::getS3method``
 
@@ -338,6 +350,8 @@ plot(lme4::lmer(Ozone ~ 0 + (Day | Month), data=aq))
 
 ## Example: Extending S3 Objects
 > http://adv-r.had.co.nz/OO-essentials.html "Creating new methods and generics"
+
+Using a class's method is what allows us to do sensible computations on different types of objects with the same command.
 
 ```{r, error=TRUE}
 pryr::ftype(mean) # mean is an s3 generic function
@@ -434,16 +448,15 @@ Try extending that to have the monster trucks tell their mythical_backstory as t
 We will return to S4 objects in more detail in section 5.
 
 # Reference Classes
-http://adv-r.had.co.nz/OO-essentials.html#rc
 
-
-
-
+References classes are a "truly" object oriented system in R, but we are going to skip them entirely for now because they are rare enough that you aren't likely to encounter them yet. See here for more information: http://adv-r.had.co.nz/OO-essentials.html#rc
 
 # References
 * http://manuals.bioinformatics.ucr.edu/home/programming-in-r#TOC-Object-Oriented-Programming-OOP-
 * http://www.stat.ucla.edu/%7Ecocteau/stat202a/resources/docs/S4Objects.pdf
 * http://adv-r.had.co.nz/OO-essentials.html
+* http://adv-r.had.co.nz/Data-structures.html
+
 
 
 -------------------

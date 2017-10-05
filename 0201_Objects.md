@@ -331,7 +331,7 @@ numbers are length=one atomic vectors. They are:
 <td><code>integers &lt;- c(1L, 2L, 3L)</code></td>
 </tr>
 <tr class="odd">
-<td>Double</td>
+<td>Double (== <code>numeric</code>)</td>
 <td><code>doubles &lt;- c(1, 2.5, 0.005)</code></td>
 </tr>
 <tr class="even">
@@ -344,10 +344,10 @@ numbers are length=one atomic vectors. They are:
 `raw` and `complex` types also exist, but they are rare.
 
 Vectors are constructed with `c()`. When heterogeneous vectors are
-constructed with `c()`, they are *coerced* to the most permissive vector
-type (an integer can be both a double (floating point numbers with
-decimal points) and character "1") - the table above is ordered from
-least to most permissive.
+constructed with `c()`, they are **coerced** to the most permissive
+vector type (an integer can be both a double (floating point numbers
+with decimal points) and character "1") - the table above is ordered
+from least to most permissive.
 
     vect_1 <- c(1L, 2L, 3L)
     vect_2 <- c(1L, 2L, 3)
@@ -373,6 +373,26 @@ least to most permissive.
     vect_3[1]
 
     ## [1] "1"
+
+Each of the different atomic vector types has different methods (we'll
+come back to how methods work in a bit), which explains why we can
+`1 + 1` but not `"1" + "1"`. Notice how the `integer` class has a set of
+methods called "Arith" (see `?Arith`, an S4 group of generic functions,
+something we won't talk about until section 5) but `character` doesn't.
+
+    methods(class="integer")
+
+    ## [1] as.data.frame coerce        Ops          
+    ## see '?methods' for accessing help and source code
+
+    methods(class="character")
+
+    ##  [1] all.equal                as.data.frame           
+    ##  [3] as.Date                  as.POSIXlt              
+    ##  [5] as.raster                coerce                  
+    ##  [7] coerce<-                 formula                 
+    ##  [9] getDLLRegisteredRoutines Ops                     
+    ## see '?methods' for accessing help and source code
 
 To make a vector that preserves the types of its elements, make a `list`
 instead
@@ -429,21 +449,21 @@ returns the the elements in that list.
     ## [[2]]
     ## [1] "apple"    "banana"   "cucumber"
 
-    b_list[1]
+    b_list[1]    # gets the first list
 
     ## [[1]]
     ## [1] 1 2 3
 
-    b_list[1][1]
+    b_list[1][1] # doesn't work
 
     ## [[1]]
     ## [1] 1 2 3
 
-    b_list[[1]]
+    b_list[[1]]  # gets the contents of the first list
 
     ## [1] 1 2 3
 
-    b_list[[1]][1]
+    b_list[[1]][1] # gets the first element of the contents of the first list
 
     ## [1] 1
 
@@ -454,11 +474,11 @@ will be coerced to lists.
 
     ## [1] 1 2 3
 
-    c(c(1),c(2,3))
+    c(c(1),c(2,3)) # vectors can't be recursive, so they get flattened
 
     ## [1] 1 2 3
 
-    c(c(1),list(2,3))
+    c(c(1),list(2,3)) # if one element is a list, the whole object will become a list
 
     ## [[1]]
     ## [1] 1
@@ -492,14 +512,89 @@ base type for many derived classes, like data frames
 Matrices & Arrays
 -----------------
 
-**Arrays** are atomic vectors with a `dim` attribute (more about
-attributes in 2.2). **Matrices** are arrays with `dim = 2`.
+**Arrays** are atomic vectors with a `dim` attribute. **Matrices** are
+arrays with `dim = 2`.
 
+    # General way of making arrays
     array_1 <- array(1:24, dim=c(2,3,4))
+    array_1
+
+    ## , , 1
+    ## 
+    ##      [,1] [,2] [,3]
+    ## [1,]    1    3    5
+    ## [2,]    2    4    6
+    ## 
+    ## , , 2
+    ## 
+    ##      [,1] [,2] [,3]
+    ## [1,]    7    9   11
+    ## [2,]    8   10   12
+    ## 
+    ## , , 3
+    ## 
+    ##      [,1] [,2] [,3]
+    ## [1,]   13   15   17
+    ## [2,]   14   16   18
+    ## 
+    ## , , 4
+    ## 
+    ##      [,1] [,2] [,3]
+    ## [1,]   19   21   23
+    ## [2,]   20   22   24
+
+    typeof(array_1)
+
+    ## [1] "integer"
+
+    attributes(array_1)
+
+    ## $dim
+    ## [1] 2 3 4
+
+    # Matrices have their own syntax
     array_2 <- matrix(1:24, ncol=3, nrow=8)
+    array_2
+
+    ##      [,1] [,2] [,3]
+    ## [1,]    1    9   17
+    ## [2,]    2   10   18
+    ## [3,]    3   11   19
+    ## [4,]    4   12   20
+    ## [5,]    5   13   21
+    ## [6,]    6   14   22
+    ## [7,]    7   15   23
+    ## [8,]    8   16   24
+
+    # A vector can be made an array afterwards by setting the 'dim' attribute
     array_3 <- c(1:24)
     dim(array_3) <- c(2,3,4)
     # or attr(array_3, "dim") <- c(2,3,4)
+    array_3
+
+    ## , , 1
+    ## 
+    ##      [,1] [,2] [,3]
+    ## [1,]    1    3    5
+    ## [2,]    2    4    6
+    ## 
+    ## , , 2
+    ## 
+    ##      [,1] [,2] [,3]
+    ## [1,]    7    9   11
+    ## [2,]    8   10   12
+    ## 
+    ## , , 3
+    ## 
+    ##      [,1] [,2] [,3]
+    ## [1,]   13   15   17
+    ## [2,]   14   16   18
+    ## 
+    ## , , 4
+    ## 
+    ##      [,1] [,2] [,3]
+    ## [1,]   19   21   23
+    ## [2,]   20   22   24
 
 In higher dimensions, c() becomes `cbind(), rbind()`, and `abind()`;
 column and row bind for matrices and array bind for arrays.
@@ -586,7 +681,18 @@ length vectors.
     ## 4           3        8
     ## 5           4        9
 
-dfs can be used like lists of vectors
+    attributes(df)
+
+    ## $names
+    ## [1] "little_ones" "big_ones"   
+    ## 
+    ## $row.names
+    ## [1] 1 2 3 4 5
+    ## 
+    ## $class
+    ## [1] "data.frame"
+
+data frames can be used like lists of vectors
 
     df[1]
 
@@ -605,9 +711,8 @@ dfs can be used like lists of vectors
 
     ## [1] 0
 
-Or using `names`, which we'll cover in more detail in 2.2. In short, the
-`$` operator allows us to index by an object's `names`. see `?Extract`
-for more information.
+Or using `names` with the `$` operator (see `?Extract` for more
+information).
 
     names(df)
 
@@ -657,8 +762,6 @@ Data frames also inherit the methods of lists and vectors
     ## 9            6        6
     ## 10           7        7
 
-\`\`\`
-
 Etc.
 ----
 
@@ -668,9 +771,10 @@ section on Functions are also base objects, but we'll discuss them then.
 S3 Objects
 ==========
 
-S3 objects "belong to" functions, S4 objects "have" functions (methods).
-S3 classes don't really "exist," but are assigned as an object's "class"
-attribute.
+S3 objects "belong to" functions, which become their methods. S3 classes
+don't really "exist," but are assigned as an object's "class" attribute.
+S3 classes are one of the worst things about R, but are also responsible
+for some of its flexibility.
 
     x <- 1
     attr(x, "class")
@@ -684,7 +788,8 @@ attribute.
 
 One can find an articulation of the reasoning behind this
 "function-and-class" programming can be found here:
-<https://developer.r-project.org/howMethodsWork.pdf>
+<https://developer.r-project.org/howMethodsWork.pdf>. We'll talk more
+about this in later sections.
 
 S3 objects are defined by a series of functions that themselves contain
 the `UseMethod()` function - this is described briefly above, try
@@ -694,12 +799,12 @@ function, typically using the syntax `generic.class()` as in the case of
 that have a generic method, and the methods that an object has with
 `methods()`
 
-    methods(mean)
+    methods(mean) # list the classes that have this method
 
     ## [1] mean.Date     mean.default  mean.difftime mean.POSIXct  mean.POSIXlt 
     ## see '?methods' for accessing help and source code
 
-    methods(class="Date")
+    methods(class="Date") # list the methods that this class has
 
     ##  [1] -             [             [[            [<-           +            
     ##  [6] as.character  as.data.frame as.list       as.POSIXct    as.POSIXlt   
@@ -774,7 +879,7 @@ points on a scatterplot, the actual function that is called is
     ##             ...)
     ##     invisible()
     ## }
-    ## <bytecode: 0x7f8b6628b278>
+    ## <bytecode: 0x7f97de04db50>
     ## <environment: namespace:graphics>
 
 If the first argument to `plot` has its own `plot` method (ie. that it
@@ -784,19 +889,22 @@ section 5), that function is called instead. That's why
     aq <- datasets::airquality
     plot(lm(Ozone ~ Month, data=aq))
 
-![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-29-1.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-29-2.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-29-3.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-29-4.png)
+![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-30-1.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-30-2.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-30-3.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-30-4.png)
 
 is different than this nonsensical model
 
     plot(lme4::lmer(Ozone ~ 0 + (Day | Month), data=aq))
 
-![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-30-1.png)
+![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-31-1.png)
 
 Example: Extending S3 Objects
 -----------------------------
 
 > <http://adv-r.had.co.nz/OO-essentials.html> "Creating new methods and
 > generics"
+
+Using a class's method is what allows us to do sensible computations on
+different types of objects with the same command.
 
     pryr::ftype(mean) # mean is an s3 generic function
 
@@ -958,6 +1066,9 @@ We will return to S4 objects in more detail in section 5.
 Reference Classes
 =================
 
+References classes are a "truly" object oriented system in R, but we are
+going to skip them entirely for now because they are rare enough that
+you aren't likely to encounter them yet. See here for more information:
 <http://adv-r.had.co.nz/OO-essentials.html#rc>
 
 References
@@ -966,5 +1077,6 @@ References
 -   <http://manuals.bioinformatics.ucr.edu/home/programming-in-r#TOC-Object-Oriented-Programming-OOP->
 -   <http://www.stat.ucla.edu/%7Ecocteau/stat202a/resources/docs/S4Objects.pdf>
 -   <http://adv-r.had.co.nz/OO-essentials.html>
+-   <http://adv-r.had.co.nz/Data-structures.html>
 
 ------------------------------------------------------------------------
