@@ -14,6 +14,13 @@ order: 100
 
 Function | Function function
 ---------- | ----------
+`getwd()`  | Return your working directory
+`setwd()`  | Assign a working directory to use for the current session
+`ls()`     | List the objects in memory
+`rm(x)`     | Remove an object from the workspace (in this example, `x`)
+`rm(list=ls())` | Remove all objects from the workspace
+`history()` | Show the last 25 commands
+
 
 # Objects
 Function | Function function
