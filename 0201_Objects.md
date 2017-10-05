@@ -14,9 +14,10 @@ order: 2
     -   [Object terminology](#object-terminology)
 -   [Objects in R](#objects-in-r)
 -   [Base Types](#base-types)
-    -   [Atomic Vectors](#atomic-vectors)
-    -   [Lists & Matrices](#lists-matrices)
+    -   [Vectors](#vectors)
+    -   [Matrices](#matrices)
     -   [Data Frames](#data-frames)
+    -   [Etc.](#etc.)
 -   [S3 Objects](#s3-objects)
     -   [Example: Extending S3 Objects](#example-extending-s3-objects)
 -   [S4 Objects](#s4-objects)
@@ -101,6 +102,71 @@ R has base types and three object-oriented systems.
     method 'belongs to' the class rather than a function. This is the
     common `dataframe$column_name` syntax.
 
+The easiest way to see everything about an object is to use the str()
+function, short for structure. For example we can see everything about
+the lamest linear model ever
+
+    lame_model <- lm(c(1,2,3) ~ c(4,5,6))
+    str(lame_model)
+
+    ## List of 12
+    ##  $ coefficients : Named num [1:2] -3 1
+    ##   ..- attr(*, "names")= chr [1:2] "(Intercept)" "c(4, 5, 6)"
+    ##  $ residuals    : Named num [1:3] -9.06e-17 1.81e-16 -9.06e-17
+    ##   ..- attr(*, "names")= chr [1:3] "1" "2" "3"
+    ##  $ effects      : Named num [1:3] -3.46 -1.41 -2.22e-16
+    ##   ..- attr(*, "names")= chr [1:3] "(Intercept)" "c(4, 5, 6)" ""
+    ##  $ rank         : int 2
+    ##  $ fitted.values: Named num [1:3] 1 2 3
+    ##   ..- attr(*, "names")= chr [1:3] "1" "2" "3"
+    ##  $ assign       : int [1:2] 0 1
+    ##  $ qr           :List of 5
+    ##   ..$ qr   : num [1:3, 1:2] -1.732 0.577 0.577 -8.66 -1.414 ...
+    ##   .. ..- attr(*, "dimnames")=List of 2
+    ##   .. .. ..$ : chr [1:3] "1" "2" "3"
+    ##   .. .. ..$ : chr [1:2] "(Intercept)" "c(4, 5, 6)"
+    ##   .. ..- attr(*, "assign")= int [1:2] 0 1
+    ##   ..$ qraux: num [1:2] 1.58 1.26
+    ##   ..$ pivot: int [1:2] 1 2
+    ##   ..$ tol  : num 1e-07
+    ##   ..$ rank : int 2
+    ##   ..- attr(*, "class")= chr "qr"
+    ##  $ df.residual  : int 1
+    ##  $ xlevels      : Named list()
+    ##  $ call         : language lm(formula = c(1, 2, 3) ~ c(4, 5, 6))
+    ##  $ terms        :Classes 'terms', 'formula'  language c(1, 2, 3) ~ c(4, 5, 6)
+    ##   .. ..- attr(*, "variables")= language list(c(1, 2, 3), c(4, 5, 6))
+    ##   .. ..- attr(*, "factors")= int [1:2, 1] 0 1
+    ##   .. .. ..- attr(*, "dimnames")=List of 2
+    ##   .. .. .. ..$ : chr [1:2] "c(1, 2, 3)" "c(4, 5, 6)"
+    ##   .. .. .. ..$ : chr "c(4, 5, 6)"
+    ##   .. ..- attr(*, "term.labels")= chr "c(4, 5, 6)"
+    ##   .. ..- attr(*, "order")= int 1
+    ##   .. ..- attr(*, "intercept")= int 1
+    ##   .. ..- attr(*, "response")= int 1
+    ##   .. ..- attr(*, ".Environment")=<environment: R_GlobalEnv> 
+    ##   .. ..- attr(*, "predvars")= language list(c(1, 2, 3), c(4, 5, 6))
+    ##   .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "numeric"
+    ##   .. .. ..- attr(*, "names")= chr [1:2] "c(1, 2, 3)" "c(4, 5, 6)"
+    ##  $ model        :'data.frame':   3 obs. of  2 variables:
+    ##   ..$ c(1, 2, 3): num [1:3] 1 2 3
+    ##   ..$ c(4, 5, 6): num [1:3] 4 5 6
+    ##   ..- attr(*, "terms")=Classes 'terms', 'formula'  language c(1, 2, 3) ~ c(4, 5, 6)
+    ##   .. .. ..- attr(*, "variables")= language list(c(1, 2, 3), c(4, 5, 6))
+    ##   .. .. ..- attr(*, "factors")= int [1:2, 1] 0 1
+    ##   .. .. .. ..- attr(*, "dimnames")=List of 2
+    ##   .. .. .. .. ..$ : chr [1:2] "c(1, 2, 3)" "c(4, 5, 6)"
+    ##   .. .. .. .. ..$ : chr "c(4, 5, 6)"
+    ##   .. .. ..- attr(*, "term.labels")= chr "c(4, 5, 6)"
+    ##   .. .. ..- attr(*, "order")= int 1
+    ##   .. .. ..- attr(*, "intercept")= int 1
+    ##   .. .. ..- attr(*, "response")= int 1
+    ##   .. .. ..- attr(*, ".Environment")=<environment: R_GlobalEnv> 
+    ##   .. .. ..- attr(*, "predvars")= language list(c(1, 2, 3), c(4, 5, 6))
+    ##   .. .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "numeric"
+    ##   .. .. .. ..- attr(*, "names")= chr [1:2] "c(1, 2, 3)" "c(4, 5, 6)"
+    ##  - attr(*, "class")= chr "lm"
+
 R has a useful package `pryr` for inspecting objects and other
 meta-linguistic needs. Let's get that now.
 
@@ -122,8 +188,8 @@ Base Types
 Every R object is built out of basic C structures that define how it is
 stored and managed in memory.
 
-This table from [Advanced R - Data
-Structures](http://adv-r.had.co.nz/Data-structures.html#data-structures)
+This table from [Advanced
+R](http://adv-r.had.co.nz/Data-structures.html#data-structures)
 summarizes them:
 
 <table>
@@ -153,14 +219,211 @@ summarizes them:
 </tbody>
 </table>
 
-Atomic Vectors
---------------
+Recall that we can use `typeof()` to find an object's base type
 
-Lists & Matrices
-----------------
+    typeof(1)
+
+    ## [1] "double"
+
+    typeof(list(1,2,3))
+
+    ## [1] "list"
+
+Vectors
+-------
+
+Vectors are sequences, the most basic data type in R. They have two
+varieties: **atomic vectors** (with homogenous values) and **lists**
+(with ... heterogenous values).
+
+R has no 0-dimensional, scalar types, so individual characters or
+numbers are length=one atomic vectors. They are:
+
+<table>
+<thead>
+<tr class="header">
+<th>Atomic Vector Type</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Logical</td>
+<td><code>booleans &lt;- c(TRUE, FALSE, NA)</code></td>
+</tr>
+<tr class="even">
+<td>Integer</td>
+<td><code>integers &lt;- c(1L, 2L, 3L)</code></td>
+</tr>
+<tr class="odd">
+<td>Double</td>
+<td><code>doubles &lt;- c(1, 2.5, 0.005)</code></td>
+</tr>
+<tr class="even">
+<td>Character</td>
+<td>`characters &lt;- c(&quot;apple&quot;, &quot;banana&quot;)</td>
+</tr>
+</tbody>
+</table>
+
+`raw` and `complex` types also exist, but they are rare.
+
+Note that vectors are constructed with `c()`. When heterogeneous vectors
+are constructed with `c()`, they are *coerced* to the most permissive
+vector type (an integer can be both a double (floating point numbers
+with decimal points) and character "1") - the table above is ordered
+from least to most permissive.
+
+    vect_1 <- c(1L, 2L, 3L)
+    vect_2 <- c(1L, 2L, 3)
+    vect_3 <- c(1L,2,"3")
+
+    typeof(vect_1)
+
+    ## [1] "integer"
+
+    typeof(vect_2)
+
+    ## [1] "double"
+
+    typeof(vect_3)
+
+    ## [1] "character"
+
+    # We select elements of vectors with [] notation
+    vect_1[1]
+
+    ## [1] 1
+
+    vect_3[1]
+
+    ## [1] "1"
+
+To make a vector that preserves the types of its elements, make a `list`
+instead
+
+    a_list <- list(1L,2,"3")
+    a_list
+
+    ## [[1]]
+    ## [1] 1
+    ## 
+    ## [[2]]
+    ## [1] 2
+    ## 
+    ## [[3]]
+    ## [1] "3"
+
+    typeof(a_list[[1]])
+
+    ## [1] "integer"
+
+    typeof(a_list[[2]])
+
+    ## [1] "double"
+
+    typeof(a_list[[3]])
+
+    ## [1] "character"
+
+Notice the double bracket notation `[[]]`. Lists are commonly recursive
+- they store other lists. Since the elements of our list are themselves
+lists, single bracket indexing `[]` returns lists, and `[[]]` returns
+the the elements in that list.
+
+    is.recursive(a_list)
+
+    ## [1] TRUE
+
+    a_list[1]
+
+    ## [[1]]
+    ## [1] 1
+
+    typeof(a_list[1])
+
+    ## [1] "list"
+
+    # Indexing recursive lists
+    b_list <- list(1:3, c("apple", "banana", "cucumber"))
+    b_list
+
+    ## [[1]]
+    ## [1] 1 2 3
+    ## 
+    ## [[2]]
+    ## [1] "apple"    "banana"   "cucumber"
+
+    b_list[1]
+
+    ## [[1]]
+    ## [1] 1 2 3
+
+    b_list[1][1]
+
+    ## [[1]]
+    ## [1] 1 2 3
+
+    b_list[[1]]
+
+    ## [1] 1 2 3
+
+    b_list[[1]][1]
+
+    ## [1] 1
+
+Similarly to coersion among atomic vectors, vectors that contain lists
+will be coerced to lists.
+
+    c(1,2,3)
+
+    ## [1] 1 2 3
+
+    c(c(1),c(2,3))
+
+    ## [1] 1 2 3
+
+    c(c(1),list(2,3))
+
+    ## [[1]]
+    ## [1] 1
+    ## 
+    ## [[2]]
+    ## [1] 2
+    ## 
+    ## [[3]]
+    ## [1] 3
+
+    list(c(1,2,3), c("a","b","c"))
+
+    ## [[1]]
+    ## [1] 1 2 3
+    ## 
+    ## [[2]]
+    ## [1] "a" "b" "c"
+
+    # Unlist turns lists back into (flat) atomic vectors
+    unlist(list(c(1,2,3), c("a","b","c")))
+
+    ## [1] "1" "2" "3" "a" "b" "c"
+
+Because they are the most general form of vector, lists are used as the
+base type for many derived classes, like data frames
+
+    typeof(data.frame(c(1,2,3)))
+
+    ## [1] "list"
+
+Matrices
+--------
 
 Data Frames
 -----------
+
+Etc.
+----
+
+But also functions, environments, etc. that we'll learn about in 5.
 
 S3 Objects
 ==========
@@ -267,7 +530,7 @@ points on a scatterplot, the actual function that is called is
     ##             ...)
     ##     invisible()
     ## }
-    ## <bytecode: 0x7fbe28a9a0e0>
+    ## <bytecode: 0x7f91ee04cbf8>
     ## <environment: namespace:graphics>
 
 If the first argument to `plot` has its own `plot` method (ie. that it
@@ -277,13 +540,13 @@ section 5), that function is called instead. That's why
     aq <- datasets::airquality
     plot(lm(Ozone ~ Month, data=aq))
 
-![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-10-1.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-10-2.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-10-3.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-10-4.png)
+![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-17-1.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-17-2.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-17-3.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-17-4.png)
 
 is different than this nonsensical model
 
     plot(lme4::lmer(Ozone ~ 0 + (Day | Month), data=aq))
 
-![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-11-1.png)
+![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-18-1.png)
 
 Example: Extending S3 Objects
 -----------------------------

@@ -57,6 +57,12 @@ R has base types and three object-oriented systems.
 
 * **Reference classes:** Objects that use **message passing** - or the method 'belongs to' the class rather than a function. This is the common `dataframe$column_name` syntax.
 
+The easiest way to see everything about an object is to use the str() function, short for structure. For example we can see everything about the lamest linear model ever
+```{r}
+lame_model <- lm(c(1,2,3) ~ c(4,5,6))
+str(lame_model)
+```
+
 R has a useful package `pryr` for inspecting objects and other meta-linguistic needs. Let's get that now.
 ```{r}
 # install.packages("pryr")
@@ -66,13 +72,12 @@ We can query any object's type with pryr's `otype`
 ```{r}
 pryr::otype(c(1,2,3,4,5)) # A vector is a base object
 pryr::otype(data.frame(x=c(1,2,3,4,5))) # A dataframe is an S3 object
-
 ```
 
 # Base Types
-Every R object is built out of basic C structures that define how it is stored and managed in memory. 
+Every R object is built out of basic C structures that define how it is stored and managed in memory.
 
-This table from [Advanced R - Data Structures](http://adv-r.had.co.nz/Data-structures.html#data-structures) summarizes them:
+This table from [Advanced R](http://adv-r.had.co.nz/Data-structures.html#data-structures) summarizes them:
 
 | | Homogenous data | Heterogenous data |
 |------------|----------------| ------------------|
@@ -80,11 +85,94 @@ This table from [Advanced R - Data Structures](http://adv-r.had.co.nz/Data-struc
 | 2-Dimensional | Matrix | Data frame |
 | N-Dimensional | Array | |
 
-## Atomic Vectors
+Recall that we can use `typeof()` to find an object's base type
+```{r}
+typeof(1)
+typeof(list(1,2,3))
+```
 
-## Lists & Matrices
+
+
+## Vectors
+
+Vectors are sequences, the most basic data type in R. They have two varieties: **atomic vectors** (with homogenous values) and **lists** (with ... heterogenous values). 
+
+R has no 0-dimensional, scalar types, so individual characters or numbers are length=one atomic vectors. They are:
+
+| Atomic Vector Type | Example | 
+| ------------------ | ------- |
+| Logical   | `booleans <- c(TRUE, FALSE, NA)` |
+| Integer   | `integers <- c(1L, 2L, 3L)`  |
+| Double    | `doubles <- c(1, 2.5, 0.005)` |
+| Character | `characters <- c("apple", "banana") |
+
+`raw` and `complex` types also exist, but they are rare.
+
+Note that vectors are constructed with `c()`. When heterogeneous vectors are constructed with `c()`, they are *coerced* to the most permissive vector type (an integer can be both a double (floating point numbers with decimal points) and character "1") - the table above is ordered from least to most permissive.
+
+```{r}
+vect_1 <- c(1L, 2L, 3L)
+vect_2 <- c(1L, 2L, 3)
+vect_3 <- c(1L,2,"3")
+
+typeof(vect_1)
+typeof(vect_2)
+typeof(vect_3)
+
+# We select elements of vectors with [] notation
+vect_1[1]
+vect_3[1]
+
+```
+
+To make a vector that preserves the types of its elements, make a `list` instead
+```{r}
+a_list <- list(1L,2,"3")
+a_list
+typeof(a_list[[1]])
+typeof(a_list[[2]])
+typeof(a_list[[3]])
+```
+
+Notice the double bracket notation `[[]]`. Lists are commonly recursive - they store other lists. Since the elements of our list are themselves lists, single bracket indexing `[]` returns lists, and `[[]]` returns the the elements in that list.
+
+```{r}
+is.recursive(a_list)
+a_list[1]
+typeof(a_list[1])
+
+# Indexing recursive lists
+b_list <- list(1:3, c("apple", "banana", "cucumber"))
+b_list
+b_list[1]
+b_list[1][1]
+b_list[[1]]
+b_list[[1]][1]
+```
+
+Similarly to coersion among atomic vectors, vectors that contain lists will be coerced to lists.
+```{r}
+c(1,2,3)
+c(c(1),c(2,3))
+c(c(1),list(2,3))
+list(c(1,2,3), c("a","b","c"))
+
+# Unlist turns lists back into (flat) atomic vectors
+unlist(list(c(1,2,3), c("a","b","c")))
+```
+
+Because they are the most general form of vector, lists are used as the base type for many derived classes, like data frames
+```{r}
+typeof(data.frame(c(1,2,3)))
+```
+
+## Matrices
 
 ## Data Frames
+
+## Etc.
+
+But also functions, environments, etc. that we'll learn about in 5.
 
 
 # S3 Objects
