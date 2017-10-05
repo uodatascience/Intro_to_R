@@ -12,9 +12,7 @@ order: 2
 
 # What are Objects?
 
-When using R, only objects in active memory are manipulated, not the data on the disk. So your data files are always available in their raw format, which means your analyses can be reproduces and altered without ever touching the raw data files.   
-
-Objects are, roughly, data (or more generally a stored state) that know what it can do. 
+Objects are, roughly, data (or more generally a stored state) that knows what it can do. 
 
 We know what happens when we put this troublesome `+` guy between numbers
 
@@ -37,16 +35,14 @@ typeof("a")
 
 
 ## Object terminology
-A **class** is the description, or 'blueprint' of how individual **objects** are made, including their **attributes** - which data should be kept and what it should be named, and **methods**, the functions that they are capable of calling on their stored data or attributes. 
+A **class** is the description, or 'blueprint' of how individual **objects** or **instances** are made, including their **attributes** - which data should be kept and what it should be named, and **methods**, the functions that they are capable of calling on their stored data or attributes. Objects can have a nested structure, and sub-classes can **inherit** the attributes and methods of their parent classes.
 
-See this example class ():
-
-> do the example class
+For example: As a class, trucks have attributes like engine_size, number_of_wheels, or number_of_jumps_gone_off. Trucks have the method go_faster(), but only individual instances of trucks can go_faster() - the concept/class of trucks can't. As a subclass, monster_trucks also have the attributes engine_size, etc. and the method go_faster(), but they also have additional attributes like mythical_backstory and methods like monster_jam().
 
 
 *classes define the behavior of objects
 ** Describe attributes and relationship to other classes
-** Methods are functions that depend on the class of their input. try methods(object) (`?methods`)
+** Methods are functions that depend on the class of their input. 
 
 
 
@@ -56,7 +52,10 @@ See this example class ():
 >"S3 objects are functions that call the functions of their objects" - *Also R*
 
 
-R has three object-oriented systems and the base types.
+R has base types and three object-oriented systems.
+
+
+* **Base types:** Low-level C types. Build the other object systems.
 
 * **S3 - "Casual objects":** Objects that use **generic functions**. Rather than asking an object what method to call, the generic function decides which method to call based on the argument classes. Functions contain the **UseMethod("function_name", object)** function (see `?UseMethod`), which searches the object's namespace for "function_name" and passes computation to it.
 ** Find example of S3 object
@@ -64,8 +63,6 @@ R has three object-oriented systems and the base types.
 * **S4 - "Formal objects":** Formal classes with inheritance and means by which methods can be shared between classes.
 
 * **Reference classes:** Objects that use **message passing** - or the method 'belongs to' the class rather than a function. This is the common `dataframe$column_name` syntax.
-
-* **Base types:** Low-level C types. Build the other object systems.
 
 R has a useful package `pryr` for inspecting objects and other meta-linguistic needs. Let's get that now.
 ```{r}
@@ -79,7 +76,22 @@ pryr::otype(data.frame(x=c(1,2,3,4,5))) # A dataframe is an S3 object
 
 ```
 
+# Base Types
+Every R object is built out of basic C structures that define how it is stored and managed in memory. 
 
+This table from [Advanced R - Data Structures](http://adv-r.had.co.nz/Data-structures.html#data-structures) summarizes them:
+
+ | Homogenous data | Heterogenous data
+---------------- | ------------------
+1 Dimensional | Atomic Vector | List
+2 Dimensional | Matrix | Data frame
+nd | Array
+
+## Atomic Vectors
+
+## Lists & Matrices
+
+## Data Frames
 
 
 # S3 Objects
@@ -93,7 +105,14 @@ attr(x, "class")
 ```
 
 
-S3 objects are defined by a series of functions that themselves contain the `UseMethod()` function - this is described briefly above, try `?UseMethod` for more detail. These functions extend the generic function, typically using the syntax `generic.class()` as in the case of `mean.Date()` for taking the mean of dates. One can list the methods of an S3 class with `methods()`
+S3 objects are defined by a series of functions that themselves contain the `UseMethod()` function - this is described briefly above, try `?UseMethod` for more detail. These functions extend the generic function, typically using the syntax `generic.class()` as in the case of `mean.Date()` for taking the mean of dates. One can list the objects that have a generic method, and the methods that an object has with `methods()`
+
+```{r}
+methods(mean)
+
+methods(class="Date")
+```
+
 
 By default, the source code of S3 methods is not visible to R, one can retreive it with `utils::getS3method``
 
@@ -158,10 +177,6 @@ mean.Date(dates) # which can also be called directly
 
 
 # S4 Objects
-
-
-# Base Types
-http://adv-r.had.co.nz/Data-structures.html#data-structures
 
 # References
 * http://manuals.bioinformatics.ucr.edu/home/programming-in-r#TOC-Object-Oriented-Programming-OOP-

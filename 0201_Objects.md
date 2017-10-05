@@ -2,7 +2,7 @@
 title: "2.1 - Objects"
 author: "Jonny Saunders"
 date: "October 5, 2017"
-output:
+output: 
   md_document:
     preserve_yaml: true
     toc: true
@@ -13,21 +13,19 @@ order: 2
 -   [What are Objects?](#what-are-objects)
     -   [Object terminology](#object-terminology)
 -   [Objects in R](#objects-in-r)
+-   [Base Types](#base-types)
+    -   [Atomic Vectors](#atomic-vectors)
+    -   [Lists & Matrices](#lists-matrices)
+    -   [Data Frames](#data-frames)
 -   [S3 Objects](#s3-objects)
     -   [Example: Extending S3 Objects](#example-extending-s3-objects)
 -   [S4 Objects](#s4-objects)
--   [Base Types](#base-types)
 -   [References](#references)
 
 What are Objects?
 =================
 
-When using R, only objects in active memory are manipulated, not the
-data on the disk. So your data files are always available in their raw
-format, which means your analyses can be reproduces and altered without
-ever touching the raw data files.
-
-Objects are, roughly, data (or more generally a stored state) that know
+Objects are, roughly, data (or more generally a stored state) that knows
 what it can do.
 
 We know what happens when we put this troublesome `+` guy between
@@ -61,17 +59,23 @@ Object terminology
 ------------------
 
 A **class** is the description, or 'blueprint' of how individual
-**objects** are made, including their **attributes** - which data should
-be kept and what it should be named, and **methods**, the functions that
-they are capable of calling on their stored data or attributes.
+**objects** or **instances** are made, including their **attributes** -
+which data should be kept and what it should be named, and **methods**,
+the functions that they are capable of calling on their stored data or
+attributes. Objects can have a nested structure, and sub-classes can
+**inherit** the attributes and methods of their parent classes.
 
-See this example class ():
-
-> do the example class
+For example: As a class, trucks have attributes like engine\_size,
+number\_of\_wheels, or number\_of\_jumps\_gone\_off. Trucks have the
+method go\_faster(), but only individual instances of trucks can
+go\_faster() - the concept/class of trucks can't. As a subclass,
+monster\_trucks also have the attributes engine\_size, etc. and the
+method go\_faster(), but they also have additional attributes like
+mythical\_backstory and methods like monster\_jam().
 
 \*classes define the behavior of objects ** Describe attributes and
 relationship to other classes ** Methods are functions that depend on
-the class of their input. try methods(object) (`?methods`)
+the class of their input.
 
 Objects in R
 ============
@@ -82,7 +86,9 @@ Objects in R
 > "S3 objects are functions that call the functions of their objects" -
 > *Also R*
 
-R has three object-oriented systems and the base types.
+R has base types and three object-oriented systems.
+
+-   **Base types:** Low-level C types. Build the other object systems.
 
 -   **S3 - "Casual objects":** Objects that use **generic functions**.
     Rather than asking an object what method to call, the generic
@@ -99,8 +105,6 @@ R has three object-oriented systems and the base types.
     method 'belongs to' the class rather than a function. This is the
     common `dataframe$column_name` syntax.
 
--   **Base types:** Low-level C types. Build the other object systems.
-
 R has a useful package `pryr` for inspecting objects and other
 meta-linguistic needs. Let's get that now.
 
@@ -115,6 +119,48 @@ We can query any object's type with pryr's `otype`
     pryr::otype(data.frame(x=c(1,2,3,4,5))) # A dataframe is an S3 object
 
     ## [1] "S3"
+
+Base Types
+==========
+
+Every R object is built out of basic C structures that define how it is
+stored and managed in memory.
+
+This table from [Advanced R - Data
+Structures](http://adv-r.had.co.nz/Data-structures.html#data-structures)
+summarizes them:
+
+<table>
+<thead>
+<tr class="header">
+<th>Homogenous data</th>
+<th>Heterogenous data</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1 Dimensional</td>
+<td>Atomic Vector</td>
+</tr>
+<tr class="even">
+<td>2 Dimensional</td>
+<td>Matrix</td>
+</tr>
+<tr class="odd">
+<td>nd</td>
+<td>Array</td>
+</tr>
+</tbody>
+</table>
+
+Atomic Vectors
+--------------
+
+Lists & Matrices
+----------------
+
+Data Frames
+-----------
 
 S3 Objects
 ==========
@@ -137,8 +183,26 @@ S3 objects are defined by a series of functions that themselves contain
 the `UseMethod()` function - this is described briefly above, try
 `?UseMethod` for more detail. These functions extend the generic
 function, typically using the syntax `generic.class()` as in the case of
-`mean.Date()` for taking the mean of dates. One can list the methods of
-an S3 class with `methods()`
+`mean.Date()` for taking the mean of dates. One can list the objects
+that have a generic method, and the methods that an object has with
+`methods()`
+
+    methods(mean)
+
+    ## [1] mean.Date     mean.default  mean.difftime mean.POSIXct  mean.POSIXlt 
+    ## see '?methods' for accessing help and source code
+
+    methods(class="Date")
+
+    ##  [1] -             [             [[            [<-           +            
+    ##  [6] as.character  as.data.frame as.list       as.POSIXct    as.POSIXlt   
+    ## [11] Axis          c             coerce        cut           diff         
+    ## [16] format        hist          initialize    is.numeric    julian       
+    ## [21] Math          mean          months        Ops           pretty       
+    ## [26] print         quarters      rep           round         seq          
+    ## [31] show          slotsFromS3   split         str           summary      
+    ## [36] Summary       trunc         weekdays      weighted.mean xtfrm        
+    ## see '?methods' for accessing help and source code
 
 By default, the source code of S3 methods is not visible to R, one can
 retreive it with \`utils::getS3method\`\`
@@ -155,30 +219,30 @@ points on a scatterplot, the actual function that is called is
 
     plot.default
 
-    ## function (x, y = NULL, type = "p", xlim = NULL, ylim = NULL,
-    ##     log = "", main = NULL, sub = NULL, xlab = NULL, ylab = NULL,
-    ##     ann = par("ann"), axes = TRUE, frame.plot = axes, panel.first = NULL,
-    ##     panel.last = NULL, asp = NA, ...)
+    ## function (x, y = NULL, type = "p", xlim = NULL, ylim = NULL, 
+    ##     log = "", main = NULL, sub = NULL, xlab = NULL, ylab = NULL, 
+    ##     ann = par("ann"), axes = TRUE, frame.plot = axes, panel.first = NULL, 
+    ##     panel.last = NULL, asp = NA, ...) 
     ## {
     ##     localAxis <- function(..., col, bg, pch, cex, lty, lwd) Axis(...)
     ##     localBox <- function(..., col, bg, pch, cex, lty, lwd) box(...)
     ##     localWindow <- function(..., col, bg, pch, cex, lty, lwd) plot.window(...)
     ##     localTitle <- function(..., col, bg, pch, cex, lty, lwd) title(...)
-    ##     xlabel <- if (!missing(x))
+    ##     xlabel <- if (!missing(x)) 
     ##         deparse(substitute(x))
-    ##     ylabel <- if (!missing(y))
+    ##     ylabel <- if (!missing(y)) 
     ##         deparse(substitute(y))
     ##     xy <- xy.coords(x, y, xlabel, ylabel, log)
-    ##     xlab <- if (is.null(xlab))
+    ##     xlab <- if (is.null(xlab)) 
     ##         xy$xlab
     ##     else xlab
-    ##     ylab <- if (is.null(ylab))
+    ##     ylab <- if (is.null(ylab)) 
     ##         xy$ylab
     ##     else ylab
-    ##     xlim <- if (is.null(xlim))
+    ##     xlim <- if (is.null(xlim)) 
     ##         range(xy$x[is.finite(xy$x)])
     ##     else xlim
-    ##     ylim <- if (is.null(ylim))
+    ##     ylim <- if (is.null(ylim)) 
     ##         range(xy$y[is.finite(xy$y)])
     ##     else ylim
     ##     dev.hold()
@@ -189,21 +253,21 @@ points on a scatterplot, the actual function that is called is
     ##     plot.xy(xy, type, ...)
     ##     panel.last
     ##     if (axes) {
-    ##         localAxis(if (is.null(y))
+    ##         localAxis(if (is.null(y)) 
     ##             xy$x
     ##         else x, side = 1, ...)
-    ##         localAxis(if (is.null(y))
+    ##         localAxis(if (is.null(y)) 
     ##             x
     ##         else y, side = 2, ...)
     ##     }
-    ##     if (frame.plot)
+    ##     if (frame.plot) 
     ##         localBox(...)
-    ##     if (ann)
-    ##         localTitle(main = main, sub = sub, xlab = xlab, ylab = ylab,
+    ##     if (ann) 
+    ##         localTitle(main = main, sub = sub, xlab = xlab, ylab = ylab, 
     ##             ...)
     ##     invisible()
     ## }
-    ## <bytecode: 0x7fb35d142d18>
+    ## <bytecode: 0x7f8e10c9e870>
     ## <environment: namespace:graphics>
 
 If the first argument to `plot` has its own `plot` method (ie. that it
@@ -213,13 +277,13 @@ section 5), that function is called instead. That's why
     aq <- datasets::airquality
     plot(lm(Ozone ~ Month, data=aq))
 
-![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-9-1.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-9-2.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-9-3.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-9-4.png)
+![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-10-1.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-10-2.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-10-3.png)![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-10-4.png)
 
 is different than this nonsensical model
 
     plot(lme4::lmer(Ozone ~ 0 + (Day | Month), data=aq))
 
-![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-10-1.png)
+![](0201_Objects_files/figure-markdown_strict/unnamed-chunk-11-1.png)
 
 Example: Extending S3 Objects
 -----------------------------
@@ -249,11 +313,11 @@ Example: Extending S3 Objects
     # Other objects have their own mean() method
     methods(mean)
 
-    ##  [1] mean,ANY-method          mean,Matrix-method
+    ##  [1] mean,ANY-method          mean,Matrix-method      
     ##  [3] mean,sparseMatrix-method mean,sparseVector-method
-    ##  [5] mean.Date                mean.default
-    ##  [7] mean.difftime            mean.just_one
-    ##  [9] mean.POSIXct             mean.POSIXlt
+    ##  [5] mean.Date                mean.default            
+    ##  [7] mean.difftime            mean.just_one           
+    ##  [9] mean.POSIXct             mean.POSIXlt            
     ## see '?methods' for accessing help and source code
 
     # like Date objects
@@ -286,11 +350,6 @@ Example: Extending S3 Objects
 S4 Objects
 ==========
 
-Base Types
-==========
-
-<http://adv-r.had.co.nz/Data-structures.html#data-structures>
-
 References
 ==========
 
@@ -300,67 +359,67 @@ References
 
 ------------------------------------------------------------------------
 
-    # S4 Methods are stored in environments
+    # S4 Methods are stored in environments 
     nM <- asNamespace("Matrix")
     sort(grep("^[.]__T__", names(nM), value=TRUE))
 
-    ##   [1] ".__T__-:base"                ".__T__!:base"
-    ##   [3] ".__T__[:base"                ".__T__[<-:base"
-    ##   [5] ".__T__*:base"                ".__T__/:base"
-    ##   [7] ".__T__&:base"                ".__T__%*%:base"
-    ##   [9] ".__T__%/%:base"              ".__T__%&%:Matrix"
-    ##  [11] ".__T__%%:base"               ".__T__^:base"
-    ##  [13] ".__T__+:base"                ".__T__all:base"
-    ##  [15] ".__T__all.equal:base"        ".__T__any:base"
-    ##  [17] ".__T__anyNA:base"            ".__T__Arith:base"
-    ##  [19] ".__T__as.array:base"         ".__T__as.integer:base"
-    ##  [21] ".__T__as.logical:base"       ".__T__as.matrix:base"
-    ##  [23] ".__T__as.numeric:base"       ".__T__as.vector:base"
-    ##  [25] ".__T__band:Matrix"           ".__T__BunchKaufman:Matrix"
-    ##  [27] ".__T__cbind2:methods"        ".__T__chol:base"
-    ##  [29] ".__T__chol2inv:base"         ".__T__Cholesky:Matrix"
-    ##  [31] ".__T__coerce:methods"        ".__T__coerce<-:methods"
-    ##  [33] ".__T__colMeans:base"         ".__T__colSums:base"
-    ##  [35] ".__T__Compare:methods"       ".__T__cov2cor:stats"
-    ##  [37] ".__T__crossprod:base"        ".__T__determinant:base"
-    ##  [39] ".__T__diag:base"             ".__T__diag<-:base"
-    ##  [41] ".__T__diff:base"             ".__T__dim:base"
-    ##  [43] ".__T__dim<-:base"            ".__T__dimnames:base"
-    ##  [45] ".__T__dimnames<-:base"       ".__T__drop:base"
-    ##  [47] ".__T__expand:Matrix"         ".__T__expm:Matrix"
+    ##   [1] ".__T__-:base"                ".__T__!:base"               
+    ##   [3] ".__T__[:base"                ".__T__[<-:base"             
+    ##   [5] ".__T__*:base"                ".__T__/:base"               
+    ##   [7] ".__T__&:base"                ".__T__%*%:base"             
+    ##   [9] ".__T__%/%:base"              ".__T__%&%:Matrix"           
+    ##  [11] ".__T__%%:base"               ".__T__^:base"               
+    ##  [13] ".__T__+:base"                ".__T__all:base"             
+    ##  [15] ".__T__all.equal:base"        ".__T__any:base"             
+    ##  [17] ".__T__anyNA:base"            ".__T__Arith:base"           
+    ##  [19] ".__T__as.array:base"         ".__T__as.integer:base"      
+    ##  [21] ".__T__as.logical:base"       ".__T__as.matrix:base"       
+    ##  [23] ".__T__as.numeric:base"       ".__T__as.vector:base"       
+    ##  [25] ".__T__band:Matrix"           ".__T__BunchKaufman:Matrix"  
+    ##  [27] ".__T__cbind2:methods"        ".__T__chol:base"            
+    ##  [29] ".__T__chol2inv:base"         ".__T__Cholesky:Matrix"      
+    ##  [31] ".__T__coerce:methods"        ".__T__coerce<-:methods"     
+    ##  [33] ".__T__colMeans:base"         ".__T__colSums:base"         
+    ##  [35] ".__T__Compare:methods"       ".__T__cov2cor:stats"        
+    ##  [37] ".__T__crossprod:base"        ".__T__determinant:base"     
+    ##  [39] ".__T__diag:base"             ".__T__diag<-:base"          
+    ##  [41] ".__T__diff:base"             ".__T__dim:base"             
+    ##  [43] ".__T__dim<-:base"            ".__T__dimnames:base"        
+    ##  [45] ".__T__dimnames<-:base"       ".__T__drop:base"            
+    ##  [47] ".__T__expand:Matrix"         ".__T__expm:Matrix"          
     ##  [49] ".__T__facmul:Matrix"         ".__T__forceSymmetric:Matrix"
-    ##  [51] ".__T__format:base"           ".__T__head:utils"
-    ##  [53] ".__T__image:graphics"        ".__T__initialize:methods"
-    ##  [55] ".__T__is.finite:base"        ".__T__is.infinite:base"
-    ##  [57] ".__T__is.na:base"            ".__T__isDiagonal:Matrix"
-    ##  [59] ".__T__isSymmetric:base"      ".__T__isTriangular:Matrix"
-    ##  [61] ".__T__kronecker:base"        ".__T__length:base"
-    ##  [63] ".__T__Logic:base"            ".__T__lu:Matrix"
-    ##  [65] ".__T__Math:base"             ".__T__Math2:methods"
-    ##  [67] ".__T__mean:base"             ".__T__nnzero:Matrix"
-    ##  [69] ".__T__norm:base"             ".__T__Ops:base"
-    ##  [71] ".__T__pack:Matrix"           ".__T__print:base"
-    ##  [73] ".__T__prod:base"             ".__T__qr:base"
-    ##  [75] ".__T__qr.coef:base"          ".__T__qr.fitted:base"
-    ##  [77] ".__T__qr.Q:base"             ".__T__qr.qty:base"
-    ##  [79] ".__T__qr.qy:base"            ".__T__qr.R:base"
-    ##  [81] ".__T__qr.resid:base"         ".__T__rbind2:methods"
-    ##  [83] ".__T__rcond:base"            ".__T__rep:base"
-    ##  [85] ".__T__rowMeans:base"         ".__T__rowSums:base"
-    ##  [87] ".__T__Schur:Matrix"          ".__T__show:methods"
-    ##  [89] ".__T__skewpart:Matrix"       ".__T__solve:base"
-    ##  [91] ".__T__sum:base"              ".__T__summary:base"
-    ##  [93] ".__T__Summary:base"          ".__T__symmpart:Matrix"
-    ##  [95] ".__T__t:base"                ".__T__tail:utils"
-    ##  [97] ".__T__tcrossprod:base"       ".__T__toeplitz:stats"
-    ##  [99] ".__T__tril:Matrix"           ".__T__triu:Matrix"
-    ## [101] ".__T__unname:base"           ".__T__unpack:Matrix"
-    ## [103] ".__T__update:stats"          ".__T__updown:Matrix"
-    ## [105] ".__T__which:base"            ".__T__writeMM:Matrix"
+    ##  [51] ".__T__format:base"           ".__T__head:utils"           
+    ##  [53] ".__T__image:graphics"        ".__T__initialize:methods"   
+    ##  [55] ".__T__is.finite:base"        ".__T__is.infinite:base"     
+    ##  [57] ".__T__is.na:base"            ".__T__isDiagonal:Matrix"    
+    ##  [59] ".__T__isSymmetric:base"      ".__T__isTriangular:Matrix"  
+    ##  [61] ".__T__kronecker:base"        ".__T__length:base"          
+    ##  [63] ".__T__Logic:base"            ".__T__lu:Matrix"            
+    ##  [65] ".__T__Math:base"             ".__T__Math2:methods"        
+    ##  [67] ".__T__mean:base"             ".__T__nnzero:Matrix"        
+    ##  [69] ".__T__norm:base"             ".__T__Ops:base"             
+    ##  [71] ".__T__pack:Matrix"           ".__T__print:base"           
+    ##  [73] ".__T__prod:base"             ".__T__qr:base"              
+    ##  [75] ".__T__qr.coef:base"          ".__T__qr.fitted:base"       
+    ##  [77] ".__T__qr.Q:base"             ".__T__qr.qty:base"          
+    ##  [79] ".__T__qr.qy:base"            ".__T__qr.R:base"            
+    ##  [81] ".__T__qr.resid:base"         ".__T__rbind2:methods"       
+    ##  [83] ".__T__rcond:base"            ".__T__rep:base"             
+    ##  [85] ".__T__rowMeans:base"         ".__T__rowSums:base"         
+    ##  [87] ".__T__Schur:Matrix"          ".__T__show:methods"         
+    ##  [89] ".__T__skewpart:Matrix"       ".__T__solve:base"           
+    ##  [91] ".__T__sum:base"              ".__T__summary:base"         
+    ##  [93] ".__T__Summary:base"          ".__T__symmpart:Matrix"      
+    ##  [95] ".__T__t:base"                ".__T__tail:utils"           
+    ##  [97] ".__T__tcrossprod:base"       ".__T__toeplitz:stats"       
+    ##  [99] ".__T__tril:Matrix"           ".__T__triu:Matrix"          
+    ## [101] ".__T__unname:base"           ".__T__unpack:Matrix"        
+    ## [103] ".__T__update:stats"          ".__T__updown:Matrix"        
+    ## [105] ".__T__which:base"            ".__T__writeMM:Matrix"       
     ## [107] ".__T__zapsmall:base"
 
     meth.Ops <- nM$`.__T__Ops:base`
     head(sort(names(meth.Ops)))
 
-    ## [1] "abIndex#abIndex" "abIndex#ANY"     "ANY#abIndex"     "ANY#ddiMatrix"
+    ## [1] "abIndex#abIndex" "abIndex#ANY"     "ANY#abIndex"     "ANY#ddiMatrix"  
     ## [5] "ANY#ldiMatrix"   "ANY#Matrix"
