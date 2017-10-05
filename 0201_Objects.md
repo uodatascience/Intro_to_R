@@ -88,19 +88,16 @@ R has base types and three object-oriented systems.
 -   **Base types:** Low-level C types. Build the other object systems.
 
 -   **S3 - "Casual objects":** Objects that use **generic functions**.
-    Rather than asking an object what method to call, the generic
-    function decides which method to call based on the argument classes.
-    Functions contain the **UseMethod("function\_name", object)**
-    function (see `?UseMethod`), which searches the object's namespace
-    for "function\_name" and passes computation to it. \*\* Find example
-    of S3 object
+    S3 methods "belong to" functions, not classes. Functions contain the
+    **UseMethod("function\_name", object)** function (see `?UseMethod`).
 
 -   **S4 - "Formal objects":** Formal classes with inheritance and means
-    by which methods can be shared between classes.
+    by which methods can be shared between classes. S4 methods still
+    "belong to" functions, but classes are more rigorously defined.
 
 -   **Reference classes:** Objects that use **message passing** - or the
-    method 'belongs to' the class rather than a function. This is the
-    common `dataframe$column_name` syntax.
+    method 'belongs to' the object instance rather than the class. This
+    is the common `dataframe$column_name` syntax.
 
 The easiest way to see everything about an object is to use the str()
 function, short for structure. For example we can see everything about
@@ -677,7 +674,7 @@ points on a scatterplot, the actual function that is called is
     ##             ...)
     ##     invisible()
     ## }
-    ## <bytecode: 0x7fbcb08928a0>
+    ## <bytecode: 0x7fd66b2d6ff8>
     ## <environment: namespace:graphics>
 
 If the first argument to `plot` has its own `plot` method (ie. that it
@@ -759,6 +756,17 @@ Example: Extending S3 Objects
 
 S4 Objects
 ==========
+
+S4 objects have a single class definition with specifically defined
+fields and functions. So we could pretend for awhile we're another class
+with S3 functions
+
+    a <- data.frame(a="test")
+    class(a)
+
+    ## [1] "data.frame"
+
+    class(a) <- "lm"
 
 References
 ==========

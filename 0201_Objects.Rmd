@@ -45,17 +45,16 @@ For example: As a class, trucks have attributes like engine_size, number_of_whee
 >"S3 objects are functions that call the functions of their objects" - *Also R*
 
 
-R has base types and three object-oriented systems.
+R has base types and three object-oriented systems. We'll spend more time on Base types and S3 objects in this lesson, and return to S4 and reference classes when we start building bigger code.
 
 
 * **Base types:** Low-level C types. Build the other object systems.
 
-* **S3 - "Casual objects":** Objects that use **generic functions**. Rather than asking an object what method to call, the generic function decides which method to call based on the argument classes. Functions contain the **UseMethod("function_name", object)** function (see `?UseMethod`), which searches the object's namespace for "function_name" and passes computation to it.
-** Find example of S3 object
+* **S3 - "Casual objects":** Objects that use **generic functions**. S3 methods "belong to" functions, not classes. Functions contain the **UseMethod("function_name", object)** function (see `?UseMethod`).
 
-* **S4 - "Formal objects":** Formal classes with inheritance and means by which methods can be shared between classes.
+* **S4 - "Formal objects":** Formal classes with inheritance and means by which methods can be shared between classes. S4 methods still "belong to" functions, but classes are more rigorously defined. 
 
-* **Reference classes:** Objects that use **message passing** - or the method 'belongs to' the class rather than a function. This is the common `dataframe$column_name` syntax.
+* **Reference classes:** Objects that use **message passing** - or the method 'belongs to' the object instance rather than the class.
 
 The easiest way to see everything about an object is to use the str() function, short for structure. For example we can see everything about the lamest linear model ever
 ```{r}
@@ -205,7 +204,7 @@ df[[1]]
 df[[1]][1] # as above
 ```
 
-Or using `names`, which we'll cover in more detail in 2.2.
+Or using `names`, which we'll cover in more detail in 2.2. In short, the `$` operator allows us to index by an object's `names`. see `?Extract` for more information.
 
 ```{r}
 names(df)
@@ -246,6 +245,8 @@ attr(x, "class")
 class(x) <- "letters"
 attr(x, "class")
 ```
+
+One can find an articulation of the reasoning behind this "function-and-class" programming can be found here: https://developer.r-project.org/howMethodsWork.pdf
 
 
 S3 objects are defined by a series of functions that themselves contain the `UseMethod()` function - this is described briefly above, try `?UseMethod` for more detail. These functions extend the generic function, typically using the syntax `generic.class()` as in the case of `mean.Date()` for taking the mean of dates. One can list the objects that have a generic method, and the methods that an object has with `methods()`
@@ -320,6 +321,72 @@ mean.Date(dates) # which can also be called directly
 
 
 # S4 Objects
+S4 objects have a single class definition with specifically defined fields and functions. They are too complicated for us to cover in much detail yet, so we will return to them again later.
+
+We could pretend for awhile we're another class with S3 objects
+
+```{r, error=TRUE}
+a <- data.frame(a="test")
+class(a)
+class(a) <- "lm"
+a
+summary(a)
+```
+
+Not so with S4 objects.
+
+We can finally implement our truck classes
+```{r}
+setClass("truck",
+  slots = list(engine_size = "numeric",
+    n_wheels = "numeric",
+    n_jumps  = "numeric"))
+  
+setClass("monster_truck",
+  slots = list(mythical_backstory = "character"),
+  contains = "truck")
+  
+getClass("monster_truck")
+```
+
+S4 objects have `slots`, accessible with `@` (which behaves like `$`) or `slot()`. We create new instances of S4 objects with `new()`
+
+```{r}
+my_truck <- new("truck", engine_size = 4, n_wheels = 4, n_jumps = 40)
+
+my_truck@engine_size
+slot(my_truck, "n_jumps")
+```
+
+S4 Methods are a headache (and we will skip them in the class). One has to create a generic function if it does not yet exist with `setGeneric()`, then set the method, classes and function separately with `setMethod()`. An example for your edification:
+
+```{r}
+setGeneric("go_faster", function(which_truck, how_fast) {standardGeneric("go_faster")})
+
+setMethod("go_faster",
+  signature = c(which_truck = "truck",
+    how_fast = "character"),
+  function(which_truck, how_fast){
+    print("your truck is now going:")
+    print(how_fast)
+    print("in MPH:")
+    print(which_truck@engine_size * 4)
+  }
+)
+
+go_faster(my_truck, "2 fast 4 u 2 c")
+```
+
+Try extending that to have the monster trucks tell their mythical_backstory as they accelerate.
+
+We will return to S4 objects in more detail in section 5.
+
+# Reference Classes
+http://adv-r.had.co.nz/OO-essentials.html#rc
+
+
+
+
 
 # References
 * http://manuals.bioinformatics.ucr.edu/home/programming-in-r#TOC-Object-Oriented-Programming-OOP-
@@ -329,11 +396,5 @@ mean.Date(dates) # which can also be called directly
 
 -------------------
 
-```{r}
-# S4 Methods are stored in environments 
-nM <- asNamespace("Matrix")
-sort(grep("^[.]__T__", names(nM), value=TRUE))
-meth.Ops <- nM$`.__T__Ops:base`
-head(sort(names(meth.Ops)))
-```
+
 

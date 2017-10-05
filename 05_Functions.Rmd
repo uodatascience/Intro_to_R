@@ -10,3 +10,11 @@ output:
 order: 2
 ---
 > Scoping from R Faq 3.3.1
+
+```{r}
+# S4 Methods are stored in environments 
+nM <- asNamespace("Matrix")
+sort(grep("^[.]__T__", names(nM), value=TRUE))
+meth.Ops <- nM$`.__T__Ops:base`
+head(sort(names(meth.Ops)))
+```
