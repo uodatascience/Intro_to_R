@@ -22,10 +22,10 @@ order: 2
 What are Objects?
 =================
 
-(Brief aside): When using R, only objects in active memory are
-manipulated, not the data on the disk. So your data files are always
-available in their raw format, which means your analyses can be
-reproduces and altered without ever touching the raw data files.
+When using R, only objects in active memory are manipulated, not the
+data on the disk. So your data files are always available in their raw
+format, which means your analyses can be reproduces and altered without
+ever touching the raw data files.
 
 Objects are, roughly, data (or more generally a stored state) that know
 what it can do.
@@ -190,7 +190,7 @@ points on a scatterplot, the actual function that is called is
     ##             ...)
     ##     invisible()
     ## }
-    ## <bytecode: 0x7fbb2bb58c78>
+    ## <bytecode: 0x7f99c4ba5278>
     ## <environment: namespace:graphics>
 
 If the first argument to `plot` has its own `plot` method (ie. that it
