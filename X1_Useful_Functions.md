@@ -12,6 +12,7 @@ order: 100
 
 -   [Workspace](#workspace)
 -   [Objects](#objects)
+-   [Iteration](#iteration)
 
 Workspace
 =========
@@ -69,6 +70,24 @@ Objects
 <tr class="even">
 <td>pryr::otype</td>
 <td>Get object's type system (base, S3, S4, RC)</td>
+</tr>
+</tbody>
+</table>
+
+Iteration
+=========
+
+<table>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Function function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>txtProgressBar</code></td>
+<td>Keep track of how things are going</td>
 </tr>
 </tbody>
 </table>

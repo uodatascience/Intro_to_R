@@ -17,6 +17,9 @@ Lessons (Rough stuff down by 21st)
 4: Control flow - loops optimized loops & aggregate operations
 5: Functions - how to write them, how to structure your data analysis code, good practices for reusable code
 6: Document creation - RMD & LaTeX
+7: high performance programming https://cran.r-project.org/web/views/HighPerformanceComputing.html
+http://www.nimbios.org/tutorials/TT_RforHPC
+http://adv-r.had.co.nz/Rcpp.html
 
 
 Reference pages:

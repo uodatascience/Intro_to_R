@@ -15,5 +15,7 @@ order: 0
 > Contexts, Loops, optimized loops, conditional and logical expressions
 5. Functions
 > Namespaces, Writing functions, good practices for reusable analysis code
-6. Document creation
-> R Markdown, LaTeX
+6. Document Creation
+> R Markdown, LaTeX, Table creation & etc.
+7. High-Performance Programming
+> Parallelization, remote access/control, profiling

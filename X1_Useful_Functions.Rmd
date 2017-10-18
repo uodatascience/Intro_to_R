@@ -28,3 +28,9 @@ Function | Function function
 typeof | Get object's base type
 pryr::otype | Get object's type system (base, S3, S4, RC)
 
+# Iteration
+
+Function | Function function
+--------- | ------------
+`txtProgressBar` | Keep track of how things are going
+
