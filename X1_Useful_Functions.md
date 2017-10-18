@@ -35,7 +35,7 @@ Workspace
 </tr>
 <tr class="odd">
 <td><code>ls()</code></td>
-<td>List the objects in memory</td>
+<td>List the objects in an environment</td>
 </tr>
 <tr class="even">
 <td><code>rm(x)</code></td>

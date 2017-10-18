@@ -16,7 +16,7 @@ Function | Function function
 ---------- | ----------
 `getwd()`  | Return your working directory
 `setwd()`  | Assign a working directory to use for the current session
-`ls()`     | List the objects in memory
+`ls()`     | List the objects in an environment
 `rm(x)`     | Remove an object from the workspace (in this example, `x`)
 `rm(list=ls())` | Remove all objects from the workspace
 `history()` | Show the last 25 commands
