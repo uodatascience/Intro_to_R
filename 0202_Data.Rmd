@@ -202,7 +202,7 @@ y[3, c(3,4,7)]
 y[2,]
 
 # with names
-names(x) <- c("adam", "steve", "harry", "ted", "watsom")
+names(x) <- c("adam", "steve", "harry", "ted", "watson")
 x["harry"]
 z["numbers"]
 
@@ -275,30 +275,77 @@ This is useful when combined with logical statements (see `?base::Logic`) and co
 | `x & y`, `x && y` | x and y (vectorized, single comparison) |
 | `x | y`, `x || y` | x or y (vectorized, single comparison) |
 | `xor(x, y)` | exclusive or (x or y but not both) |
-| x < y | x less than y |
-| x <= y | x less than or equal to y | 
-| x > y | x greater than y | 
-| x >= y | x greater than or equal to y | 
-| x == y | x is equal to y |
-| x != y | x is not equal to y |
+| `x < y` | x less than y |
+| `x <= y` | x less than or equal to y | 
+| `x > y` | x greater than y | 
+| `x >= y` | x greater than or equal to y | 
+| `x == y` | x is equal to y |
+| `x != y` | x is not equal to y |
+
+These will all output boolean vectors, more examples
+
+```{r}
+x > 10
+x >= 10
+
+# logical operators can be combined
+(x > 10) & (x < 20)
+
+# the single & will compare each element
+cbind((x>10), (x<20),((x>10) & (x<20)))
+
+# double &&s will only compare the first element - use it when you are trying to evaluate whether a single thing is true or false, eg. is this value greater than one? are my vectors the same length?
+(max(x) > 20) && (min(x) <= 5)
+```
+
+This can be used in indexing, either by explicitly referring to the object within the indexing operator, or by using the `with` function
 
 
+```{r}
+# Get all the rows in diamonds who are Good or Very Good
+# remember the comma at the end, we want to select all columns
+df[df$cut=="Good" | df$cut=="Very Good",]
 
+# you can combine boolean vectors arbitrarily
 
+df[df$cut=="Good" & df$carat>1,]
 
-* Indexing  (Jonny)
-    * stacking indexing [][][]
-    * dplyr::select and variations like contains, one_of
-    * sampling
-    * logical indexing & booleans (incl. & vs &&) & converting w/ which
-    * set operations
-    * subsetting with assignment (x[i] <- 1)
-    * creating with subsetting (match, using one vector to pull rows from a df, doing a gradebook w/ commnets), and destroying (unique, dplyr::distinct)
+# select columns in the usual way too
+head(df[df$cut=="Good" & df$carat>1, 2])
+head(df[df$cut=="Good" & df$carat>1, "color"])
+head(df[df$cut=="Good" & df$carat>1,]$color)
+
+# %in% is a useful way to select multiple levels of a factor
+head(df[df$cut %in% c("Good", "Very Good"),])
+
+# with temporarily attaches our dataframe so we don't have to keep referring to it explicitly
+head(with(df, df[cut %in% c("Good", "Very Good"),]))
+
+```
+
+A boolean vector can be converted back to a numerical position vector with `which`
+
+```{r}
+x > 10
+which(x > 10)
+```
+
+## Assignment with Indexing
+
+Sometimes we need to change some values in an existing object, but all assignments to existing objects have to have the same shape and class. If you give something too small, it will be repeated Rather than having to create a new object, we can assign to an indexed subset of an object
+
+```{r, error=TRUE}
+friends <- data.frame(names=c("toothbrush", "vacuum", "blinds"),
+                      hobbies=c("brushing", "spinning", "darkening"),
+                      favorites=c(1,2,3))
+
+# too small :(
+friends$favorites <- c(4,5)
+
+# toothbrush and vacuum get a demotion
+friends[c(1,2),]$favorites <- c(4,5)
+```
     
-    
-    
-  
-
 # Manupulating Data
 
 Now that you have your data in R, and have maybe subsetted it in some manner, you may want to manipulate the data. In this section, we'll cover some ways that you might want to manipulate data, including manipulating the format of the data and creating new variables (both from combining/splitting existing variables, and creating new ones if you need to).
