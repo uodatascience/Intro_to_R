@@ -241,7 +241,106 @@ sample_b5_data_long %>%
   gather(trait, score, agreeableness:openness)
 ```
 
-##Piping syntax
+## Piping syntax
+
+Before we get into reshaping data, its importantt we cover a type of syntax called piping. Piping is not unique to R, but it is highly useful in R, especially for data wrangling and manipulation. The pipe itself is this symbol `%>%`, and in R, it comes from the *magrittr* package (this is a references to the famous painging by Magritte,the treachery of images). *magrittr* is part of the tidyverse, so it will load when you call the tidyverse library.
+
+### A quick sidenote about the term pipe
+
+As mentioned above, a pipe in piping syntax is symbolized by `%>%`. However, another character is sometimes called a pipe, which is the vertical bar |, and this is used quite a bit in logical/boolean operations (| means or in logical statements).
+
+### The logic of piping syntax
+
+The general idea of piping syntax, is that we have some function on the lefthand and righthand side of the pipe. The function on the leftside is evaluated, and then the **output** of that function is passed to the function on the righthand side of the pipe as the first argument of that function. Let's start with a simple example. We'll create a vector of values and take the mean.
+
+```{r piping example 1}
+
+# first set.seed, because we're going to be sampling values. 
+# this will make it so we always get the same result.
+set.seed(100)
+# first create a vector using rnorm. This is saying give me a random sample of 20 observations, drawn from a normal distribution with a mean of 5 and sd of 1.
+rnorm(n = 20, mean = 5, sd = 1) %>% mean()
+```
+As you can see, on the lefthand side of the pipe `%>%`, we have a function that create a vector of 20 values (sampled from a normal distribution,  with a mean of 5 and an sd of 1). On the righthand side, we simply have the function mean(), which calculates the mean of a vector of values. And so what's happening, is first the function on the righthand side creates a vector; the output of this function is simply the vector of values:
+```{r piping example 1 explained}
+set.seed(100)
+rnorm(n=20, mean = 5, sd = 1)
+```
+
+So the output of this fucntion, the vector of 20 values, is then passed along to the mean function. The mean function requires a vector of values for its first argument (see for yourself by running `?mean`). So, we end the pipe with simply `mean()`, and this provides the mean. 
+
+#### A quick tip about style
+
+It's typically considered good practice to not have more than one pipe per line. So what I have above is considered bad coding style. So instead of
+```{r piping syle bad}
+set.seed(100)
+rnorm(n = 20, mean = 5, sd = 1) %>% mean()
+```
+You should instead do this:
+```{r piping syle good}
+set.seed(100)
+rnorm(n = 20, mean = 5, sd = 1) %>%
+  mean()
+```
+
+### Logic of Piping Syntax continued
+
+As we covered above, the function following the pipe takes the output of the preceding function as its **first** argument. In the preceding example, we didn't supply another argument, and so the righthand side of the pipe was simply `mean()`. Let's say, we wanted to specify an additional argument. One option in `mean()` is trim, which indicates the proportion of values we want to trim from the vector before calculating the mean. Let's say we wanted only half the data points; I have no idea why someone would do something like this, especially with a vector of 20 values, but let's do it anyway.
+
+```{r piping with additional arguments}
+set.seed(100)
+# This is the same as before
+rnorm(n = 20, mean = 5, sd = 1) %>%
+# Notice that the mean() function now contains the argument trim = 0.5
+    mean(trim = 0.5)
+```
+
+You'll see we got a slightly different value; a value a little closer to the population mean of 5, since 50% of the values in the tails were removed from the vectore before calculating the mean.
+
+This can be pretty confusing when you're new to piping, because our `mean()` function is basically missing an argument, namely, the argument with the name of the vector of values. Importantly, the argument isn't missing, it's just sort of hidden under the hood. The `mean()` line above, to R, is actually looking something like this: `mean(vector_output_above, trim = 0.5)`, it's just that the first argument is hidden from view. We could do this in two steps, without pipes.
+
+```{r trimmed mean without a pipe}
+set.seed(100)
+# we could create the vectore, and save it as an object
+vector_from_pipe <- rnorm(n = 20, mean = 5, sd = 1)
+# and then take the mean
+mean(vector_from_pipe, trim = .5)
+```
+And we get the same trimmed mean. We could also do this with one step:
+```{r trimmed mean without a pipe 2}
+set.seed(100)
+mean(rnorm(n = 20, mean = 5, sd = 1), trim = .5)
+```
+And we can see that we get the same result. Some of you may have noticed that we have three different routes to the same destination. So why use pipes?
+
+### Why use pipes?
+
+There are probably lots of reasons to use or not use pipes. The most important and most often mentioned reason to use pipes is *cleanliness* (which I hear is next to *godliness*). That is, pipes help make two things clean:
+
+1. Your code
+    * This is nice, because it helps make your code more readable by other humans.
+    * Other humans include your future self, who may return to a code file 6 months or a year later, and want to know wtf the code is doing.
+
+An example may help with this. Compare this:
+```{r dirtier code example, eval = FALSE}
+set.seed(100)
+
+mean(rnorm(n = 20, mean = 5, sd = 1), trim = .5)
+```
+to this:
+```{r cleaner code exmple, eval = FALSE}
+set.seed(100)
+
+rnorm(n = 20, mean = 5, sd = 1) %>%
+    mean(trim = 0.5)
+```
+
+The second, piped, example is a little easier to parse. One reason is it more closely matches the way we tend to think about analysis. In the former example, we're saying take a mean, and what I want you to take a mean of is this vector, and this is how I want you to make this vector (random sample from a normal dist, etc.). In the latter, we're saying make a vector like this (random sample, etc.), and then take its mean. I find the latter is more similar to the way I think about the steps in an analysis.
+
+One more thing to keep in mind about this issue, is that the gains in cleanliness with pipes is greater the more complex your code is. Let's say, we had a dataset that we wanted to take a subset of cases from, and just a couple of rows from, 
+
+2. Your environment
+    * When you use pipes, you have basically no reason to save objects from intermediary steps in your data wrangling / analysis workflow, because you can just pass output from function to function without saving it (recall when we broke apart the pipe into two steps above).
 
 We'll cover how to reshape
 
