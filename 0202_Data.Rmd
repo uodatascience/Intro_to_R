@@ -169,17 +169,183 @@ system2('open', args=abs_path, wait=FALSE)
 
 Notice how we have to use `dev.off()` rather than calling `pdf()` again as would be expected from `sink`
 
-# Stuff to do for 10/19
+# Indexing
 
-* Indexing  (Jonny)
-    * stacking indexing [][][]
-    * dplyr::select and variations like contains, one_of
-    * use of drop (preserving vs simplifying)
-    * sampling
-    * logical indexing & booleans (incl. & vs &&) & converting w/ which
-    * subsetting with assignment (x[i] <- 1)
-    * creating with subsetting (match, using one vector to pull rows from a df, doing a gradebook w/ commnets), and destroying (unique, dplyr::distinct)
+Or, how to get specific pieces of stuff.
 
+We've already seen a bunch of basic indexing
+
+```{r}
+# try ?seq
+x <- seq(5, 25, 5)
+x
+
+y <- array(1:24, dim=c(3,8))
+y
+
+z <- list("scores"=c(1,2,3,4,5), 
+          "numbers"=c(6,7,8,9,10))
+
+# good ole positional indexing
+x[3]
+
+# indexing with a vector to select multiple positions
+x[c(3,5)]
+
+# higher dimensional objects have more dimensions to index
+y[1,5]
+
+# both together
+y[3, c(3,4,7)]
+
+# leaving a position blank selects all of its indices
+y[2,]
+
+# with names
+names(x) <- c("adam", "steve", "harry", "ted", "watson")
+x["harry"]
+z["numbers"]
+
+# Using double brackets to return a vector instead of a list
+z[["numbers"]]
+
+# and the equivalent dollar sign
+z$scores
+```
+
+Negative values deselect
+
+```{r}
+x[-3]
+
+# useful to select starting from the end
+-(1:3) # quick way to construct sequences of negative numbers
+x[-(1:3)] # get the last two
+```
+
+We have also seen chained indexing, think of it like indexing the product of each successive indexing operation
+
+```{r}
+x[c(1,3,5)][1]
+
+z[["numbers"]][4]
+
+# one reason why it's important what class is returned from your indexing operation
+# aka knowing why we use double brackets
+z["numbers"][4]
+```
+
+dplyr has a `select` function and a collection of tools ("select helpers") to make selecting variables by name a bit more flexible:
+
+* `starts_with()`
+* `ends_with()`
+* `contains()`
+* `matches()` - variables that match a regular expression
+* `num_range()` - eg `num_range("x",1:5)` to select `x1, x2, ...`
+* `one_of()` - find variables in a list, eg. `one_of(c("calcium", "potassium", "magnesium"))`
+* `everything()` - all variables, don't know why you'd use this.
+
+A few examples...
+```{r}
+library(dplyr)
+
+df <- ggplot2::diamonds
+names(df)
+
+head(select(df, starts_with("c")))
+
+head(select(df, one_of(c("color", "hue", "luminance", "clarity"))))
+```
+
+## Logical indexing
+
+In addition to specifying what we want by position, we can specify what we want by using a vector of booleans (`TRUE`, `FALSE`) the same length as the object
+
+```{r}
+x[3]
+
+x[c(FALSE, FALSE, TRUE, FALSE, FALSE)]
+```
+
+This is useful when combined with logical statements (see `?base::Logic`) and comparisons (see `?Comparison`). One makes logical statements or comparisons with these operators:
+
+| Operator | Use |
+| ------- | ------------- |
+| `!x` | not x |
+| `x & y`, `x && y` | x and y (vectorized, single comparison) |
+| `x | y`, `x || y` | x or y (vectorized, single comparison) |
+| `xor(x, y)` | exclusive or (x or y but not both) |
+| `x < y` | x less than y |
+| `x <= y` | x less than or equal to y | 
+| `x > y` | x greater than y | 
+| `x >= y` | x greater than or equal to y | 
+| `x == y` | x is equal to y |
+| `x != y` | x is not equal to y |
+
+These will all output boolean vectors, more examples
+
+```{r}
+x > 10
+x >= 10
+
+# logical operators can be combined
+(x > 10) & (x < 20)
+
+# the single & will compare each element
+cbind((x>10), (x<20),((x>10) & (x<20)))
+
+# double &&s will only compare the first element - use it when you are trying to evaluate whether a single thing is true or false, eg. is this value greater than one? are my vectors the same length?
+(max(x) > 20) && (min(x) <= 5)
+```
+
+This can be used in indexing, either by explicitly referring to the object within the indexing operator, or by using the `with` function
+
+
+```{r}
+# Get all the rows in diamonds who are Good or Very Good
+# remember the comma at the end, we want to select all columns
+df[df$cut=="Good" | df$cut=="Very Good",]
+
+# you can combine boolean vectors arbitrarily
+
+df[df$cut=="Good" & df$carat>1,]
+
+# select columns in the usual way too
+head(df[df$cut=="Good" & df$carat>1, 2])
+head(df[df$cut=="Good" & df$carat>1, "color"])
+head(df[df$cut=="Good" & df$carat>1,]$color)
+
+# %in% is a useful way to select multiple levels of a factor
+head(df[df$cut %in% c("Good", "Very Good"),])
+
+# with temporarily attaches our dataframe so we don't have to keep referring to it explicitly
+head(with(df, df[cut %in% c("Good", "Very Good"),]))
+
+```
+
+A boolean vector can be converted back to a numerical position vector with `which`
+
+```{r}
+x > 10
+which(x > 10)
+```
+
+## Assignment with Indexing
+
+Sometimes we need to change some values in an existing object, but all assignments to existing objects have to have the same shape and class. If you give something too small, it will be repeated Rather than having to create a new object, we can assign to an indexed subset of an object
+
+```{r, error=TRUE}
+friends <- data.frame(names=c("toothbrush", "vacuum", "blinds"),
+                      hobbies=c("brushing", "spinning", "darkening"),
+                      favorites=c(1,2,3))
+
+# too small :(
+friends$favorites <- c(4,5)
+
+# toothbrush and vacuum get a demotion
+friends[c(1,2),]$favorites <- c(4,5)
+```
+    
 # Manupulating Data
 
 Now that you have your data in R, and have maybe subsetted it in some manner, you may want to manipulate the data. In this section, we'll cover some ways that you might want to manipulate data, including manipulating the format of the data and creating new variables (both from combining/splitting existing variables, and creating new ones if you need to).
