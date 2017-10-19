@@ -321,7 +321,22 @@ There are probably lots of reasons to use or not use pipes. The most important a
     * This is nice, because it helps make your code more readable by other humans.
     * Other humans include your future self, who may return to a code file 6 months or a year later, and want to know wtf the code is doing.
 
-An example may help with this. Compare this:
+2. Your environment
+    * When you use pipes, you have basically no reason to save objects from intermediary steps in your data wrangling / analysis workflow, because you can just pass output from function to function without saving it (recall when we broke apart the pipe into two steps above).
+
+A related advantage of pipes:
+
+3. Efficiency
+    * This is efficiency for you, the person doing the coding (not more efficient computing)
+    * This advantage primarily comes from the fact that withhout pipes, you have to save objects from intermediary steps. This can create ineffencies and/or errors:
+        * Inefficiences stem from having to keep coming up with names for objects from intermediary steps.
+        * errors can crop up from re-using names (to be more efficient), which can easily lead to calling the wrong object in an analysis or over-writing one that you need later.
+
+#### Cleaner code
+
+With pipes, its often easier to make code that is cleaner, and easier for other humans to read. The last part is important, because R doesnt care if your code is clean (as long as its syntactically correct), but clean code is easier for your collaborators (including future you) to understand.
+
+Why do pipes make cleaner code? An example may help with this. Compare this:
 ```{r dirtier code example, eval = FALSE}
 set.seed(100)
 
@@ -337,11 +352,72 @@ rnorm(n = 20, mean = 5, sd = 1) %>%
 
 The second, piped, example is a little easier to parse. One reason is it more closely matches the way we tend to think about analysis. In the former example, we're saying take a mean, and what I want you to take a mean of is this vector, and this is how I want you to make this vector (random sample from a normal dist, etc.). In the latter, we're saying make a vector like this (random sample, etc.), and then take its mean. I find the latter is more similar to the way I think about the steps in an analysis.
 
-One more thing to keep in mind about this issue, is that the gains in cleanliness with pipes is greater the more complex your code is. Let's say, we had a dataset that we wanted to take a subset of cases from, and just a couple of rows from, 
+#### A cleaner environment
 
-2. Your environment
-    * When you use pipes, you have basically no reason to save objects from intermediary steps in your data wrangling / analysis workflow, because you can just pass output from function to function without saving it (recall when we broke apart the pipe into two steps above).
+This is a smaller and less important advantage, but  an advantage none the less. Not having to save objects from intermediary steps means less stuff crowding up you environment. Now, you don't have to save those intermediary steps, but doing so will often make cleaner code. Pipes maximize cleanliness of both your code and environment, so with pipes you don't have to make this trade-off. Recall this example:
+```{r cleaner code less clean environment, eval = FALSE}
+set.seed(100)
+# we could create the vectore, and save it as an object
+vector_from_pipe <- rnorm(n = 20, mean = 5, sd = 1)
+# and then take the mean
+mean(vector_from_pipe, trim = .5)
+```
+We saved the vector me made with `rnorm()` so that we could pass that vector to the `mean` function. Now this code is a little easier to read than this code, that doesn't save the object:
+```{r, eval = FALSE}
+mean(rnorm(n = 20, mean = 5, sd = 1), trim = .5)
+```
+So the first chunk is easier to read, but clutters our environment, while the second chunk is harder to read but creates less clutter. Which is better? Who know. Pipes avoid making this tough decision, by making cleaner code that doesn't clutter up our environment:
+```{r , eval = FALSE}
+rnorm(n = 20, mean = 5, sd = 1) %>%
+  mean()
+```
 
+You may be wondering why a cluttered environment matters. The main thing is that it can create ineffeciencies in two ways: 
+1. sometimes you want to quickly glance over to your environment window to get some information (like what you named that dataset); this is obviously harder in a busier visual environment. 
+2. You can hit tab to autocomplete; the more objects with similar names you have, the less efficient autocomplete is.
+
+####Efficiency
+
+This one is pretty straight forward. By not having to save objects from intermediary steps, we have to come up with less names and remember less names. Coming up with names is hard; remembering what names correspond to what is harder. Both of these things will slow you down.
+
+For example, we had to name the vector when we saved it in the above example; this added about 2 seconds to my work in preparing this code. Say we needed a new vector, that was the log transformed values of the previous vetor. We might name that `log_vector_from_pipe`; this probably added another 2 seconds. Now obviously, these are small additions of time, but they add up. Plus, sometimes coming up with unique names gets tough (when you're on the 5th or 6th or 10th vector that you have to name)
+
+#### A note about Scaling
+One more thing to keep in mind is that gains in cleanliness and efficiency scale with the complexity of what you're doing. Let's say, we had a dataset that we wanted to take a subset of cases/rows from (those where age is > 25), and just a couple of just a couple of columns (a, b, c, d), then we wanted to log transform that data, and then wanted to get descriptives for all of the remaining variables.
+
+Without pipes, you'll either end up with some difficult to read code:
+```{r, eval = FALSE}
+library(psych)
+describe(log(select(filter(data, age > 5), a, b, c, d)))
+```
+or some throwaway objects:
+```{r, eval = FALSE}
+library (psych)
+data_subset_age <- filter(data, age > 5)
+data_subset_age_abcd <- select(data_subset_age, a, b, c, d)
+log_data_subset_age_abcd <- log(data_subset_age_abcd)
+describe(log_data_subset_age_abcd)
+```
+With pipes, we can avoid these issues:
+```{r, eval = FALSE}
+data %>%
+  filter(age > 25) %>%
+  select(a, b, v, d) %>%
+  describe()
+```
+See, so much easier to read, and not flooding our enviornment with clutter and not taxing our already taxed minds with having to come up with a bunch of damn names.
+
+### Saving the output of your pipe
+So far, we've been runing with example where we just ran functions in pipes without saving the output. Sometimes this is useful, like if we just wanted to see the descriptives in the above example (and didn't want to do anything else with those descriptives). But, often we want to take the output from the pipe and save it to an object so we can do analyses with it later. For example, instead of just getting descriptives, maybe we want a dataset that has only people above 25 and columns a, b, c, d to use in analyses. We just add the assignment and object name at the top, like so:
+
+```{r, eval = FALSE}
+age25plus_abcd<- data %>%
+  filter(age > 25) %>%
+  select(a, b, v, d) %>%
+
+```
+
+# Okay, let's return to res
 We'll cover how to reshape
 
 * Manipulating
