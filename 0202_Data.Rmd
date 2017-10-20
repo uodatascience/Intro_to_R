@@ -226,7 +226,7 @@ x[-(1:3)] # get the last two
 We have also seen chained indexing, think of it like indexing the product of each successive indexing operation
 
 ```{r}
-x[c(1,3,5)][1]
+x[c(1,3,5)][2]
 
 z[["numbers"]][4]
 
@@ -346,7 +346,7 @@ friends$favorites <- c(4,5)
 friends[c(1,2),]$favorites <- c(4,5)
 ```
     
-# Manupulating Data
+# Manipulating Data
 
 Now that you have your data in R, and have maybe subsetted it in some manner, you may want to manipulate the data. In this section, we'll cover some ways that you might want to manipulate data, including manipulating the format of the data and creating new variables (both from combining/splitting existing variables, and creating new ones if you need to).
 
@@ -396,8 +396,6 @@ sample_b5_data_long <- sample_b5_data_wide %>%
   gather(variable, score, -pid) %>%
   separate(variable, c("Trait", "time")) %>%
   spread(Trait, score)
-
-sample_b5_data_long
 ```
 
 So we now have a row for each participant at each time point, and a column for each of the Big 5. We could also make it a little longer, by making each row correspond to a score on each Big Five trait for each participant at each time point, like so:
@@ -568,7 +566,7 @@ With pipes, we can avoid these issues:
 ```{r, eval = FALSE}
 data %>%
   filter(age > 25) %>%
-  select(a, b, v, d) %>%
+  select(a, b, c, d) %>%
   describe()
 ```
 See, so much easier to read, and not flooding our enviornment with clutter and not taxing our already taxed minds with having to come up with a bunch of damn names.
@@ -577,9 +575,9 @@ See, so much easier to read, and not flooding our enviornment with clutter and n
 So far, we've been runing with example where we just ran functions in pipes without saving the output. Sometimes this is useful, like if we just wanted to see the descriptives in the above example (and didn't want to do anything else with those descriptives). But, often we want to take the output from the pipe and save it to an object so we can do analyses with it later. For example, instead of just getting descriptives, maybe we want a dataset that has only people above 25 and columns a, b, c, d to use in analyses. We just add the assignment and object name at the top, like so:
 
 ```{r, eval = FALSE}
-age25plus_abcd<- data %>%
+age25plus_abcd <- data %>%
   filter(age > 25) %>%
-  select(a, b, v, d) %>%
+  select(a, b, c, d)
 
 ```
 
@@ -598,6 +596,7 @@ sample_b5_data_long
 ```
 
 We can use a function called `gather()` from the *tidyr* package (another package in the tidyverse). `gather()` requires at least three arguments:
+
 * data
     * This one is easy. It is the dataset that we want to lengthen
 * key
@@ -609,13 +608,15 @@ We can use a function called `gather()` from the *tidyr* package (another packag
 
 And that's all that is required.
 
-The most important remaining part of this syntax is the columns that you want to *gather*. If you don't name any columns, it will select all of them. Alternatively, you can tell it not to select one of the columns. In our example, we want to select all of the columns except `pid`, which is the participant id. So we would write some code like this:
+The most important remaining part of this syntax is the columns that you want to *gather*, or the variables that you want to become key-value pairs. Another way to put this is which columns do you want to become rows (lengthening the data)? 
+
+If you don't name any columns, it will select all of them. The syntax for this part works similarly to `select()`. You can name a series of variables, like `agreeableness_t1:openness_t4` , or name each column individually separated by a comma `agreeabeleness_t1, conscientiousness, ..., openness_t4`, or you can say which columns you *do not* want with a minus sign in front of the column name. Since we want to include all of our columns except participant id (`pid`), we'll use the minus sign to tell `gather()` include everything but `pid` 
 ```{r lengthening data with gather 1}
 sample_b5_data_wide %>%
   gather(variable, score, -pid)
 ```
 
-Okay, so this brings us to our first issue when trying to lengthen a dataset. The key column (what we called variable) contains the trait that was measured and the time point. We want these to be in separate columns, so that we can select certain traits or time points, or model slopes across time points.
+Okay, so this brings us to our first issue when trying to lengthen a dataset. The key column (what we called variable) contains the trait that was measured and the time point. That is, this column contains 2 pieces of information that we probably want kept separately. We want these to be in separate columns, so that we can select certain traits or time points, or model slopes across time points.
 
 Thankfully, the authors of tidyr anticipated this problem, and created a useful function called `separate()`, which basically takes data within a single column, and splits it into multiple columns. Let's add that into the pipeline on the variable column. We're going to throw a pipe on the end of gather into separate. This will put the dataset above as the first argument in the separate function. We then tell it the columns we want to separate (variable in this case) and provide it the names of the new columns, which we'll call trait and time, for Big Five trait and time point.
 ```{r gather + separate}
@@ -624,16 +625,178 @@ sample_b5_data_wide %>%
   separate(variable, c("trait", "time"))
 ```
 
+You'll notice we didn't tell separate anything other than the column we wanted separated (`variable`) and the name of two new columns (`trait` and `time`). How did it know how to separate that column?
+
+Well, basically, separate looks for something called *regular expressions*. We'll get into more detail about regular expressions later on, but one regular expression is '_' for separating things. So it recognized that every string in the variable column contained a "_". Then, it put the character string on the left hand side of the "_" into the first column name we gave it (trait) and put the character string on the right hand side of the "_" into the second column name we gave it (time). If we wanted to be more explicit, we could specify the `sep=` argument like so:
+
+```{r setting sep in separate}
+# We're going to save this to an object called sample_b5_data_long
+sample_b5_data_long<- sample_b5_data_wide %>%
+  gather(variable, score, -pid) %>%
+  separate(variable, c("trait", "time"), sep = "_")
+sample_b5_data_long
+```
+See, that did the same thing. Now, let's save this long data, and see what we have to do to get it wide again.
+
+### Long to wide
+
+I will say, that my one mild frustration with `tidyr()`, with all due respect, is that it seems to be optimized to getting data into long format. I take it, from reading R for Data Science <r4ds.had.co.nz> , that Hadley Wickham and company prefer long data (my sense is that they consider data *tidy* when its in its longest format, though perhaps I misread).
+
+Long data is great and all, but sometimes we need wide data. Specifically, we need wide data for **SEM** and **Path Analysis**, which we use pretty regularly in psychology.
+
+All of that said, you can use `spread()` from tidyr to widen your data. There is also the `reshape()` function from base R, which I sometimes find makes widening data a little easier than `spread()`. Let's go over each in turn.
+
+#### Spread
+
+Spread is part of the `tidyr()` package, and is the function from that package for reshaping data from long to wide format. It's syntactically pretty similar to `spread()` making it pretty easy to go between the two, which is nice. Spread requires 3 arguments, which you'll see mirror gather:
+
+* Data
+    * The data that you want to widen
+* key
+    * The column that contains the values that you want to be columns. This would be either the variable or time column from our above example dataset.
+* value
+    * The column that contains the values you want to fill the cells beneath the new columns with. This would be the score column from above.
+    
+Let's say we're starting with our data in a long format like the one above, and we wanted to get it to a wide format, like the one we started with (where each row was a participant, and each column was a trait at a particular time, like `agreeableness_t1`). We might start with this
+```{r}
+sample_b5_data_long2 <- sample_b5_data_long %>%
+  spread(trait, score)
+
+sample_b5_data_long2 
+```
+Okay, that got us about halfway there. We now have a separate column for each trait, but time is still row-wise. Maybe we could try spreading time, but what would be the value column? We currently have 5. Let's try passing it all of them.
+```{r, eval = FALSE, error = TRUE}
+sample_b5_data_long %>%
+  spread(time, score) %>%
+  spread(trait, agreeableness:openness) # note that if you pass it a vector of names like c("agreeableness", etc.) it also won't work
+```
+
+We can't do that; we can only give exactly **one** column for the value argument in spread. Herein lies my frustration with spread. Now there is a workaround. 
+
+If you're data is in the longer format from above (where each row was a participant X trait X time combo), then you can first use `unite()` (the complement to separate). `unite()` requires an argument for data and the column name you want it to add (once it unites the columns you tell it to unite). You'll probably also want to name specific columns, which can be done just like other tidyr functions, by listing their unquoted names (or if you have a range of columns, you can use column_name_at_start_of_range:column_name_at_end_of_range). 
+
+So, we'll add in a unite before we get to spread, and see if that fixes it:
+
+```{r}
+sample_b5_data_long %>%
+  unite(variable, trait, time) %>%
+  spread(variable, score)
+```
+Okay, that got our data into the right format. So, spread isn't *that* bad, but you typically need to start with data in (just about) the longest format possible, and to use `unite()` function as well.
+
+But, sometimes our data are in between the longest format possible and the wide format that we want. Sometimes we get data like we accidentally got above, where each row is a participant X time point and each column is trait. Like this:
+
+```{r}
+sample_b5_data_long2
+```
+
+What do we do here? Well, if we want to use gather, we'll have to first lengthen the data, and unite the columns that we need to unite, and then spread. So it will something like this:
+
+```{r}
+sample_b5_data_long2 %>%
+  # first gather (you'll have to remember to not gather pid AND time)
+  gather(trait, score, -pid, -time) %>%
+  # Then unite trait and time into a column called variable
+  unite(variable, trait, time) %>%
+  # then spread it
+  spread(variable, score)
+```
+So that isn't sooooo bad. But, it can be a little cumbersome, because you're using several different functions together. So to do this right, you have to remember a pretty complex sequence (or look it up each time). Plus, when your data is more complicated than this data (which was intentionally made pretty simple), it becomes pretty easy to make a mistake in one of these steps (not remembering which columns not to gather in step 2 above, remembering to unite the right columns, etc.). So, `reshape()` from base R is sometimes a little easier in these cases. Let's talk about that now.
+
+#### Using reshape(): long to wide
+
+In general, `reshape()` is a little more complicated. It has more arguments, and more of the arguments are required. But, like I said, it is sometimes a little easier for widening data than `spread()`. One thing to keep in mind is, unlike `spread()` and `gather()`, `reshape()` is used for widening or lengthening data, and you have to specify the direction in the function.
+
+Let's say our data look like the intermediate data we've used before. I mean this data shape:
+```{r}
+sample_b5_data_long2
+```
+
+And we wanted it to look like our dataset above, where each row is a unique participant. We could use reshape like so
+```{r}
+reshape(sample_b5_data_long2,
+        # This one is straight forward; just the column with participant id's
+        idvar = "pid",
+        # This won't always be time. timevar is the variable you want to move from rows into column names.
+        # It's equivalen to key in the spread() function
+        timevar = "time",
+        # Gotta tell it what direction to go.
+        direction = "wide",
+        # Note, this is fully optional, but the defailt is ".", and I wanted it to look like the above, with a "_"
+        sep = "_")
+```
+
+Holy sh**, what happened!?!?! What did I do
+
+This brings us to what has got to be the most common mistake made with `reshape()` in modern times (post tidyverse times, that is). The reason we got that hot mess above is beecause reshape *only* works with data.frames **NOT** tibbles. Now our data set `sample_b5_data_long2` is probably a tibble. Let's check that out with the structure function `str()`
+
+```{r find structure of sample_b5_datalong2}
+str(sample_b5_data_long2)
+```
+
+Yep, it looks like it's class is tbl_df, tbl, and data.frame, which means its a tibble. Thankfully, this is an easy fix, you just need to turn the tibble into a data.frame with `as.data.frame()`. So let's add that into the pipeline.
+
+```{r}
+
+sample_b5_data_long2 %>%
+  as.data.frame() %>%
+  # Note, because we're piping things, we start with 'idvar=' instead of the name of the data
+  reshape(idvar = "pid",
+          timevar = "time",
+          direction = "wide",
+          # Note, this is fully optional, but the defailt is ".", and I wanted it to look like the above, with a "_"
+          sep = "_")
+```
+
+Whew, it worked! By learning this limitation of `reshape()`, you're avoiding a very confusing rabbit hole that I spent almost a full week in!
+
+Side note: tidyverse functions will turn your data into tibbles, so be aware (the one exception is pipes; they don't do that).
+
+#### Using reshape(): wide to long
+
+Now, you can use `reshape()` to go from wide to long too. I'd recommend using `gather()` from tidyr for that instead, but for the sake of completeness, this is how it would work:
+
+```{r reshape function for wide to long}
+sample_b5_data_wide %>%
+    #never forget to make it a data.frame!
+    as.data.frame() %>%
+    # when going from wide to long, you have to tell it the varying variables.
+    # These are the columns that contain the information you want in rows.
+    # This is a little confusing, but basically, you give it a list, with vectors for each thing that shares that information.
+    # So, all the t1 variables go into the same vector
+    # then, all the t2 variables go into the same vector, etc.
+    reshape(varying = c(c("agreeableness_t1", "conscientiousness_t1", "extraversion_t1", "neuroticism_t1", "openness_t1"),
+                        c("agreeableness_t2", "conscientiousness_t2", "extraversion_t2", "neuroticism_t2", "openness_t2"),
+                        c("agreeableness_t3", "conscientiousness_t3", "extraversion_t3", "neuroticism_t3", "openness_t3"),
+                        c("agreeableness_t4", "conscientiousness_t4", "extraversion_t4", "neuroticism_t4", "openness_t4")),
+            # sep is really important here, because it tells it where to split the columns
+            sep = "_",
+            # and of course, tell it the direction
+            direction = "long")
+```
+There, that worked, but it was a little inefficient compared to `gather()` I think.
+
+### Final note on reshaping data
+
+So now you how to reshape your data. Some general tips to keep in mind:
+* `gather()` is great for lengthening data; I would recommend it over `reshape()` everytime.
+* `separate()` can be used to separate a column that really contains multiple pieces of information
+* `spread()` works for getting widening your data, but it can require some in between steps.
+* `gather()` can be used to combine information kept in two separate columns
+    * remember, this is a big one for getting data into wide format with tidyr and `spread()`
+* `reshape()` works really well for widening your data; I recommend it over `spread()` in most cases.
+    * the exception being when your dataset is already in a long (and really, the longest reasonable) format.
+* `reshape()` can be used to lengthen your data, but it's syntax is a little wonky
+
 ###
 
-We'll cover how to reshape
+Things left for manipulating
 
 * Manipulating
-    * Wide v Long data as intro
-    * piping syntax (incl. when to use/not use)
-    * reshaping - gather/melt & spread/dcast (https://www.r-bloggers.com/how-to-reshape-data-in-r-tidyr-vs-reshape2/)
+    * creating new variables with mutate()
+    * creating summary/aggregate datasets with summarize()
+        * combining group_by() with summarize, which is where summarize gets powerful.
     * reordering (incl. reordering factor levels, talking abt factors)
-    * separate & colsplit
     * combining dataframes (if this makes sense to do/there's time to do it) (see relational data in r4ds)
 
 * Annoyances
