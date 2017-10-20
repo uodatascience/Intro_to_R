@@ -479,7 +479,7 @@ And we can see that we get the same result. Some of you may have noticed that we
 
 ### Why use pipes?
 
-There are probably lots of reasons to use or not use pipes. The most important and most often mentioned reason to use pipes is *cleanliness* (which I hear is next to *godliness*). That is, pipes help make two things clean:
+There are probably lots of reasons to use or not use pipes. The most important and most often mentioned reasons to use pipes are *cleanliness* (which I hear is next to *godliness*) and efficiency. We can think of three related advantages:
 
 1. Your code
     * This is nice, because it helps make your code more readable by other humans.
@@ -487,8 +487,6 @@ There are probably lots of reasons to use or not use pipes. The most important a
 
 2. Your environment
     * When you use pipes, you have basically no reason to save objects from intermediary steps in your data wrangling / analysis workflow, because you can just pass output from function to function without saving it (recall when we broke apart the pipe into two steps above).
-
-A related advantage of pipes:
 
 3. Efficiency
     * This is efficiency for you, the person doing the coding (not more efficient computing)
