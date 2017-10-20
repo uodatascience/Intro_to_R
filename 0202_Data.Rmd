@@ -745,7 +745,9 @@ sample_b5_data_long2 %>%
           timevar = "time",
           direction = "wide",
           # Note, this is fully optional, but the defailt is ".", and I wanted it to look like the above, with a "_"
-          sep = "_")
+          sep = "_") %>%
+  # Turning it back into a tibble, because they print a little nicer
+  as_tibble()
 ```
 
 Whew, it worked! By learning this limitation of `reshape()`, you're avoiding a very confusing rabbit hole that I spent almost a full week in!
@@ -772,7 +774,9 @@ sample_b5_data_wide %>%
             # sep is really important here, because it tells it where to split the columns
             sep = "_",
             # and of course, tell it the direction
-            direction = "long")
+            direction = "long") %>%
+    # Turning it back into a tibble, because they print a little nicer
+    as_tibble()
 ```
 There, that worked, but it was a little inefficient compared to `gather()` I think.
 
