@@ -781,6 +781,7 @@ There, that worked, but it was a little inefficient compared to `gather()` I thi
 ### Final note on reshaping data
 
 So now you how to reshape your data. Some general tips to keep in mind:
+
 * `gather()` is great for lengthening data; I would recommend it over `reshape()` everytime.
 * `separate()` can be used to separate a column that really contains multiple pieces of information
 * `spread()` works for getting widening your data, but it can require some in between steps.
