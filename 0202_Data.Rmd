@@ -627,7 +627,7 @@ sample_b5_data_wide %>%
 
 You'll notice we didn't tell separate anything other than the column we wanted separated (`variable`) and the name of two new columns (`trait` and `time`). How did it know how to separate that column?
 
-Well, basically, separate looks for something called *regular expressions*. We'll get into more detail about regular expressions later on, but one regular expression is  for separating things. So it recognized that every string in the variable column contained a underscore. Then, it put the character string on the left hand side of the underscore into the first column name we gave it (trait) and put the character string on the right hand side of the underscore into the second column name we gave it (time). If we wanted to be more explicit, we could specify the `sep=` argument like so:
+Well, basically, separate looks for something called *regular expressions*. We'll get into more detail about regular expressions later on, but one regular expression is the underscore for separating things. So it recognized that every string in the variable column contained a underscore. Then, it put the character string on the left hand side of the underscore into the first column name we gave it (trait) and put the character string on the right hand side of the underscore into the second column name we gave it (time). If we wanted to be more explicit, we could specify the `sep=` argument like so:
 
 ```{r setting sep in separate}
 # We're going to save this to an object called sample_b5_data_long
