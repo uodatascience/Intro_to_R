@@ -1,0 +1,11 @@
+bookdown::gitbook:
+  css: style.css
+  split_by: chapter
+  config:
+    toc:
+      collapse: subsection
+      before: |
+        <li><a href="./">R Guide</a></li>
+      after: |
+        <li><a href="https://github.com/uodatascience/R_Guide">See the repo</a></li>
+
