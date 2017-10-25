@@ -1,5 +1,11 @@
 ---
 title: R Guide Index
+author: UO Data Science
+date: "Fall 2017"
+site: bookdown::bookdown_site
+documentclass: book
+github-repo: uodatascience/R_Guide
+url: https://github.com/uodatascience/R_Guide
 order: 0
 ---
 # UO R Guide
