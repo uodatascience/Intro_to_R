@@ -10,6 +10,8 @@ output:
 order: 100
 ---
 
+# Useful Functions
+
 # Workspace
 
 Function | Function function

@@ -10,7 +10,9 @@ output:
 order: 2
 ---
 
-# What are Objects?
+# Objects
+
+## What are Objects?
 
 Objects are, roughly, data (or more generally a stored state) that knows what it can do. 
 

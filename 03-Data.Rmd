@@ -9,7 +9,9 @@ output:
     toc_depth: 2
 order: 3
 ---
-# Loading data
+# Data
+
+## Loading data
 
 ## One day we will have a summary table here
 

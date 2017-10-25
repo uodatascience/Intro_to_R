@@ -1,6 +1,5 @@
 book_filename: "R-Guide"
 repo: https://github.com/uodatascience/R_Guide
 output_dir: docs
-rmd_files: ["index.Rmd", "01_Introduction.Rmd", "0201_Objects.Rmd", "0202_Data.Rmd", "X1_Useful_Functions.Rmd", "X2_Style_Tips.Rmd", "X3_Howdoi.Rmd"]
 clean: [packages.bib, bookdown.bbl]
 new_session: yes
