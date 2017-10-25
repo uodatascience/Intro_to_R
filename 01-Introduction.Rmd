@@ -11,9 +11,7 @@ order: 1
 ---
 # Introduction
 
-#What the F#$% is R and how do I get started with it?
-
-##Installing R and R Studio 
+## Installing R and R Studio 
 
 First, you will need to download R if you haven't already. You can do that at this link: <https://www.r-project.org/>
 
@@ -72,7 +70,7 @@ For a more complete list, check out the RStudio IDE Cheat Sheet. Find it online 
 8. Or this online text, ["R for beginners"](https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf), by Emmanuel Paradis.  
 
 
-#What is R?
+# What is R?
 R is a programming language designed for statistical computing. So, it is (in many ways) more similar to another programming language (e.g., Python) than it is to statistical software you may have experience with (e.g., SPSS). If you have no experience with programming languages and have only ever used statistical software (e.g., SPSS) for your stats then you will probably feel overwhelmed and confused by R for a little while. That's fine and normal. Speaking for myself, I think I installed and opened R studio about a half dozen times over the course of a year before I ever used it becuase I had no idea where to get started. Hopefully this (and the next few weeks of the Data Science Club) helps you with that.
 
 How do we use R. Lots of ways! For starters, it's like a calculator. Sort of like the graphing calculators that you may have been fascinated by at 16 (or at least I was for some reason). Because it's like a calculator, we can use it like one.
@@ -84,7 +82,7 @@ Okay, but now we all have calculators in our phones, so this isn't that cool. Wh
 Lots of stuff. Almost all of it revolves around *assigning* and then later *calling* and *manipulating* objects. What is an object? It's just R's way of representing information. And then we can use that information later. 
 
 
-##Objects
+## Objects
 How do we get R to represent some information as an object? We tell it to, using the assignment operator '<-'. Whatever we put on the left side of the arrow becomes the name of the object and whatever is on the right side of the arrow becomes the definition of that object. For example, we may want to store what we had done earlier into an object.
 
 ```{r objects}
@@ -155,7 +153,7 @@ And if we wanted both, we can just assign the dataframe to a new object
 amp_volume_dataframe <- as.data.frame(amp_volume_dataset)
 ```
 
-##Functions
+## Functions
 
 * c() is a function for putting things together 
     + it stands for concatenate(mneumonic: it also shares an initial with combine)
@@ -238,7 +236,7 @@ ggplot2::ggplot(data=amp_volume_dataframe, ggplot2::aes(x=Bands, y = amp_volumes
   ggplot2::geom_col()
 ```
 
-##Some more useful basic syntax
+## Some useful basic syntax
 
 We've covered some of the basics of R syntax (e.g., the assignment operator '<-')
 

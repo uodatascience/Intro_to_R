@@ -13,11 +13,11 @@ order: 3
 
 ## Loading data
 
-## One day we will have a summary table here
+### One day we will have a summary table here
 
 Most of the time we have a datafile (either on our hard drive or on the internet) that we want to work with in R. To do that, we can use a function to read the data into R. For instance, the **`read.table()`** is a flexible function for reading in data in various formats. 
 
-## .csv files
+### .csv files
 In order to use **`read.table()`**, you will typically need to specify some of the arguments, such as the argument **`sep = `**, which is where you specify the thing that seperates values in your data file.   
 
 For example, if you are working with a data file in the comma seperated values (csv) format, you would need to specify that commas are the seperator with **`sep = ","`**. 
@@ -46,13 +46,13 @@ In some rare cases, you may be getting an error due to differences between how y
 
 This will sometimes be spelled out in the documentation (e.g., **`reshape`** says it takes data frames as the first argument), but its not always clear; sometimes, you just need to test it out. If you do need to go between different formats, that is easy to do in R with a couple of functions. **`as.data.frame()`** will turn an object that can be a dataframe into a dataframe. **`as_tibble`** will turn an object that can be a tibble into a tibble. 
 
-## .sav files
+### .sav files
 
 R can also work with datafiles that are formatted for SPSS, which have the extension '.sav'.  
 
 Like csv's, there are a few options. The one that seems to work the best is **`read_spss()`** from the haven package (also a part of the tidyverse). There is also a function called **`read.spss()`** from the **`foreign`** package, but it is no longer being maintained and may stop working; it also had some frustrating qualities, so probably best to stick to **`read_spss()`**. It's worth noting that **`read_spss()`** will format your data as a **`tibble`**. If you don't want it as a **`tibble`**, you can always use the **`as.data.frame()`** function to turn it into a generic **`data.frame`**.
 
-## `rio` for general import
+### `rio` for general import
 
 Another function worth knowing about for reading in data is the **`import()`** function from the **`rio`** package. The nice thing about **`import()`** is that it works with lots of different types of datafiles, and very little has to be changed for each type of datafile. For example, if our data (let's say its name is 'df') were a .sav file, we would read it in with the following command:  
 
@@ -76,11 +76,11 @@ However, this is telling R to just read the data. If you run code like that, it 
 
 Now R has read our data and stored it as an object called `df`, that we can start running our models on.
 
-# Saving data
+## Saving data
 
 Most of the above functions have complementary `write` functions, for example `write.csv` or `haven::write_sav`. There are two other common ways you may want to save your data
 
-## .RData files
+### .RData files
 
 Because all objects in R descend from a precious few C structures, they can all be easily **serialized**, or converted into a string of bits that can be written to disk (not always true in other languages, like Python). These files typically can't be read by anything but R (except if that thing is another programming language where someone has written a specific routine to do so!), so if your mom tries to look at your cool data in openoffice they'll be out of luck.
 
@@ -123,7 +123,7 @@ saveRDS(cant_forget, file="cant_forget.rds")
 sad_news <- readRDS("cant_forget.rds")
 ```
 
-## `sink`
+### `sink`
 
 Perhaps common is an overstatement. Consider these the option of last resort when all you want to do is put what you see in this window in some other window and ya don't care how ya do it.
 
@@ -171,7 +171,7 @@ system2('open', args=abs_path, wait=FALSE)
 
 Notice how we have to use `dev.off()` rather than calling `pdf()` again as would be expected from `sink`
 
-# Indexing
+## Indexing
 
 Or, how to get specific pieces of stuff.
 
@@ -259,7 +259,7 @@ head(select(df, starts_with("c")))
 head(select(df, one_of(c("color", "hue", "luminance", "clarity"))))
 ```
 
-## Logical indexing
+### Logical indexing
 
 In addition to specifying what we want by position, we can specify what we want by using a vector of booleans (`TRUE`, `FALSE`) the same length as the object
 
@@ -332,7 +332,7 @@ x > 10
 which(x > 10)
 ```
 
-## Assignment with Indexing
+### Assignment with Indexing
 
 Sometimes we need to change some values in an existing object, but all assignments to existing objects have to have the same shape and class. If you give something too small, it will be repeated Rather than having to create a new object, we can assign to an indexed subset of an object
 
@@ -348,11 +348,11 @@ friends$favorites <- c(4,5)
 friends[c(1,2),]$favorites <- c(4,5)
 ```
     
-# Manipulating Data
+## Manipulating Data
 
 Now that you have your data in R, and have maybe subsetted it in some manner, you may want to manipulate the data. In this section, we'll cover some ways that you might want to manipulate data, including manipulating the format of the data and creating new variables (both from combining/splitting existing variables, and creating new ones if you need to).
 
-## Wide vs. Long Data
+### Wide vs. Long Data
 Let's start by talking about one of the more common data format issues, which is whether data are structured in a *long* or *wide* format. These, like basically all things, exist on a continuum (data is almost always somewhere in between the extremes of long and wide). So, it's probably helpful to start with an example. 
 
 One common design that leads to data easily represented as wide or long is longitudinal data. Let's say we administer the Big Five Inventory - 2 (BFI-2; Soto & John, 2016) to a sample of incoming freshman annually for 4 years. To keep things simple, let's say we only have that data (nothing else was administered). In this case, you may have a dataset that looks like this:
@@ -407,15 +407,15 @@ sample_b5_data_long %>%
   gather(trait, score, agreeableness:openness)
 ```
 
-## Piping syntax
+### Piping syntax
 
 Before we get into reshaping data, its importantt we cover a type of syntax called piping. Piping is not unique to R, but it is highly useful in R, especially for data wrangling and manipulation. The pipe itself is this symbol `%>%`, and in R, it comes from the *magrittr* package (this is a references to the famous painging by Magritte,the treachery of images). *magrittr* is part of the tidyverse, so it will load when you call the tidyverse library.
 
-### A quick sidenote about the term pipe
+#### A quick sidenote about the term pipe
 
 As mentioned above, a pipe in piping syntax is symbolized by `%>%`. However, another character is sometimes called a pipe, which is the vertical bar |, and this is used quite a bit in logical/boolean operations (| means or in logical statements).
 
-### The logic of piping syntax
+#### The logic of piping syntax
 
 The general idea of piping syntax, is that we have some function on the lefthand and righthand side of the pipe. The function on the leftside is evaluated, and then the **output** of that function is passed to the function on the righthand side of the pipe as the first argument of that function. Let's start with a simple example. We'll create a vector of values and take the mean.
 
@@ -449,7 +449,7 @@ rnorm(n = 20, mean = 5, sd = 1) %>%
   mean()
 ```
 
-### Logic of Piping Syntax continued
+#### Logic of Piping Syntax continued
 
 As we covered above, the function following the pipe takes the output of the preceding function as its **first** argument. In the preceding example, we didn't supply another argument, and so the righthand side of the pipe was simply `mean()`. Let's say, we wanted to specify an additional argument. One option in `mean()` is trim, which indicates the proportion of values we want to trim from the vector before calculating the mean. Let's say we wanted only half the data points; I have no idea why someone would do something like this, especially with a vector of 20 values, but let's do it anyway.
 
@@ -808,7 +808,7 @@ Things left for manipulating
     * dealing with `NaN`s
     * typing your data (mainly to cover factors, ordered v. unordered)
 
-# Resources
+### Resources
 
 * R Data Import/Export Manual: https://cran.r-project.org/doc/manuals/R-data.pdf
 * http://zoonek2.free.fr/UNIX/48_R/02.html#6

@@ -10,8 +10,7 @@ github-repo: uodatascience/R_Guide
 url: https://github.com/uodatascience/R_Guide
 order: 0
 ---
-# UO R Guide
-## Lessons
+# Lessons
 
 1. Introduction
 > Installing R, Basic Syntax, Installing and Loading Packages
