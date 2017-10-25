@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="reference-classes.html">
-<link rel="next" href="data.html">
+<link rel="prev" href="references.html">
+<link rel="next" href="saving-data.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -198,24 +198,66 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="references" class="section level1">
-<h1><span class="header-section-number">11</span> References</h1>
-<ul>
-<li><a href="http://manuals.bioinformatics.ucr.edu/home/programming-in-r#TOC-Object-Oriented-Programming-OOP-" class="uri">http://manuals.bioinformatics.ucr.edu/home/programming-in-r#TOC-Object-Oriented-Programming-OOP-</a></li>
-<li><a href="http://www.stat.ucla.edu/%7Ecocteau/stat202a/resources/docs/S4Objects.pdf">http://www.stat.ucla.edu/%7Ecocteau/stat202a/resources/docs/S4Objects.pdf</a></li>
-<li><a href="http://adv-r.had.co.nz/OO-essentials.html" class="uri">http://adv-r.had.co.nz/OO-essentials.html</a></li>
-<li><a href="http://adv-r.had.co.nz/Data-structures.html" class="uri">http://adv-r.had.co.nz/Data-structures.html</a></li>
-</ul>
-<hr />
-
+<div id="data" class="section level1">
+<h1><span class="header-section-number">12</span> Data</h1>
+<div id="loading-data" class="section level2">
+<h2><span class="header-section-number">12.1</span> Loading data</h2>
+</div>
+<div id="one-day-we-will-have-a-summary-table-here" class="section level2">
+<h2><span class="header-section-number">12.2</span> One day we will have a summary table here</h2>
+<p>Most of the time we have a datafile (either on our hard drive or on the internet) that we want to work with in R. To do that, we can use a function to read the data into R. For instance, the <strong><code>read.table()</code></strong> is a flexible function for reading in data in various formats.</p>
+</div>
+<div id="csv-files" class="section level2">
+<h2><span class="header-section-number">12.3</span> .csv files</h2>
+<p>In order to use <strong><code>read.table()</code></strong>, you will typically need to specify some of the arguments, such as the argument <strong><code>sep =</code></strong>, which is where you specify the thing that seperates values in your data file.</p>
+<p>For example, if you are working with a data file in the comma seperated values (csv) format, you would need to specify that commas are the seperator with <strong><code>sep = &quot;,&quot;</code></strong>.</p>
+<div id="defaults" class="section level3">
+<h3><span class="header-section-number">12.3.1</span> Defaults</h3>
+<p>Thankfully, other people have done this for us, and have created functions that have the proper defaults to work with common formats like csv fles. For csv files, To see the defaults, simply check the documentation with e.g. <strong><code>?read.table</code></strong></p>
+<p><strong><code>read.csv()</code></strong> is basically a version of <strong><code>read.table()</code></strong> with the defaults set up to work well with csv files. These defaults include setting <strong>“,”</strong> as the seperator, and setting <strong><code>header = TRUE</code></strong>, which means that R will read in the first row in the csv file as being a header row, and treat that row as the row of column names. These defaults can be changed though, so if you had a file with no header, you would indicate that with <strong><code>header = FALSE</code></strong>, like so</p>
+<p><code>read.csv(file_path/file_name.csv, header = FALSE)</code></p>
+<p>where file_path is the full path to the file, and file_name is the name of the data file. Take a look at the documentation for <code>read.csv()</code> with <code>?read.csv()</code> to see the different arguments and defaults.</p>
+</div>
+<div id="a-brief-interlude-into-formats-for-data-in-r" class="section level3">
+<h3><span class="header-section-number">12.3.2</span> A brief interlude into formats for data in R</h3>
+<p>There are lots of options for reading data into R, even for a single format.</p>
+<p>For example, we could instead use <strong><code>read_csv()</code></strong> from the <strong><code>readr</code></strong> package. The main difference between <strong><code>read.csv()</code></strong> and <strong><code>read_csv()</code></strong> is that they load the data into different formats in R. <strong><code>read.csv()</code></strong> will read your data in as a <strong><code>data.frame</code></strong>, which is a common format of data in R.</p>
+<p><strong><code>read_csv()</code></strong> will read your data in as a <strong><code>tibble</code></strong>, which is the data format associated with the tidyverse. There are a couple of differences between these formats. They have different printing defaults, there are differences in subsetting, and differences in recycling. Check out the documentation by running the code <strong><code>vignette(&quot;tibble&quot;)</code></strong> or by checking out the chapter on tibbles in the R for Data Science Book <a href="http://r4ds.had.co.nz/tibbles.html" class="uri">http://r4ds.had.co.nz/tibbles.html</a>.</p>
+<p>Outside of these differences, they are mostly interchangeable (for most purposes), but occassionally a function will only work properly with one or the other. For example, the <strong><code>reshape()</code></strong> function only works properly with <em>data.frames</em> (unless that has changed in an update).</p>
+</div>
+<div id="format-issues" class="section level3">
+<h3><span class="header-section-number">12.3.3</span> Format issues?</h3>
+<p>In some rare cases, you may be getting an error due to differences between how your data is formatted in R and what format the function you’re attempting to use works with.</p>
+<p>This will sometimes be spelled out in the documentation (e.g., <strong><code>reshape</code></strong> says it takes data frames as the first argument), but its not always clear; sometimes, you just need to test it out. If you do need to go between different formats, that is easy to do in R with a couple of functions. <strong><code>as.data.frame()</code></strong> will turn an object that can be a dataframe into a dataframe. <strong><code>as_tibble</code></strong> will turn an object that can be a tibble into a tibble.</p>
+</div>
+</div>
+<div id="sav-files" class="section level2">
+<h2><span class="header-section-number">12.4</span> .sav files</h2>
+<p>R can also work with datafiles that are formatted for SPSS, which have the extension ‘.sav’.</p>
+<p>Like csv’s, there are a few options. The one that seems to work the best is <strong><code>read_spss()</code></strong> from the haven package (also a part of the tidyverse). There is also a function called <strong><code>read.spss()</code></strong> from the <strong><code>foreign</code></strong> package, but it is no longer being maintained and may stop working; it also had some frustrating qualities, so probably best to stick to <strong><code>read_spss()</code></strong>. It’s worth noting that <strong><code>read_spss()</code></strong> will format your data as a <strong><code>tibble</code></strong>. If you don’t want it as a <strong><code>tibble</code></strong>, you can always use the <strong><code>as.data.frame()</code></strong> function to turn it into a generic <strong><code>data.frame</code></strong>.</p>
+</div>
+<div id="rio-for-general-import" class="section level2">
+<h2><span class="header-section-number">12.5</span> <code>rio</code> for general import</h2>
+<p>Another function worth knowing about for reading in data is the <strong><code>import()</code></strong> function from the <strong><code>rio</code></strong> package. The nice thing about <strong><code>import()</code></strong> is that it works with lots of different types of datafiles, and very little has to be changed for each type of datafile. For example, if our data (let’s say its name is ‘df’) were a .sav file, we would read it in with the following command:</p>
+<p><code>import(df.sav)</code></p>
+<p>If it were instead a csv, we would use the following command:</p>
+<p><code>import(df.csv)</code></p>
+<p>Note that virtually nothing changed, just the file extension (which is part of the name of the file). <strong><code>import()</code></strong> is able to figure out the format of the file based on that extension.</p>
+<p><strong>Remember to assign your data to a variable in the environment!</strong></p>
+<p>A pretty common and frustrating mistake people make when starting with R is not saving their data file as an object. For example, if we were loading in our datafile called ‘df’, we may want to run some code like this:</p>
+<p><code>import(df.csv)</code></p>
+<p>However, this is telling R to just read the data. If you run code like that, it will simply read the data, and print out the data (or some subset of it) into the console. Then, when you go to work with the data, it won’t be in your global environment. That’s because you didn’t save it as an object. You would do that the same way you save anything as an object, with the assignment operator: <code>&lt;-</code>. So instead of the above, you’d instead want to run something like the following:</p>
+<p><code>df &lt;- import(df.csv)</code></p>
+<p>Now R has read our data and stored it as an object called <code>df</code>, that we can start running our models on.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="reference-classes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="references.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="saving-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

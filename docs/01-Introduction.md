@@ -315,7 +315,7 @@ ggplot(data=amp_volume_dataframe, aes(x=Bands, y = amp_volumes))+
   geom_col()
 ```
 
-<img src="01_Introduction_files/figure-html/GGPlot works!-1.png" width="672" />
+<img src="01-Introduction_files/figure-html/GGPlot works!-1.png" width="672" />
 It worked! We'll spend some time talking about ggplot (led by Jonny) a little later on, so don't worry about what that code means. Soon you'll know.
 
 What happens when two packages have functions with the same name? for example, both dplyr and plyr have functions named "summarise" that behave slightly differently. We can solve these "namespace conflicts" by being specific about where we load the library in our search paths. If we want to load the functions from plyr, but keep all our existing references to dplyr, we could do something like this (although if you've already loaded tidyverse, this won't do anything because these packages are loaded by tidyverse)
@@ -367,7 +367,7 @@ ggplot2::ggplot(data=amp_volume_dataframe, ggplot2::aes(x=Bands, y = amp_volumes
   ggplot2::geom_col()
 ```
 
-<img src="01_Introduction_files/figure-html/direct function reference-1.png" width="672" />
+<img src="01-Introduction_files/figure-html/direct function reference-1.png" width="672" />
 
 ##Some more useful basic syntax
 
