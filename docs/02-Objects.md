@@ -64,17 +64,17 @@ R has a useful package `pryr` for inspecting objects and other meta-linguistic n
 ```
 
 
-## Object terminology
+### Object terminology
 A **class** is the description, or 'blueprint' of how individual **objects** or **instances** are made, including their **attributes** - which data should be kept and what it should be named, and **methods**, the functions that they are capable of calling on their stored data or attributes. Objects can have a nested structure, and sub-classes can **inherit** the attributes and methods of their parent classes.
 
 For example: As a class, trucks have attributes like engine_size, number_of_wheels, or number_of_jumps_gone_off. Trucks have the method go_faster(), but only individual instances of trucks can go_faster() - the concept/class of trucks can't. As a subclass, monster_trucks also have the attributes engine_size, etc. and the method go_faster(), but they also have additional attributes like mythical_backstory and methods like monster_jam().
 
-# Objects in R
+## Objects in R
 >"In R functions are objects and can be manipulated in much the same way as any other object." - *R language guide 2.1.5*
 
 >"S3 objects are functions that call the functions of their objects" - *Also R*
 
-## Object Systems
+### Object Systems
 
 R has base types and three object-oriented systems (also called **types**). We'll spend more time on Base types and S3 objects in this lesson, and return to S4 and reference classes when we start building bigger code.
 
@@ -218,7 +218,7 @@ class(c(1))       # whose class is 'numeric'
 ## [1] "numeric"
 ```
 
-## Attributes
+### Attributes
 
 Object can also have arbitrarily many **attributes**. The most important and common are 
 
@@ -275,7 +275,7 @@ attributes(named_vector)
 ```
 
 
-# Base Types
+## Base Types
 Every R object is built out of basic C structures that define how it is stored and managed in memory.
 
 This table from [Advanced R](http://adv-r.had.co.nz/Data-structures.html#data-structures) summarizes them:
@@ -304,7 +304,7 @@ typeof(list(1,2,3))
 ## [1] "list"
 ```
 
-## Vectors
+### Vectors
 
 Vectors are sequences, the most basic data type in R. They have two varieties: **atomic vectors** (with homogenous values) and **lists** (with ... heterogenous values). 
 
@@ -572,7 +572,7 @@ typeof(data.frame(c(1,2,3)))
 ## [1] "list"
 ```
 
-## Matrices & Arrays
+### Matrices & Arrays
 **Arrays** are atomic vectors with a `dim` attribute. **Matrices** are arrays with `dim = 2`. 
 
 
@@ -770,7 +770,7 @@ methods(class="matrix")
 ## see '?methods' for accessing help and source code
 ```
 
-## Data Frames
+### Data Frames
 Data frames are one of the gems of R. A data frame is a list of equal length vectors. 
 
 
@@ -916,12 +916,12 @@ rbind(df,df_squared)
 ```
 
 
-## Etc.
+### Etc.
 
 Functions, environments, and other stuff that we'll learn about in our section on Functions are also base objects, but we'll discuss them then.
 
 
-# S3 Objects
+## S3 Objects
 S3 objects "belong to" functions, which become their methods. S3 classes don't really "exist," but are assigned as an object's "class" attribute. S3 classes are one of the worst things about R, but are also responsible for some of its flexibility.
 
 
@@ -1042,7 +1042,7 @@ plot.default
 ##             ...)
 ##     invisible()
 ## }
-## <bytecode: 0x7fa10316dca0>
+## <bytecode: 0x7fb676fd0aa0>
 ## <environment: namespace:graphics>
 ```
 
@@ -1065,7 +1065,7 @@ plot(lme4::lmer(Ozone ~ 0 + (Day | Month), data=aq))
 
 <img src="02-Objects_files/figure-html/unnamed-chunk-31-1.png" width="672" />
 
-## Example: Extending S3 Objects
+### Example: Extending S3 Objects
 > http://adv-r.had.co.nz/OO-essentials.html "Creating new methods and generics"
 
 Using a class's method is what allows us to do sensible computations on different types of objects with the same command.
@@ -1175,7 +1175,7 @@ mean.Date(dates) # which can also be called directly
 
 
 
-# S4 Objects
+## S4 Objects
 S4 objects have a single class definition with specifically defined fields and functions. They are too complicated for us to cover in much detail yet, so we will return to them again later.
 
 We could pretend for awhile we're another class with S3 objects
@@ -1262,11 +1262,11 @@ Try extending that to have the monster trucks tell their mythical_backstory as t
 
 We will return to S4 objects in more detail in section 5.
 
-# Reference Classes
+## Reference Classes
 
 References classes are a "truly" object oriented system in R, but we are going to skip them entirely for now because they are rare enough that you aren't likely to encounter them yet. See here for more information: http://adv-r.had.co.nz/OO-essentials.html#rc
 
-# References
+## References
 * http://manuals.bioinformatics.ucr.edu/home/programming-in-r#TOC-Object-Oriented-Programming-OOP-
 * http://www.stat.ucla.edu/%7Ecocteau/stat202a/resources/docs/S4Objects.pdf
 * http://adv-r.had.co.nz/OO-essentials.html

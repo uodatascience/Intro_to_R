@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="introduction.html">
+<link rel="prev" href="data.html">
+<link rel="next" href="useful-functions.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -194,22 +194,73 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">R Guide Index</h1>
-<h4 class="author"><em>UO Data Science</em></h4>
-<h4 class="date"><em>Fall 2017</em></h4>
-</div>
-<div id="lessons" class="section level1">
-<h1><span class="header-section-number">1</span> Lessons</h1>
-<ol style="list-style-type: decimal">
-<li>Introduction &gt; Installing R, Basic Syntax, Installing and Loading Packages</li>
-<li>Data &gt; Data types, loading, indexing, manipulation, subsetting, ordering</li>
-<li>Plotting &gt; Using ggplot2</li>
-<li>Control Flow &gt; Contexts, Loops, optimized loops, conditional and logical expressions</li>
-<li>Functions &gt; Namespaces, Writing functions, good practices for reusable analysis code</li>
-<li>Document Creation &gt; R Markdown, LaTeX, Table creation &amp; etc.</li>
-<li>High-Performance Programming &gt; Parallelization, remote access/control, profiling</li>
-</ol>
+<div id="functions-1" class="section level1">
+<h1><span class="header-section-number">6</span> Functions</h1>
+<blockquote>
+<p>Scoping from R Faq 3.3.1</p>
+</blockquote>
+<p>NOT REAL YET!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># S4 Methods are stored in environments </span>
+nM &lt;-<span class="st"> </span><span class="kw">asNamespace</span>(<span class="st">&quot;Matrix&quot;</span>)
+<span class="kw">sort</span>(<span class="kw">grep</span>(<span class="st">&quot;^[.]__T__&quot;</span>, <span class="kw">names</span>(nM), <span class="dt">value=</span><span class="ot">TRUE</span>))</code></pre></div>
+<pre><code>##   [1] &quot;.__T__-:base&quot;                &quot;.__T__!:base&quot;               
+##   [3] &quot;.__T__[:base&quot;                &quot;.__T__[&lt;-:base&quot;             
+##   [5] &quot;.__T__*:base&quot;                &quot;.__T__/:base&quot;               
+##   [7] &quot;.__T__&amp;:base&quot;                &quot;.__T__%*%:base&quot;             
+##   [9] &quot;.__T__%/%:base&quot;              &quot;.__T__%&amp;%:Matrix&quot;           
+##  [11] &quot;.__T__%%:base&quot;               &quot;.__T__^:base&quot;               
+##  [13] &quot;.__T__+:base&quot;                &quot;.__T__all:base&quot;             
+##  [15] &quot;.__T__all.equal:base&quot;        &quot;.__T__any:base&quot;             
+##  [17] &quot;.__T__anyNA:base&quot;            &quot;.__T__Arith:base&quot;           
+##  [19] &quot;.__T__as.array:base&quot;         &quot;.__T__as.integer:base&quot;      
+##  [21] &quot;.__T__as.logical:base&quot;       &quot;.__T__as.matrix:base&quot;       
+##  [23] &quot;.__T__as.numeric:base&quot;       &quot;.__T__as.vector:base&quot;       
+##  [25] &quot;.__T__band:Matrix&quot;           &quot;.__T__BunchKaufman:Matrix&quot;  
+##  [27] &quot;.__T__cbind2:methods&quot;        &quot;.__T__chol:base&quot;            
+##  [29] &quot;.__T__chol2inv:base&quot;         &quot;.__T__Cholesky:Matrix&quot;      
+##  [31] &quot;.__T__coerce:methods&quot;        &quot;.__T__coerce&lt;-:methods&quot;     
+##  [33] &quot;.__T__colMeans:base&quot;         &quot;.__T__colSums:base&quot;         
+##  [35] &quot;.__T__Compare:methods&quot;       &quot;.__T__cov2cor:stats&quot;        
+##  [37] &quot;.__T__crossprod:base&quot;        &quot;.__T__determinant:base&quot;     
+##  [39] &quot;.__T__diag:base&quot;             &quot;.__T__diag&lt;-:base&quot;          
+##  [41] &quot;.__T__diff:base&quot;             &quot;.__T__dim:base&quot;             
+##  [43] &quot;.__T__dim&lt;-:base&quot;            &quot;.__T__dimnames:base&quot;        
+##  [45] &quot;.__T__dimnames&lt;-:base&quot;       &quot;.__T__drop:base&quot;            
+##  [47] &quot;.__T__expand:Matrix&quot;         &quot;.__T__expm:Matrix&quot;          
+##  [49] &quot;.__T__facmul:Matrix&quot;         &quot;.__T__forceSymmetric:Matrix&quot;
+##  [51] &quot;.__T__format:base&quot;           &quot;.__T__head:utils&quot;           
+##  [53] &quot;.__T__image:graphics&quot;        &quot;.__T__initialize:methods&quot;   
+##  [55] &quot;.__T__is.finite:base&quot;        &quot;.__T__is.infinite:base&quot;     
+##  [57] &quot;.__T__is.na:base&quot;            &quot;.__T__isDiagonal:Matrix&quot;    
+##  [59] &quot;.__T__isSymmetric:base&quot;      &quot;.__T__isTriangular:Matrix&quot;  
+##  [61] &quot;.__T__kronecker:base&quot;        &quot;.__T__length:base&quot;          
+##  [63] &quot;.__T__Logic:base&quot;            &quot;.__T__lu:Matrix&quot;            
+##  [65] &quot;.__T__Math:base&quot;             &quot;.__T__Math2:methods&quot;        
+##  [67] &quot;.__T__mean:base&quot;             &quot;.__T__nnzero:Matrix&quot;        
+##  [69] &quot;.__T__norm:base&quot;             &quot;.__T__Ops:base&quot;             
+##  [71] &quot;.__T__pack:Matrix&quot;           &quot;.__T__print:base&quot;           
+##  [73] &quot;.__T__prod:base&quot;             &quot;.__T__qr:base&quot;              
+##  [75] &quot;.__T__qr.coef:base&quot;          &quot;.__T__qr.fitted:base&quot;       
+##  [77] &quot;.__T__qr.Q:base&quot;             &quot;.__T__qr.qty:base&quot;          
+##  [79] &quot;.__T__qr.qy:base&quot;            &quot;.__T__qr.R:base&quot;            
+##  [81] &quot;.__T__qr.resid:base&quot;         &quot;.__T__rbind2:methods&quot;       
+##  [83] &quot;.__T__rcond:base&quot;            &quot;.__T__rep:base&quot;             
+##  [85] &quot;.__T__rowMeans:base&quot;         &quot;.__T__rowSums:base&quot;         
+##  [87] &quot;.__T__Schur:Matrix&quot;          &quot;.__T__show:methods&quot;         
+##  [89] &quot;.__T__skewpart:Matrix&quot;       &quot;.__T__solve:base&quot;           
+##  [91] &quot;.__T__sum:base&quot;              &quot;.__T__summary:base&quot;         
+##  [93] &quot;.__T__Summary:base&quot;          &quot;.__T__symmpart:Matrix&quot;      
+##  [95] &quot;.__T__t:base&quot;                &quot;.__T__tail:utils&quot;           
+##  [97] &quot;.__T__tcrossprod:base&quot;       &quot;.__T__toeplitz:stats&quot;       
+##  [99] &quot;.__T__tril:Matrix&quot;           &quot;.__T__triu:Matrix&quot;          
+## [101] &quot;.__T__unname:base&quot;           &quot;.__T__unpack:Matrix&quot;        
+## [103] &quot;.__T__update:stats&quot;          &quot;.__T__updown:Matrix&quot;        
+## [105] &quot;.__T__which:base&quot;            &quot;.__T__writeMM:Matrix&quot;       
+## [107] &quot;.__T__zapsmall:base&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">meth.Ops &lt;-<span class="st"> </span>nM$<span class="st">`</span><span class="dt">.__T__Ops:base</span><span class="st">`</span>
+<span class="kw">head</span>(<span class="kw">sort</span>(<span class="kw">names</span>(meth.Ops)))</code></pre></div>
+<pre><code>## [1] &quot;abIndex#abIndex&quot; &quot;abIndex#ANY&quot;     &quot;ANY#abIndex&quot;     &quot;ANY#ddiMatrix&quot;  
+## [5] &quot;ANY#ldiMatrix&quot;   &quot;ANY#Matrix&quot;</code></pre>
 
 </div>
             </section>
@@ -217,8 +268,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-
-<a href="introduction.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="useful-functions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

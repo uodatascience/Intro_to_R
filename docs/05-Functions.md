@@ -9,7 +9,11 @@ output:
     toc_depth: 2
 order: 2
 ---
+# Functions
+
 > Scoping from R Faq 3.3.1
+
+NOT REAL YET!
 
 
 ```r

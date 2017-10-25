@@ -13,11 +13,11 @@ order: 3
 
 ## Loading data
 
-## One day we will have a summary table here
+### One day we will have a summary table here
 
 Most of the time we have a datafile (either on our hard drive or on the internet) that we want to work with in R. To do that, we can use a function to read the data into R. For instance, the **`read.table()`** is a flexible function for reading in data in various formats. 
 
-## .csv files
+### .csv files
 In order to use **`read.table()`**, you will typically need to specify some of the arguments, such as the argument **`sep = `**, which is where you specify the thing that seperates values in your data file.   
 
 For example, if you are working with a data file in the comma seperated values (csv) format, you would need to specify that commas are the seperator with **`sep = ","`**. 
@@ -46,13 +46,13 @@ In some rare cases, you may be getting an error due to differences between how y
 
 This will sometimes be spelled out in the documentation (e.g., **`reshape`** says it takes data frames as the first argument), but its not always clear; sometimes, you just need to test it out. If you do need to go between different formats, that is easy to do in R with a couple of functions. **`as.data.frame()`** will turn an object that can be a dataframe into a dataframe. **`as_tibble`** will turn an object that can be a tibble into a tibble. 
 
-## .sav files
+### .sav files
 
 R can also work with datafiles that are formatted for SPSS, which have the extension '.sav'.  
 
 Like csv's, there are a few options. The one that seems to work the best is **`read_spss()`** from the haven package (also a part of the tidyverse). There is also a function called **`read.spss()`** from the **`foreign`** package, but it is no longer being maintained and may stop working; it also had some frustrating qualities, so probably best to stick to **`read_spss()`**. It's worth noting that **`read_spss()`** will format your data as a **`tibble`**. If you don't want it as a **`tibble`**, you can always use the **`as.data.frame()`** function to turn it into a generic **`data.frame`**.
 
-## `rio` for general import
+### `rio` for general import
 
 Another function worth knowing about for reading in data is the **`import()`** function from the **`rio`** package. The nice thing about **`import()`** is that it works with lots of different types of datafiles, and very little has to be changed for each type of datafile. For example, if our data (let's say its name is 'df') were a .sav file, we would read it in with the following command:  
 
@@ -76,11 +76,11 @@ However, this is telling R to just read the data. If you run code like that, it 
 
 Now R has read our data and stored it as an object called `df`, that we can start running our models on.
 
-# Saving data
+## Saving data
 
 Most of the above functions have complementary `write` functions, for example `write.csv` or `haven::write_sav`. There are two other common ways you may want to save your data
 
-## .RData files
+### .RData files
 
 Because all objects in R descend from a precious few C structures, they can all be easily **serialized**, or converted into a string of bits that can be written to disk (not always true in other languages, like Python). These files typically can't be read by anything but R (except if that thing is another programming language where someone has written a specific routine to do so!), so if your mom tries to look at your cool data in openoffice they'll be out of luck.
 
@@ -132,7 +132,7 @@ saveRDS(cant_forget, file="cant_forget.rds")
 sad_news <- readRDS("cant_forget.rds")
 ```
 
-## `sink`
+### `sink`
 
 Perhaps common is an overstatement. Consider these the option of last resort when all you want to do is put what you see in this window in some other window and ya don't care how ya do it.
 
@@ -210,7 +210,7 @@ system2('open', args=abs_path, wait=FALSE)
 
 Notice how we have to use `dev.off()` rather than calling `pdf()` again as would be expected from `sink`
 
-# Indexing
+## Indexing
 
 Or, how to get specific pieces of stuff.
 
@@ -465,7 +465,7 @@ head(select(df, one_of(c("color", "hue", "luminance", "clarity"))))
 ## 6     J    VVS2
 ```
 
-## Logical indexing
+### Logical indexing
 
 In addition to specifying what we want by position, we can specify what we want by using a vector of booleans (`TRUE`, `FALSE`) the same length as the object
 
@@ -704,7 +704,7 @@ which(x > 10)
 ##      3      4      5
 ```
 
-## Assignment with Indexing
+### Assignment with Indexing
 
 Sometimes we need to change some values in an existing object, but all assignments to existing objects have to have the same shape and class. If you give something too small, it will be repeated Rather than having to create a new object, we can assign to an indexed subset of an object
 
@@ -727,11 +727,11 @@ friends$favorites <- c(4,5)
 friends[c(1,2),]$favorites <- c(4,5)
 ```
     
-# Manipulating Data
+## Manipulating Data
 
 Now that you have your data in R, and have maybe subsetted it in some manner, you may want to manipulate the data. In this section, we'll cover some ways that you might want to manipulate data, including manipulating the format of the data and creating new variables (both from combining/splitting existing variables, and creating new ones if you need to).
 
-## Wide vs. Long Data
+### Wide vs. Long Data
 Let's start by talking about one of the more common data format issues, which is whether data are structured in a *long* or *wide* format. These, like basically all things, exist on a continuum (data is almost always somewhere in between the extremes of long and wide). So, it's probably helpful to start with an example. 
 
 One common design that leads to data easily represented as wide or long is longitudinal data. Let's say we administer the Big Five Inventory - 2 (BFI-2; Soto & John, 2016) to a sample of incoming freshman annually for 4 years. To keep things simple, let's say we only have that data (nothing else was administered). In this case, you may have a dataset that looks like this:
@@ -757,16 +757,16 @@ One common design that leads to data easily represented as wide or long is longi
 ## # A tibble: 100 x 21
 ##      pid agreeableness_t1 conscientiousness_t1 neuroticism_t1
 ##    <dbl>            <dbl>                <dbl>          <dbl>
-##  1     1         2.440257             4.540655       1.959233
-##  2     2         2.412030             2.908148       2.231855
-##  3     3         2.830686             3.896701       4.010424
-##  4     4         5.767905             2.180680       2.208962
-##  5     5         3.197443             3.612782       4.457193
-##  6     6         5.038328             3.094981       3.444035
-##  7     7         1.501038             3.445639       3.499687
-##  8     8         3.664378             2.876772       5.126053
-##  9     9         2.270216             3.395898       2.676413
-## 10    10         2.594947             2.815376       2.223118
+##  1     1         3.272170             2.910066       1.930431
+##  2     2         4.437896             5.077282       3.426696
+##  3     3         2.637504             1.142518       3.235054
+##  4     4         3.565533             3.592956       4.294807
+##  5     5         3.420215             1.192690       3.625460
+##  6     6         3.055457             2.939600       2.746538
+##  7     7         3.601571             4.568350       3.656175
+##  8     8         2.721202             2.324931       3.278157
+##  9     9         2.235776             3.469522       2.424450
+## 10    10         4.018627             2.210176       4.517837
 ## # ... with 90 more rows, and 17 more variables: extraversion_t1 <dbl>,
 ## #   openness_t1 <dbl>, agreeableness_t2 <dbl>, conscientiousness_t2 <dbl>,
 ## #   neuroticism_t2 <dbl>, extraversion_t2 <dbl>, openness_t2 <dbl>,
@@ -779,26 +779,26 @@ One common design that leads to data easily represented as wide or long is longi
 ```
 ## Classes 'tbl_df', 'tbl' and 'data.frame':	100 obs. of  21 variables:
 ##  $ pid                 : num  1 2 3 4 5 6 7 8 9 10 ...
-##  $ agreeableness_t1    : num  2.44 2.41 2.83 5.77 3.2 ...
-##  $ conscientiousness_t1: num  4.54 2.91 3.9 2.18 3.61 ...
-##  $ neuroticism_t1      : num  1.96 2.23 4.01 2.21 4.46 ...
-##  $ extraversion_t1     : num  4.58 3.36 2.74 2.91 4.36 ...
-##  $ openness_t1         : num  4 3.07 2.88 2.78 1.45 ...
-##  $ agreeableness_t2    : num  2.95 2.97 3.26 6.22 3.93 ...
-##  $ conscientiousness_t2: num  5 3.25 4.53 2.4 4.22 ...
-##  $ neuroticism_t2      : num  2.33 2.57 4.18 2.32 5.05 ...
-##  $ extraversion_t2     : num  5.04 4.04 3.18 3.78 5.01 ...
-##  $ openness_t2         : num  4.88 3.62 3.12 3.2 1.78 ...
-##  $ agreeableness_t3    : num  3.42 3.42 3.92 6.9 4.46 ...
-##  $ conscientiousness_t3: num  5.43 3.8 5.04 2.85 4.88 ...
-##  $ neuroticism_t3      : num  2.74 3.73 4.49 2.76 5.74 ...
-##  $ extraversion_t3     : num  5.59 4.28 3.56 4.41 5.28 ...
-##  $ openness_t3         : num  5.59 4.16 3.33 3.85 1.65 ...
-##  $ agreeableness_t4    : num  4.01 3.74 4.24 6.99 5.28 ...
-##  $ conscientiousness_t4: num  6.03 4.33 5.91 3.38 5.2 ...
-##  $ neuroticism_t4      : num  3.25 4.35 4.97 3.56 6.22 ...
-##  $ extraversion_t4     : num  6.13 4.84 3.91 4.84 5.42 ...
-##  $ openness_t4         : num  5.92 4.4 3.88 4.38 1.88 ...
+##  $ agreeableness_t1    : num  3.27 4.44 2.64 3.57 3.42 ...
+##  $ conscientiousness_t1: num  2.91 5.08 1.14 3.59 1.19 ...
+##  $ neuroticism_t1      : num  1.93 3.43 3.24 4.29 3.63 ...
+##  $ extraversion_t1     : num  4.0515 3.04 0.0634 3.3821 3.1879 ...
+##  $ openness_t1         : num  5.32 5.07 3.35 1.62 2.65 ...
+##  $ agreeableness_t2    : num  3.91 5.07 2.87 4.18 3.82 ...
+##  $ conscientiousness_t2: num  3.16 4.95 1.67 4.11 1.78 ...
+##  $ neuroticism_t2      : num  2.27 3.98 3.78 4.51 4.01 ...
+##  $ extraversion_t2     : num  4.728 3.363 0.826 3.889 3.402 ...
+##  $ openness_t2         : num  5.86 5.54 4 2.06 3.07 ...
+##  $ agreeableness_t3    : num  4.63 5.27 3.13 4.27 4.39 ...
+##  $ conscientiousness_t3: num  3.65 5.41 2.43 4.39 1.98 ...
+##  $ neuroticism_t3      : num  2.86 4.77 4.07 4.76 4.72 ...
+##  $ extraversion_t3     : num  5.24 3.67 1.51 4.28 3.65 ...
+##  $ openness_t3         : num  6.53 5.85 4.82 2.75 3.34 ...
+##  $ agreeableness_t4    : num  4.88 5.65 3.85 4.64 4.86 ...
+##  $ conscientiousness_t4: num  4.17 5.57 2.76 4.92 2.64 ...
+##  $ neuroticism_t4      : num  2.94 5.56 4.96 5.26 4.95 ...
+##  $ extraversion_t4     : num  5.65 4.26 1.61 5.12 3.78 ...
+##  $ openness_t4         : num  7.17 6.36 5.8 3.21 3.82 ...
 ```
 
 As you can see in the above, we have a row for each participant, and a column corresponding to each Big 5 score at each time point. For example, column 2 contains each participant's score on Agreeableness at time 1, column 7 contains each participant's score on Agreeableness at time 2, etc.
@@ -820,28 +820,28 @@ sample_b5_data_long %>%
 ## # A tibble: 2,000 x 4
 ##      pid  time         trait    score
 ##    <dbl> <chr>         <chr>    <dbl>
-##  1     1    t1 agreeableness 2.440257
-##  2     1    t2 agreeableness 2.954696
-##  3     1    t3 agreeableness 3.422144
-##  4     1    t4 agreeableness 4.008029
-##  5     2    t1 agreeableness 2.412030
-##  6     2    t2 agreeableness 2.971969
-##  7     2    t3 agreeableness 3.415010
-##  8     2    t4 agreeableness 3.736804
-##  9     3    t1 agreeableness 2.830686
-## 10     3    t2 agreeableness 3.256730
+##  1     1    t1 agreeableness 3.272170
+##  2     1    t2 agreeableness 3.908980
+##  3     1    t3 agreeableness 4.630217
+##  4     1    t4 agreeableness 4.879904
+##  5     2    t1 agreeableness 4.437896
+##  6     2    t2 agreeableness 5.069580
+##  7     2    t3 agreeableness 5.269524
+##  8     2    t4 agreeableness 5.648835
+##  9     3    t1 agreeableness 2.637504
+## 10     3    t2 agreeableness 2.866149
 ## # ... with 1,990 more rows
 ```
 
-## Piping syntax
+### Piping syntax
 
 Before we get into reshaping data, its importantt we cover a type of syntax called piping. Piping is not unique to R, but it is highly useful in R, especially for data wrangling and manipulation. The pipe itself is this symbol `%>%`, and in R, it comes from the *magrittr* package (this is a references to the famous painging by Magritte,the treachery of images). *magrittr* is part of the tidyverse, so it will load when you call the tidyverse library.
 
-### A quick sidenote about the term pipe
+#### A quick sidenote about the term pipe
 
 As mentioned above, a pipe in piping syntax is symbolized by `%>%`. However, another character is sometimes called a pipe, which is the vertical bar |, and this is used quite a bit in logical/boolean operations (| means or in logical statements).
 
-### The logic of piping syntax
+#### The logic of piping syntax
 
 The general idea of piping syntax, is that we have some function on the lefthand and righthand side of the pipe. The function on the leftside is evaluated, and then the **output** of that function is passed to the function on the righthand side of the pipe as the first argument of that function. Let's start with a simple example. We'll create a vector of values and take the mean.
 
@@ -896,7 +896,7 @@ rnorm(n = 20, mean = 5, sd = 1) %>%
 ## [1] 5.107867
 ```
 
-### Logic of Piping Syntax continued
+#### Logic of Piping Syntax continued
 
 As we covered above, the function following the pipe takes the output of the preceding function as its **first** argument. In the preceding example, we didn't supply another argument, and so the righthand side of the pipe was simply `mean()`. Let's say, we wanted to specify an additional argument. One option in `mean()` is trim, which indicates the proportion of values we want to trim from the vector before calculating the mean. Let's say we wanted only half the data points; I have no idea why someone would do something like this, especially with a vector of 20 values, but let's do it anyway.
 
@@ -1066,16 +1066,16 @@ sample_b5_data_wide
 ## # A tibble: 100 x 21
 ##      pid agreeableness_t1 conscientiousness_t1 neuroticism_t1
 ##    <dbl>            <dbl>                <dbl>          <dbl>
-##  1     1         2.440257             4.540655       1.959233
-##  2     2         2.412030             2.908148       2.231855
-##  3     3         2.830686             3.896701       4.010424
-##  4     4         5.767905             2.180680       2.208962
-##  5     5         3.197443             3.612782       4.457193
-##  6     6         5.038328             3.094981       3.444035
-##  7     7         1.501038             3.445639       3.499687
-##  8     8         3.664378             2.876772       5.126053
-##  9     9         2.270216             3.395898       2.676413
-## 10    10         2.594947             2.815376       2.223118
+##  1     1         3.272170             2.910066       1.930431
+##  2     2         4.437896             5.077282       3.426696
+##  3     3         2.637504             1.142518       3.235054
+##  4     4         3.565533             3.592956       4.294807
+##  5     5         3.420215             1.192690       3.625460
+##  6     6         3.055457             2.939600       2.746538
+##  7     7         3.601571             4.568350       3.656175
+##  8     8         2.721202             2.324931       3.278157
+##  9     9         2.235776             3.469522       2.424450
+## 10    10         4.018627             2.210176       4.517837
 ## # ... with 90 more rows, and 17 more variables: extraversion_t1 <dbl>,
 ## #   openness_t1 <dbl>, agreeableness_t2 <dbl>, conscientiousness_t2 <dbl>,
 ## #   neuroticism_t2 <dbl>, extraversion_t2 <dbl>, openness_t2 <dbl>,
@@ -1090,16 +1090,16 @@ And say we want it to lengthen it to look like this:
 ## # A tibble: 400 x 7
 ##      pid  time agreeableness conscientiousness extraversion neuroticism
 ##  * <dbl> <chr>         <dbl>             <dbl>        <dbl>       <dbl>
-##  1     1    t1      2.440257          4.540655     4.583366    1.959233
-##  2     1    t2      2.954696          4.998175     5.039662    2.327997
-##  3     1    t3      3.422144          5.433964     5.590352    2.739649
-##  4     1    t4      4.008029          6.029997     6.127099    3.245819
-##  5     2    t1      2.412030          2.908148     3.358208    2.231855
-##  6     2    t2      2.971969          3.245699     4.042082    2.573951
-##  7     2    t3      3.415010          3.797699     4.277225    3.727821
-##  8     2    t4      3.736804          4.330912     4.836052    4.346881
-##  9     3    t1      2.830686          3.896701     2.740682    4.010424
-## 10     3    t2      3.256730          4.532590     3.178003    4.180825
+##  1     1    t1      3.272170          2.910066   4.05151416    1.930431
+##  2     1    t2      3.908980          3.155975   4.72821482    2.274380
+##  3     1    t3      4.630217          3.651040   5.24490921    2.861416
+##  4     1    t4      4.879904          4.169724   5.65135039    2.935181
+##  5     2    t1      4.437896          5.077282   3.03995468    3.426696
+##  6     2    t2      5.069580          4.948804   3.36266652    3.975431
+##  7     2    t3      5.269524          5.410024   3.66931986    4.769191
+##  8     2    t4      5.648835          5.568569   4.25892682    5.559122
+##  9     3    t1      2.637504          1.142518   0.06342994    3.235054
+## 10     3    t2      2.866149          1.671569   0.82641445    3.782311
 ## # ... with 390 more rows, and 1 more variables: openness <dbl>
 ```
 
@@ -1129,16 +1129,16 @@ sample_b5_data_wide %>%
 ## # A tibble: 2,000 x 3
 ##      pid         variable    score
 ##    <dbl>            <chr>    <dbl>
-##  1     1 agreeableness_t1 2.440257
-##  2     2 agreeableness_t1 2.412030
-##  3     3 agreeableness_t1 2.830686
-##  4     4 agreeableness_t1 5.767905
-##  5     5 agreeableness_t1 3.197443
-##  6     6 agreeableness_t1 5.038328
-##  7     7 agreeableness_t1 1.501038
-##  8     8 agreeableness_t1 3.664378
-##  9     9 agreeableness_t1 2.270216
-## 10    10 agreeableness_t1 2.594947
+##  1     1 agreeableness_t1 3.272170
+##  2     2 agreeableness_t1 4.437896
+##  3     3 agreeableness_t1 2.637504
+##  4     4 agreeableness_t1 3.565533
+##  5     5 agreeableness_t1 3.420215
+##  6     6 agreeableness_t1 3.055457
+##  7     7 agreeableness_t1 3.601571
+##  8     8 agreeableness_t1 2.721202
+##  9     9 agreeableness_t1 2.235776
+## 10    10 agreeableness_t1 4.018627
 ## # ... with 1,990 more rows
 ```
 
@@ -1156,16 +1156,16 @@ sample_b5_data_wide %>%
 ## # A tibble: 2,000 x 4
 ##      pid         trait  time    score
 ##  * <dbl>         <chr> <chr>    <dbl>
-##  1     1 agreeableness    t1 2.440257
-##  2     2 agreeableness    t1 2.412030
-##  3     3 agreeableness    t1 2.830686
-##  4     4 agreeableness    t1 5.767905
-##  5     5 agreeableness    t1 3.197443
-##  6     6 agreeableness    t1 5.038328
-##  7     7 agreeableness    t1 1.501038
-##  8     8 agreeableness    t1 3.664378
-##  9     9 agreeableness    t1 2.270216
-## 10    10 agreeableness    t1 2.594947
+##  1     1 agreeableness    t1 3.272170
+##  2     2 agreeableness    t1 4.437896
+##  3     3 agreeableness    t1 2.637504
+##  4     4 agreeableness    t1 3.565533
+##  5     5 agreeableness    t1 3.420215
+##  6     6 agreeableness    t1 3.055457
+##  7     7 agreeableness    t1 3.601571
+##  8     8 agreeableness    t1 2.721202
+##  9     9 agreeableness    t1 2.235776
+## 10    10 agreeableness    t1 4.018627
 ## # ... with 1,990 more rows
 ```
 
@@ -1186,16 +1186,16 @@ sample_b5_data_long
 ## # A tibble: 2,000 x 4
 ##      pid         trait  time    score
 ##  * <dbl>         <chr> <chr>    <dbl>
-##  1     1 agreeableness    t1 2.440257
-##  2     2 agreeableness    t1 2.412030
-##  3     3 agreeableness    t1 2.830686
-##  4     4 agreeableness    t1 5.767905
-##  5     5 agreeableness    t1 3.197443
-##  6     6 agreeableness    t1 5.038328
-##  7     7 agreeableness    t1 1.501038
-##  8     8 agreeableness    t1 3.664378
-##  9     9 agreeableness    t1 2.270216
-## 10    10 agreeableness    t1 2.594947
+##  1     1 agreeableness    t1 3.272170
+##  2     2 agreeableness    t1 4.437896
+##  3     3 agreeableness    t1 2.637504
+##  4     4 agreeableness    t1 3.565533
+##  5     5 agreeableness    t1 3.420215
+##  6     6 agreeableness    t1 3.055457
+##  7     7 agreeableness    t1 3.601571
+##  8     8 agreeableness    t1 2.721202
+##  9     9 agreeableness    t1 2.235776
+## 10    10 agreeableness    t1 4.018627
 ## # ... with 1,990 more rows
 ```
 See, that did the same thing. Now, let's save this long data, and see what we have to do to get it wide again.
@@ -1232,16 +1232,16 @@ sample_b5_data_long2
 ## # A tibble: 400 x 7
 ##      pid  time agreeableness conscientiousness extraversion neuroticism
 ##  * <dbl> <chr>         <dbl>             <dbl>        <dbl>       <dbl>
-##  1     1    t1      2.440257          4.540655     4.583366    1.959233
-##  2     1    t2      2.954696          4.998175     5.039662    2.327997
-##  3     1    t3      3.422144          5.433964     5.590352    2.739649
-##  4     1    t4      4.008029          6.029997     6.127099    3.245819
-##  5     2    t1      2.412030          2.908148     3.358208    2.231855
-##  6     2    t2      2.971969          3.245699     4.042082    2.573951
-##  7     2    t3      3.415010          3.797699     4.277225    3.727821
-##  8     2    t4      3.736804          4.330912     4.836052    4.346881
-##  9     3    t1      2.830686          3.896701     2.740682    4.010424
-## 10     3    t2      3.256730          4.532590     3.178003    4.180825
+##  1     1    t1      3.272170          2.910066   4.05151416    1.930431
+##  2     1    t2      3.908980          3.155975   4.72821482    2.274380
+##  3     1    t3      4.630217          3.651040   5.24490921    2.861416
+##  4     1    t4      4.879904          4.169724   5.65135039    2.935181
+##  5     2    t1      4.437896          5.077282   3.03995468    3.426696
+##  6     2    t2      5.069580          4.948804   3.36266652    3.975431
+##  7     2    t3      5.269524          5.410024   3.66931986    4.769191
+##  8     2    t4      5.648835          5.568569   4.25892682    5.559122
+##  9     3    t1      2.637504          1.142518   0.06342994    3.235054
+## 10     3    t2      2.866149          1.671569   0.82641445    3.782311
 ## # ... with 390 more rows, and 1 more variables: openness <dbl>
 ```
 Okay, that got us about halfway there. We now have a separate column for each trait, but time is still row-wise. Maybe we could try spreading time, but what would be the value column? We currently have 5. Let's try passing it all of them.
@@ -1269,16 +1269,16 @@ sample_b5_data_long %>%
 ## # A tibble: 100 x 21
 ##      pid agreeableness_t1 agreeableness_t2 agreeableness_t3
 ##  * <dbl>            <dbl>            <dbl>            <dbl>
-##  1     1         2.440257         2.954696         3.422144
-##  2     2         2.412030         2.971969         3.415010
-##  3     3         2.830686         3.256730         3.915557
-##  4     4         5.767905         6.215997         6.904326
-##  5     5         3.197443         3.926931         4.455726
-##  6     6         5.038328         5.467414         5.884595
-##  7     7         1.501038         1.886098         2.564915
-##  8     8         3.664378         4.063416         4.268474
-##  9     9         2.270216         2.775803         3.602384
-## 10    10         2.594947         3.540182         3.758939
+##  1     1         3.272170         3.908980         4.630217
+##  2     2         4.437896         5.069580         5.269524
+##  3     3         2.637504         2.866149         3.128495
+##  4     4         3.565533         4.177458         4.271881
+##  5     5         3.420215         3.820150         4.393501
+##  6     6         3.055457         3.747260         4.227234
+##  7     7         3.601571         4.371170         4.811993
+##  8     8         2.721202         3.031440         3.471654
+##  9     9         2.235776         2.799455         3.149776
+## 10    10         4.018627         4.818018         5.552746
 ## # ... with 90 more rows, and 17 more variables: agreeableness_t4 <dbl>,
 ## #   conscientiousness_t1 <dbl>, conscientiousness_t2 <dbl>,
 ## #   conscientiousness_t3 <dbl>, conscientiousness_t4 <dbl>,
@@ -1300,16 +1300,16 @@ sample_b5_data_long2
 ## # A tibble: 400 x 7
 ##      pid  time agreeableness conscientiousness extraversion neuroticism
 ##  * <dbl> <chr>         <dbl>             <dbl>        <dbl>       <dbl>
-##  1     1    t1      2.440257          4.540655     4.583366    1.959233
-##  2     1    t2      2.954696          4.998175     5.039662    2.327997
-##  3     1    t3      3.422144          5.433964     5.590352    2.739649
-##  4     1    t4      4.008029          6.029997     6.127099    3.245819
-##  5     2    t1      2.412030          2.908148     3.358208    2.231855
-##  6     2    t2      2.971969          3.245699     4.042082    2.573951
-##  7     2    t3      3.415010          3.797699     4.277225    3.727821
-##  8     2    t4      3.736804          4.330912     4.836052    4.346881
-##  9     3    t1      2.830686          3.896701     2.740682    4.010424
-## 10     3    t2      3.256730          4.532590     3.178003    4.180825
+##  1     1    t1      3.272170          2.910066   4.05151416    1.930431
+##  2     1    t2      3.908980          3.155975   4.72821482    2.274380
+##  3     1    t3      4.630217          3.651040   5.24490921    2.861416
+##  4     1    t4      4.879904          4.169724   5.65135039    2.935181
+##  5     2    t1      4.437896          5.077282   3.03995468    3.426696
+##  6     2    t2      5.069580          4.948804   3.36266652    3.975431
+##  7     2    t3      5.269524          5.410024   3.66931986    4.769191
+##  8     2    t4      5.648835          5.568569   4.25892682    5.559122
+##  9     3    t1      2.637504          1.142518   0.06342994    3.235054
+## 10     3    t2      2.866149          1.671569   0.82641445    3.782311
 ## # ... with 390 more rows, and 1 more variables: openness <dbl>
 ```
 
@@ -1330,16 +1330,16 @@ sample_b5_data_long2 %>%
 ## # A tibble: 100 x 21
 ##      pid agreeableness_t1 agreeableness_t2 agreeableness_t3
 ##  * <dbl>            <dbl>            <dbl>            <dbl>
-##  1     1         2.440257         2.954696         3.422144
-##  2     2         2.412030         2.971969         3.415010
-##  3     3         2.830686         3.256730         3.915557
-##  4     4         5.767905         6.215997         6.904326
-##  5     5         3.197443         3.926931         4.455726
-##  6     6         5.038328         5.467414         5.884595
-##  7     7         1.501038         1.886098         2.564915
-##  8     8         3.664378         4.063416         4.268474
-##  9     9         2.270216         2.775803         3.602384
-## 10    10         2.594947         3.540182         3.758939
+##  1     1         3.272170         3.908980         4.630217
+##  2     2         4.437896         5.069580         5.269524
+##  3     3         2.637504         2.866149         3.128495
+##  4     4         3.565533         4.177458         4.271881
+##  5     5         3.420215         3.820150         4.393501
+##  6     6         3.055457         3.747260         4.227234
+##  7     7         3.601571         4.371170         4.811993
+##  8     8         2.721202         3.031440         3.471654
+##  9     9         2.235776         2.799455         3.149776
+## 10    10         4.018627         4.818018         5.552746
 ## # ... with 90 more rows, and 17 more variables: agreeableness_t4 <dbl>,
 ## #   conscientiousness_t1 <dbl>, conscientiousness_t2 <dbl>,
 ## #   conscientiousness_t3 <dbl>, conscientiousness_t4 <dbl>,
@@ -1364,16 +1364,16 @@ sample_b5_data_long2
 ## # A tibble: 400 x 7
 ##      pid  time agreeableness conscientiousness extraversion neuroticism
 ##  * <dbl> <chr>         <dbl>             <dbl>        <dbl>       <dbl>
-##  1     1    t1      2.440257          4.540655     4.583366    1.959233
-##  2     1    t2      2.954696          4.998175     5.039662    2.327997
-##  3     1    t3      3.422144          5.433964     5.590352    2.739649
-##  4     1    t4      4.008029          6.029997     6.127099    3.245819
-##  5     2    t1      2.412030          2.908148     3.358208    2.231855
-##  6     2    t2      2.971969          3.245699     4.042082    2.573951
-##  7     2    t3      3.415010          3.797699     4.277225    3.727821
-##  8     2    t4      3.736804          4.330912     4.836052    4.346881
-##  9     3    t1      2.830686          3.896701     2.740682    4.010424
-## 10     3    t2      3.256730          4.532590     3.178003    4.180825
+##  1     1    t1      3.272170          2.910066   4.05151416    1.930431
+##  2     1    t2      3.908980          3.155975   4.72821482    2.274380
+##  3     1    t3      4.630217          3.651040   5.24490921    2.861416
+##  4     1    t4      4.879904          4.169724   5.65135039    2.935181
+##  5     2    t1      4.437896          5.077282   3.03995468    3.426696
+##  6     2    t2      5.069580          4.948804   3.36266652    3.975431
+##  7     2    t3      5.269524          5.410024   3.66931986    4.769191
+##  8     2    t4      5.648835          5.568569   4.25892682    5.559122
+##  9     3    t1      2.637504          1.142518   0.06342994    3.235054
+## 10     3    t2      2.866149          1.671569   0.82641445    3.782311
 ## # ... with 390 more rows, and 1 more variables: openness <dbl>
 ```
 
@@ -1425,11 +1425,11 @@ str(sample_b5_data_long2)
 ## Classes 'tbl_df', 'tbl' and 'data.frame':	400 obs. of  7 variables:
 ##  $ pid              : num  1 1 1 1 2 2 2 2 3 3 ...
 ##  $ time             : chr  "t1" "t2" "t3" "t4" ...
-##  $ agreeableness    : num  2.44 2.95 3.42 4.01 2.41 ...
-##  $ conscientiousness: num  4.54 5 5.43 6.03 2.91 ...
-##  $ extraversion     : num  4.58 5.04 5.59 6.13 3.36 ...
-##  $ neuroticism      : num  1.96 2.33 2.74 3.25 2.23 ...
-##  $ openness         : num  4 4.88 5.59 5.92 3.07 ...
+##  $ agreeableness    : num  3.27 3.91 4.63 4.88 4.44 ...
+##  $ conscientiousness: num  2.91 3.16 3.65 4.17 5.08 ...
+##  $ extraversion     : num  4.05 4.73 5.24 5.65 3.04 ...
+##  $ neuroticism      : num  1.93 2.27 2.86 2.94 3.43 ...
+##  $ openness         : num  5.32 5.86 6.53 7.17 5.07 ...
 ```
 
 Yep, it looks like it's class is tbl_df, tbl, and data.frame, which means its a tibble. Thankfully, this is an easy fix, you just need to turn the tibble into a data.frame with `as.data.frame()`. So let's add that into the pipeline.
@@ -1452,16 +1452,16 @@ sample_b5_data_long2 %>%
 ## # A tibble: 100 x 21
 ##      pid agreeableness_t1 conscientiousness_t1 extraversion_t1
 ##  * <dbl>            <dbl>                <dbl>           <dbl>
-##  1     1         2.440257             4.540655        4.583366
-##  2     2         2.412030             2.908148        3.358208
-##  3     3         2.830686             3.896701        2.740682
-##  4     4         5.767905             2.180680        2.912666
-##  5     5         3.197443             3.612782        4.363478
-##  6     6         5.038328             3.094981        3.048046
-##  7     7         1.501038             3.445639        4.295976
-##  8     8         3.664378             2.876772        2.515931
-##  9     9         2.270216             3.395898        3.752960
-## 10    10         2.594947             2.815376        4.666313
+##  1     1         3.272170             2.910066      4.05151416
+##  2     2         4.437896             5.077282      3.03995468
+##  3     3         2.637504             1.142518      0.06342994
+##  4     4         3.565533             3.592956      3.38212519
+##  5     5         3.420215             1.192690      3.18794360
+##  6     6         3.055457             2.939600      3.92343116
+##  7     7         3.601571             4.568350      4.59795403
+##  8     8         2.721202             2.324931      2.92162762
+##  9     9         2.235776             3.469522      0.63861271
+## 10    10         4.018627             2.210176      3.40134279
 ## # ... with 90 more rows, and 17 more variables: neuroticism_t1 <dbl>,
 ## #   openness_t1 <dbl>, agreeableness_t2 <dbl>, conscientiousness_t2 <dbl>,
 ## #   extraversion_t2 <dbl>, neuroticism_t2 <dbl>, openness_t2 <dbl>,
@@ -1505,16 +1505,16 @@ sample_b5_data_wide %>%
 ## # A tibble: 400 x 8
 ##      pid  time agreeableness conscientiousness extraversion neuroticism
 ##  * <dbl> <chr>         <dbl>             <dbl>        <dbl>       <dbl>
-##  1     1    t1      2.440257          4.540655     4.583366    1.959233
-##  2     2    t1      2.412030          2.908148     3.358208    2.231855
-##  3     3    t1      2.830686          3.896701     2.740682    4.010424
-##  4     4    t1      5.767905          2.180680     2.912666    2.208962
-##  5     5    t1      3.197443          3.612782     4.363478    4.457193
-##  6     6    t1      5.038328          3.094981     3.048046    3.444035
-##  7     7    t1      1.501038          3.445639     4.295976    3.499687
-##  8     8    t1      3.664378          2.876772     2.515931    5.126053
-##  9     9    t1      2.270216          3.395898     3.752960    2.676413
-## 10    10    t1      2.594947          2.815376     4.666313    2.223118
+##  1     1    t1      3.272170          2.910066   4.05151416    1.930431
+##  2     2    t1      4.437896          5.077282   3.03995468    3.426696
+##  3     3    t1      2.637504          1.142518   0.06342994    3.235054
+##  4     4    t1      3.565533          3.592956   3.38212519    4.294807
+##  5     5    t1      3.420215          1.192690   3.18794360    3.625460
+##  6     6    t1      3.055457          2.939600   3.92343116    2.746538
+##  7     7    t1      3.601571          4.568350   4.59795403    3.656175
+##  8     8    t1      2.721202          2.324931   2.92162762    3.278157
+##  9     9    t1      2.235776          3.469522   0.63861271    2.424450
+## 10    10    t1      4.018627          2.210176   3.40134279    4.517837
 ## # ... with 390 more rows, and 2 more variables: openness <dbl>, id <int>
 ```
 There, that worked, but it was a little inefficient compared to `gather()` I think.
@@ -1547,7 +1547,7 @@ Things left for manipulating
     * dealing with `NaN`s
     * typing your data (mainly to cover factors, ordered v. unordered)
 
-# Resources
+### Resources
 
 * R Data Import/Export Manual: https://cran.r-project.org/doc/manuals/R-data.pdf
 * http://zoonek2.free.fr/UNIX/48_R/02.html#6

@@ -12,7 +12,7 @@ order: 100
 
 # Useful Functions
 
-# Workspace
+## Workspace
 
 Function | Function function
 ---------- | ----------
@@ -24,13 +24,13 @@ Function | Function function
 `history()` | Show the last 25 commands
 
 
-# Objects
+## Objects
 Function | Function function
 ---------- | ----------
 typeof | Get object's base type
 pryr::otype | Get object's type system (base, S3, S4, RC)
 
-# Iteration
+## Iteration
 
 Function | Function function
 --------- | ------------
