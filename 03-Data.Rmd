@@ -1,5 +1,5 @@
 ---
-title: "2.2 - Data Wrangling"
+title: "Data Wrangling"
 author: "Jonny Saunders"
 date: "10/2/2017"
 output: 
@@ -11,7 +11,7 @@ order: 3
 ---
 # Data
 
-## Loading data
+## Loading
 
 ### One day we will have a summary table here
 
@@ -76,7 +76,7 @@ However, this is telling R to just read the data. If you run code like that, it 
 
 Now R has read our data and stored it as an object called `df`, that we can start running our models on.
 
-## Saving data
+## Saving
 
 Most of the above functions have complementary `write` functions, for example `write.csv` or `haven::write_sav`. There are two other common ways you may want to save your data
 
@@ -347,67 +347,8 @@ friends$favorites <- c(4,5)
 # toothbrush and vacuum get a demotion
 friends[c(1,2),]$favorites <- c(4,5)
 ```
-    
-## Manipulating Data
 
-Now that you have your data in R, and have maybe subsetted it in some manner, you may want to manipulate the data. In this section, we'll cover some ways that you might want to manipulate data, including manipulating the format of the data and creating new variables (both from combining/splitting existing variables, and creating new ones if you need to).
-
-### Wide vs. Long Data
-Let's start by talking about one of the more common data format issues, which is whether data are structured in a *long* or *wide* format. These, like basically all things, exist on a continuum (data is almost always somewhere in between the extremes of long and wide). So, it's probably helpful to start with an example. 
-
-One common design that leads to data easily represented as wide or long is longitudinal data. Let's say we administer the Big Five Inventory - 2 (BFI-2; Soto & John, 2016) to a sample of incoming freshman annually for 4 years. To keep things simple, let's say we only have that data (nothing else was administered). In this case, you may have a dataset that looks like this:
-```{r long v wide data Longitudinal Big 5 example, echo = FALSE}
-library(tidyverse)
-sample_b5_data_wide <- as_tibble(
-  cbind(
-    pid = seq(1:100),
-    agreeableness_t1 = rnorm(100, 3, 1),
-    conscientiousness_t1 = rnorm(100, 3, 1),
-    neuroticism_t1 = rnorm(100, 3, 1),
-    extraversion_t1 = rnorm(100, 3, 1),
-    openness_t1 = rnorm(100, 3, 1)))
-
-sample_b5_data_wide <- mutate(sample_b5_data_wide,
-    agreeableness_t2     = agreeableness_t1 + rnorm(100, .5, .2),
-    conscientiousness_t2 = conscientiousness_t1 + rnorm(100, .5, .2),
-    neuroticism_t2       = neuroticism_t1 + rnorm(100, .5, .2),
-    extraversion_t2      = extraversion_t1 + rnorm(100, .5, .2),
-    openness_t2          = openness_t1 + rnorm(100, .5, .2),
-    agreeableness_t3     = agreeableness_t2 + rnorm(100, .5, .2),
-    conscientiousness_t3 = conscientiousness_t2 + rnorm(100, .5, .2),
-    neuroticism_t3       = neuroticism_t2 + rnorm(100, .5, .2),
-    extraversion_t3      = extraversion_t2 + rnorm(100, .5, .2),
-    openness_t3          = openness_t2 + rnorm(100, .5, .2),
-    agreeableness_t4     = agreeableness_t3 + rnorm(100, .5, .2),
-    conscientiousness_t4 = conscientiousness_t3 + rnorm(100, .5, .2),
-    neuroticism_t4       = neuroticism_t3 + rnorm(100, .5, .2),
-    extraversion_t4      = extraversion_t3 + rnorm(100, .5, .2),
-    openness_t4          = openness_t3 + rnorm(100, .5, .2)
-  )
-sample_b5_data_wide
-str(sample_b5_data_wide)
-```
-
-As you can see in the above, we have a row for each participant, and a column corresponding to each Big 5 score at each time point. For example, column 2 contains each participant's score on Agreeableness at time 1, column 7 contains each participant's score on Agreeableness at time 2, etc.
-
-This data is in a *wide* format. It's also in basically the widest format it could be in for any reasonable purpose; the only way to make it wider would be to have a single row, and a column for each participant X Big 5 score X time point.
-
-What would make this data *long*? There are two dimensions that we could lengthen the data on, but the more common one you might see is time. That is, we'd have a row for each participant X time point combination, like the following:
-```{r example of a longer dataset, echo = FALSE}
-sample_b5_data_long <- sample_b5_data_wide %>%
-  gather(variable, score, -pid) %>%
-  separate(variable, c("Trait", "time")) %>%
-  spread(Trait, score)
-```
-
-So we now have a row for each participant at each time point, and a column for each of the Big 5. We could also make it a little longer, by making each row correspond to a score on each Big Five trait for each participant at each time point, like so:
-
-```{r example of an even longer dataset}
-sample_b5_data_long %>%
-  gather(trait, score, agreeableness:openness)
-```
-
-### Piping syntax
+## Piping Syntax
 
 Before we get into reshaping data, its importantt we cover a type of syntax called piping. Piping is not unique to R, but it is highly useful in R, especially for data wrangling and manipulation. The pipe itself is this symbol `%>%`, and in R, it comes from the *magrittr* package (this is a references to the famous painging by Magritte,the treachery of images). *magrittr* is part of the tidyverse, so it will load when you call the tidyverse library.
 
@@ -581,9 +522,65 @@ age25plus_abcd <- data %>%
 
 ```
 
-## Reshaping Data
+## Reshaping
 
 At the start of the data manipulation section, we talked about long vs wide data. Now let's talk about how to actually lengthen or widen or data. We'll use the same dataset we made up for the starting example: 4 year longitudinal study where the Big Five were measured annually. 
+
+### Wide vs. Long Data
+Let's start by talking about one of the more common data format issues, which is whether data are structured in a *long* or *wide* format. These, like basically all things, exist on a continuum (data is almost always somewhere in between the extremes of long and wide). So, it's probably helpful to start with an example. 
+
+One common design that leads to data easily represented as wide or long is longitudinal data. Let's say we administer the Big Five Inventory - 2 (BFI-2; Soto & John, 2016) to a sample of incoming freshman annually for 4 years. To keep things simple, let's say we only have that data (nothing else was administered). In this case, you may have a dataset that looks like this:
+```{r long v wide data Longitudinal Big 5 example, echo = FALSE}
+library(tidyverse)
+sample_b5_data_wide <- as_tibble(
+  cbind(
+    pid = seq(1:100),
+    agreeableness_t1 = rnorm(100, 3, 1),
+    conscientiousness_t1 = rnorm(100, 3, 1),
+    neuroticism_t1 = rnorm(100, 3, 1),
+    extraversion_t1 = rnorm(100, 3, 1),
+    openness_t1 = rnorm(100, 3, 1)))
+
+sample_b5_data_wide <- mutate(sample_b5_data_wide,
+    agreeableness_t2     = agreeableness_t1 + rnorm(100, .5, .2),
+    conscientiousness_t2 = conscientiousness_t1 + rnorm(100, .5, .2),
+    neuroticism_t2       = neuroticism_t1 + rnorm(100, .5, .2),
+    extraversion_t2      = extraversion_t1 + rnorm(100, .5, .2),
+    openness_t2          = openness_t1 + rnorm(100, .5, .2),
+    agreeableness_t3     = agreeableness_t2 + rnorm(100, .5, .2),
+    conscientiousness_t3 = conscientiousness_t2 + rnorm(100, .5, .2),
+    neuroticism_t3       = neuroticism_t2 + rnorm(100, .5, .2),
+    extraversion_t3      = extraversion_t2 + rnorm(100, .5, .2),
+    openness_t3          = openness_t2 + rnorm(100, .5, .2),
+    agreeableness_t4     = agreeableness_t3 + rnorm(100, .5, .2),
+    conscientiousness_t4 = conscientiousness_t3 + rnorm(100, .5, .2),
+    neuroticism_t4       = neuroticism_t3 + rnorm(100, .5, .2),
+    extraversion_t4      = extraversion_t3 + rnorm(100, .5, .2),
+    openness_t4          = openness_t3 + rnorm(100, .5, .2)
+  )
+sample_b5_data_wide
+str(sample_b5_data_wide)
+```
+
+As you can see in the above, we have a row for each participant, and a column corresponding to each Big 5 score at each time point. For example, column 2 contains each participant's score on Agreeableness at time 1, column 7 contains each participant's score on Agreeableness at time 2, etc.
+
+This data is in a *wide* format. It's also in basically the widest format it could be in for any reasonable purpose; the only way to make it wider would be to have a single row, and a column for each participant X Big 5 score X time point.
+
+What would make this data *long*? There are two dimensions that we could lengthen the data on, but the more common one you might see is time. That is, we'd have a row for each participant X time point combination, like the following:
+```{r example of a longer dataset, echo = FALSE}
+sample_b5_data_long <- sample_b5_data_wide %>%
+  gather(variable, score, -pid) %>%
+  separate(variable, c("Trait", "time")) %>%
+  spread(Trait, score)
+```
+
+So we now have a row for each participant at each time point, and a column for each of the Big 5. We could also make it a little longer, by making each row correspond to a score on each Big Five trait for each participant at each time point, like so:
+
+```{r example of an even longer dataset}
+sample_b5_data_long %>%
+  gather(trait, score, agreeableness:openness)
+```
+
 
 ### Wide to Long
 We'll start with lengthening our data. We currently have our data in a wide format that looks something like this for now:
@@ -793,7 +790,35 @@ So now you how to reshape your data. Some general tips to keep in mind:
     * the exception being when your dataset is already in a long (and really, the longest reasonable) format.
 * `reshape()` can be used to lengthen your data, but it's syntax is a little wonky
 
-###
+## Summarizing
+
+Typically, we are interested in some summary of our data rather than the individual values themselves. Summarization operations reduce a large number of observations to a single or few summarizing values. You're familiar with many of these (and their often obviously named base r implementations):
+
+| Operation | Function |
+| ------- | ------------- |
+| Mean/Average | `mean()` |
+| Weighted Mean | `weighted.mean()` |
+| Median | `median()` |
+| Max/Min | `max()` / `min()`, `which.min()` or `.max()` returns the index, rather than the value |
+| Variance | `var()` |
+| Standard Deviation | `sd()` |
+
+A simple way to get a global summary of all variables in a dataframe, one can use the `psych::describe`
+
+```{r}
+df <- ggplot2::diamonds
+
+knitr::kable(
+  psych::describe(df),
+  format="markdown"
+)
+  
+```
+
+
+
+
+
 
 Things left for manipulating
 
