@@ -792,7 +792,11 @@ So now you how to reshape your data. Some general tips to keep in mind:
 
 ## Summarizing
 
-Typically, we are interested in some summary of our data rather than the individual values themselves. Summarization operations reduce a large number of observations to a single or few summarizing values. You're familiar with many of these (and their often obviously named base r implementations):
+Typically, we are interested in some summary of our data rather than the individual values themselves. Summarization operations reduce a large number of observations to a single or few summarizing values.
+
+### Basic Summarization
+
+You're familiar with many summarization operations (and their often obviously named base r implementations):
 
 | Operation | Function |
 | ------- | ------------- |
@@ -803,7 +807,7 @@ Typically, we are interested in some summary of our data rather than the individ
 | Variance | `var()` |
 | Standard Deviation | `sd()` |
 
-A simple way to get a global summary of all variables in a dataframe, one can use the `psych::describe`
+A simple way to get a global summary of all variables in a dataframe is to use  `psych::describe`
 
 ```{r}
 df <- ggplot2::diamonds
@@ -814,23 +818,80 @@ pander::pander(
   
 ```
 
+We can also `apply` any function to a dataframe along a dimension. Typically functions that work on numerical data don't work on factorial or character data, so one has to be mindful about your call making sense.
+
+For example, if we want to get the means of each of the numeric columns in our dataframe, we call `apply` on the 5th-9th columns of our dataframe (`df[,5:9]`), tell it to operate along the second dimension (columnwise), and apply `mean`:
+
+```{r}
+apply(df[,5:9], 2, mean)
+```
+
+Note that if we called it over the whole dataframe, `mean` will throw up warnings about being applied to non-numeric data, `apply` will quit after 10 warnings by default.
+
+```{r}
+apply(df, 2, mean)
+```
+
+`apply` is the base function in several convenience/extension functions in base R, like `sweep` and `aggregate`, and functions similarly to `lapply`, `tapply`, `mapply`, `rapply`, `eapply`, etc.
 
 
+### Grouped Summarization
 
+If our data is in long format, the variable we are interested in summarizing is **grouped** by one or several others. For example, in our diamonds dataset we would expect `price` to be different depending on the diamond's `cut` and `carat`. `plyr` handles grouping elegantly with its `summarise` (`summarize` is an alias for us Americans) function. `summarize` can be used in a pipe, but since I am a stodgy old grandpa I prefer to use it in conjunction with one of the `plyr::*ply` functions (`ddply` when the input is a dataframe and the output is a dataframe, `ldply` for input lists output dataframes, `dlply` for input dataframes and output lists, etc.). `ddply` works like `apply`, but by first splitting the data by grouping variables. When `summarize` is used with `ddply`, the arguments afterwards are passed to `summarize`, and with them we can make whatever new variables we want. 
 
+```{r}
+# We use the .() syntax so we don't have to pass variable names as strings.
+# .(cut, carat) is the same as c("cut", "carat")
+library(plyr)
+df_summary <- ddply(df, .(cut, carat), summarise,
+                    mean_price = mean(price),
+                    sd_price = sd(price),
+                    n_samples = length(price))
 
-Things left for manipulating
+pander::pander(
+  df_summary
+)
+```
 
-* Manipulating
-    * creating new variables with mutate()
-    * creating summary/aggregate datasets with summarize()
-        * combining group_by() with summarize, which is where summarize gets powerful.
-    * reordering (incl. reordering factor levels, talking abt factors)
-    * combining dataframes (if this makes sense to do/there's time to do it) (see relational data in r4ds)
+Whoa, that's a lot of variables. Since `carat` is numeric, each value is treated as unique. We can use `dplyr::ntile` to bin the values of `carat`:
 
-* Annoyances
-    * dealing with `NaN`s
-    * typing your data (mainly to cover factors, ordered v. unordered)
+```{r}
+df_summary_bin <- ddply(df, .(cut, dplyr::ntile(carat, 5)), summarise,
+                    mean_price = mean(price),
+                    sd_price = sd(price),
+                    n_samples = length(price))
+
+pander::pander(
+  df_summary_bin
+)
+```
+
+We can do whatever we want in our summaries, like if we want some R^2 value from a model... 
+
+```{r}
+df_summary_rsq <- ddply(df, .(cut), summarise,
+                        rsquared <- summary(lm(price~carat))$adj.r.squared)
+
+pander::pander(
+  df_summary_rsq
+)
+
+```
+
+### Mutation
+
+A related function, `mutate`, works similarly but rather than summarizing (taking multiple values and returning one), it creates a value for each input row
+
+```{r}
+df_mutate <- ddply(df, .(cut), mutate,
+                   timesten = price*10,
+                   n = seq(1, length(price)))
+
+pander::pander(
+  head(df_mutate)
+)
+```
+
 
 ### Resources
 
