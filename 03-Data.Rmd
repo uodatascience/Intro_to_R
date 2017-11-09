@@ -808,9 +808,8 @@ A simple way to get a global summary of all variables in a dataframe, one can us
 ```{r}
 df <- ggplot2::diamonds
 
-knitr::kable(
-  psych::describe(df),
-  format="markdown"
+pander::pander(
+  psych::describe(df)
 )
   
 ```

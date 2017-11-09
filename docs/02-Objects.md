@@ -1042,7 +1042,7 @@ plot.default
 ##             ...)
 ##     invisible()
 ## }
-## <bytecode: 0x7fe66d165628>
+## <bytecode: 0x7faf7c94a428>
 ## <environment: namespace:graphics>
 ```
 

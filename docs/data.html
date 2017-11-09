@@ -1271,205 +1271,247 @@ sample_b5_data_long2 </code></pre></div>
 <p>A simple way to get a global summary of all variables in a dataframe, one can use the <code>psych::describe</code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span>ggplot2::diamonds
 
-knitr::<span class="kw">kable</span>(
-  psych::<span class="kw">describe</span>(df),
-  <span class="dt">format=</span><span class="st">&quot;markdown&quot;</span>
+pander::<span class="kw">pander</span>(
+  psych::<span class="kw">describe</span>(df)
 )</code></pre></div>
 <table style="width:100%;">
+<caption>Table continues below</caption>
 <colgroup>
-<col width="6%" />
-<col width="3%" />
-<col width="4%" />
+<col width="19%" />
 <col width="9%" />
-<col width="9%" />
-<col width="6%" />
-<col width="9%" />
-<col width="8%" />
-<col width="4%" />
-<col width="6%" />
-<col width="6%" />
-<col width="7%" />
-<col width="7%" />
-<col width="7%" />
+<col width="10%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="12%" />
+<col width="12%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="left"></th>
-<th align="right">vars</th>
-<th align="right">n</th>
-<th align="right">mean</th>
-<th align="right">sd</th>
-<th align="right">median</th>
-<th align="right">trimmed</th>
-<th align="right">mad</th>
-<th align="right">min</th>
-<th align="right">max</th>
-<th align="right">range</th>
-<th align="right">skew</th>
-<th align="right">kurtosis</th>
-<th align="right">se</th>
+<th align="center"> </th>
+<th align="center">vars</th>
+<th align="center">n</th>
+<th align="center">mean</th>
+<th align="center">sd</th>
+<th align="center">median</th>
+<th align="center">trimmed</th>
+<th align="center">mad</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">carat</td>
-<td align="right">1</td>
-<td align="right">53940</td>
-<td align="right">0.7979397</td>
-<td align="right">0.4740112</td>
-<td align="right">0.70</td>
-<td align="right">0.7349655</td>
-<td align="right">0.474432</td>
-<td align="right">0.2</td>
-<td align="right">5.01</td>
-<td align="right">4.81</td>
-<td align="right">1.1165838</td>
-<td align="right">1.2562498</td>
-<td align="right">0.0020410</td>
+<td align="center"><strong>carat</strong></td>
+<td align="center">1</td>
+<td align="center">53940</td>
+<td align="center">0.7979</td>
+<td align="center">0.474</td>
+<td align="center">0.7</td>
+<td align="center">0.735</td>
+<td align="center">0.4744</td>
 </tr>
 <tr class="even">
-<td align="left">cut*</td>
-<td align="right">2</td>
-<td align="right">53940</td>
-<td align="right">3.9040971</td>
-<td align="right">1.1165999</td>
-<td align="right">4.00</td>
-<td align="right">4.0424314</td>
-<td align="right">1.482600</td>
-<td align="right">1.0</td>
-<td align="right">5.00</td>
-<td align="right">4.00</td>
-<td align="right">-0.7171406</td>
-<td align="right">-0.3981442</td>
-<td align="right">0.0048078</td>
+<td align="center"><strong>cut</strong>*</td>
+<td align="center">2</td>
+<td align="center">53940</td>
+<td align="center">3.904</td>
+<td align="center">1.117</td>
+<td align="center">4</td>
+<td align="center">4.042</td>
+<td align="center">1.483</td>
 </tr>
 <tr class="odd">
-<td align="left">color*</td>
-<td align="right">3</td>
-<td align="right">53940</td>
-<td align="right">3.5941973</td>
-<td align="right">1.7011048</td>
-<td align="right">4.00</td>
-<td align="right">3.5526743</td>
-<td align="right">1.482600</td>
-<td align="right">1.0</td>
-<td align="right">7.00</td>
-<td align="right">6.00</td>
-<td align="right">0.1893554</td>
-<td align="right">-0.8668722</td>
-<td align="right">0.0073245</td>
+<td align="center"><strong>color</strong>*</td>
+<td align="center">3</td>
+<td align="center">53940</td>
+<td align="center">3.594</td>
+<td align="center">1.701</td>
+<td align="center">4</td>
+<td align="center">3.553</td>
+<td align="center">1.483</td>
 </tr>
 <tr class="even">
-<td align="left">clarity*</td>
-<td align="right">4</td>
-<td align="right">53940</td>
-<td align="right">4.0510197</td>
-<td align="right">1.6471361</td>
-<td align="right">4.00</td>
-<td align="right">3.9144651</td>
-<td align="right">1.482600</td>
-<td align="right">1.0</td>
-<td align="right">8.00</td>
-<td align="right">7.00</td>
-<td align="right">0.5514069</td>
-<td align="right">-0.3949375</td>
-<td align="right">0.0070921</td>
+<td align="center"><strong>clarity</strong>*</td>
+<td align="center">4</td>
+<td align="center">53940</td>
+<td align="center">4.051</td>
+<td align="center">1.647</td>
+<td align="center">4</td>
+<td align="center">3.914</td>
+<td align="center">1.483</td>
 </tr>
 <tr class="odd">
-<td align="left">depth</td>
-<td align="right">5</td>
-<td align="right">53940</td>
-<td align="right">61.7494049</td>
-<td align="right">1.4326213</td>
-<td align="right">61.80</td>
-<td align="right">61.7846079</td>
-<td align="right">1.037820</td>
-<td align="right">43.0</td>
-<td align="right">79.00</td>
-<td align="right">36.00</td>
-<td align="right">-0.0822894</td>
-<td align="right">5.7384473</td>
-<td align="right">0.0061684</td>
+<td align="center"><strong>depth</strong></td>
+<td align="center">5</td>
+<td align="center">53940</td>
+<td align="center">61.75</td>
+<td align="center">1.433</td>
+<td align="center">61.8</td>
+<td align="center">61.78</td>
+<td align="center">1.038</td>
 </tr>
 <tr class="even">
-<td align="left">table</td>
-<td align="right">6</td>
-<td align="right">53940</td>
-<td align="right">57.4571839</td>
-<td align="right">2.2344906</td>
-<td align="right">57.00</td>
-<td align="right">57.3183514</td>
-<td align="right">1.482600</td>
-<td align="right">43.0</td>
-<td align="right">95.00</td>
-<td align="right">52.00</td>
-<td align="right">0.7968515</td>
-<td align="right">2.8012708</td>
-<td align="right">0.0096211</td>
+<td align="center"><strong>table</strong></td>
+<td align="center">6</td>
+<td align="center">53940</td>
+<td align="center">57.46</td>
+<td align="center">2.234</td>
+<td align="center">57</td>
+<td align="center">57.32</td>
+<td align="center">1.483</td>
 </tr>
 <tr class="odd">
-<td align="left">price</td>
-<td align="right">7</td>
-<td align="right">53940</td>
-<td align="right">3932.7997219</td>
-<td align="right">3989.4397381</td>
-<td align="right">2401.00</td>
-<td align="right">3158.9923526</td>
-<td align="right">2475.942000</td>
-<td align="right">326.0</td>
-<td align="right">18823.00</td>
-<td align="right">18497.00</td>
-<td align="right">1.6183053</td>
-<td align="right">2.1771907</td>
-<td align="right">17.1773608</td>
+<td align="center"><strong>price</strong></td>
+<td align="center">7</td>
+<td align="center">53940</td>
+<td align="center">3933</td>
+<td align="center">3989</td>
+<td align="center">2401</td>
+<td align="center">3159</td>
+<td align="center">2476</td>
 </tr>
 <tr class="even">
-<td align="left">x</td>
-<td align="right">8</td>
-<td align="right">53940</td>
-<td align="right">5.7311572</td>
-<td align="right">1.1217607</td>
-<td align="right">5.70</td>
-<td align="right">5.6600758</td>
-<td align="right">1.378818</td>
-<td align="right">0.0</td>
-<td align="right">10.74</td>
-<td align="right">10.74</td>
-<td align="right">0.3786553</td>
-<td align="right">-0.6183029</td>
-<td align="right">0.0048300</td>
+<td align="center"><strong>x</strong></td>
+<td align="center">8</td>
+<td align="center">53940</td>
+<td align="center">5.731</td>
+<td align="center">1.122</td>
+<td align="center">5.7</td>
+<td align="center">5.66</td>
+<td align="center">1.379</td>
 </tr>
 <tr class="odd">
-<td align="left">y</td>
-<td align="right">9</td>
-<td align="right">53940</td>
-<td align="right">5.7345260</td>
-<td align="right">1.1421347</td>
-<td align="right">5.71</td>
-<td align="right">5.6627443</td>
-<td align="right">1.363992</td>
-<td align="right">0.0</td>
-<td align="right">58.90</td>
-<td align="right">58.90</td>
-<td align="right">2.4340313</td>
-<td align="right">91.2024980</td>
-<td align="right">0.0049177</td>
+<td align="center"><strong>y</strong></td>
+<td align="center">9</td>
+<td align="center">53940</td>
+<td align="center">5.735</td>
+<td align="center">1.142</td>
+<td align="center">5.71</td>
+<td align="center">5.663</td>
+<td align="center">1.364</td>
 </tr>
 <tr class="even">
-<td align="left">z</td>
-<td align="right">10</td>
-<td align="right">53940</td>
-<td align="right">3.5387338</td>
-<td align="right">0.7056988</td>
-<td align="right">3.53</td>
-<td align="right">3.4948834</td>
-<td align="right">0.845082</td>
-<td align="right">0.0</td>
-<td align="right">31.80</td>
-<td align="right">31.80</td>
-<td align="right">1.5223379</td>
-<td align="right">47.0802865</td>
-<td align="right">0.0030385</td>
+<td align="center"><strong>z</strong></td>
+<td align="center">10</td>
+<td align="center">53940</td>
+<td align="center">3.539</td>
+<td align="center">0.7057</td>
+<td align="center">3.53</td>
+<td align="center">3.495</td>
+<td align="center">0.8451</td>
+</tr>
+</tbody>
+</table>
+<table style="width:97%;">
+<colgroup>
+<col width="20%" />
+<col width="8%" />
+<col width="11%" />
+<col width="11%" />
+<col width="15%" />
+<col width="15%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">min</th>
+<th align="center">max</th>
+<th align="center">range</th>
+<th align="center">skew</th>
+<th align="center">kurtosis</th>
+<th align="center">se</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>carat</strong></td>
+<td align="center">0.2</td>
+<td align="center">5.01</td>
+<td align="center">4.81</td>
+<td align="center">1.117</td>
+<td align="center">1.256</td>
+<td align="center">0.002041</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>cut</strong>*</td>
+<td align="center">1</td>
+<td align="center">5</td>
+<td align="center">4</td>
+<td align="center">-0.7171</td>
+<td align="center">-0.3981</td>
+<td align="center">0.004808</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>color</strong>*</td>
+<td align="center">1</td>
+<td align="center">7</td>
+<td align="center">6</td>
+<td align="center">0.1894</td>
+<td align="center">-0.8669</td>
+<td align="center">0.007324</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>clarity</strong>*</td>
+<td align="center">1</td>
+<td align="center">8</td>
+<td align="center">7</td>
+<td align="center">0.5514</td>
+<td align="center">-0.3949</td>
+<td align="center">0.007092</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>depth</strong></td>
+<td align="center">43</td>
+<td align="center">79</td>
+<td align="center">36</td>
+<td align="center">-0.08229</td>
+<td align="center">5.738</td>
+<td align="center">0.006168</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>table</strong></td>
+<td align="center">43</td>
+<td align="center">95</td>
+<td align="center">52</td>
+<td align="center">0.7969</td>
+<td align="center">2.801</td>
+<td align="center">0.009621</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>price</strong></td>
+<td align="center">326</td>
+<td align="center">18823</td>
+<td align="center">18497</td>
+<td align="center">1.618</td>
+<td align="center">2.177</td>
+<td align="center">17.18</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>x</strong></td>
+<td align="center">0</td>
+<td align="center">10.74</td>
+<td align="center">10.74</td>
+<td align="center">0.3787</td>
+<td align="center">-0.6183</td>
+<td align="center">0.00483</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>y</strong></td>
+<td align="center">0</td>
+<td align="center">58.9</td>
+<td align="center">58.9</td>
+<td align="center">2.434</td>
+<td align="center">91.2</td>
+<td align="center">0.004918</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>z</strong></td>
+<td align="center">0</td>
+<td align="center">31.8</td>
+<td align="center">31.8</td>
+<td align="center">1.522</td>
+<td align="center">47.08</td>
+<td align="center">0.003039</td>
 </tr>
 </tbody>
 </table>
