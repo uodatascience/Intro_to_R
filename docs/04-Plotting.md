@@ -13,10 +13,64 @@ output:
 
 ## R Graphics Structure
 
-* plotting packages
-* graphics systems (grid, graphics)
-* graphics engines - coordinate primitives, store state
-* graphics devices - some set of graphics primitives
+Plotting packages like `ggplot2` are only the top of four "layers" in R's graphics structure:
+
+| Layer | Function | Examples |
+| ----- | -------- | -------- |
+| Graphics Packages | High-level, user-facing plotting systems | `ggplot2`, `lattice` |
+| Graphics Systems | Maintaining plotting state, coordinating the construction of graphical objects using instructions from plotting packages | `grid`, `graphics` |
+| Graphics Engines | Interface between graphics systems and graphics devices, handle resizing and displaying plots, maintaining "display lists" - record of function calls used to make plot, maintain an array of graphics devices | `grDevices` |
+| Graphics Devices | Maintain a plotting window, implement a series of "graphical primitives" like circles, lines, colors, etc. | `X11`, `pdf`, `png` |
+
+![](guide_files/RGraphics.png)
+
+It is possible to get away with just knowing the top-level graphics packages, but understanding the full system is critical for making publication-quality figures. Without understanding `grid`, one cannot add custom labels or layouts to `ggplot2` plots; without understanding graphics devices, it may be unclear why saving as a `pdf` allows one to edit individual plot elements in Illustrator while `png` does not.
+
+
+## Base graphics
+
+Base R graphics are made with a series of function calls, typically starting with a function that 'creates' the plot (like, say, `plot()`), and subsequent functions that modify that same plot. `par()` is used to set graphical parameters. [Paul Murrell has compiled a mnemonic table](https://www.stat.auckland.ac.nz/~paul/R/parMemnonics.html) to help remember the different parameters of `par()`.
+
+We won't discuss base graphics in much detail, as I haven't seen a situation where using `ggplot2` isn't a better idea.
+
+(An example from https://www.stat.auckland.ac.nz/~paul/RG2e/examples-stdplots.R)
+
+```r
+# Scatterplot
+
+# make data
+x <- c(0.5, 2, 4, 8, 12, 16)
+y1 <- c(1, 1.3, 1.9, 3.4, 3.9, 4.8)
+y2 <- c(4, .8, .5, .45, .4, .3)
+
+# Set axis label style (las), (mar)gins, text size (cex)
+par(las=1, mar=c(4, 4, 2, 4), cex=.7)
+
+# Create the plot and add objects
+plot.new()
+plot.window(range(x), c(0, 6))
+lines(x, y1)
+lines(x, y2)
+points(x, y1, pch=16, cex=2)
+points(x, y2, pch=21, bg="white", cex=2)
+
+# Further parameter adjustments
+par(col="gray50", fg="gray50", col.axis="gray50")
+axis(1, at=seq(0, 16, 4))
+axis(2, at=seq(0, 6, 2))
+axis(4, at=seq(0, 6, 2))
+box(bty="u")
+mtext("Travel Time (s)", side=1, line=2, cex=0.8)
+mtext("Responses per Travel", side=2, line=2, las=0, cex=0.8)
+mtext("Responses per Second", side=4, line=2, las=0, cex=0.8)
+text(4, 5, "Bird 131")
+```
+
+<img src="04-Plotting_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+
+```r
+par(mar=c(5.1, 4.1, 4.1, 2.1), col="black", fg="black", col.axis="black")
+```
 
 ## ggplot2
 
@@ -84,7 +138,7 @@ g <- ggplot(diamond_sub, aes(x=carat, y=price))+
 g
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 We made a ggplot object named "g" that is attached to the dataframe "diamond_sub" `g <- ggplot(diamond_sub,` and has the aesthetic parameters "x" and "y" mapped to the columns "carat" and "price," respectively `aes(x=carat, y=price))`. Then we added `+` another element to our plot, `geom_point()` which tells us that we want our aesthetic mapping represented geometrically as points. Note that we have to add parentheses to tell R that we want that function evaluated even if we don't pass any arguments. We then rendered the plot by calling the variable name `g`.
 
@@ -145,7 +199,7 @@ ggplot(diamond_sub, aes(x=carat, y=price))+
   geom_point(aes(color=color))
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 
 ```r
@@ -155,7 +209,7 @@ ggplot(diamond_sub, aes(x=carat, y=price, color=color))+
   geom_line(aes(color=NULL))
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 Damn those are some ugly graphs, but this guide is about "can" not "should." Notice how the order in which you add elements matters - the plints are 'on top of' the lines in the first plot because the `geom_point` call came second, and vice-versa in the second plot.
 
@@ -172,7 +226,7 @@ ggplot(economics_epoch, aes(x=date,color=epoch))+
   geom_line(aes(y=unemploy), size=10)
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 So goofy. Compared to...
 
@@ -182,7 +236,7 @@ ggplot(economics_epoch, aes(x=date,fill=epoch))+
   geom_ribbon(aes(ymax=unemploy,ymin=unemploy-1000))
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 Also, it's common to confuse "fill" and "color." You can see the difference:
 
@@ -191,7 +245,7 @@ ggplot(economics_epoch, aes(x=date,color=epoch))+
   geom_ribbon(aes(ymax=unemploy,ymin=unemploy-1000))
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
 And if you wanted to use both for different reasons because you're a maniac
 
@@ -201,7 +255,7 @@ ggplot(economics_epoch, aes(x=date,color=epoch, fill=rev(epoch)))+
   geom_ribbon(aes(ymax=unemploy,ymin=unemploy-1000))
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 
 You can also assign single values to an aes, though as we'll see, it's usually better to do that in a scale. You can give colors using [color names](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf) or [RGB hex values](https://coolors.co) passed outside the aes argument - remember the aes is a mapping from the data to the geom! Assigning a `fill` within the `aes` argument assumes you mean that your hex value is a level in a factor (and who could blame it), but assigning it outside the `aes` argument means that you are sending that color to the geom directly. 
 
@@ -211,7 +265,7 @@ ggplot(economics_epoch, aes(x=date))+
   geom_ribbon(aes(ymax=unemploy,ymin=unemploy-1000), fill="#F0A125")
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
 ggplot will do its best to figure out how to split your data when combining multiple aesthetics, but here is one extra trick:
 
@@ -243,7 +297,7 @@ ggplot(diamond_sub, aes(x=interaction(cut,color)))+
   )
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
 I'll give ya a list of all the aesthetics by shapes once we know what a stat is.
 
@@ -267,7 +321,7 @@ ggplot(diamond_sub, aes(x=price))+
   geom_histogram(color="white", bins = 20)
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
 This is equivalent to the call
 
@@ -276,7 +330,7 @@ ggplot(diamond_sub, aes(x=price))+
   stat_bin(geom="bar", color="white", bins = 20)
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
 
 If instead one wants the scale as a density,
@@ -287,7 +341,7 @@ ggplot(diamond_sub, aes(x=price))+
   geom_histogram(aes(y=..density..), color="white", bins = 20)
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 
 Other stats can be accessed by calling another geom that uses it as their default. We can estimate a density kernel like:
 
@@ -298,7 +352,7 @@ ggplot(diamond_sub, aes(x=price))+
   geom_density()
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
 Yikes, our kernel is a little soft. We can adjust the bandwidth of the kernel (as its standard deviation)... 
 
@@ -309,7 +363,7 @@ ggplot(diamond_sub, aes(x=price))+
   geom_density(bw=300)
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-18-1.png" width="672" />
 
 How about some two dimensional data? I need lines. thankfully we can directly perform linear models in ggplot.
 
@@ -320,7 +374,7 @@ ggplot(diamond_sub, aes(x=table, y=depth))+
   geom_smooth(method="lm", color="red", se=FALSE)
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-19-1.png" width="672" />
 
 And if you want your confidence intervals right there with ya too
 
@@ -330,7 +384,7 @@ ggplot(diamond_sub, aes(x=depth, y=table))+
   geom_smooth(color="red", method="lm", level=0.99)
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-20-1.png" width="672" />
 
 We can also perform a few other smoothing/estimation operations, for example
 
@@ -341,7 +395,7 @@ ggplot(diamond_sub, aes(x=table, y=depth))+
   geom_smooth(method="loess", color="red")
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-21-1.png" width="672" />
 
 And with a bit of convincing, ggplot will even do logistic regression for us
 
@@ -352,7 +406,7 @@ ggplot(midwest, aes(x=percbelowpoverty, y=inmetro))+
   geom_smooth(method="glm", method.args=list(family="binomial"), color="red")
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-22-1.png" width="672" />
 
 As we saw before, most geoms can be controlled directly by calling their related stat. When doing so, we can select which geom we'd like to plot our error bars with.
 
@@ -363,7 +417,7 @@ ggplot(economics, aes(x=date, y=unemploy))+
   stat_smooth(geom="linerange", size = 0.5, method="loess", level=0.99)
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-23-1.png" width="672" />
 
 How about some denser data. Remember our very first plot? There's a whole lot more data that we randomly ignored. What if we weren't some fraudulators and didn't conveniently "lose our data?"
 
@@ -373,7 +427,7 @@ ggplot(diamonds, aes(x=carat, y=price))+
   geom_point(alpha=0.02)
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-24-1.png" width="672" />
 
 Wow that's cool and smoky and all, but is it a good representation of the data?. If we summarize it with some hexagons ...
 
@@ -389,7 +443,7 @@ ggplot(diamonds, aes(x=carat, y=price))+
 ## Please install and try again.
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-25-1.png" width="672" />
 
 Turns out it's really easy to misrepresent your data if it's not presented in a quantitatively meaningful way. Most of the density of our plot is in the lowest left section. Let's try one more visualization method. Notice the `..density..` notation. Since density is a computed function, it is wrapped in a sorta weird half ellipse to make sure it doesn't conflict with the dataframe in case it has a variable called density. 
 
@@ -399,7 +453,7 @@ ggplot(diamonds, aes(x=carat, y=price))+
   stat_density_2d(geom = "point", aes(size = ..density.., color= ..density..), n=50, contour = F)
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-25-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-26-1.png" width="672" />
 
 ### Position
 
@@ -417,7 +471,7 @@ ggplot(diamond_sub, aes(x=price, fill=cut))+
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-26-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-27-1.png" width="672" />
 
 
 ```r
@@ -429,7 +483,7 @@ ggplot(diamond_sub, aes(x=price, fill=cut))+
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-27-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-28-1.png" width="672" />
 
 and maybe jitter
 
@@ -439,14 +493,14 @@ ggplot(diamond_sub, aes(x=cut, y=price))+
   geom_point()
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-28-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-29-1.png" width="672" />
 
 ```r
 ggplot(diamond_sub, aes(x=cut, y=price))+
   geom_point(position=position_jitter(width=0.25))
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-29-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-30-1.png" width="672" />
 
 and maybe one more with `fill`
 
@@ -456,7 +510,7 @@ ggplot(diamonds, aes(x=price, fill=cut))+
   geom_histogram(bins=50)
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-30-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-31-1.png" width="672" />
 
 
 ```r
@@ -464,7 +518,7 @@ ggplot(diamonds, aes(x=price, fill=cut))+
   geom_histogram(bins=50, position="fill")
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-31-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-32-1.png" width="672" />
 
 
 
@@ -496,7 +550,7 @@ If you don't want to manually input colors and want to just follow best principl
 brewplot <- RColorBrewer::display.brewer.all()
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-32-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-33-1.png" width="672" />
 
 To simply drop it in to any plot:
 
@@ -507,7 +561,7 @@ ggplot(economics_epoch, aes(x=date,fill=epoch))+
   scale_fill_brewer(palette="Set1")
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-33-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-34-1.png" width="672" />
 
 And the continuous variant is called "Distiller"
 
@@ -519,7 +573,7 @@ ggplot(diamond_sub, aes(x=carat,y=price,color=price))+
   theme_dark()
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-34-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-35-1.png" width="672" />
 
 #### Manual Colors
 
@@ -539,7 +593,7 @@ ggplot(diamonds, aes(x=carat, y=price))+
   facet_grid(cut~color)
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-35-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-36-1.png" width="672" />
 
 
 ### Coordinate Systems
@@ -577,7 +631,7 @@ ggplot(diamond_sub, aes(x=carat,y=price,color=price))+
   theme_minimal()
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-36-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-37-1.png" width="672" />
 
 
 ```r
@@ -586,7 +640,7 @@ ggplot(diamond_sub, aes(x=carat,y=price,color=price))+
   theme_void()
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-37-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-38-1.png" width="672" />
 
 ### Removing elements
 
@@ -607,7 +661,7 @@ ggplot(diamond_sub, aes(x=carat,y=price,color=price))+
   )
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-38-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-39-1.png" width="672" />
 
 And sometimes you just want to make a mockery of your audience's eyes like you've got your hands in the MS paint bucket again. Notice how since we are in a "g" rammar of "g" raphics ("plot") ("2") things work as we expect them to
 
@@ -626,7 +680,7 @@ ggplot(diamond_sub, aes(x=carat,y=price))+
   )
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-39-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-40-1.png" width="672" />
 
 A useful tool here is the direct specification of sizes with units. The general syntax for units are unit(number, "unit_type"), for example if you are trying to shout about how big those numbers are and dont understand what axis ticks are for
 
@@ -645,7 +699,7 @@ ggplot(diamond_sub, aes(x=carat,y=price))+
   )
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-40-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-41-1.png" width="672" />
 
 Uh oh, who is screwing with our medicine? Our text is now hopelessly buried beneath our arrows. We can fix that by adjusting our margins. The margins are set in the order top, right, bottom, left. Since that doesn't really make sense, they advise you to remember the phrase "trouble" and that actually works. Notice the inheritance. Even though we make settings for the x and y axis text specifically, it still retains our 24 point mistake. Margins can also be used with the plot.background to eliminate excess space, and can be set to negative numbers.
 
@@ -666,7 +720,7 @@ ggplot(diamond_sub, aes(x=carat,y=price))+
   )
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-41-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-42-1.png" width="672" />
 
 ### Lattice
 
@@ -871,7 +925,7 @@ grid.newpage()
 grid.draw(g.grob)
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-46-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-47-1.png" width="672" />
 
 I have no idea why you keep wanting to do this to your plots. Lets try to use grid to arrange two plots that we couldn't using ggplot alone. Let's try to get density plots next to our scatterplot
 
@@ -960,7 +1014,7 @@ grid.newpage()
 grid.draw(g.scatter_grob)
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-47-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-48-1.png" width="672" />
 
 Uh oh, we're a little misaligned. We can expand our x-axes to make the density plots fill the entire space
 
@@ -1048,29 +1102,13 @@ grid.newpage()
 grid.draw(g.scatter_grob)
 ```
 
-<img src="04-Plotting_files/figure-html/unnamed-chunk-48-1.png" width="672" />
+<img src="04-Plotting_files/figure-html/unnamed-chunk-49-1.png" width="672" />
 
 Todo: adding raw grobs
 
-## Base graphics
-
-* plot() plots
-* par() sets parameters
-
-https://www.slideshare.net/dataspora/a-survey-of-r-graphics
-
-
 ### References
 
-https://www.stat.auckland.ac.nz/~paul/grid/grid.html
-https://www.stat.auckland.ac.nz/~paul/grid/doc/plotexample.pdf
-https://www.stat.auckland.ac.nz/~paul/Talks/CSIRO2011/rgraphics.pdf
-https://www.stat.auckland.ac.nz/~paul/Talks/JSM2013/grid.html
-https://www.stat.auckland.ac.nz/~paul/Talks/Rgraphics.pdf
-https://www.stat.auckland.ac.nz/~paul/grid/doc/interactive.pdf
-http://bxhorn.com/structure-of-r-graphs/
-https://www.slideshare.net/dataspora/a-survey-of-r-graphics
-
+ikn
 #### Extensions
 
 > Cowplot

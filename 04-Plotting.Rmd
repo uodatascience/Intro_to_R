@@ -13,10 +13,59 @@ output:
 
 ## R Graphics Structure
 
-* plotting packages
-* graphics systems (grid, graphics)
-* graphics engines - coordinate primitives, store state
-* graphics devices - some set of graphics primitives
+Plotting packages like `ggplot2` are only the top of four "layers" in R's graphics structure:
+
+| Layer | Function | Examples |
+| ----- | -------- | -------- |
+| Graphics Packages | High-level, user-facing plotting systems | `ggplot2`, `lattice` |
+| Graphics Systems | Maintaining plotting state, coordinating the construction of graphical objects using instructions from plotting packages | `grid`, `graphics` |
+| Graphics Engines | Interface between graphics systems and graphics devices, handle resizing and displaying plots, maintaining "display lists" - record of function calls used to make plot, maintain an array of graphics devices | `grDevices` |
+| Graphics Devices | Maintain a plotting window, implement a series of "graphical primitives" like circles, lines, colors, etc. | `X11`, `pdf`, `png` |
+
+![](guide_files/RGraphics.png)
+
+It is possible to get away with just knowing the top-level graphics packages, but understanding the full system is critical for making publication-quality figures. Without understanding `grid`, one cannot add custom labels or layouts to `ggplot2` plots; without understanding graphics devices, it may be unclear why saving as a `pdf` allows one to edit individual plot elements in Illustrator while `png` does not.
+
+
+## Base graphics
+
+Base R graphics are made with a series of function calls, typically starting with a function that 'creates' the plot (like, say, `plot()`), and subsequent functions that modify that same plot. `par()` is used to set graphical parameters. [Paul Murrell has compiled a mnemonic table](https://www.stat.auckland.ac.nz/~paul/R/parMemnonics.html) to help remember the different parameters of `par()`.
+
+We won't discuss base graphics in much detail, as I haven't seen a situation where using `ggplot2` isn't a better idea.
+
+(An example from https://www.stat.auckland.ac.nz/~paul/RG2e/examples-stdplots.R)
+```{r}
+
+# Scatterplot
+
+# make data
+x <- c(0.5, 2, 4, 8, 12, 16)
+y1 <- c(1, 1.3, 1.9, 3.4, 3.9, 4.8)
+y2 <- c(4, .8, .5, .45, .4, .3)
+
+# Set axis label style (las), (mar)gins, text size (cex)
+par(las=1, mar=c(4, 4, 2, 4), cex=.7)
+
+# Create the plot and add objects
+plot.new()
+plot.window(range(x), c(0, 6))
+lines(x, y1)
+lines(x, y2)
+points(x, y1, pch=16, cex=2)
+points(x, y2, pch=21, bg="white", cex=2)
+
+# Further parameter adjustments
+par(col="gray50", fg="gray50", col.axis="gray50")
+axis(1, at=seq(0, 16, 4))
+axis(2, at=seq(0, 6, 2))
+axis(4, at=seq(0, 6, 2))
+box(bty="u")
+mtext("Travel Time (s)", side=1, line=2, cex=0.8)
+mtext("Responses per Travel", side=2, line=2, las=0, cex=0.8)
+mtext("Responses per Second", side=4, line=2, las=0, cex=0.8)
+text(4, 5, "Bird 131")
+par(mar=c(5.1, 4.1, 4.1, 2.1), col="black", fg="black", col.axis="black")
+```
 
 ## ggplot2
 
@@ -687,25 +736,9 @@ grid.draw(g.scatter_grob)
 
 Todo: adding raw grobs
 
-## Base graphics
-
-* plot() plots
-* par() sets parameters
-
-https://www.slideshare.net/dataspora/a-survey-of-r-graphics
-
-
 ### References
 
-https://www.stat.auckland.ac.nz/~paul/grid/grid.html
-https://www.stat.auckland.ac.nz/~paul/grid/doc/plotexample.pdf
-https://www.stat.auckland.ac.nz/~paul/Talks/CSIRO2011/rgraphics.pdf
-https://www.stat.auckland.ac.nz/~paul/Talks/JSM2013/grid.html
-https://www.stat.auckland.ac.nz/~paul/Talks/Rgraphics.pdf
-https://www.stat.auckland.ac.nz/~paul/grid/doc/interactive.pdf
-http://bxhorn.com/structure-of-r-graphs/
-https://www.slideshare.net/dataspora/a-survey-of-r-graphics
-
+ikn
 #### Extensions
 
 > Cowplot
