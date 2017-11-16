@@ -16,7 +16,7 @@ output:
 Plotting packages like `ggplot2` are only the top of four "layers" in R's graphics structure:
 
 | Layer | Function | Examples |
-| ----- | -------- | -------- |
+| ----- | ------------------------------- | -------- |
 | Graphics Packages | High-level, user-facing plotting systems | `ggplot2`, `lattice` |
 | Graphics Systems | Maintaining plotting state, coordinating the construction of graphical objects using instructions from plotting packages | `grid`, `graphics` |
 | Graphics Engines | Interface between graphics systems and graphics devices, handle resizing and displaying plots, maintaining "display lists" - record of function calls used to make plot, maintain an array of graphics devices | `grDevices` |
