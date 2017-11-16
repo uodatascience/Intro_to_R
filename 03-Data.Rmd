@@ -1,5 +1,5 @@
 ---
-title: "Data Wrangling"
+title: "Data"
 author: "Jonny Saunders"
 date: "10/2/2017"
 output: 
@@ -834,7 +834,6 @@ apply(df, 2, mean)
 
 `apply` is the base function in several convenience/extension functions in base R, like `sweep` and `aggregate`, and functions similarly to `lapply`, `tapply`, `mapply`, `rapply`, `eapply`, etc.
 
-
 ### Grouped Summarization
 
 If our data is in long format, the variable we are interested in summarizing is **grouped** by one or several others. For example, in our diamonds dataset we would expect `price` to be different depending on the diamond's `cut` and `carat`. `plyr` handles grouping elegantly with its `summarise` (`summarize` is an alias for us Americans) function. `summarize` can be used in a pipe, but since I am a stodgy old grandpa I prefer to use it in conjunction with one of the `plyr::*ply` functions (`ddply` when the input is a dataframe and the output is a dataframe, `ldply` for input lists output dataframes, `dlply` for input dataframes and output lists, etc.). `ddply` works like `apply`, but by first splitting the data by grouping variables. When `summarize` is used with `ddply`, the arguments afterwards are passed to `summarize`, and with them we can make whatever new variables we want. 
@@ -849,7 +848,7 @@ df_summary <- ddply(df, .(cut, carat), summarise,
                     n_samples = length(price))
 
 pander::pander(
-  df_summary
+  head(df_summary)
 )
 ```
 
@@ -878,6 +877,7 @@ pander::pander(
 
 ```
 
+
 ### Mutation
 
 A related function, `mutate`, works similarly but rather than summarizing (taking multiple values and returning one), it creates a value for each input row
@@ -893,7 +893,7 @@ pander::pander(
 ```
 
 
-### Resources
+## Resources
 
 * R Data Import/Export Manual: https://cran.r-project.org/doc/manuals/R-data.pdf
 * http://zoonek2.free.fr/UNIX/48_R/02.html#6
