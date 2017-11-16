@@ -15,17 +15,18 @@ output:
 
 Plotting packages like `ggplot2` are only the top of four "layers" in R's graphics structure:
 
+![](guide_files/RGraphics.png)
+
 | Layer | Function | Examples |
-| ----- | ------------------------------- | -------- |
+| ----- | ----------------------------------------------------- | -------- |
 | Graphics Packages | High-level, user-facing plotting systems | `ggplot2`, `lattice` |
 | Graphics Systems | Maintaining plotting state, coordinating the construction of graphical objects using instructions from plotting packages | `grid`, `graphics` |
 | Graphics Engines | Interface between graphics systems and graphics devices, handle resizing and displaying plots, maintaining "display lists" - record of function calls used to make plot, maintain an array of graphics devices | `grDevices` |
 | Graphics Devices | Maintain a plotting window, implement a series of "graphical primitives" like circles, lines, colors, etc. | `X11`, `pdf`, `png` |
 
-![](guide_files/RGraphics.png)
+While most, if not all programming languages and data manipulation software allow plotting, this system makes R graphics particularly [**permissive**](https://www.stat.auckland.ac.nz/~paul/Talks/CSIRO2011/rgraphics.pdf) -- if the system can't already make the plot you want, it is possible to code it yourself.  
 
 It is possible to get away with just knowing the top-level graphics packages, but understanding the full system is critical for making publication-quality figures. Without understanding `grid`, one cannot add custom labels or layouts to `ggplot2` plots; without understanding graphics devices, it may be unclear why saving as a `pdf` allows one to edit individual plot elements in Illustrator while `png` does not.
-
 
 ## Base graphics
 
@@ -63,8 +64,8 @@ box(bty="u")
 mtext("Travel Time (s)", side=1, line=2, cex=0.8)
 mtext("Responses per Travel", side=2, line=2, las=0, cex=0.8)
 mtext("Responses per Second", side=4, line=2, las=0, cex=0.8)
-text(4, 5, "Bird 131")
 par(mar=c(5.1, 4.1, 4.1, 2.1), col="black", fg="black", col.axis="black")
+text(4, 5, "Bird 131")
 ```
 
 ## ggplot2
@@ -78,7 +79,9 @@ But we are gonna use diamonds because we are properly classed.
 
 ```{r}
 library(ggplot2)
-head(diamonds)
+pander::pander(
+  head(diamonds)
+)
 
 # But we don't want to plot 50000 points every time so
 diamond_sub <- diamonds[sample(1:nrow(diamonds), 500, replace=FALSE),]
@@ -101,6 +104,7 @@ We'll follow their lead. In ggplot, that combination of things forms a layer. Th
 * **stat** - statistical transformations
 
 Reordered, the flow of information in ggplot2 is:
+
 * **data** is attached to the ggplot call, 
 * mapped by **aes**, and
 * transformed by **stat** before being passed to a
@@ -142,14 +146,15 @@ ggplot(diamond_sub, aes(x=carat, y=price))+
   geom_point(aes(color=color))
 ```
 
+You can make the same plot (except for order) in a worse way by specifying color in the base ggplot call and removing it with NULL from the lines. 
+
 ```{r}
-# You can make the same plot (except for order) in a worse way by specifying color in the base ggplot call and removing it with NULL from the lines. 
 ggplot(diamond_sub, aes(x=carat, y=price, color=color))+
   geom_point()+
   geom_line(aes(color=NULL))
 ```
 
-Damn those are some ugly graphs, but this guide is about "can" not "should." Notice how the order in which you add elements matters - the plints are 'on top of' the lines in the first plot because the `geom_point` call came second, and vice-versa in the second plot.
+Damn those are some ugly graphs, but this guide is about "can" not "should." Notice how the order in which you add elements matters - the points are 'on top of' the lines in the first plot because the `geom_point` call came second, and vice-versa in the second plot.
 
 You can also perform operations within the aes(), say if you want to fatten out a ribbon without it being a big goofy line
 ```{r}
@@ -194,7 +199,7 @@ ggplot will do its best to figure out how to split your data when combining mult
 
 Say you want to split your data by two factors but don't want to make a new column in your dataframe or color them. You can use the `interaction()` function like (ignore the use of theme(), we'll get to that):
 ```{r}
-# we have tow factors, cut and color, with the levels...
+# we have two factors, cut and color, with the levels...
 levels(diamond_sub$cut)
 levels(diamond_sub$color)
 # and we want to make a plot with all their permutations:
@@ -232,6 +237,12 @@ ggplot(diamond_sub, aes(x=price))+
   stat_bin(geom="bar", color="white", bins = 20)
 ```
 
+But calling it this way allows us to use whatever geom we'd like
+```{r}
+ggplot(diamond_sub, aes(x=price))+
+  stat_bin(geom="step", color="blue", bins = 20)+
+  stat_bin(geom="point", color="red", bins = 20)
+```
 
 If instead one wants the scale as a density,
 
@@ -313,12 +324,25 @@ Turns out it's really easy to misrepresent your data if it's not presented in a 
 
 ```{r}
 ggplot(diamonds, aes(x=carat, y=price))+
-  stat_density_2d(geom = "point", aes(size = ..density.., color= ..density..), n=50, contour = F)
+  scale_color_distiller(palette="Spectral")+
+  stat_density_2d(geom = "point", aes(size = ..density.., color= ..density..), alpha=0.6, n=75, contour = F)+
+  theme(panel.background = element_rect(fill="#000000"),
+        panel.grid = element_blank(),
+        legend.position = "none")
+```
+
+```{r}
+ggplot(diamonds, aes(x=carat, y=price))+
+  scale_color_distiller(palette="Spectral")+
+  stat_density_2d(geom = "point", aes(size = ..density.., color= ..density.., alpha= ..density..), n=75, contour = F)+
+  theme(panel.background = element_rect(fill="#000000"),
+        panel.grid = element_blank(),
+        legend.position = "none")
 ```
 
 ### Position
 
-Is also important but I'm not covering it right now. ve most deel vis it.
+Is also important but I'm not covering it formally right now. ve most deel vis it.
 
 Until I do, if your bar charts aren't looking right just monkey around on google with the phrase `dodge`
 
@@ -355,13 +379,9 @@ ggplot(diamonds, aes(x=price, fill=cut))+
   geom_histogram(bins=50, position="fill")
 ```
 
-
-
-### Layouts
+### Scales
 
 We have led our little geometric lambs to water, but what good is it if we don't own the land?
-
-### Scales
 
 Every aesthetic component, including axes, is a scale. There are two types of scales, continuous and discrete. With scales, we control things like 
 
@@ -376,6 +396,18 @@ Every aesthetic component, including axes, is a scale. There are two types of sc
 The general syntax to modify your scale is `scale_aesthetic_continuous` or `scale_aesthetic_discrete`, for example `scale_x_continuous` or `scale_fill_discrete`.
 
 For now, not going to spend much time on this because they are relatively self explanatory, but a few specific useful examples
+
+#### Axis limits
+
+If you want to set axis limits manually, rather than allowing ggplot to figure them out for you...
+
+```{r}
+ggplot(diamond_sub, aes(x=table, y=depth))+
+  geom_point(alpha=0.8, position=position_jitter(width=.25))+
+  geom_smooth(method="loess", color="red")+
+  scale_x_continuous(limits=c(56, 60))
+```
+
 
 #### Color Brewer
 
@@ -459,7 +491,7 @@ ggplot(diamond_sub, aes(x=carat,y=price,color=price))+
   theme_void()
 ```
 
-### Removing elements
+#### Removing elements
 
 Sometimes you want to be all draped in pearls and roses, and other times you just need your black turtleneck. To remove items, replace them with a blank element:
 
@@ -527,13 +559,21 @@ ggplot(diamond_sub, aes(x=carat,y=price))+
   )
 ```
 
-### Lattice
+### Extensions
+
+ggplot has lots of extensions. But we'll leave it at that for now....
+
+## Lattice
 
 * lattice stuff here
 
 ## Rendering
 
 Having plots in your R environment is one thing, but getting them out into the world or stuffed into your papers is quite another. Without explicitly specifying certain parameters like sizes and positions, your figure will end up with text crowded across the screen or nonevident without microscopy. It's always a good idea to make those specifications explicit with the theme() function, but some things require that ggplot has knowledge about the rendering environment.
+
+### Using Graphics Engines
+
+* bring over from Data chapter
 
 ### ggsave
 
@@ -736,12 +776,16 @@ grid.draw(g.scatter_grob)
 
 Todo: adding raw grobs
 
-### References
+## References
 
-ikn
-#### Extensions
-
-> Cowplot
+* https://www.stat.auckland.ac.nz/~paul/grid/grid.html
+* https://www.stat.auckland.ac.nz/~paul/grid/doc/plotexample.pdf
+* https://www.stat.auckland.ac.nz/~paul/Talks/CSIRO2011/rgraphics.pdf
+* https://www.stat.auckland.ac.nz/~paul/Talks/JSM2013/grid.html
+* https://www.stat.auckland.ac.nz/~paul/Talks/Rgraphics.pdf
+* https://www.stat.auckland.ac.nz/~paul/grid/doc/interactive.pdf
+* http://bxhorn.com/structure-of-r-graphs/
+* https://www.slideshare.net/dataspora/a-survey-of-r-graphics
 
 <!-- # Some DoPlots To Tittilate -->
 
