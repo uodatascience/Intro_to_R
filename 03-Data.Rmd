@@ -348,6 +348,34 @@ friends$favorites <- c(4,5)
 friends[c(1,2),]$favorites <- c(4,5)
 ```
 
+## Basic Manipulation
+
+A few common operations hastily stolen from [Krista's lesson](https://github.com/kdestasio/2018_dataSciSem)
+
+```{r vector functions}
+victor <- c(1,2,3,4,5) # Join elements into a vector and name it victor
+
+reverse_victor <- rev(victor) # reverse the elements in victor
+reverse_victor
+
+sort(reverse_victor) # sort reverse-victor (sorts smallest to largest by default). This gives us back regular victor.  
+
+sort(reverse_victor) == victor # verify that this is true with Boolean logic
+
+sort(victor, decreasing = T) # you can also sort from largest to smallest
+
+sort(victor, decreasing = T) == reverse_victor # sorting regular victor by largest to smallest gives us reverse-Victor
+
+# What if victor had repeating elements?
+victor_rep <- c(1,1,1,3,5,5,7,10)
+
+table(victor_rep) # gives a frequency of all the different elements in victor
+
+unique(victor_rep) # gives all the unique elements in victor
+```
+
+
+
 ## Piping Syntax
 
 Before we get into reshaping data, its importantt we cover a type of syntax called piping. Piping is not unique to R, but it is highly useful in R, especially for data wrangling and manipulation. The pipe itself is this symbol `%>%`, and in R, it comes from the *magrittr* package (this is a references to the famous painging by Magritte,the treachery of images). *magrittr* is part of the tidyverse, so it will load when you call the tidyverse library.
@@ -890,6 +918,41 @@ df_mutate <- ddply(df, .(cut), mutate,
 pander::pander(
   head(df_mutate)
 )
+```
+
+## Type-specific Operations
+
+Sort of the junk-drawer of data manipulation, factors and character vectors have a few specific operations that don't fit neatly into other sections
+
+### Working with Factors
+
+(Stolen haphazardly from [Krista's lesson](https://github.com/kdestasio/2018_dataSciSem))
+
+Reordering levels of a factor
+
+```{r gapminder manipulation}
+require(gapminder) # load in the gapminder dataset 
+
+gapminder <- gapminder # save the dataset to an object
+
+# Check the class of the variables 
+class(gapminder$continent) # "continent" is a factor
+class(gapminder$gdpPercap) # "gdpPercap" is numeric 
+
+# Check the order of the levels of "continent"
+levels(gapminder$continent)
+
+# Plot GDP per capita by continent. 
+library(ggplot2)
+(plot1 <- ggplot(data = gapminder, aes(x = continent, y = gdpPercap)) + 
+  geom_bar(stat = "identity"))
+
+# This graph would look better if we re-ordered the levels of "continent". Let's do it. 
+gapminder$continent <- factor(gapminder$continent, 
+                              levels = c("Oceania", "Africa", "Americas", "Asia", "Europe")) # manually re-order the levels of "continent"
+
+(plot2 <- ggplot(data = gapminder, aes(x = continent, y = gdpPercap, reorder(x, y))) + 
+  geom_bar(stat = "identity")) # re-plot the data
 ```
 
 

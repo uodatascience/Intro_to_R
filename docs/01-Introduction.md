@@ -271,21 +271,21 @@ library(tidyverse)
 ```
 
 ```
-## Loading tidyverse: ggplot2
-## Loading tidyverse: tibble
-## Loading tidyverse: tidyr
-## Loading tidyverse: readr
-## Loading tidyverse: purrr
-## Loading tidyverse: dplyr
+## ── Attaching packages ────────────────────────────────── tidyverse 1.2.1 ──
 ```
 
 ```
-## Conflicts with tidy packages ----------------------------------------------
+## ✔ ggplot2 2.2.1.9000     ✔ purrr   0.2.4     
+## ✔ tibble  1.4.2          ✔ dplyr   0.7.4     
+## ✔ tidyr   0.8.0          ✔ stringr 1.3.0     
+## ✔ readr   1.1.1          ✔ forcats 0.3.0
 ```
 
 ```
-## filter(): dplyr, stats
-## lag():    dplyr, stats
+## ── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+## ✖ dplyr::vars()   masks ggplot2::vars()
 ```
 
 ```r
@@ -293,11 +293,12 @@ search()
 ```
 
 ```
-##  [1] ".GlobalEnv"        "package:dplyr"     "package:purrr"    
-##  [4] "package:readr"     "package:tidyr"     "package:tibble"   
-##  [7] "package:ggplot2"   "package:tidyverse" "package:stats"    
-## [10] "package:graphics"  "package:grDevices" "package:utils"    
-## [13] "package:datasets"  "Autoloads"         "package:base"
+##  [1] ".GlobalEnv"        "package:forcats"   "package:stringr"  
+##  [4] "package:dplyr"     "package:purrr"     "package:readr"    
+##  [7] "package:tidyr"     "package:tibble"    "package:ggplot2"  
+## [10] "package:tidyverse" "package:stats"     "package:graphics" 
+## [13] "package:grDevices" "package:utils"     "package:datasets" 
+## [16] "Autoloads"         "package:base"
 ```
 
 Importantly, you have to call all of the libraries you will use each time you start a new session in R. You may want to get in the habit of putting a bunch of library calls at the top of your script.

@@ -438,6 +438,7 @@ ggplot(diamond_sub, aes(x=carat,y=price,color=price))+
 To use your own colors, use `scale_color_manual` or `scale_fill_manual`
 (todo, trying to get some actually cool stuff in here)
 
+
 ### Facets
 
 (Skipping detailed description for now... but)

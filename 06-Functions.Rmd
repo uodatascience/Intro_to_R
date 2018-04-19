@@ -1,0 +1,79 @@
+---
+title: "5 - Functions"
+author: "Jonny Saunders"
+date: "October 5, 2017"
+output: 
+  md_document:
+    preserve_yaml: true
+    toc: true
+    toc_depth: 2
+order: 2
+---
+# Functions
+
+Stolen without changes from [Krista's lesson](https://github.com/kdestasio/2018_dataSciSem). A stub, a work-in-progress.
+
+```
+# General form
+
+function_name <- function(var){
+    Do something
+    return(new_variable)
+}
+```
+
+Functions have:
+
+1. A name
+2. Inputs, or arguments, within the function
+3. A body. This is the code between `{ }`
+
+```{r Example of a Function}
+
+inverse <- function(x){
+    inverse <- 1/x
+    return(inverse)
+}
+
+inverse(2)
+```
+
+Another example of a function
+
+
+```{r Import - write function}
+# get data from each subject's directory and make a data frame for each subject
+
+create_df <- function(subjects) {
+    df <- data.frame() # make an empty data frame
+    for (sub in subjects) {
+        data_file = list.files(paste0(data_dir, sub), pattern = "*.csv") # list of csv files in the subject's datadir
+        path_tmp <- paste0(data_dir, sub, "/", data_file) # path to subject's data file
+        df_tmp <- read.csv(path_tmp, sep = ",") # read in the data
+        df_tmp$id <- rep(as.character(sub), nrow(df_tmp)) # make a column for the subject ID based
+        df <- rbind(df, df_tmp) # add the subject's data to the main data frame
+    }
+  assign("dat", df, envir = .GlobalEnv) # name the data frame 'dat' and make available in the global environment
+}
+```
+
+
+Use the function
+
+```{r Import - get subject data}
+#create_df(subjects = subjects)
+#head(dat)
+```
+
+> Scoping from R Faq 3.3.1
+
+NOT REAL YET!
+
+```{r}
+# S4 Methods are stored in environments 
+nM <- asNamespace("Matrix")
+sort(grep("^[.]__T__", names(nM), value=TRUE))
+meth.Ops <- nM$`.__T__Ops:base`
+head(sort(names(meth.Ops)))
+```
+

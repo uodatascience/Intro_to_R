@@ -175,7 +175,7 @@ ggplot2:::GeomPoint
 ```
 
 ```
-## <ggproto object: Class GeomPoint, Geom>
+## <ggproto object: Class GeomPoint, Geom, gg>
 ##     aesthetics: function
 ##     default_aes: uneval
 ##     draw_group: function
@@ -190,7 +190,7 @@ ggplot2:::GeomPoint
 ##     required_aes: x y
 ##     setup_data: function
 ##     use_defaults: function
-##     super:  <ggproto object: Class Geom>
+##     super:  <ggproto object: Class Geom, gg>
 ```
 Note the "required_aes" and "non_missing_aes" for required and optional aes, respectively.
 
@@ -581,11 +581,11 @@ ggplot(diamond_sub, aes(x=table, y=depth))+
 ```
 
 ```
-## Warning: Removed 137 rows containing non-finite values (stat_smooth).
+## Warning: Removed 140 rows containing non-finite values (stat_smooth).
 ```
 
 ```
-## Warning: Removed 204 rows containing missing values (geom_point).
+## Warning: Removed 197 rows containing missing values (geom_point).
 ```
 
 <img src="04-Plotting_files/figure-html/unnamed-chunk-35-1.png" width="672" />
@@ -628,6 +628,7 @@ ggplot(diamond_sub, aes(x=carat,y=price,color=price))+
 
 To use your own colors, use `scale_color_manual` or `scale_fill_manual`
 (todo, trying to get some actually cool stuff in here)
+
 
 ### Facets
 
@@ -896,13 +897,13 @@ g.grob$grobs
 
 ```
 ## [[1]]
-## zeroGrob[plot.background..zeroGrob.2978] 
+## zeroGrob[plot.background..zeroGrob.3075] 
 ## 
 ## [[2]]
 ## zeroGrob[NULL] 
 ## 
 ## [[3]]
-## absoluteGrob[GRID.absoluteGrob.2951] 
+## absoluteGrob[GRID.absoluteGrob.3036] 
 ## 
 ## [[4]]
 ## zeroGrob[NULL] 
@@ -911,10 +912,10 @@ g.grob$grobs
 ## zeroGrob[NULL] 
 ## 
 ## [[6]]
-## gTree[panel-1.gTree.2933] 
+## gTree[panel-1.gTree.3024] 
 ## 
 ## [[7]]
-## absoluteGrob[GRID.absoluteGrob.2945] 
+## absoluteGrob[GRID.absoluteGrob.3030] 
 ## 
 ## [[8]]
 ## zeroGrob[NULL] 
@@ -929,10 +930,10 @@ g.grob$grobs
 ## zeroGrob[NULL] 
 ## 
 ## [[12]]
-## titleGrob[axis.title.x..titleGrob.2936] 
+## titleGrob[axis.title.x.bottom..titleGrob.3039] 
 ## 
 ## [[13]]
-## titleGrob[axis.title.y..titleGrob.2939] 
+## titleGrob[axis.title.y.left..titleGrob.3042] 
 ## 
 ## [[14]]
 ## zeroGrob[NULL] 
@@ -947,13 +948,13 @@ g.grob$grobs
 ##                                     zeroGrob[NULL]
 ## 
 ## [[16]]
-## zeroGrob[plot.subtitle..zeroGrob.2976] 
+## zeroGrob[plot.subtitle..zeroGrob.3073] 
 ## 
 ## [[17]]
-## zeroGrob[plot.title..zeroGrob.2975] 
+## zeroGrob[plot.title..zeroGrob.3072] 
 ## 
 ## [[18]]
-## zeroGrob[plot.caption..zeroGrob.2977]
+## zeroGrob[plot.caption..zeroGrob.3074]
 ```
 
 We can see that deep down at the core of our plot is just a bunch of polygons. I arrived at these numbers by just listing them recursively (calling `g.grob$grobs`, seeing which one I needed, etc.). We can directly edit the graphical properties of these polygons (`gp`) as you might expect. We then 
@@ -967,7 +968,7 @@ g.grob$grobs[[6]]$children[[3]]$children
 ```
 
 ```
-## (polygon[geom_ribbon.polygon.2911], polygon[geom_ribbon.polygon.2913], polygon[geom_ribbon.polygon.2915], polygon[geom_ribbon.polygon.2917], polygon[geom_ribbon.polygon.2919])
+## (polygon[geom_ribbon.polygon.3002], polygon[geom_ribbon.polygon.3004], polygon[geom_ribbon.polygon.3006], polygon[geom_ribbon.polygon.3008], polygon[geom_ribbon.polygon.3010])
 ```
 
 ```r

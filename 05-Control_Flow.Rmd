@@ -1,0 +1,119 @@
+---
+title: "Control Flow"
+author: "Jonny Saunders"
+date: "04/19/2018"
+output: 
+  md_document:
+    preserve_yaml: true
+    toc: true
+    toc_depth: 2
+---
+# Control Flow
+
+
+Stolen without changes from [Krista's lesson](https://github.com/kdestasio/2018_dataSciSem). A stub, a work-in-progress.
+
+
+## For Loops
+
+```
+# General form
+
+for (variable in sequence){
+    Do something
+}
+```
+
+```{r Example of for loop}
+
+for (i in (1:10)) {
+  x <- i^2
+  print(x)
+}
+```
+
+## While Loops
+
+```
+# General form:
+
+while (condition){
+    Do something
+}
+```
+
+```{r Example of While Loops}
+i <- 1
+
+while (i < 11){
+  print(i)
+  i <- i + 1
+}
+```
+
+
+## If/Then Statements
+
+```
+# General form:
+
+if (condition){
+    Do something
+} else {
+    Do something different
+}
+```
+
+```{r Example of If/Else Statement}
+
+if (i > 5) {
+  print("This number is greater than 5.")
+} else {
+  print("This number is less than 5.")
+}
+```
+
+
+## Apply functions
+[R-bloggers, lapply() and sapply()](https://www.r-bloggers.com/using-apply-sapply-lapply-in-r/)
+
+FUNCTION | INPUT          | OUTPUT
+-------- | -------------- | -------
+apply    | matrix         |	vector or matrix
+sapply	 | vector or list | vector or matrix
+lapply	 | vector or list | list
+
+`apply()` functions are a type **functional**, i.e. a function that takes a function as an input and returns a vector or a list as output. This can be used as an alternative to for loops. 
+
+```{r apply}
+X <- matrix(data = c(1,2,3, 1,2,3, 1,2,3), nrow = 3, ncol = 3, byrow = T)
+X
+
+# Sum the values of each column with `apply()`
+apply(X, 2, sum) # the second argument refers to a vector giving the subscripts which the function will be applied over, e.g. for a matrix 1 indicates rows, 2 indicates columns. The third argument specifies the function to be applied
+
+# Now sum the values of each row
+apply(X, 1, sum)
+```
+
+`lapply()` takes a function, applies it to each element in a list, and returns the results in the form of a list. Recall the for loop from the above example:
+
+```
+for (i in (1:10)){
+  x <- i^2
+  print(x)
+}
+```
+
+We can accomplish the same result without using a for loop by instead using `lapply()`. Notice that `lapply()` returns a list. 
+
+```{r lapply}
+lapply(1:10, function(x) x^2)
+```
+
+If we want to get back an atomic vector instead of a list, we can use `sapply()`. 
+
+```{r sapply}
+sapply(1:10, function(x) x^2)
+```
+
