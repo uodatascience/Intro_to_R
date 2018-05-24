@@ -11,65 +11,244 @@ order: 2
 ---
 # Functions
 
-Stolen without changes from [Krista's lesson](https://github.com/kdestasio/2018_dataSciSem). A stub, a work-in-progress.
+## Form
 
-```
-# General form
-
-function_name <- function(var){
-    Do something
-    return(new_variable)
+The general form of a function is
+```{r, eval=FALSE}
+function_name <- function(arguments){
+    #Do something
+    return(output)
 }
 ```
 
 Functions have:
 
-1. A name
-2. Inputs, or arguments, within the function
-3. A body. This is the code between `{ }`
+1. An argument list, or `formals()` - what is passed to the function
+2. A `body()`. Typically, this is the code between `{curly braces}`, but can be any syntactically complete statement - `{}` denote a code "block" that is not evaluated until the end of the block, rather than evaluated line-by-line as is otherwise the case.
+3. An `environment()`, or the list of symbol (name)/value pairs known to the function.
 
+For example...
 ```{r Example of a Function}
 
-inverse <- function(x){
-    inverse <- 1/x
+inverse <- function(invert_me){
+    inverse <- 1/invert_me
     return(inverse)
 }
 
 inverse(2)
 ```
 
-Another example of a function
-
-
-```{r Import - write function}
-# get data from each subject's directory and make a data frame for each subject
-
-create_df <- function(subjects) {
-    df <- data.frame() # make an empty data frame
-    for (sub in subjects) {
-        data_file = list.files(paste0(data_dir, sub), pattern = "*.csv") # list of csv files in the subject's datadir
-        path_tmp <- paste0(data_dir, sub, "/", data_file) # path to subject's data file
-        df_tmp <- read.csv(path_tmp, sep = ",") # read in the data
-        df_tmp$id <- rep(as.character(sub), nrow(df_tmp)) # make a column for the subject ID based
-        df <- rbind(df, df_tmp) # add the subject's data to the main data frame
-    }
-  return(df) # name the data frame 'dat' and make available in the global environment
-}
-```
-
-
-Use the function
-
-```{r Import - get subject data}
-# dat <- create_df(subjects = subjects)
-# head(dat)
-```
-
-> Scoping from R Faq 3.3.1
-
-NOT REAL YET!
+We can interrogate the parts of a function
 
 ```{r}
+formals(inverse)
+body(inverse)
+environment(inverse)
+```
+
+## Environments and Scoping
+
+### Function Environments 
+
+Functions create their own private collection of variables that are distinct from those in the global environment. 
+
+For example, what's going on here?
+
+```{r}
+x <- 1
+y <- 3
+
+whos_who <- function(){
+  x <- 2
+  print(paste("x is", x))
+  print(paste("y is", y))
+}
+
+whos_who()
+print(paste("but x is also", x))
+```
+
+We define x and y to be 1 and 3 respectively, and then a function that defines x to be 2. When we call the function, it tells us that x is 2 and 3, but outside the function x is 1. 
+
+The assignment `x <- 2` is **scoped**, or defined locally in the function's environment. **Lexical scoping** is the process by which functions lookup the values associated with different names. In this case, `x` is defined locally, but `y` is not. Functions inherit the enviroment that they were defined in, or their **enclosing environment**, in this case the global environment -- a function and its attached environment is called a **closure**.
+
+```{r}
+environment(whos_who)
+```
+
+If a function doesn't find a variable locally, it ascends the environments it is nested within until it finds (or doesn't find) a match. If one defines a function within another function, the innermost function will preserve the environment of the outer function -- which can be used to make "function factories:"
+
+```{r}
+# example from http://adv-r.had.co.nz/Environments.html#function-envs
+
+plus <- function(x){
+  function(y){
+    x + y
+  }
+}
+
+plus_one <- plus(1)
+plus_two <- plus(2)
+
+plus_one(1)
+plus_two(2)
+```
+
+the `plus` function itself returns a function with the environment created when `plus` is called. Since `x` is defined in the returned function's (eg. `plus_one`) **enclosing environment** it will always be able to use that value even if there is another `x` in the global environment. 
+
+While a function will always preserve its enclosing environment, its **execution environment**, or the environment created when the function is called, is created fresh each time. This **fresh start** principle gives functions their utility as dissociable building blocks for more complicated code -- if a function does one thing and does it well, it can be used in whatever context that operation needs to be performed without fear or prejudice from its previous experiences.
+
+Functions also have a **binding environment(s)**, or the environments that have a binding between a name and the function. We will skip these for now as they will become more relevant when it comes time to write packages, but more information can be found here: [http://adv-r.had.co.nz/Environments.html#function-envs](Advanced R - Function Environments)
+
+### Querying environments
+
+The global environment, which we are used to working in, is itself nested within a series of environments:
+
+1. A series of package environments (or **namespaces**) that provide the names of any loaded (`library/require()`'d) packages
+2. The base environment that provides the names of the base functions
+3. The empty environment, the parent of all environments.
+
+![http://adv-r.had.co.nz/Environments.html](guide_files/globalenv.png)
+
+You can see the loaded packages, or search path, with `search`
+```{r}
+search()
+```
+
+One can make a symbol to reference an environment with `as.environment`
+```{r}
+env <- as.environment('.GlobalEnv')
+```
+
+and query its contents with `ls.str()`
+
+```{r}
+ls.str(env)
+```
+
+if you're lost deep in a twisted spire of environments and need to get something specifically, you can do so with `get` (although fixing the structure of your code is usually a better idea ;p)
+
+```{r}
+# create a new environment
+new_env <- new.env()
+
+# assignation works like a list
+new_env$new_var <- 5
+
+# attaching an environment adds it to our search path
+attach(new_env)
+search()
+new_var
+detach(new_env)
+
+# we now make a new assignation in the global environment, which will be searched before any attached environment
+new_var <- 10
+new_var
+
+attach(new_env)
+new_var
+detach(new_env)
+
+# we can skip the masking of the global environment with get
+get("new_var", envir=new_env)
+```
+
+## Arguments
+
+The names of the variables used within the function and the structure of their input are the **formal arguments** of a function, but the variables that are given to a function each time are also called arguments. Where ambiguous, refer to the latter as arguments.
+
+Arguments can be specified by position or name. Partial names also work, but that typically makes for confusing code. Arguments are first matched by name and then by position.
+
+```{r}
+profit_maker <- function(good_idea, stealing, depth){
+  print(paste("Momma said i should", good_idea, 
+              "but instead I stole", stealing, 
+              "dollars and buried it in a hole", depth, "feet deep"))
+}
+
+profit_maker("say mean things about barn animals", 100, 1000)
+
+profit_maker(depth=100, stealing=1, good_idea="keep my bellybutton open")
+```
+
+Formal arguments can be defined with default values, so if an argument is not passed the default is used.
+
+```{r}
+whats_it_cost <- function(cost=10){
+  print(paste("i dunno like", cost, "bucks"))
+}
+
+whats_it_cost()
+```
+
+This is useful in situations where a function should do one thing most of the time, but if asked nicely should do something else.
+
+```{r}
+ice_cream <- function(scoops, round=FALSE){
+  if (round == FALSE){
+    print(paste("here ya go kid,", scoops, "scoops of hot fresh ice cream"))
+  } else {
+    print(paste("listen kid i'm gonna give you", floor(scoops), "scoops and you can get out of my shop"))
+  }
+}
+
+what_i_want <- runif(1)*10
+
+ice_cream(what_i_want)
+ice_cream(what_i_want, round=TRUE)
+```
+
+Default arguments can be used to make code more efficient while still being flexible. For example if the same value needs to be computed in a number of different functions, it can instead be passed. If the default is set to NULL you can check if you need to perform the computation.
+
+```{r}
+# precompute some image's x gradient stupidly
+image <- matrix(runif(100), nrow=10, ncol=10)
+grad <- diff(image)
+
+image_operation_1 <- function(image, grad=NULL){
+  if (is.null(grad)){
+    grad <- diff(image)
+  }
+  # do some stuff to the image
+}
+
+image_operation_2 <- function(image, grad=NULL){
+  if (is.null(grad)){
+    grad <- diff(image)
+  }
+  # do some stuff to the image
+}
+
+```
+
+Additionally, oen can use `...` to specify an arbitrary number of arguments. This is commonly used in the S3 object system where the arguments passed as `...` are simply passed on to the method calls from the generic method.
+
+```{r}
+print_whatever <- function(...){
+  args <- list(...)
+  anames <- names(args)
+  for (a in anames){
+    print(paste(a, ":", args[a]))
+  }
+}
+
+print_whatever(apple="banana", coconut="hospital visit")
+```
+
+
+
+
+
+
+
+
+
+
+## Todo:
+
+* Scoping from R Faq 3.3.1
+
+```{r, eval=FALSE}
 # S4 Methods are stored in environments 
 nM <- asNamespace("Matrix")
 sort(grep("^[.]__T__", names(nM), value=TRUE))

@@ -49,41 +49,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 </head>
@@ -100,543 +128,124 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ul class="summary">
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Lessons</a></li>
 <li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
-<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#installing-r-and-r-studio"><i class="fa fa-check"></i><b>2.1</b> Installing R and R Studio</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="introduction.html"><a href="introduction.html#using-rstudio"><i class="fa fa-check"></i><b>2.1.1</b> Using RStudio</a></li>
-</ul></li>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#installing-r-and-r-studio"><i class="fa fa-check"></i><b>2.1</b> Installing R and R Studio</a></li>
 <li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#getting-help"><i class="fa fa-check"></i><b>2.2</b> Getting help</a></li>
-<li class="chapter" data-level="2.3" data-path="introduction.html"><a href="introduction.html#section"><i class="fa fa-check"></i><b>2.3</b> [1] 11</a></li>
-<li class="chapter" data-level="2.4" data-path="introduction.html"><a href="introduction.html#objects"><i class="fa fa-check"></i><b>2.4</b> Objects</a></li>
-<li class="chapter" data-level="2.5" data-path="introduction.html"><a href="introduction.html#section-1"><i class="fa fa-check"></i><b>2.5</b> [1] 3.316625</a></li>
-<li class="chapter" data-level="2.6" data-path="introduction.html"><a href="introduction.html#but-these-go-up-to-11"><i class="fa fa-check"></i><b>2.6</b> [1] “But these go up to 11”</a></li>
-<li class="chapter" data-level="2.7" data-path="introduction.html"><a href="introduction.html#section-2"><i class="fa fa-check"></i><b>2.7</b> [1] 11 10</a></li>
-<li class="chapter" data-level="2.8" data-path="introduction.html"><a href="introduction.html#section-3"><i class="fa fa-check"></i><b>2.8</b> [1] 3.316625 3.162278</a></li>
-<li class="chapter" data-level="2.9" data-path="introduction.html"><a href="introduction.html#functions"><i class="fa fa-check"></i><b>2.9</b> Functions</a></li>
-<li class="chapter" data-level="2.10" data-path="introduction.html"><a href="introduction.html#packages"><i class="fa fa-check"></i><b>2.10</b> Packages</a></li>
-<li class="chapter" data-level="2.11" data-path="introduction.html"><a href="introduction.html#cran"><i class="fa fa-check"></i><b>2.11</b> CRAN</a></li>
-<li class="chapter" data-level="2.12" data-path="introduction.html"><a href="introduction.html#cran-1"><i class="fa fa-check"></i><b>2.12</b> <a href="mailto:%22@CRAN@">&quot;@CRAN@</a>&quot;</a></li>
-<li class="chapter" data-level="2.13" data-path="introduction.html"><a href="introduction.html#libraryframeworksr.frameworkversions3.4resourceslibrary"><i class="fa fa-check"></i><b>2.13</b> [1] “/Library/Frameworks/R.framework/Versions/3.4/Resources/library”</a></li>
-<li class="chapter" data-level="2.14" data-path="introduction.html"><a href="introduction.html#globalenv-packagestats-packagegraphics"><i class="fa fa-check"></i><b>2.14</b> [1] “.GlobalEnv” “package:stats” “package:graphics”</a></li>
-<li class="chapter" data-level="2.15" data-path="introduction.html"><a href="introduction.html#packagegrdevices-packageutils-packagedatasets"><i class="fa fa-check"></i><b>2.15</b> [4] “package:grDevices” “package:utils” “package:datasets”</a></li>
-<li class="chapter" data-level="2.16" data-path="introduction.html"><a href="introduction.html#autoloads-packagebase"><i class="fa fa-check"></i><b>2.16</b> [7] “Autoloads” “package:base”</a></li>
-<li class="chapter" data-level="2.17" data-path="introduction.html"><a href="introduction.html#attaching-packages-tidyverse-1.2.1"><i class="fa fa-check"></i><b>2.17</b> ── Attaching packages ────────────────────────────────── tidyverse 1.2.1 ──</a></li>
-<li class="chapter" data-level="2.18" data-path="introduction.html"><a href="introduction.html#ggplot2-2.2.1.9000-purrr-0.2.4"><i class="fa fa-check"></i><b>2.18</b> ✔ ggplot2 2.2.1.9000 ✔ purrr 0.2.4</a></li>
-<li class="chapter" data-level="2.19" data-path="introduction.html"><a href="introduction.html#tibble-1.4.2-dplyr-0.7.4"><i class="fa fa-check"></i><b>2.19</b> ✔ tibble 1.4.2 ✔ dplyr 0.7.4</a></li>
-<li class="chapter" data-level="2.20" data-path="introduction.html"><a href="introduction.html#tidyr-0.8.0-stringr-1.3.0"><i class="fa fa-check"></i><b>2.20</b> ✔ tidyr 0.8.0 ✔ stringr 1.3.0</a></li>
-<li class="chapter" data-level="2.21" data-path="introduction.html"><a href="introduction.html#readr-1.1.1-forcats-0.3.0"><i class="fa fa-check"></i><b>2.21</b> ✔ readr 1.1.1 ✔ forcats 0.3.0</a></li>
-<li class="chapter" data-level="2.22" data-path="introduction.html"><a href="introduction.html#conflicts-tidyverse_conflicts"><i class="fa fa-check"></i><b>2.22</b> ── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──</a></li>
-<li class="chapter" data-level="2.23" data-path="introduction.html"><a href="introduction.html#dplyrfilter-masks-statsfilter"><i class="fa fa-check"></i><b>2.23</b> ✖ dplyr::filter() masks stats::filter()</a></li>
-<li class="chapter" data-level="2.24" data-path="introduction.html"><a href="introduction.html#dplyrlag-masks-statslag"><i class="fa fa-check"></i><b>2.24</b> ✖ dplyr::lag() masks stats::lag()</a></li>
-<li class="chapter" data-level="2.25" data-path="introduction.html"><a href="introduction.html#dplyrvars-masks-ggplot2vars"><i class="fa fa-check"></i><b>2.25</b> ✖ dplyr::vars() masks ggplot2::vars()</a></li>
-<li class="chapter" data-level="2.26" data-path="introduction.html"><a href="introduction.html#globalenv-packageforcats-packagestringr"><i class="fa fa-check"></i><b>2.26</b> [1] “.GlobalEnv” “package:forcats” “package:stringr”</a></li>
-<li class="chapter" data-level="2.27" data-path="introduction.html"><a href="introduction.html#packagedplyr-packagepurrr-packagereadr"><i class="fa fa-check"></i><b>2.27</b> [4] “package:dplyr” “package:purrr” “package:readr”</a></li>
-<li class="chapter" data-level="2.28" data-path="introduction.html"><a href="introduction.html#packagetidyr-packagetibble-packageggplot2"><i class="fa fa-check"></i><b>2.28</b> [7] “package:tidyr” “package:tibble” “package:ggplot2”</a></li>
-<li class="chapter" data-level="2.29" data-path="introduction.html"><a href="introduction.html#packagetidyverse-packagestats-packagegraphics"><i class="fa fa-check"></i><b>2.29</b> [10] “package:tidyverse” “package:stats” “package:graphics”</a></li>
-<li class="chapter" data-level="2.30" data-path="introduction.html"><a href="introduction.html#packagegrdevices-packageutils-packagedatasets-1"><i class="fa fa-check"></i><b>2.30</b> [13] “package:grDevices” “package:utils” “package:datasets”</a></li>
-<li class="chapter" data-level="2.31" data-path="introduction.html"><a href="introduction.html#autoloads-packagebase-1"><i class="fa fa-check"></i><b>2.31</b> [16] “Autoloads” “package:base”</a></li>
-<li class="chapter" data-level="2.32" data-path="introduction.html"><a href="introduction.html#section-4"><i class="fa fa-check"></i><b>2.32</b> ————————————————————————-</a></li>
-<li class="chapter" data-level="2.33" data-path="introduction.html"><a href="introduction.html#you-have-loaded-plyr-after-dplyr---this-is-likely-to-cause-problems."><i class="fa fa-check"></i><b>2.33</b> You have loaded plyr after dplyr - this is likely to cause problems.</a></li>
-<li class="chapter" data-level="2.34" data-path="introduction.html"><a href="introduction.html#if-you-need-functions-from-both-plyr-and-dplyr-please-load-plyr-first-then-dplyr"><i class="fa fa-check"></i><b>2.34</b> If you need functions from both plyr and dplyr, please load plyr first, then dplyr:</a></li>
-<li class="chapter" data-level="2.35" data-path="introduction.html"><a href="introduction.html#libraryplyr-librarydplyr"><i class="fa fa-check"></i><b>2.35</b> library(plyr); library(dplyr)</a></li>
-<li class="chapter" data-level="2.36" data-path="introduction.html"><a href="introduction.html#section-5"><i class="fa fa-check"></i><b>2.36</b> ————————————————————————-</a></li>
-<li class="chapter" data-level="2.37" data-path="introduction.html"><a href="introduction.html#section-6"><i class="fa fa-check"></i><b>2.37</b> </a></li>
-<li class="chapter" data-level="2.38" data-path="introduction.html"><a href="introduction.html#attaching-package-plyr"><i class="fa fa-check"></i><b>2.38</b> Attaching package: ‘plyr’</a></li>
-<li class="chapter" data-level="2.39" data-path="introduction.html"><a href="introduction.html#the-following-objects-are-masked-by-packagedplyr"><i class="fa fa-check"></i><b>2.39</b> The following objects are masked <em>by</em> ‘package:dplyr’:</a></li>
-<li class="chapter" data-level="2.40" data-path="introduction.html"><a href="introduction.html#section-7"><i class="fa fa-check"></i><b>2.40</b> </a></li>
-<li class="chapter" data-level="2.41" data-path="introduction.html"><a href="introduction.html#arrange-count-desc-failwith-id-mutate-rename-summarise"><i class="fa fa-check"></i><b>2.41</b> arrange, count, desc, failwith, id, mutate, rename, summarise,</a></li>
-<li class="chapter" data-level="2.42" data-path="introduction.html"><a href="introduction.html#summarize"><i class="fa fa-check"></i><b>2.42</b> summarize</a></li>
-<li class="chapter" data-level="2.43" data-path="introduction.html"><a href="introduction.html#the-following-object-is-masked-by-packagepurrr"><i class="fa fa-check"></i><b>2.43</b> The following object is masked <em>by</em> ‘package:purrr’:</a></li>
-<li class="chapter" data-level="2.44" data-path="introduction.html"><a href="introduction.html#section-8"><i class="fa fa-check"></i><b>2.44</b> </a></li>
-<li class="chapter" data-level="2.45" data-path="introduction.html"><a href="introduction.html#compact"><i class="fa fa-check"></i><b>2.45</b> compact</a></li>
-<li class="chapter" data-level="2.46" data-path="introduction.html"><a href="introduction.html#some-useful-basic-syntax"><i class="fa fa-check"></i><b>2.46</b> Some useful basic syntax</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="objects-1.html"><a href="objects-1.html"><i class="fa fa-check"></i><b>3</b> Objects</a><ul>
-<li class="chapter" data-level="3.1" data-path="objects-1.html"><a href="objects-1.html#what-are-objects"><i class="fa fa-check"></i><b>3.1</b> What are Objects?</a></li>
-<li class="chapter" data-level="3.2" data-path="objects-1.html"><a href="objects-1.html#section-9"><i class="fa fa-check"></i><b>3.2</b> [1] 2</a></li>
-<li class="chapter" data-level="3.3" data-path="objects-1.html"><a href="objects-1.html#error-in-a-b-non-numeric-argument-to-binary-operator"><i class="fa fa-check"></i><b>3.3</b> Error in “a” + “b”: non-numeric argument to binary operator</a></li>
-<li class="chapter" data-level="3.4" data-path="objects-1.html"><a href="objects-1.html#double"><i class="fa fa-check"></i><b>3.4</b> [1] “double”</a></li>
-<li class="chapter" data-level="3.5" data-path="objects-1.html"><a href="objects-1.html#character"><i class="fa fa-check"></i><b>3.5</b> [1] “character”</a><ul>
-<li class="chapter" data-level="3.5.1" data-path="objects-1.html"><a href="objects-1.html#object-terminology"><i class="fa fa-check"></i><b>3.5.1</b> Object terminology</a></li>
+<li class="chapter" data-level="3" data-path="what-is-r.html"><a href="what-is-r.html"><i class="fa fa-check"></i><b>3</b> What is R?</a><ul>
+<li class="chapter" data-level="3.1" data-path="what-is-r.html"><a href="what-is-r.html#objects"><i class="fa fa-check"></i><b>3.1</b> Objects</a></li>
+<li class="chapter" data-level="3.2" data-path="what-is-r.html"><a href="what-is-r.html#functions"><i class="fa fa-check"></i><b>3.2</b> Functions</a></li>
+<li class="chapter" data-level="3.3" data-path="what-is-r.html"><a href="what-is-r.html#packages"><i class="fa fa-check"></i><b>3.3</b> Packages</a></li>
+<li class="chapter" data-level="3.4" data-path="what-is-r.html"><a href="what-is-r.html#some-useful-basic-syntax"><i class="fa fa-check"></i><b>3.4</b> Some useful basic syntax</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="objects-1.html"><a href="objects-1.html#objects-in-r"><i class="fa fa-check"></i><b>3.6</b> Objects in R</a><ul>
-<li class="chapter" data-level="3.6.1" data-path="objects-1.html"><a href="objects-1.html#object-systems"><i class="fa fa-check"></i><b>3.6.1</b> Object Systems</a></li>
+<li class="chapter" data-level="4" data-path="objects-1.html"><a href="objects-1.html"><i class="fa fa-check"></i><b>4</b> Objects</a><ul>
+<li class="chapter" data-level="4.1" data-path="objects-1.html"><a href="objects-1.html#what-are-objects"><i class="fa fa-check"></i><b>4.1</b> What are Objects?</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="objects-1.html"><a href="objects-1.html#object-terminology"><i class="fa fa-check"></i><b>4.1.1</b> Object terminology</a></li>
 </ul></li>
-<li class="chapter" data-level="3.7" data-path="objects-1.html"><a href="objects-1.html#list-of-12"><i class="fa fa-check"></i><b>3.7</b> List of 12</a></li>
-<li class="chapter" data-level="3.8" data-path="objects-1.html"><a href="objects-1.html#coefficients-named-num-12--3-1"><i class="fa fa-check"></i><b>3.8</b> $ coefficients : Named num [1:2] -3 1</a></li>
-<li class="chapter" data-level="3.9" data-path="objects-1.html"><a href="objects-1.html#attr-names-chr-12-intercept-c4-5-6-residuals-named-num-13--9.06e-17-1.81e-16--9.06e-17-..--attr-names-chr-13-1-2-3"><i class="fa fa-check"></i><b>3.9</b> ..- attr(<em>, “names”)= chr [1:2] “(Intercept)” “c(4, 5, 6)” ## $ residuals : Named num [1:3] -9.06e-17 1.81e-16 -9.06e-17 ## ..- attr(</em>, “names”)= chr [1:3] “1” “2” “3”</a></li>
-<li class="chapter" data-level="3.10" data-path="objects-1.html"><a href="objects-1.html#effects-named-num-13--3.46--1.41--2.22e-16"><i class="fa fa-check"></i><b>3.10</b> $ effects : Named num [1:3] -3.46 -1.41 -2.22e-16</a></li>
-<li class="chapter" data-level="3.11" data-path="objects-1.html"><a href="objects-1.html#attr-names-chr-13-intercept-c4-5-6-rank-int-2-fitted.values-named-num-13-1-2-3-..--attr-names-chr-13-1-2-3"><i class="fa fa-check"></i><b>3.11</b> ..- attr(<em>, “names”)= chr [1:3] “(Intercept)” “c(4, 5, 6)” “” ## $ rank : int 2 ## $ fitted.values: Named num [1:3] 1 2 3 ## ..- attr(</em>, “names”)= chr [1:3] “1” “2” “3”</a></li>
-<li class="chapter" data-level="3.12" data-path="objects-1.html"><a href="objects-1.html#assign-int-12-0-1"><i class="fa fa-check"></i><b>3.12</b> $ assign : int [1:2] 0 1</a></li>
-<li class="chapter" data-level="3.13" data-path="objects-1.html"><a href="objects-1.html#qr-list-of-5"><i class="fa fa-check"></i><b>3.13</b> $ qr :List of 5</a></li>
-<li class="chapter" data-level="3.14" data-path="objects-1.html"><a href="objects-1.html#qr-num-13-12--1.732-0.577-0.577--8.66--1.414"><i class="fa fa-check"></i><b>3.14</b> ..$ qr : num [1:3, 1:2] -1.732 0.577 0.577 -8.66 -1.414 …</a></li>
-<li class="chapter" data-level="3.15" data-path="objects-1.html"><a href="objects-1.html#attr-dimnameslist-of-2-..-..-..-chr-13-1-2-3-..-..-..-chr-12-intercept-c4-5-6-..-..--attr-assign-int-12-0-1"><i class="fa fa-check"></i><b>3.15</b> .. ..- attr(<em>, “dimnames”)=List of 2 ## .. .. ..$ : chr [1:3] “1” “2” “3” ## .. .. ..$ : chr [1:2] “(Intercept)” “c(4, 5, 6)” ## .. ..- attr(</em>, “assign”)= int [1:2] 0 1</a></li>
-<li class="chapter" data-level="3.16" data-path="objects-1.html"><a href="objects-1.html#qraux-num-12-1.58-1.26"><i class="fa fa-check"></i><b>3.16</b> ..$ qraux: num [1:2] 1.58 1.26</a></li>
-<li class="chapter" data-level="3.17" data-path="objects-1.html"><a href="objects-1.html#pivot-int-12-1-2"><i class="fa fa-check"></i><b>3.17</b> ..$ pivot: int [1:2] 1 2</a></li>
-<li class="chapter" data-level="3.18" data-path="objects-1.html"><a href="objects-1.html#tol-num-1e-07"><i class="fa fa-check"></i><b>3.18</b> ..$ tol : num 1e-07</a></li>
-<li class="chapter" data-level="3.19" data-path="objects-1.html"><a href="objects-1.html#rank-int-2"><i class="fa fa-check"></i><b>3.19</b> ..$ rank : int 2</a></li>
-<li class="chapter" data-level="3.20" data-path="objects-1.html"><a href="objects-1.html#attr-class-chr-qr-df.residual-int-1-xlevels-named-list-call-language-lmformula-c1-2-3-c4-5-6-terms-classes-terms-formula-language-c1-2-3-c4-5-6-..-..--attr-variables-language-listc1-2-3-c4-5-6"><i class="fa fa-check"></i><b>3.20</b> ..- attr(<em>, “class”)= chr “qr” ## $ df.residual : int 1 ## $ xlevels : Named list() ## $ call : language lm(formula = c(1, 2, 3) ~ c(4, 5, 6)) ## $ terms :Classes ‘terms’, ‘formula’ language c(1, 2, 3) ~ c(4, 5, 6) ## .. ..- attr(</em>, “variables”)= language list(c(1, 2, 3), c(4, 5, 6))</a></li>
-<li class="chapter" data-level="3.21" data-path="objects-1.html"><a href="objects-1.html#attr-factors-int-12-1-0-1-..-..-..--attr-dimnameslist-of-2"><i class="fa fa-check"></i><b>3.21</b> .. ..- attr(<em>, “factors”)= int [1:2, 1] 0 1 ## .. .. ..- attr(</em>, “dimnames”)=List of 2</a></li>
-<li class="chapter" data-level="3.22" data-path="objects-1.html"><a href="objects-1.html#chr-12-c1-2-3-c4-5-6"><i class="fa fa-check"></i><b>3.22</b> .. .. .. ..$ : chr [1:2] “c(1, 2, 3)” “c(4, 5, 6)”</a></li>
-<li class="chapter" data-level="3.23" data-path="objects-1.html"><a href="objects-1.html#chr-c4-5-6"><i class="fa fa-check"></i><b>3.23</b> .. .. .. ..$ : chr “c(4, 5, 6)”</a></li>
-<li class="chapter" data-level="3.24" data-path="objects-1.html"><a href="objects-1.html#attr-term.labels-chr-c4-5-6-..-..--attr-order-int-1"><i class="fa fa-check"></i><b>3.24</b> .. ..- attr(<em>, “term.labels”)= chr “c(4, 5, 6)” ## .. ..- attr(</em>, “order”)= int 1</a></li>
-<li class="chapter" data-level="3.25" data-path="objects-1.html"><a href="objects-1.html#attr-intercept-int-1-..-..--attr-response-int-1"><i class="fa fa-check"></i><b>3.25</b> .. ..- attr(<em>, “intercept”)= int 1 ## .. ..- attr(</em>, “response”)= int 1</a></li>
-<li class="chapter" data-level="3.26" data-path="objects-1.html"><a href="objects-1.html#attr-.environmentenvironment-r_globalenv-..-..--attr-predvars-language-listc1-2-3-c4-5-6"><i class="fa fa-check"></i><b>3.26</b> .. ..- attr(<em>, “.Environment”)=&lt;environment: R_GlobalEnv&gt; ## .. ..- attr(</em>, “predvars”)= language list(c(1, 2, 3), c(4, 5, 6))</a></li>
-<li class="chapter" data-level="3.27" data-path="objects-1.html"><a href="objects-1.html#attr-dataclasses-named-chr-12-numeric-numeric-..-..-..--attr-names-chr-12-c1-2-3-c4-5-6"><i class="fa fa-check"></i><b>3.27</b> .. ..- attr(<em>, “dataClasses”)= Named chr [1:2] “numeric” “numeric” ## .. .. ..- attr(</em>, “names”)= chr [1:2] “c(1, 2, 3)” “c(4, 5, 6)”</a></li>
-<li class="chapter" data-level="3.28" data-path="objects-1.html"><a href="objects-1.html#model-data.frame-3-obs.-of-2-variables"><i class="fa fa-check"></i><b>3.28</b> $ model :‘data.frame’: 3 obs. of 2 variables:</a></li>
-<li class="chapter" data-level="3.29" data-path="objects-1.html"><a href="objects-1.html#c1-2-3-num-13-1-2-3"><i class="fa fa-check"></i><b>3.29</b> ..$ c(1, 2, 3): num [1:3] 1 2 3</a></li>
-<li class="chapter" data-level="3.30" data-path="objects-1.html"><a href="objects-1.html#c4-5-6-num-13-4-5-6"><i class="fa fa-check"></i><b>3.30</b> ..$ c(4, 5, 6): num [1:3] 4 5 6</a></li>
-<li class="chapter" data-level="3.31" data-path="objects-1.html"><a href="objects-1.html#attr-termsclasses-terms-formula-language-c1-2-3-c4-5-6-..-..-..--attr-variables-language-listc1-2-3-c4-5-6"><i class="fa fa-check"></i><b>3.31</b> ..- attr(<em>, “terms”)=Classes ‘terms’, ‘formula’ language c(1, 2, 3) ~ c(4, 5, 6) ## .. .. ..- attr(</em>, “variables”)= language list(c(1, 2, 3), c(4, 5, 6))</a></li>
-<li class="chapter" data-level="3.32" data-path="objects-1.html"><a href="objects-1.html#attr-factors-int-12-1-0-1-..-..-..-..--attr-dimnameslist-of-2"><i class="fa fa-check"></i><b>3.32</b> .. .. ..- attr(<em>, “factors”)= int [1:2, 1] 0 1 ## .. .. .. ..- attr(</em>, “dimnames”)=List of 2</a></li>
-<li class="chapter" data-level="3.33" data-path="objects-1.html"><a href="objects-1.html#chr-12-c1-2-3-c4-5-6-1"><i class="fa fa-check"></i><b>3.33</b> .. .. .. .. ..$ : chr [1:2] “c(1, 2, 3)” “c(4, 5, 6)”</a></li>
-<li class="chapter" data-level="3.34" data-path="objects-1.html"><a href="objects-1.html#chr-c4-5-6-1"><i class="fa fa-check"></i><b>3.34</b> .. .. .. .. ..$ : chr “c(4, 5, 6)”</a></li>
-<li class="chapter" data-level="3.35" data-path="objects-1.html"><a href="objects-1.html#attr-term.labels-chr-c4-5-6-..-..-..--attr-order-int-1"><i class="fa fa-check"></i><b>3.35</b> .. .. ..- attr(<em>, “term.labels”)= chr “c(4, 5, 6)” ## .. .. ..- attr(</em>, “order”)= int 1</a></li>
-<li class="chapter" data-level="3.36" data-path="objects-1.html"><a href="objects-1.html#attr-intercept-int-1-..-..-..--attr-response-int-1"><i class="fa fa-check"></i><b>3.36</b> .. .. ..- attr(<em>, “intercept”)= int 1 ## .. .. ..- attr(</em>, “response”)= int 1</a></li>
-<li class="chapter" data-level="3.37" data-path="objects-1.html"><a href="objects-1.html#attr-.environmentenvironment-r_globalenv-..-..-..--attr-predvars-language-listc1-2-3-c4-5-6"><i class="fa fa-check"></i><b>3.37</b> .. .. ..- attr(<em>, “.Environment”)=&lt;environment: R_GlobalEnv&gt; ## .. .. ..- attr(</em>, “predvars”)= language list(c(1, 2, 3), c(4, 5, 6))</a></li>
-<li class="chapter" data-level="3.38" data-path="objects-1.html"><a href="objects-1.html#attr-dataclasses-named-chr-12-numeric-numeric-..-..-..-..--attr-names-chr-12-c1-2-3-c4-5-6"><i class="fa fa-check"></i><b>3.38</b> .. .. ..- attr(<em>, “dataClasses”)= Named chr [1:2] “numeric” “numeric” ## .. .. .. ..- attr(</em>, “names”)= chr [1:2] “c(1, 2, 3)” “c(4, 5, 6)”</a></li>
-<li><a href="objects-1.html#attr-class-chr-lm-1-base-1-s3-1-s3-1-numeric-1-lm-1-base-1-numeric-attributes-1-apples-bananas-cherries-apples-1-1-apples-bananas-cherries-names-1-apples-bananas-cherries-base-types-1-double-1-list-vectors-1-integer-1-double-1-character-1-1-1-1-1-as.data.frame-see-methods-for-accessing-help-and-source-code-1-all.equal-as.data.frame-3-as.date-as.posixlt-5-as.raster-formula-7-getdllregisteredroutines-see-methods-for-accessing-help-and-source-code-1-1-1-2-1-2-3-1-3-1-integer-1-double-1-character-1-true-1-1-1-1-list-1-1-1-2-3-2-1-apple-banana-cucumber-1-1-1-2-3-1-1-1-2-3-1-1-2-3-1-1-1-1-2-3-1-1-2-3-1-1-1-2-1-2-3-1-3-1-1-1-2-3-2-1-a-b-c-1-1-2-3-a-b-c-1-list-matrices-arrays-1-1-2-3-1-1-3-5-2-2-4-6-2-1-2-3-1-7-9-11-2-8-10-12-3-1-2-3-1-13-15-17-2-14-16-18-4-1-2-3-1-19-21-23-2-20-22-24-1-integer-dim-1-2-3-4-1-2-3-1-1-9-17-2-2-10-18-3-3-11-19-4-4-12-20-5-5-13-21-6-6-14-22-7-7-15-23-8-8-16-24-1-1-2-3-1-1-3-5-2-2-4-6-2-1-2-3-1-7-9-11-2-8-10-12-3-1-2-3-1-13-15-17-2-14-16-18-4-1-2-3-1-19-21-23-2-20-22-24-1-2-3-1-1-4-7-2-2-5-8-3-3-6-9-1-2-3-1-1-2-3-2-4-5-6-3-7-8-9-1-2-3-1-1-4-7-2-2-5-8-3-3-6-9-4-1-2-3-5-4-5-6-6-7-8-9-1-2-3-4-5-6-1-1-4-7-1-2-3-2-2-5-8-4-5-6-3-3-6-9-7-8-9-1-1-2-3-1-1-4-7-2-2-5-8-3-3-6-9-2-1-2-3-1-1-2-3-2-4-5-6-3-7-8-9-1-all.equal-as.data.frame-relist-within-see-methods-for-accessing-help-and-source-code-1-anyduplicated-as.data.frame-as.raster-boxplot-determinant-6-duplicated-edit-head-issymmetric-relist-11-subset-summary-tail-unique-see-methods-for-accessing-help-and-source-code-data-frames-little_ones-big_ones-1-0-5-2-1-6-3-2-7-4-3-8-5-4-9-names-1-little_ones-big_ones-row.names-1-1-2-3-4-5-class-1-data.frame-little_ones-1-0-2-1-3-2-4-3-5-4-1-0-1-2-3-4-1-0-1-little_ones-big_ones-1-little_ones-big_ones-1-1-2-3-4-5-1-0-1-2-3-4-1-5-6-7-8-9-little_ones-big_ones-medium_ones-1-0-5-3-2-1-6-4-3-2-7-5-4-3-8-6-5-4-9-7-little_ones-big_ones-1-0-5-2-1-6-3-2-7-4-3-8-5-4-9-6-3-3-7-4-4-8-5-5-9-6-6-10-7-7-etc.-s3-objects-null-1-letters-1-mean.date-mean.default-mean.difftime-mean.posixct-mean.posixlt-see-methods-for-accessing-help-and-source-code-1-----6-as.character-as.data.frame-as.list-as.posixct-as.posixlt-11-axis-c-cut-diff-format-16-hist-is.numeric-julian-math-mean-21-months-ops-pretty-print-quarters-26-rep-round-seq-split-str-31-summary-summary-trunc-weekdays-weighted.mean-36-xtfrm-see-methods-for-accessing-help-and-source-code-1-s3-generic-function-x-y-null-type-p-xlim-null-ylim-null-log-main-null-sub-null-xlab-null-ylab-null-ann-parann-axes-true-frame.plot-axes-panel.first-null-panel.last-null-asp-na-...-localaxis---function...-col-bg-pch-cex-lty-lwd-axis...-localbox---function...-col-bg-pch-cex-lty-lwd-box...-localwindow---function...-col-bg-pch-cex-lty-lwd-plot.window...-localtitle---function...-col-bg-pch-cex-lty-lwd-title...-xlabel---if-missingx-deparsesubstitutex-ylabel---if-missingy-deparsesubstitutey-xy---xy.coordsx-y-xlabel-ylabel-log-xlab---if-is.nullxlab-xyxlab-else-xlab-ylab---if-is.nullylab-xyylab-else-ylab-xlim---if-is.nullxlim-rangexyxis.finitexyx-else-xlim-ylim---if-is.nullylim-rangexyyis.finitexyy-else-ylim-dev.hold-on.exitdev.flush-plot.new-localwindowxlim-ylim-log-asp-panel.first-plot.xyxy-type-panel.last-if-axes-localaxisif-is.nully-xyx-else-x-side-1-localaxisif-is.nully-x-else-y-side-2-if-frame.plot-localbox-if-ann-localtitlemain-main-sub-sub-xlab-xlab-ylab-ylab-invisible-bytecode-0x7f8679715400-environment-namespacegraphics-example-extending-s3-objects-1-s3-generic-1-1-1-1.25-1-thats-just-a-one-you-maniac-1-meanany-method-meanmatrix-method-3-meansparsematrix-method-meansparsevector-method-5-mean.date-mean.default-7-mean.difftime-mean.just_one-9-mean.posixct-mean.posixlt-see-methods-for-accessing-help-and-source-code-null-warning-in-mean.defaultdates-argument-is-not-numeric-or-logical-returning-na-1-na-1-date-1-2000-01-08-1-2000-01-08-s4-objects-1-data.frame-call-null-no-coefficients-error-in-if-p-0-argument-is-of-length-zero-reference-classes-references"><span class="toc-section-number">3.39</span> - attr(*, “class”)= chr “lm” ## [1] “base” ## [1] “S3” ## [1] “S3” ## [1] “numeric” ## [1] “lm” ## [1] “base” ## [1] “numeric” ### Attributes ## [1] “apples” “bananas” “cherries” ## apples ## 1 ## [1] “apples” “bananas” “cherries” ## $names ## [1] “apples” “bananas” “cherries” ## Base Types ## [1] “double” ## [1] “list” ### Vectors ## [1] “integer” ## [1] “double” ## [1] “character” ## [1] 1 ## [1] “1” ## [1] as.data.frame ## see ‘?methods’ for accessing help and source code ## [1] all.equal as.data.frame<br />
-## [3] as.Date as.POSIXlt<br />
-## [5] as.raster formula<br />
-## [7] getDLLRegisteredRoutines ## see ‘?methods’ for accessing help and source code ## [[1]] ## [1] 1 ## ## [<a href="data.html#section-12">2</a>] ## [1] 2 ## ## [[3]] ## [1] “3” ## [1] “integer” ## [1] “double” ## [1] “character” ## [1] TRUE ## [[1]] ## [1] 1 ## [1] “list” ## [[1]] ## [1] 1 2 3 ## ## [<a href="data.html#section-12">2</a>] ## [1] “apple” “banana” “cucumber” ## [[1]] ## [1] 1 2 3 ## [[1]] ## [1] 1 2 3 ## [1] 1 2 3 ## [1] 1 ## [1] 1 2 3 ## [1] 1 2 3 ## [[1]] ## [1] 1 ## ## [<a href="data.html#section-12">2</a>] ## [1] 2 ## ## [[3]] ## [1] 3 ## [[1]] ## [1] 1 2 3 ## ## [<a href="data.html#section-12">2</a>] ## [1] “a” “b” “c” ## [1] “1” “2” “3” “a” “b” “c” ## [1] “list” ### Matrices &amp; Arrays ## , , 1 ## ## [,1] [,2] [,3] ## [1,] 1 3 5 ## [2,] 2 4 6 ## ## , , 2 ## ## [,1] [,2] [,3] ## [1,] 7 9 11 ## [2,] 8 10 12 ## ## , , 3 ## ## [,1] [,2] [,3] ## [1,] 13 15 17 ## [2,] 14 16 18 ## ## , , 4 ## ## [,1] [,2] [,3] ## [1,] 19 21 23 ## [2,] 20 22 24 ## [1] “integer” ## $dim ## [1] 2 3 4 ## [,1] [,2] [,3] ## [1,] 1 9 17 ## [2,] 2 10 18 ## [3,] 3 11 19 ## [4,] 4 12 20 ## [5,] 5 13 21 ## [6,] 6 14 22 ## [7,] 7 15 23 ## [8,] 8 16 24 ## , , 1 ## ## [,1] [,2] [,3] ## [1,] 1 3 5 ## [2,] 2 4 6 ## ## , , 2 ## ## [,1] [,2] [,3] ## [1,] 7 9 11 ## [2,] 8 10 12 ## ## , , 3 ## ## [,1] [,2] [,3] ## [1,] 13 15 17 ## [2,] 14 16 18 ## ## , , 4 ## ## [,1] [,2] [,3] ## [1,] 19 21 23 ## [2,] 20 22 24 ## [,1] [,2] [,3] ## [1,] 1 4 7 ## [2,] 2 5 8 ## [3,] 3 6 9 ## [,1] [,2] [,3] ## [1,] 1 2 3 ## [2,] 4 5 6 ## [3,] 7 8 9 ## [,1] [,2] [,3] ## [1,] 1 4 7 ## [2,] 2 5 8 ## [3,] 3 6 9 ## [4,] 1 2 3 ## [5,] 4 5 6 ## [6,] 7 8 9 ## [,1] [,2] [,3] [,4] [,5] [,6] ## [1,] 1 4 7 1 2 3 ## [2,] 2 5 8 4 5 6 ## [3,] 3 6 9 7 8 9 ## , , 1 ## ## [,1] [,2] [,3] ## [1,] 1 4 7 ## [2,] 2 5 8 ## [3,] 3 6 9 ## ## , , 2 ## ## [,1] [,2] [,3] ## [1,] 1 2 3 ## [2,] 4 5 6 ## [3,] 7 8 9 ## [1] all.equal as.data.frame relist within<br />
-## see ‘?methods’ for accessing help and source code ## [1] anyDuplicated as.data.frame as.raster boxplot determinant<br />
-## [6] duplicated edit head isSymmetric relist<br />
-## [11] subset summary tail unique<br />
-## see ‘?methods’ for accessing help and source code ### Data Frames ## little_ones big_ones ## 1 0 5 ## 2 1 6 ## 3 2 7 ## 4 3 8 ## 5 4 9 ## $names ## [1] “little_ones” “big_ones”<br />
-## ## $row.names ## [1] 1 2 3 4 5 ## ## <span class="math inline">\(class ## [1] &quot;data.frame&quot; ## little_ones ## 1 0 ## 2 1 ## 3 2 ## 4 3 ## 5 4 ## [1] 0 1 2 3 4 ## [1] 0 ## [1] &quot;little_ones&quot; &quot;big_ones&quot; ## [1] &quot;little_ones&quot; &quot;big_ones&quot; ## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; &quot;5&quot; ## [1] 0 1 2 3 4 ## [1] 5 6 7 8 9 ## little_ones big_ones medium_ones ## 1 0 5 3 ## 2 1 6 4 ## 3 2 7 5 ## 4 3 8 6 ## 5 4 9 7 ## little_ones big_ones ## 1 0 5 ## 2 1 6 ## 3 2 7 ## 4 3 8 ## 5 4 9 ## 6 3 3 ## 7 4 4 ## 8 5 5 ## 9 6 6 ## 10 7 7 ### Etc. ## S3 Objects ## NULL ## [1] &quot;letters&quot; ## [1] mean.Date mean.default mean.difftime mean.POSIXct mean.POSIXlt ## see &#39;?methods&#39; for accessing help and source code ## [1] - [ [[ [&lt;- + ## [6] as.character as.data.frame as.list as.POSIXct as.POSIXlt ## [11] Axis c cut diff format ## [16] hist is.numeric julian Math mean ## [21] months Ops pretty print quarters ## [26] rep round seq split str ## [31] summary Summary trunc weekdays weighted.mean ## [36] xtfrm ## see &#39;?methods&#39; for accessing help and source code ## [1] &quot;s3&quot; &quot;generic&quot; ## function (x, y = NULL, type = &quot;p&quot;, xlim = NULL, ylim = NULL, ## log = &quot;&quot;, main = NULL, sub = NULL, xlab = NULL, ylab = NULL, ## ann = par(&quot;ann&quot;), axes = TRUE, frame.plot = axes, panel.first = NULL, ## panel.last = NULL, asp = NA, ...) ## { ## localAxis &lt;- function(..., col, bg, pch, cex, lty, lwd) Axis(...) ## localBox &lt;- function(..., col, bg, pch, cex, lty, lwd) box(...) ## localWindow &lt;- function(..., col, bg, pch, cex, lty, lwd) plot.window(...) ## localTitle &lt;- function(..., col, bg, pch, cex, lty, lwd) title(...) ## xlabel &lt;- if (!missing(x)) ## deparse(substitute(x)) ## ylabel &lt;- if (!missing(y)) ## deparse(substitute(y)) ## xy &lt;- xy.coords(x, y, xlabel, ylabel, log) ## xlab &lt;- if (is.null(xlab)) ## xy\)</span>xlab ## else xlab ## ylab &lt;- if (is.null(ylab)) ## xy<span class="math inline">\(ylab ## else ylab ## xlim &lt;- if (is.null(xlim)) ## range(xy\)</span>x[is.finite(xy$x)]) ## else xlim ## ylim &lt;- if (is.null(ylim)) ## range(xy<span class="math inline">\(y[is.finite(xy\)</span>y)]) ## else ylim ## dev.hold() ## on.exit(dev.flush()) ## plot.new() ## localWindow(xlim, ylim, log, asp, …) ## panel.first ## plot.xy(xy, type, …) ## panel.last ## if (axes) { ## localAxis(if (is.null(y)) ## xy$x ## else x, side = 1, …) ## localAxis(if (is.null(y)) ## x ## else y, side = 2, …) ## } ## if (frame.plot) ## localBox(…) ## if (ann) ## localTitle(main = main, sub = sub, xlab = xlab, ylab = ylab, ## …) ## invisible() ## } ## &lt;bytecode: 0x7f8679715400&gt; ## &lt;environment: namespace:graphics&gt; ### Example: Extending S3 Objects ## [1] “s3” “generic” ## [1] 1 ## [1] 1.25 ## [1] “that’s just a one you maniac” ## [1] mean,ANY-method mean,Matrix-method<br />
-## [3] mean,sparseMatrix-method mean,sparseVector-method ## [5] mean.Date mean.default<br />
-## [7] mean.difftime mean.just_one<br />
-## [9] mean.POSIXct mean.POSIXlt<br />
-## see ‘?methods’ for accessing help and source code ## NULL ## Warning in mean.default(dates): argument is not numeric or logical: ## returning NA ## [1] NA ## [1] “Date” ## [1] “2000-01-08” ## [1] “2000-01-08” ## S4 Objects ## [1] “data.frame” ## ## Call: ## NULL ## ## No coefficients ## Error in if (p == 0) {: argument is of length zero ## Reference Classes ## References</a></li>
+<li class="chapter" data-level="4.2" data-path="objects-1.html"><a href="objects-1.html#objects-in-r"><i class="fa fa-check"></i><b>4.2</b> Objects in R</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="objects-1.html"><a href="objects-1.html#object-systems"><i class="fa fa-check"></i><b>4.2.1</b> Object Systems</a></li>
+<li class="chapter" data-level="4.2.2" data-path="objects-1.html"><a href="objects-1.html#attributes"><i class="fa fa-check"></i><b>4.2.2</b> Attributes</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>4</b> Data</a><ul>
-<li class="chapter" data-level="4.1" data-path="data.html"><a href="data.html#loading"><i class="fa fa-check"></i><b>4.1</b> Loading</a><ul>
-<li class="chapter" data-level="4.1.1" data-path="data.html"><a href="data.html#one-day-we-will-have-a-summary-table-here"><i class="fa fa-check"></i><b>4.1.1</b> One day we will have a summary table here</a></li>
-<li class="chapter" data-level="4.1.2" data-path="data.html"><a href="data.html#csv-files"><i class="fa fa-check"></i><b>4.1.2</b> .csv files</a></li>
-<li class="chapter" data-level="4.1.3" data-path="data.html"><a href="data.html#defaults"><i class="fa fa-check"></i><b>4.1.3</b> Defaults</a></li>
-<li class="chapter" data-level="4.1.4" data-path="data.html"><a href="data.html#a-brief-interlude-into-formats-for-data-in-r"><i class="fa fa-check"></i><b>4.1.4</b> A brief interlude into formats for data in R</a></li>
-<li class="chapter" data-level="4.1.5" data-path="data.html"><a href="data.html#format-issues"><i class="fa fa-check"></i><b>4.1.5</b> Format issues?</a></li>
-<li class="chapter" data-level="4.1.6" data-path="data.html"><a href="data.html#sav-files"><i class="fa fa-check"></i><b>4.1.6</b> .sav files</a></li>
-<li class="chapter" data-level="4.1.7" data-path="data.html"><a href="data.html#rio-for-general-import"><i class="fa fa-check"></i><b>4.1.7</b> <code>rio</code> for general import</a></li>
+<li class="chapter" data-level="4.3" data-path="objects-1.html"><a href="objects-1.html#base-types"><i class="fa fa-check"></i><b>4.3</b> Base Types</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="objects-1.html"><a href="objects-1.html#vectors"><i class="fa fa-check"></i><b>4.3.1</b> Vectors</a></li>
+<li class="chapter" data-level="4.3.2" data-path="objects-1.html"><a href="objects-1.html#matrices-arrays"><i class="fa fa-check"></i><b>4.3.2</b> Matrices &amp; Arrays</a></li>
+<li class="chapter" data-level="4.3.3" data-path="objects-1.html"><a href="objects-1.html#data-frames"><i class="fa fa-check"></i><b>4.3.3</b> Data Frames</a></li>
+<li class="chapter" data-level="4.3.4" data-path="objects-1.html"><a href="objects-1.html#etc."><i class="fa fa-check"></i><b>4.3.4</b> Etc.</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="data.html"><a href="data.html#saving"><i class="fa fa-check"></i><b>4.2</b> Saving</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="data.html"><a href="data.html#rdata-files"><i class="fa fa-check"></i><b>4.2.1</b> .RData files</a></li>
+<li class="chapter" data-level="4.4" data-path="objects-1.html"><a href="objects-1.html#s3-objects"><i class="fa fa-check"></i><b>4.4</b> S3 Objects</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="objects-1.html"><a href="objects-1.html#example-extending-s3-objects"><i class="fa fa-check"></i><b>4.4.1</b> Example: Extending S3 Objects</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="data.html"><a href="data.html#you-have-to-stop-wiping-your-nose-with-just-whatever-is-close-at-hand"><i class="fa fa-check"></i><b>4.3</b> [1] “you have to stop wiping your nose with just whatever is close at hand”</a></li>
-<li class="chapter" data-level="4.4" data-path="data.html"><a href="data.html#see-you-did-it-just-now-that-was-mine"><i class="fa fa-check"></i><b>4.4</b> <a href="data.html#section-12">2</a> “see you did it just now that was mine”</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="data.html"><a href="data.html#sink"><i class="fa fa-check"></i><b>4.4.1</b> <code>sink</code></a></li>
+<li class="chapter" data-level="4.5" data-path="objects-1.html"><a href="objects-1.html#s4-objects"><i class="fa fa-check"></i><b>4.5</b> S4 Objects</a></li>
+<li class="chapter" data-level="4.6" data-path="objects-1.html"><a href="objects-1.html#reference-classes"><i class="fa fa-check"></i><b>4.6</b> Reference Classes</a></li>
+<li class="chapter" data-level="4.7" data-path="objects-1.html"><a href="objects-1.html#references"><i class="fa fa-check"></i><b>4.7</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="data.html"><a href="data.html#what-we-need-at-the-store-2day-guys"><i class="fa fa-check"></i><b>4.5</b> [1] “what we need at the store 2day guys”</a></li>
-<li class="chapter" data-level="4.6" data-path="data.html"><a href="data.html#its-always-just-apples-and-bananas"><i class="fa fa-check"></i><b>4.6</b> <a href="data.html#section-12">2</a> “it’s always just apples and bananas”</a></li>
-<li class="chapter" data-level="4.7" data-path="data.html"><a href="data.html#we-have-severe-vitamin-deficiencies"><i class="fa fa-check"></i><b>4.7</b> [3] “we have severe vitamin deficiencies”</a></li>
-<li class="chapter" data-level="4.8" data-path="data.html"><a href="data.html#character0"><i class="fa fa-check"></i><b>4.8</b> character(0)</a></li>
-<li class="chapter" data-level="4.9" data-path="data.html"><a href="data.html#function-width-7-height-7"><i class="fa fa-check"></i><b>4.9</b> function (width = 7, height = 7, …)</a></li>
-<li class="chapter" data-level="4.10" data-path="data.html"><a href="data.html#section-10"><i class="fa fa-check"></i><b>4.10</b> {</a></li>
-<li class="chapter" data-level="4.11" data-path="data.html"><a href="data.html#grdevicespdfnull-width-height"><i class="fa fa-check"></i><b>4.11</b> grDevices::pdf(NULL, width, height, …)</a></li>
-<li class="chapter" data-level="4.12" data-path="data.html"><a href="data.html#section-11"><i class="fa fa-check"></i><b>4.12</b> }</a></li>
-<li class="chapter" data-level="4.13" data-path="data.html"><a href="data.html#environment-namespaceknitr"><i class="fa fa-check"></i><b>4.13</b> &lt;environment: namespace:knitr&gt;</a></li>
-<li class="chapter" data-level="4.14" data-path="data.html"><a href="data.html#quartz_off_screen"><i class="fa fa-check"></i><b>4.14</b> quartz_off_screen</a></li>
-<li class="chapter" data-level="4.15" data-path="data.html"><a href="data.html#section-12"><i class="fa fa-check"></i><b>4.15</b> 2</a></li>
-<li class="chapter" data-level="4.16" data-path="data.html"><a href="data.html#indexing"><i class="fa fa-check"></i><b>4.16</b> Indexing</a></li>
-<li class="chapter" data-level="4.17" data-path="data.html"><a href="data.html#section-13"><i class="fa fa-check"></i><b>4.17</b> [1] 5 10 15 20 25</a></li>
-<li class="chapter" data-level="4.18" data-path="data.html"><a href="data.html#section-14"><i class="fa fa-check"></i><b>4.18</b> [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]</a></li>
-<li class="chapter" data-level="4.19" data-path="data.html"><a href="data.html#section-15"><i class="fa fa-check"></i><b>4.19</b> [1,] 1 4 7 10 13 16 19 22</a></li>
-<li class="chapter" data-level="4.20" data-path="data.html"><a href="data.html#section-16"><i class="fa fa-check"></i><b>4.20</b> [2,] 2 5 8 11 14 17 20 23</a></li>
-<li class="chapter" data-level="4.21" data-path="data.html"><a href="data.html#section-17"><i class="fa fa-check"></i><b>4.21</b> [3,] 3 6 9 12 15 18 21 24</a></li>
-<li class="chapter" data-level="4.22" data-path="data.html"><a href="data.html#section-18"><i class="fa fa-check"></i><b>4.22</b> [1] 15</a></li>
-<li class="chapter" data-level="4.23" data-path="data.html"><a href="data.html#section-19"><i class="fa fa-check"></i><b>4.23</b> [1] 15 25</a></li>
-<li class="chapter" data-level="4.24" data-path="data.html"><a href="data.html#section-20"><i class="fa fa-check"></i><b>4.24</b> [1] 13</a></li>
-<li class="chapter" data-level="4.25" data-path="data.html"><a href="data.html#section-21"><i class="fa fa-check"></i><b>4.25</b> [1] 9 12 21</a></li>
-<li class="chapter" data-level="4.26" data-path="data.html"><a href="data.html#section-22"><i class="fa fa-check"></i><b>4.26</b> [1] 2 5 8 11 14 17 20 23</a></li>
-<li class="chapter" data-level="4.27" data-path="data.html"><a href="data.html#harry"><i class="fa fa-check"></i><b>4.27</b> harry</a></li>
-<li class="chapter" data-level="4.28" data-path="data.html"><a href="data.html#section-23"><i class="fa fa-check"></i><b>4.28</b> 15</a></li>
-<li class="chapter" data-level="4.29" data-path="data.html"><a href="data.html#numbers"><i class="fa fa-check"></i><b>4.29</b> $numbers</a></li>
-<li class="chapter" data-level="4.30" data-path="data.html"><a href="data.html#section-24"><i class="fa fa-check"></i><b>4.30</b> [1] 6 7 8 9 10</a></li>
-<li class="chapter" data-level="4.31" data-path="data.html"><a href="data.html#section-25"><i class="fa fa-check"></i><b>4.31</b> [1] 6 7 8 9 10</a></li>
-<li class="chapter" data-level="4.32" data-path="data.html"><a href="data.html#section-26"><i class="fa fa-check"></i><b>4.32</b> [1] 1 2 3 4 5</a></li>
-<li class="chapter" data-level="4.33" data-path="data.html"><a href="data.html#adam-steve-ted-watson"><i class="fa fa-check"></i><b>4.33</b> adam steve ted watson</a></li>
-<li class="chapter" data-level="4.34" data-path="data.html"><a href="data.html#section-27"><i class="fa fa-check"></i><b>4.34</b> 5 10 20 25</a></li>
-<li class="chapter" data-level="4.35" data-path="data.html"><a href="data.html#section-28"><i class="fa fa-check"></i><b>4.35</b> [1] -1 -2 -3</a></li>
-<li class="chapter" data-level="4.36" data-path="data.html"><a href="data.html#ted-watson"><i class="fa fa-check"></i><b>4.36</b> ted watson</a></li>
-<li class="chapter" data-level="4.37" data-path="data.html"><a href="data.html#section-29"><i class="fa fa-check"></i><b>4.37</b> 20 25</a></li>
-<li class="chapter" data-level="4.38" data-path="data.html"><a href="data.html#harry-1"><i class="fa fa-check"></i><b>4.38</b> harry</a></li>
-<li class="chapter" data-level="4.39" data-path="data.html"><a href="data.html#section-30"><i class="fa fa-check"></i><b>4.39</b> 15</a></li>
-<li class="chapter" data-level="4.40" data-path="data.html"><a href="data.html#section-31"><i class="fa fa-check"></i><b>4.40</b> [1] 9</a></li>
-<li class="chapter" data-level="4.41" data-path="data.html"><a href="data.html#na-null-attaching-package-dplyr-the-following-objects-are-masked-from-packagestats-filter-lag-the-following-objects-are-masked-from-packagebase-intersect-setdiff-setequal-union-1-carat-cut-color-clarity-depth-table-price-8-x-y-z-a-tibble-6-x-4-carat-cut-color-clarity-dbl-ord-ord-ord-1-0.230-ideal-e-si2-2-0.210-premium-e-si1-3-0.230-good-e-vs1-4-0.290-premium-i-vs2-5-0.310-good-j-si2-6-0.240-very-good-j-vvs2-warning-unknown-variables-hue-luminance-a-tibble-6-x-2-color-clarity-ord-ord-1-e-si2-2-e-si1-3-e-vs1-4-i-vs2-5-j-si2-6-j-vvs2-logical-indexing-harry-15-harry-15-adam-steve-harry-ted-watson-false-false-true-true-true-adam-steve-harry-ted-watson-false-true-true-true-true-adam-steve-harry-ted-watson-false-false-true-false-false-1-2-3-adam-false-true-false-steve-false-true-false-harry-true-true-true-ted-true-false-false-watson-true-false-false-1-true-a-tibble-16988-x-10-carat-cut-color-clarity-depth-table-price-x-y-z-dbl-ord-ord-ord-dbl-dbl-int-dbl-dbl-dbl-1-0.230-good-e-vs1-56.9-65.0-327-4.05-4.07-2.31-2-0.310-good-j-si2-63.3-58.0-335-4.34-4.35-2.75-3-0.240-very-good-j-vvs2-62.8-57.0-336-3.94-3.96-2.48-4-0.240-very-good-i-vvs1-62.3-57.0-336-3.95-3.98-2.47-5-0.260-very-good-h-si1-61.9-55.0-337-4.07-4.11-2.53-6-0.230-very-good-h-vs1-59.4-61.0-338-4.00-4.05-2.39-7-0.300-good-j-si1-64.0-55.0-339-4.25-4.28-2.73-8-0.300-good-j-si1-63.4-54.0-351-4.23-4.29-2.70-9-0.300-good-j-si1-63.8-56.0-351-4.23-4.26-2.71-10-0.300-very-good-j-si1-62.7-59.0-351-4.21-4.27-2.66-...-with-16978-more-rows-a-tibble-1579-x-10-carat-cut-color-clarity-depth-table-price-x-y-z-dbl-ord-ord-ord-dbl-dbl-int-dbl-dbl-dbl-1-1.01-good-i-i1-63.1-57.0-2844-6.35-6.39-4.02-2-1.01-good-h-i1-64.2-61.0-2846-6.25-6.18-3.99-3-1.03-good-j-si1-63.6-57.0-2855-6.38-6.29-4.03-4-1.04-good-i-si2-59.9-64.0-2970-6.51-6.45-3.88-5-1.01-good-e-i1-63.8-57.0-3032-6.40-6.33-4.06-6-1.02-good-e-i1-63.1-60.0-3051-6.31-6.40-4.01-7-1.01-good-j-si2-63.7-60.0-3088-6.40-6.29-4.05-8-1.29-good-i-i1-64.2-54.0-3098-6.93-6.83-4.42-9-1.52-good-e-i1-57.3-58.0-3105-7.53-7.42-4.28-10-1.52-good-e-i1-57.3-58.0-3105-7.53-7.42-4.28-...-with-1569-more-rows-a-tibble-6-x-1-cut-ord-1-good-2-good-3-good-4-good-5-good-6-good-a-tibble-6-x-1-color-ord-1-i-2-h-3-j-4-i-5-e-6-e-1-i-h-j-i-e-e-levels-d-e-f-g-h-i-j-a-tibble-6-x-10-carat-cut-color-clarity-depth-table-price-x-y-z-dbl-ord-ord-ord-dbl-dbl-int-dbl-dbl-dbl-1-0.230-good-e-vs1-56.9-65.0-327-4.05-4.07-2.31-2-0.310-good-j-si2-63.3-58.0-335-4.34-4.35-2.75-3-0.240-very-good-j-vvs2-62.8-57.0-336-3.94-3.96-2.48-4-0.240-very-good-i-vvs1-62.3-57.0-336-3.95-3.98-2.47-5-0.260-very-good-h-si1-61.9-55.0-337-4.07-4.11-2.53-6-0.230-very-good-h-vs1-59.4-61.0-338-4.00-4.05-2.39-a-tibble-6-x-10-carat-cut-color-clarity-depth-table-price-x-y-z-dbl-ord-ord-ord-dbl-dbl-int-dbl-dbl-dbl-1-0.230-good-e-vs1-56.9-65.0-327-4.05-4.07-2.31-2-0.310-good-j-si2-63.3-58.0-335-4.34-4.35-2.75-3-0.240-very-good-j-vvs2-62.8-57.0-336-3.94-3.96-2.48-4-0.240-very-good-i-vvs1-62.3-57.0-336-3.95-3.98-2.47-5-0.260-very-good-h-si1-61.9-55.0-337-4.07-4.11-2.53-6-0.230-very-good-h-vs1-59.4-61.0-338-4.00-4.05-2.39-adam-steve-harry-ted-watson-false-false-true-true-true-harry-ted-watson-3-4-5-assignment-with-indexing-error-in--.data.frametmp-favorites-value-c4-5-replacement-has-2-rows-data-has-3-basic-manipulation-1-5-4-3-2-1-1-1-2-3-4-5-1-true-true-true-true-true-1-5-4-3-2-1-1-true-true-true-true-true-victor_rep-1-3-5-7-10-3-1-2-1-1-1-1-3-5-7-10-piping-syntax-a-quick-sidenote-about-the-term-pipe-the-logic-of-piping-syntax-1-5.107867-1-4.497808-5.131531-4.921083-5.886785-5.116971-5.318630-4.418209-8-5.714533-4.174741-4.640138-5.089886-5.096274-4.798366-5.739840-15-5.123380-4.970683-4.611146-5.510856-4.086186-7.310297-a-quick-tip-about-style-1-5.107867-1-5.107867-logic-of-piping-syntax-continued-1-5.09308-1-5.09308-1-5.09308-why-use-pipes-cleaner-code-a-cleaner-environment-a-note-about-scaling-saving-the-output-of-your-pipe-reshaping-wide-vs.-long-data-attaching-packages-tidyverse-1.2.1-ggplot2-2.2.1.9000-readr-1.1.1-tibble-1.4.2-purrr-0.2.4-tidyr-0.8.0-stringr-1.3.0-ggplot2-2.2.1.9000-forcats-0.3.0-conflicts-tidyverse_conflicts-dplyrfilter-masks-statsfilter-dplyrlag-masks-statslag-ggplot2vars-masks-dplyrvars-a-tibble-100-x-21-pid-agreeableness_t1-conscientiousnes-neuroticism_t1-extraversion_t1-dbl-dbl-dbl-dbl-dbl-1-1.00-2.56-2.23-1.48-1.78-2-2.00-3.76-3.42-2.98-3.89-3-3.00-3.26-2.42-3.03-3.25-4-4.00-3.77-3.42-3.16-2.93-5-5.00-2.19-1.45-3.41-3.20-6-6.00-2.56-2.48-2.37-5.48-7-7.00-2.28-2.72-3.64-3.47-8-8.00-3.23-4.01-1.80-4.33-9-9.00-1.84-2.53-4.35-3.67-10-10.0-3.25-3.30-2.40-2.86-...-with-90-more-rows-and-16-more-variables-openness_t1-dbl-agreeableness_t2-dbl-conscientiousness_t2-dbl-neuroticism_t2-dbl-extraversion_t2-dbl-openness_t2-dbl-agreeableness_t3-dbl-conscientiousness_t3-dbl-neuroticism_t3-dbl-extraversion_t3-dbl-openness_t3-dbl-agreeableness_t4-dbl-conscientiousness_t4-dbl-neuroticism_t4-dbl-extraversion_t4-dbl-openness_t4-dbl-classes-tbl_df-tbl-and-data.frame-100-obs.-of-21-variables-pid-num-1-2-3-4-5-6-7-8-9-10-...-agreeableness_t1-num-2.56-3.76-3.26-3.77-2.19-...-conscientiousness_t1-num-2.23-3.42-2.42-3.42-1.45-...-neuroticism_t1-num-1.48-2.98-3.03-3.16-3.41-...-extraversion_t1-num-1.78-3.89-3.25-2.93-3.2-...-openness_t1-num-3.28-3.82-2.57-3.57-3.18-...-agreeableness_t2-num-3.13-4.38-3.58-4.62-3-...-conscientiousness_t2-num-3.05-3.89-2.84-4.35-1.93-...-neuroticism_t2-num-2.46-3.62-3.35-3.82-4.17-...-extraversion_t2-num-2.33-4.72-3.95-3.36-3.67-...-openness_t2-num-3.77-4.14-2.88-4.32-4.04-...-agreeableness_t3-num-3.64-4.89-4.19-5.1-3.39-...-conscientiousness_t3-num-3.35-4.09-3.64-5.14-2.63-...-neuroticism_t3-num-3.37-4.16-3.91-4.42-4.97-...-extraversion_t3-num-2.67-4.96-4.4-4.05-4.04-...-openness_t3-num-4.28-4.63-3.48-4.92-4.29-...-agreeableness_t4-num-4.21-5.49-4.75-5.44-3.44-...-conscientiousness_t4-num-3.79-4.55-3.9-5.94-3.35-...-neuroticism_t4-num-3.52-4.55-4.1-4.67-5.34-...-extraversion_t4-num-3.49-5.43-4.99-4.78-4.5-...-openness_t4-num-4.87-5.22-3.98-5.54-4.91-...-a-tibble-2000-x-4-pid-time-trait-score-dbl-chr-chr-dbl-1-1.00-t1-agreeableness-2.56-2-1.00-t2-agreeableness-3.13-3-1.00-t3-agreeableness-3.64-4-1.00-t4-agreeableness-4.21-5-2.00-t1-agreeableness-3.76-6-2.00-t2-agreeableness-4.38-7-2.00-t3-agreeableness-4.89-8-2.00-t4-agreeableness-5.49-9-3.00-t1-agreeableness-3.26-10-3.00-t2-agreeableness-3.58-...-with-1990-more-rows-wide-to-long-a-tibble-100-x-21-pid-agreeableness_t1-conscientiousnes-neuroticism_t1-extraversion_t1-dbl-dbl-dbl-dbl-dbl-1-1.00-2.56-2.23-1.48-1.78-2-2.00-3.76-3.42-2.98-3.89-3-3.00-3.26-2.42-3.03-3.25-4-4.00-3.77-3.42-3.16-2.93-5-5.00-2.19-1.45-3.41-3.20-6-6.00-2.56-2.48-2.37-5.48-7-7.00-2.28-2.72-3.64-3.47-8-8.00-3.23-4.01-1.80-4.33-9-9.00-1.84-2.53-4.35-3.67-10-10.0-3.25-3.30-2.40-2.86-...-with-90-more-rows-and-16-more-variables-openness_t1-dbl-agreeableness_t2-dbl-conscientiousness_t2-dbl-neuroticism_t2-dbl-extraversion_t2-dbl-openness_t2-dbl-agreeableness_t3-dbl-conscientiousness_t3-dbl-neuroticism_t3-dbl-extraversion_t3-dbl-openness_t3-dbl-agreeableness_t4-dbl-conscientiousness_t4-dbl-neuroticism_t4-dbl-extraversion_t4-dbl-openness_t4-dbl-a-tibble-400-x-7-pid-time-agreeableness-conscientiousness-extraversion-neuroticism-dbl-chr-dbl-dbl-dbl-dbl-1-1.00-t1-2.56-2.23-1.78-1.48-2-1.00-t2-3.13-3.05-2.33-2.46-3-1.00-t3-3.64-3.35-2.67-3.37-4-1.00-t4-4.21-3.79-3.49-3.52-5-2.00-t1-3.76-3.42-3.89-2.98-6-2.00-t2-4.38-3.89-4.72-3.62-7-2.00-t3-4.89-4.09-4.96-4.16-8-2.00-t4-5.49-4.55-5.43-4.55-9-3.00-t1-3.26-2.42-3.25-3.03-10-3.00-t2-3.58-2.84-3.95-3.35-...-with-390-more-rows-and-1-more-variable-openness-dbl-a-tibble-2000-x-3-pid-variable-score-dbl-chr-dbl-1-1.00-agreeableness_t1-2.56-2-2.00-agreeableness_t1-3.76-3-3.00-agreeableness_t1-3.26-4-4.00-agreeableness_t1-3.77-5-5.00-agreeableness_t1-2.19-6-6.00-agreeableness_t1-2.56-7-7.00-agreeableness_t1-2.28-8-8.00-agreeableness_t1-3.23-9-9.00-agreeableness_t1-1.84-10-10.0-agreeableness_t1-3.25-...-with-1990-more-rows-a-tibble-2000-x-4-pid-trait-time-score-dbl-chr-chr-dbl-1-1.00-agreeableness-t1-2.56-2-2.00-agreeableness-t1-3.76-3-3.00-agreeableness-t1-3.26-4-4.00-agreeableness-t1-3.77-5-5.00-agreeableness-t1-2.19-6-6.00-agreeableness-t1-2.56-7-7.00-agreeableness-t1-2.28-8-8.00-agreeableness-t1-3.23-9-9.00-agreeableness-t1-1.84-10-10.0-agreeableness-t1-3.25-...-with-1990-more-rows-a-tibble-2000-x-4-pid-trait-time-score-dbl-chr-chr-dbl-1-1.00-agreeableness-t1-2.56-2-2.00-agreeableness-t1-3.76-3-3.00-agreeableness-t1-3.26-4-4.00-agreeableness-t1-3.77-5-5.00-agreeableness-t1-2.19-6-6.00-agreeableness-t1-2.56-7-7.00-agreeableness-t1-2.28-8-8.00-agreeableness-t1-3.23-9-9.00-agreeableness-t1-1.84-10-10.0-agreeableness-t1-3.25-...-with-1990-more-rows-long-to-wide-spread-a-tibble-400-x-7-pid-time-agreeableness-conscientiousness-extraversion-neuroticism-dbl-chr-dbl-dbl-dbl-dbl-1-1.00-t1-2.56-2.23-1.78-1.48-2-1.00-t2-3.13-3.05-2.33-2.46-3-1.00-t3-3.64-3.35-2.67-3.37-4-1.00-t4-4.21-3.79-3.49-3.52-5-2.00-t1-3.76-3.42-3.89-2.98-6-2.00-t2-4.38-3.89-4.72-3.62-7-2.00-t3-4.89-4.09-4.96-4.16-8-2.00-t4-5.49-4.55-5.43-4.55-9-3.00-t1-3.26-2.42-3.25-3.03-10-3.00-t2-3.58-2.84-3.95-3.35-...-with-390-more-rows-and-1-more-variable-openness-dbl-a-tibble-100-x-21-pid-agreeableness_t1-agreeableness_t2-agreeableness_t3-dbl-dbl-dbl-dbl-1-1.00-2.56-3.13-3.64-2-2.00-3.76-4.38-4.89-3-3.00-3.26-3.58-4.19-4-4.00-3.77-4.62-5.10-5-5.00-2.19-3.00-3.39-6-6.00-2.56-2.85-3.41-7-7.00-2.28-2.85-3.19-8-8.00-3.23-3.82-4.29-9-9.00-1.84-2.17-2.77-10-10.0-3.25-3.90-4.30-...-with-90-more-rows-and-17-more-variables-agreeableness_t4-dbl-conscientiousness_t1-dbl-conscientiousness_t2-dbl-conscientiousness_t3-dbl-conscientiousness_t4-dbl-extraversion_t1-dbl-extraversion_t2-dbl-extraversion_t3-dbl-extraversion_t4-dbl-neuroticism_t1-dbl-neuroticism_t2-dbl-neuroticism_t3-dbl-neuroticism_t4-dbl-openness_t1-dbl-openness_t2-dbl-openness_t3-dbl-openness_t4-dbl-a-tibble-400-x-7-pid-time-agreeableness-conscientiousness-extraversion-neuroticism-dbl-chr-dbl-dbl-dbl-dbl-1-1.00-t1-2.56-2.23-1.78-1.48-2-1.00-t2-3.13-3.05-2.33-2.46-3-1.00-t3-3.64-3.35-2.67-3.37-4-1.00-t4-4.21-3.79-3.49-3.52-5-2.00-t1-3.76-3.42-3.89-2.98-6-2.00-t2-4.38-3.89-4.72-3.62-7-2.00-t3-4.89-4.09-4.96-4.16-8-2.00-t4-5.49-4.55-5.43-4.55-9-3.00-t1-3.26-2.42-3.25-3.03-10-3.00-t2-3.58-2.84-3.95-3.35-...-with-390-more-rows-and-1-more-variable-openness-dbl-a-tibble-100-x-21-pid-agreeableness_t1-agreeableness_t2-agreeableness_t3-dbl-dbl-dbl-dbl-1-1.00-2.56-3.13-3.64-2-2.00-3.76-4.38-4.89-3-3.00-3.26-3.58-4.19-4-4.00-3.77-4.62-5.10-5-5.00-2.19-3.00-3.39-6-6.00-2.56-2.85-3.41-7-7.00-2.28-2.85-3.19-8-8.00-3.23-3.82-4.29-9-9.00-1.84-2.17-2.77-10-10.0-3.25-3.90-4.30-...-with-90-more-rows-and-17-more-variables-agreeableness_t4-dbl-conscientiousness_t1-dbl-conscientiousness_t2-dbl-conscientiousness_t3-dbl-conscientiousness_t4-dbl-extraversion_t1-dbl-extraversion_t2-dbl-extraversion_t3-dbl-extraversion_t4-dbl-neuroticism_t1-dbl-neuroticism_t2-dbl-neuroticism_t3-dbl-neuroticism_t4-dbl-openness_t1-dbl-openness_t2-dbl-openness_t3-dbl-openness_t4-dbl-using-reshape-long-to-wide-a-tibble-400-x-7-pid-time-agreeableness-conscientiousness-extraversion-neuroticism-dbl-chr-dbl-dbl-dbl-dbl-1-1.00-t1-2.56-2.23-1.78-1.48-2-1.00-t2-3.13-3.05-2.33-2.46-3-1.00-t3-3.64-3.35-2.67-3.37-4-1.00-t4-4.21-3.79-3.49-3.52-5-2.00-t1-3.76-3.42-3.89-2.98-6-2.00-t2-4.38-3.89-4.72-3.62-7-2.00-t3-4.89-4.09-4.96-4.16-8-2.00-t4-5.49-4.55-5.43-4.55-9-3.00-t1-3.26-2.42-3.25-3.03-10-3.00-t2-3.58-2.84-3.95-3.35-...-with-390-more-rows-and-1-more-variable-openness-dbl-a-tibble-100-x-6-pidagreeableness_ct1-conscientiousness_cextraversion_ct1"><i class="fa fa-check"></i><b>4.41</b> <span class="math inline">\(&lt;NA&gt; ## NULL ## ## Attaching package: &#39;dplyr&#39; ## The following objects are masked from &#39;package:stats&#39;: ## ## filter, lag ## The following objects are masked from &#39;package:base&#39;: ## ## intersect, setdiff, setequal, union ## [1] &quot;carat&quot; &quot;cut&quot; &quot;color&quot; &quot;clarity&quot; &quot;depth&quot; &quot;table&quot; &quot;price&quot; ## [8] &quot;x&quot; &quot;y&quot; &quot;z&quot; ## # A tibble: 6 x 4 ## carat cut color clarity ## &lt;dbl&gt; &lt;ord&gt; &lt;ord&gt; &lt;ord&gt; ## 1 0.230 Ideal E SI2 ## 2 0.210 Premium E SI1 ## 3 0.230 Good E VS1 ## 4 0.290 Premium I VS2 ## 5 0.310 Good J SI2 ## 6 0.240 Very Good J VVS2 ## Warning: Unknown variables: `hue`, `luminance` ## # A tibble: 6 x 2 ## color clarity ## &lt;ord&gt; &lt;ord&gt; ## 1 E SI2 ## 2 E SI1 ## 3 E VS1 ## 4 I VS2 ## 5 J SI2 ## 6 J VVS2 ### Logical indexing ## harry ## 15 ## harry ## 15 ## adam steve harry ted watson ## FALSE FALSE TRUE TRUE TRUE ## adam steve harry ted watson ## FALSE TRUE TRUE TRUE TRUE ## adam steve harry ted watson ## FALSE FALSE TRUE FALSE FALSE ## [,1] [,2] [,3] ## adam FALSE TRUE FALSE ## steve FALSE TRUE FALSE ## harry TRUE TRUE TRUE ## ted TRUE FALSE FALSE ## watson TRUE FALSE FALSE ## [1] TRUE ## # A tibble: 16,988 x 10 ## carat cut color clarity depth table price x y z ## &lt;dbl&gt; &lt;ord&gt; &lt;ord&gt; &lt;ord&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; ## 1 0.230 Good E VS1 56.9 65.0 327 4.05 4.07 2.31 ## 2 0.310 Good J SI2 63.3 58.0 335 4.34 4.35 2.75 ## 3 0.240 Very Good J VVS2 62.8 57.0 336 3.94 3.96 2.48 ## 4 0.240 Very Good I VVS1 62.3 57.0 336 3.95 3.98 2.47 ## 5 0.260 Very Good H SI1 61.9 55.0 337 4.07 4.11 2.53 ## 6 0.230 Very Good H VS1 59.4 61.0 338 4.00 4.05 2.39 ## 7 0.300 Good J SI1 64.0 55.0 339 4.25 4.28 2.73 ## 8 0.300 Good J SI1 63.4 54.0 351 4.23 4.29 2.70 ## 9 0.300 Good J SI1 63.8 56.0 351 4.23 4.26 2.71 ## 10 0.300 Very Good J SI1 62.7 59.0 351 4.21 4.27 2.66 ## # ... with 16,978 more rows ## # A tibble: 1,579 x 10 ## carat cut color clarity depth table price x y z ## &lt;dbl&gt; &lt;ord&gt; &lt;ord&gt; &lt;ord&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; ## 1 1.01 Good I I1 63.1 57.0 2844 6.35 6.39 4.02 ## 2 1.01 Good H I1 64.2 61.0 2846 6.25 6.18 3.99 ## 3 1.03 Good J SI1 63.6 57.0 2855 6.38 6.29 4.03 ## 4 1.04 Good I SI2 59.9 64.0 2970 6.51 6.45 3.88 ## 5 1.01 Good E I1 63.8 57.0 3032 6.40 6.33 4.06 ## 6 1.02 Good E I1 63.1 60.0 3051 6.31 6.40 4.01 ## 7 1.01 Good J SI2 63.7 60.0 3088 6.40 6.29 4.05 ## 8 1.29 Good I I1 64.2 54.0 3098 6.93 6.83 4.42 ## 9 1.52 Good E I1 57.3 58.0 3105 7.53 7.42 4.28 ## 10 1.52 Good E I1 57.3 58.0 3105 7.53 7.42 4.28 ## # ... with 1,569 more rows ## # A tibble: 6 x 1 ## cut ## &lt;ord&gt; ## 1 Good ## 2 Good ## 3 Good ## 4 Good ## 5 Good ## 6 Good ## # A tibble: 6 x 1 ## color ## &lt;ord&gt; ## 1 I ## 2 H ## 3 J ## 4 I ## 5 E ## 6 E ## [1] I H J I E E ## Levels: D &lt; E &lt; F &lt; G &lt; H &lt; I &lt; J ## # A tibble: 6 x 10 ## carat cut color clarity depth table price x y z ## &lt;dbl&gt; &lt;ord&gt; &lt;ord&gt; &lt;ord&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; ## 1 0.230 Good E VS1 56.9 65.0 327 4.05 4.07 2.31 ## 2 0.310 Good J SI2 63.3 58.0 335 4.34 4.35 2.75 ## 3 0.240 Very Good J VVS2 62.8 57.0 336 3.94 3.96 2.48 ## 4 0.240 Very Good I VVS1 62.3 57.0 336 3.95 3.98 2.47 ## 5 0.260 Very Good H SI1 61.9 55.0 337 4.07 4.11 2.53 ## 6 0.230 Very Good H VS1 59.4 61.0 338 4.00 4.05 2.39 ## # A tibble: 6 x 10 ## carat cut color clarity depth table price x y z ## &lt;dbl&gt; &lt;ord&gt; &lt;ord&gt; &lt;ord&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; ## 1 0.230 Good E VS1 56.9 65.0 327 4.05 4.07 2.31 ## 2 0.310 Good J SI2 63.3 58.0 335 4.34 4.35 2.75 ## 3 0.240 Very Good J VVS2 62.8 57.0 336 3.94 3.96 2.48 ## 4 0.240 Very Good I VVS1 62.3 57.0 336 3.95 3.98 2.47 ## 5 0.260 Very Good H SI1 61.9 55.0 337 4.07 4.11 2.53 ## 6 0.230 Very Good H VS1 59.4 61.0 338 4.00 4.05 2.39 ## adam steve harry ted watson ## FALSE FALSE TRUE TRUE TRUE ## harry ted watson ## 3 4 5 ### Assignment with Indexing ## Error in `\)</span>&lt;-.data.frame<code>(</code><em>tmp</em><code>, favorites, value = c(4, 5)): replacement has 2 rows, data has 3 ## Basic Manipulation ## [1] 5 4 3 2 1 ## [1] 1 2 3 4 5 ## [1] TRUE TRUE TRUE TRUE TRUE ## [1] 5 4 3 2 1 ## [1] TRUE TRUE TRUE TRUE TRUE ## victor_rep ##  1  3  5  7 10  ##  3  1  2  1  1 ## [1]  1  3  5  7 10 ## Piping Syntax #### A quick sidenote about the term pipe #### The logic of piping syntax ## [1] 5.107867 ##  [1] 4.497808 5.131531 4.921083 5.886785 5.116971 5.318630 4.418209 ##  [8] 5.714533 4.174741 4.640138 5.089886 5.096274 4.798366 5.739840 ## [15] 5.123380 4.970683 4.611146 5.510856 4.086186 7.310297 #### A quick tip about style ## [1] 5.107867 ## [1] 5.107867 #### Logic of Piping Syntax continued ## [1] 5.09308 ## [1] 5.09308 ## [1] 5.09308 ### Why use pipes? #### Cleaner code #### A cleaner environment #### A note about Scaling ### Saving the output of your pipe ## Reshaping ### Wide vs. Long Data ## ── Attaching packages ────────────────────────────────── tidyverse 1.2.1 ── ## ✔ ggplot2 2.2.1.9000     ✔ readr   1.1.1      ## ✔ tibble  1.4.2          ✔ purrr   0.2.4      ## ✔ tidyr   0.8.0          ✔ stringr 1.3.0      ## ✔ ggplot2 2.2.1.9000     ✔ forcats 0.3.0 ## ── Conflicts ───────────────────────────────────── tidyverse_conflicts() ── ## ✖ dplyr::filter() masks stats::filter() ## ✖ dplyr::lag()    masks stats::lag() ## ✖ ggplot2::vars() masks dplyr::vars() ## # A tibble: 100 x 21 ##      pid agreeableness_t1 conscientiousnes… neuroticism_t1 extraversion_t1 ##    &lt;dbl&gt;            &lt;dbl&gt;             &lt;dbl&gt;          &lt;dbl&gt;           &lt;dbl&gt; ##  1  1.00             2.56              2.23           1.48            1.78 ##  2  2.00             3.76              3.42           2.98            3.89 ##  3  3.00             3.26              2.42           3.03            3.25 ##  4  4.00             3.77              3.42           3.16            2.93 ##  5  5.00             2.19              1.45           3.41            3.20 ##  6  6.00             2.56              2.48           2.37            5.48 ##  7  7.00             2.28              2.72           3.64            3.47 ##  8  8.00             3.23              4.01           1.80            4.33 ##  9  9.00             1.84              2.53           4.35            3.67 ## 10 10.0              3.25              3.30           2.40            2.86 ## # ... with 90 more rows, and 16 more variables: openness_t1 &lt;dbl&gt;, ## #   agreeableness_t2 &lt;dbl&gt;, conscientiousness_t2 &lt;dbl&gt;, ## #   neuroticism_t2 &lt;dbl&gt;, extraversion_t2 &lt;dbl&gt;, openness_t2 &lt;dbl&gt;, ## #   agreeableness_t3 &lt;dbl&gt;, conscientiousness_t3 &lt;dbl&gt;, ## #   neuroticism_t3 &lt;dbl&gt;, extraversion_t3 &lt;dbl&gt;, openness_t3 &lt;dbl&gt;, ## #   agreeableness_t4 &lt;dbl&gt;, conscientiousness_t4 &lt;dbl&gt;, ## #   neuroticism_t4 &lt;dbl&gt;, extraversion_t4 &lt;dbl&gt;, openness_t4 &lt;dbl&gt; ## Classes 'tbl_df', 'tbl' and 'data.frame':    100 obs. of  21 variables: ##  $ pid                 : num  1 2 3 4 5 6 7 8 9 10 ... ##  $ agreeableness_t1    : num  2.56 3.76 3.26 3.77 2.19 ... ##  $ conscientiousness_t1: num  2.23 3.42 2.42 3.42 1.45 ... ##  $ neuroticism_t1      : num  1.48 2.98 3.03 3.16 3.41 ... ##  $ extraversion_t1     : num  1.78 3.89 3.25 2.93 3.2 ... ##  $ openness_t1         : num  3.28 3.82 2.57 3.57 3.18 ... ##  $ agreeableness_t2    : num  3.13 4.38 3.58 4.62 3 ... ##  $ conscientiousness_t2: num  3.05 3.89 2.84 4.35 1.93 ... ##  $ neuroticism_t2      : num  2.46 3.62 3.35 3.82 4.17 ... ##  $ extraversion_t2     : num  2.33 4.72 3.95 3.36 3.67 ... ##  $ openness_t2         : num  3.77 4.14 2.88 4.32 4.04 ... ##  $ agreeableness_t3    : num  3.64 4.89 4.19 5.1 3.39 ... ##  $ conscientiousness_t3: num  3.35 4.09 3.64 5.14 2.63 ... ##  $ neuroticism_t3      : num  3.37 4.16 3.91 4.42 4.97 ... ##  $ extraversion_t3     : num  2.67 4.96 4.4 4.05 4.04 ... ##  $ openness_t3         : num  4.28 4.63 3.48 4.92 4.29 ... ##  $ agreeableness_t4    : num  4.21 5.49 4.75 5.44 3.44 ... ##  $ conscientiousness_t4: num  3.79 4.55 3.9 5.94 3.35 ... ##  $ neuroticism_t4      : num  3.52 4.55 4.1 4.67 5.34 ... ##  $ extraversion_t4     : num  3.49 5.43 4.99 4.78 4.5 ... ##  $ openness_t4         : num  4.87 5.22 3.98 5.54 4.91 ... ## # A tibble: 2,000 x 4 ##      pid time  trait         score ##    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;         &lt;dbl&gt; ##  1  1.00 t1    agreeableness  2.56 ##  2  1.00 t2    agreeableness  3.13 ##  3  1.00 t3    agreeableness  3.64 ##  4  1.00 t4    agreeableness  4.21 ##  5  2.00 t1    agreeableness  3.76 ##  6  2.00 t2    agreeableness  4.38 ##  7  2.00 t3    agreeableness  4.89 ##  8  2.00 t4    agreeableness  5.49 ##  9  3.00 t1    agreeableness  3.26 ## 10  3.00 t2    agreeableness  3.58 ## # ... with 1,990 more rows ### Wide to Long ## # A tibble: 100 x 21 ##      pid agreeableness_t1 conscientiousnes… neuroticism_t1 extraversion_t1 ##    &lt;dbl&gt;            &lt;dbl&gt;             &lt;dbl&gt;          &lt;dbl&gt;           &lt;dbl&gt; ##  1  1.00             2.56              2.23           1.48            1.78 ##  2  2.00             3.76              3.42           2.98            3.89 ##  3  3.00             3.26              2.42           3.03            3.25 ##  4  4.00             3.77              3.42           3.16            2.93 ##  5  5.00             2.19              1.45           3.41            3.20 ##  6  6.00             2.56              2.48           2.37            5.48 ##  7  7.00             2.28              2.72           3.64            3.47 ##  8  8.00             3.23              4.01           1.80            4.33 ##  9  9.00             1.84              2.53           4.35            3.67 ## 10 10.0              3.25              3.30           2.40            2.86 ## # ... with 90 more rows, and 16 more variables: openness_t1 &lt;dbl&gt;, ## #   agreeableness_t2 &lt;dbl&gt;, conscientiousness_t2 &lt;dbl&gt;, ## #   neuroticism_t2 &lt;dbl&gt;, extraversion_t2 &lt;dbl&gt;, openness_t2 &lt;dbl&gt;, ## #   agreeableness_t3 &lt;dbl&gt;, conscientiousness_t3 &lt;dbl&gt;, ## #   neuroticism_t3 &lt;dbl&gt;, extraversion_t3 &lt;dbl&gt;, openness_t3 &lt;dbl&gt;, ## #   agreeableness_t4 &lt;dbl&gt;, conscientiousness_t4 &lt;dbl&gt;, ## #   neuroticism_t4 &lt;dbl&gt;, extraversion_t4 &lt;dbl&gt;, openness_t4 &lt;dbl&gt; ## # A tibble: 400 x 7 ##      pid time  agreeableness conscientiousness extraversion neuroticism ##    &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;             &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; ##  1  1.00 t1             2.56              2.23         1.78        1.48 ##  2  1.00 t2             3.13              3.05         2.33        2.46 ##  3  1.00 t3             3.64              3.35         2.67        3.37 ##  4  1.00 t4             4.21              3.79         3.49        3.52 ##  5  2.00 t1             3.76              3.42         3.89        2.98 ##  6  2.00 t2             4.38              3.89         4.72        3.62 ##  7  2.00 t3             4.89              4.09         4.96        4.16 ##  8  2.00 t4             5.49              4.55         5.43        4.55 ##  9  3.00 t1             3.26              2.42         3.25        3.03 ## 10  3.00 t2             3.58              2.84         3.95        3.35 ## # ... with 390 more rows, and 1 more variable: openness &lt;dbl&gt; ## # A tibble: 2,000 x 3 ##      pid variable         score ##    &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt; ##  1  1.00 agreeableness_t1  2.56 ##  2  2.00 agreeableness_t1  3.76 ##  3  3.00 agreeableness_t1  3.26 ##  4  4.00 agreeableness_t1  3.77 ##  5  5.00 agreeableness_t1  2.19 ##  6  6.00 agreeableness_t1  2.56 ##  7  7.00 agreeableness_t1  2.28 ##  8  8.00 agreeableness_t1  3.23 ##  9  9.00 agreeableness_t1  1.84 ## 10 10.0  agreeableness_t1  3.25 ## # ... with 1,990 more rows ## # A tibble: 2,000 x 4 ##      pid trait         time  score ##    &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt; &lt;dbl&gt; ##  1  1.00 agreeableness t1     2.56 ##  2  2.00 agreeableness t1     3.76 ##  3  3.00 agreeableness t1     3.26 ##  4  4.00 agreeableness t1     3.77 ##  5  5.00 agreeableness t1     2.19 ##  6  6.00 agreeableness t1     2.56 ##  7  7.00 agreeableness t1     2.28 ##  8  8.00 agreeableness t1     3.23 ##  9  9.00 agreeableness t1     1.84 ## 10 10.0  agreeableness t1     3.25 ## # ... with 1,990 more rows ## # A tibble: 2,000 x 4 ##      pid trait         time  score ##    &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt; &lt;dbl&gt; ##  1  1.00 agreeableness t1     2.56 ##  2  2.00 agreeableness t1     3.76 ##  3  3.00 agreeableness t1     3.26 ##  4  4.00 agreeableness t1     3.77 ##  5  5.00 agreeableness t1     2.19 ##  6  6.00 agreeableness t1     2.56 ##  7  7.00 agreeableness t1     2.28 ##  8  8.00 agreeableness t1     3.23 ##  9  9.00 agreeableness t1     1.84 ## 10 10.0  agreeableness t1     3.25 ## # ... with 1,990 more rows ### Long to wide #### Spread ## # A tibble: 400 x 7 ##      pid time  agreeableness conscientiousness extraversion neuroticism ##    &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;             &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; ##  1  1.00 t1             2.56              2.23         1.78        1.48 ##  2  1.00 t2             3.13              3.05         2.33        2.46 ##  3  1.00 t3             3.64              3.35         2.67        3.37 ##  4  1.00 t4             4.21              3.79         3.49        3.52 ##  5  2.00 t1             3.76              3.42         3.89        2.98 ##  6  2.00 t2             4.38              3.89         4.72        3.62 ##  7  2.00 t3             4.89              4.09         4.96        4.16 ##  8  2.00 t4             5.49              4.55         5.43        4.55 ##  9  3.00 t1             3.26              2.42         3.25        3.03 ## 10  3.00 t2             3.58              2.84         3.95        3.35 ## # ... with 390 more rows, and 1 more variable: openness &lt;dbl&gt; ## # A tibble: 100 x 21 ##      pid agreeableness_t1 agreeableness_t2 agreeableness_t3 ##    &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt; ##  1  1.00             2.56             3.13             3.64 ##  2  2.00             3.76             4.38             4.89 ##  3  3.00             3.26             3.58             4.19 ##  4  4.00             3.77             4.62             5.10 ##  5  5.00             2.19             3.00             3.39 ##  6  6.00             2.56             2.85             3.41 ##  7  7.00             2.28             2.85             3.19 ##  8  8.00             3.23             3.82             4.29 ##  9  9.00             1.84             2.17             2.77 ## 10 10.0              3.25             3.90             4.30 ## # ... with 90 more rows, and 17 more variables: agreeableness_t4 &lt;dbl&gt;, ## #   conscientiousness_t1 &lt;dbl&gt;, conscientiousness_t2 &lt;dbl&gt;, ## #   conscientiousness_t3 &lt;dbl&gt;, conscientiousness_t4 &lt;dbl&gt;, ## #   extraversion_t1 &lt;dbl&gt;, extraversion_t2 &lt;dbl&gt;, extraversion_t3 &lt;dbl&gt;, ## #   extraversion_t4 &lt;dbl&gt;, neuroticism_t1 &lt;dbl&gt;, neuroticism_t2 &lt;dbl&gt;, ## #   neuroticism_t3 &lt;dbl&gt;, neuroticism_t4 &lt;dbl&gt;, openness_t1 &lt;dbl&gt;, ## #   openness_t2 &lt;dbl&gt;, openness_t3 &lt;dbl&gt;, openness_t4 &lt;dbl&gt; ## # A tibble: 400 x 7 ##      pid time  agreeableness conscientiousness extraversion neuroticism ##    &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;             &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; ##  1  1.00 t1             2.56              2.23         1.78        1.48 ##  2  1.00 t2             3.13              3.05         2.33        2.46 ##  3  1.00 t3             3.64              3.35         2.67        3.37 ##  4  1.00 t4             4.21              3.79         3.49        3.52 ##  5  2.00 t1             3.76              3.42         3.89        2.98 ##  6  2.00 t2             4.38              3.89         4.72        3.62 ##  7  2.00 t3             4.89              4.09         4.96        4.16 ##  8  2.00 t4             5.49              4.55         5.43        4.55 ##  9  3.00 t1             3.26              2.42         3.25        3.03 ## 10  3.00 t2             3.58              2.84         3.95        3.35 ## # ... with 390 more rows, and 1 more variable: openness &lt;dbl&gt; ## # A tibble: 100 x 21 ##      pid agreeableness_t1 agreeableness_t2 agreeableness_t3 ##    &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt; ##  1  1.00             2.56             3.13             3.64 ##  2  2.00             3.76             4.38             4.89 ##  3  3.00             3.26             3.58             4.19 ##  4  4.00             3.77             4.62             5.10 ##  5  5.00             2.19             3.00             3.39 ##  6  6.00             2.56             2.85             3.41 ##  7  7.00             2.28             2.85             3.19 ##  8  8.00             3.23             3.82             4.29 ##  9  9.00             1.84             2.17             2.77 ## 10 10.0              3.25             3.90             4.30 ## # ... with 90 more rows, and 17 more variables: agreeableness_t4 &lt;dbl&gt;, ## #   conscientiousness_t1 &lt;dbl&gt;, conscientiousness_t2 &lt;dbl&gt;, ## #   conscientiousness_t3 &lt;dbl&gt;, conscientiousness_t4 &lt;dbl&gt;, ## #   extraversion_t1 &lt;dbl&gt;, extraversion_t2 &lt;dbl&gt;, extraversion_t3 &lt;dbl&gt;, ## #   extraversion_t4 &lt;dbl&gt;, neuroticism_t1 &lt;dbl&gt;, neuroticism_t2 &lt;dbl&gt;, ## #   neuroticism_t3 &lt;dbl&gt;, neuroticism_t4 &lt;dbl&gt;, openness_t1 &lt;dbl&gt;, ## #   openness_t2 &lt;dbl&gt;, openness_t3 &lt;dbl&gt;, openness_t4 &lt;dbl&gt; #### Using reshape(): long to wide ## # A tibble: 400 x 7 ##      pid time  agreeableness conscientiousness extraversion neuroticism ##    &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;             &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; ##  1  1.00 t1             2.56              2.23         1.78        1.48 ##  2  1.00 t2             3.13              3.05         2.33        2.46 ##  3  1.00 t3             3.64              3.35         2.67        3.37 ##  4  1.00 t4             4.21              3.79         3.49        3.52 ##  5  2.00 t1             3.76              3.42         3.89        2.98 ##  6  2.00 t2             4.38              3.89         4.72        3.62 ##  7  2.00 t3             4.89              4.09         4.96        4.16 ##  8  2.00 t4             5.49              4.55         5.43        4.55 ##  9  3.00 t1             3.26              2.42         3.25        3.03 ## 10  3.00 t2             3.58              2.84         3.95        3.35 ## # ... with 390 more rows, and 1 more variable: openness &lt;dbl&gt; ## # A tibble: 100 x 6 ##      pid</code>agreeableness_c(“t1… <code>conscientiousness_c(…</code>extraversion_c(”t1…</a></li>
-<li class="chapter" data-level="4.42" data-path="data.html"><a href="data.html#section-32"><i class="fa fa-check"></i><b>4.42</b> <dbl> <dbl> <dbl> <dbl></a></li>
-<li class="chapter" data-level="4.43" data-path="data.html"><a href="data.html#na-na-na"><i class="fa fa-check"></i><b>4.43</b> 1 1.00 NA NA NA</a></li>
-<li class="chapter" data-level="4.44" data-path="data.html"><a href="data.html#na-na-na-1"><i class="fa fa-check"></i><b>4.44</b> 2 2.00 NA NA NA</a></li>
-<li class="chapter" data-level="4.45" data-path="data.html"><a href="data.html#na-na-na-2"><i class="fa fa-check"></i><b>4.45</b> 3 3.00 NA NA NA</a></li>
-<li class="chapter" data-level="4.46" data-path="data.html"><a href="data.html#na-na-na-3"><i class="fa fa-check"></i><b>4.46</b> 4 4.00 NA NA NA</a></li>
-<li class="chapter" data-level="4.47" data-path="data.html"><a href="data.html#na-na-na-4"><i class="fa fa-check"></i><b>4.47</b> 5 5.00 NA NA NA</a></li>
-<li class="chapter" data-level="4.48" data-path="data.html"><a href="data.html#na-na-na-5"><i class="fa fa-check"></i><b>4.48</b> 6 6.00 NA NA NA</a></li>
-<li class="chapter" data-level="4.49" data-path="data.html"><a href="data.html#na-na-na-6"><i class="fa fa-check"></i><b>4.49</b> 7 7.00 NA NA NA</a></li>
-<li class="chapter" data-level="4.50" data-path="data.html"><a href="data.html#na-na-na-7"><i class="fa fa-check"></i><b>4.50</b> 8 8.00 NA NA NA</a></li>
-<li class="chapter" data-level="4.51" data-path="data.html"><a href="data.html#na-na-na-8"><i class="fa fa-check"></i><b>4.51</b> 9 9.00 NA NA NA</a></li>
-<li class="chapter" data-level="4.52" data-path="data.html"><a href="data.html#na-na-na-9"><i class="fa fa-check"></i><b>4.52</b> 10 10.0 NA NA NA</a></li>
-<li class="chapter" data-level="4.53" data-path="data.html"><a href="data.html#with-90-more-rows-and-2-more-variables-neuroticism_ct1-t2-t3-t4-openness_ct1-t2-t3-t4"><i class="fa fa-check"></i><b>4.53</b> # … with 90 more rows, and 2 more variables: <code>neuroticism_c(&quot;t1&quot;, &quot;t2&quot;, ## #   &quot;t3&quot;, &quot;t4&quot;)</code> <dbl>, <code>openness_c(&quot;t1&quot;, &quot;t2&quot;, &quot;t3&quot;, &quot;t4&quot;)</code> <dbl></a></li>
-<li class="chapter" data-level="4.54" data-path="data.html"><a href="data.html#classes-tbl_df-tbl-and-data.frame-400-obs.-of-7-variables"><i class="fa fa-check"></i><b>4.54</b> Classes ‘tbl_df’, ‘tbl’ and ‘data.frame’: 400 obs. of 7 variables:</a></li>
-<li class="chapter" data-level="4.55" data-path="data.html"><a href="data.html#pid-num-1-1-1-1-2-2-2-2-3-3"><i class="fa fa-check"></i><b>4.55</b> $ pid : num 1 1 1 1 2 2 2 2 3 3 …</a></li>
-<li class="chapter" data-level="4.56" data-path="data.html"><a href="data.html#time-chr-t1-t2-t3-t4"><i class="fa fa-check"></i><b>4.56</b> $ time : chr “t1” “t2” “t3” “t4” …</a></li>
-<li class="chapter" data-level="4.57" data-path="data.html"><a href="data.html#agreeableness-num-2.56-3.13-3.64-4.21-3.76"><i class="fa fa-check"></i><b>4.57</b> $ agreeableness : num 2.56 3.13 3.64 4.21 3.76 …</a></li>
-<li class="chapter" data-level="4.58" data-path="data.html"><a href="data.html#conscientiousness-num-2.23-3.05-3.35-3.79-3.42"><i class="fa fa-check"></i><b>4.58</b> $ conscientiousness: num 2.23 3.05 3.35 3.79 3.42 …</a></li>
-<li class="chapter" data-level="4.59" data-path="data.html"><a href="data.html#extraversion-num-1.78-2.33-2.67-3.49-3.89"><i class="fa fa-check"></i><b>4.59</b> $ extraversion : num 1.78 2.33 2.67 3.49 3.89 …</a></li>
-<li class="chapter" data-level="4.60" data-path="data.html"><a href="data.html#neuroticism-num-1.48-2.46-3.37-3.52-2.98"><i class="fa fa-check"></i><b>4.60</b> $ neuroticism : num 1.48 2.46 3.37 3.52 2.98 …</a></li>
-<li class="chapter" data-level="4.61" data-path="data.html"><a href="data.html#openness-num-3.28-3.77-4.28-4.87-3.82"><i class="fa fa-check"></i><b>4.61</b> $ openness : num 3.28 3.77 4.28 4.87 3.82 …</a></li>
-<li class="chapter" data-level="4.62" data-path="data.html"><a href="data.html#a-tibble-100-x-21"><i class="fa fa-check"></i><b>4.62</b> # A tibble: 100 x 21</a></li>
-<li class="chapter" data-level="4.63" data-path="data.html"><a href="data.html#pid-agreeableness_t1-conscientiousnes-extraversion_t1-neuroticism_t1"><i class="fa fa-check"></i><b>4.63</b> pid agreeableness_t1 conscientiousnes… extraversion_t1 neuroticism_t1</a></li>
-<li class="chapter" data-level="4.64" data-path="data.html"><a href="data.html#section-33"><i class="fa fa-check"></i><b>4.64</b> * <dbl> <dbl> <dbl> <dbl> <dbl></a></li>
-<li class="chapter" data-level="4.65" data-path="data.html"><a href="data.html#section-34"><i class="fa fa-check"></i><b>4.65</b> 1 1.00 2.56 2.23 1.78 1.48</a></li>
-<li class="chapter" data-level="4.66" data-path="data.html"><a href="data.html#section-35"><i class="fa fa-check"></i><b>4.66</b> 2 2.00 3.76 3.42 3.89 2.98</a></li>
-<li class="chapter" data-level="4.67" data-path="data.html"><a href="data.html#section-36"><i class="fa fa-check"></i><b>4.67</b> 3 3.00 3.26 2.42 3.25 3.03</a></li>
-<li class="chapter" data-level="4.68" data-path="data.html"><a href="data.html#section-37"><i class="fa fa-check"></i><b>4.68</b> 4 4.00 3.77 3.42 2.93 3.16</a></li>
-<li class="chapter" data-level="4.69" data-path="data.html"><a href="data.html#section-38"><i class="fa fa-check"></i><b>4.69</b> 5 5.00 2.19 1.45 3.20 3.41</a></li>
-<li class="chapter" data-level="4.70" data-path="data.html"><a href="data.html#section-39"><i class="fa fa-check"></i><b>4.70</b> 6 6.00 2.56 2.48 5.48 2.37</a></li>
-<li class="chapter" data-level="4.71" data-path="data.html"><a href="data.html#section-40"><i class="fa fa-check"></i><b>4.71</b> 7 7.00 2.28 2.72 3.47 3.64</a></li>
-<li class="chapter" data-level="4.72" data-path="data.html"><a href="data.html#section-41"><i class="fa fa-check"></i><b>4.72</b> 8 8.00 3.23 4.01 4.33 1.80</a></li>
-<li class="chapter" data-level="4.73" data-path="data.html"><a href="data.html#section-42"><i class="fa fa-check"></i><b>4.73</b> 9 9.00 1.84 2.53 3.67 4.35</a></li>
-<li class="chapter" data-level="4.74" data-path="data.html"><a href="data.html#section-43"><i class="fa fa-check"></i><b>4.74</b> 10 10.0 3.25 3.30 2.86 2.40</a></li>
-<li class="chapter" data-level="4.75" data-path="data.html"><a href="data.html#with-90-more-rows-and-16-more-variables-openness_t1"><i class="fa fa-check"></i><b>4.75</b> # … with 90 more rows, and 16 more variables: openness_t1 <dbl>,</a></li>
-<li class="chapter" data-level="4.76" data-path="data.html"><a href="data.html#agreeableness_t2-conscientiousness_t2"><i class="fa fa-check"></i><b>4.76</b> # agreeableness_t2 <dbl>, conscientiousness_t2 <dbl>,</a></li>
-<li class="chapter" data-level="4.77" data-path="data.html"><a href="data.html#extraversion_t2-neuroticism_t2-openness_t2"><i class="fa fa-check"></i><b>4.77</b> # extraversion_t2 <dbl>, neuroticism_t2 <dbl>, openness_t2 <dbl>,</a></li>
-<li class="chapter" data-level="4.78" data-path="data.html"><a href="data.html#agreeableness_t3-conscientiousness_t3"><i class="fa fa-check"></i><b>4.78</b> # agreeableness_t3 <dbl>, conscientiousness_t3 <dbl>,</a></li>
-<li class="chapter" data-level="4.79" data-path="data.html"><a href="data.html#extraversion_t3-neuroticism_t3-openness_t3"><i class="fa fa-check"></i><b>4.79</b> # extraversion_t3 <dbl>, neuroticism_t3 <dbl>, openness_t3 <dbl>,</a></li>
-<li class="chapter" data-level="4.80" data-path="data.html"><a href="data.html#agreeableness_t4-conscientiousness_t4"><i class="fa fa-check"></i><b>4.80</b> # agreeableness_t4 <dbl>, conscientiousness_t4 <dbl>,</a></li>
-<li class="chapter" data-level="4.81" data-path="data.html"><a href="data.html#extraversion_t4-neuroticism_t4-openness_t4"><i class="fa fa-check"></i><b>4.81</b> # extraversion_t4 <dbl>, neuroticism_t4 <dbl>, openness_t4 <dbl></a></li>
-<li class="chapter" data-level="4.82" data-path="data.html"><a href="data.html#a-tibble-400-x-8"><i class="fa fa-check"></i><b>4.82</b> # A tibble: 400 x 8</a></li>
-<li class="chapter" data-level="4.83" data-path="data.html"><a href="data.html#pid-time-agreeableness-conscientiousness-extraversion-neuroticism"><i class="fa fa-check"></i><b>4.83</b> pid time agreeableness conscientiousness extraversion neuroticism</a></li>
-<li class="chapter" data-level="4.84" data-path="data.html"><a href="data.html#section-44"><i class="fa fa-check"></i><b>4.84</b> * <dbl> <chr> <dbl> <dbl> <dbl> <dbl></a></li>
-<li class="chapter" data-level="4.85" data-path="data.html"><a href="data.html#t1-2.56-2.23-1.78-1.48"><i class="fa fa-check"></i><b>4.85</b> 1 1.00 t1 2.56 2.23 1.78 1.48</a></li>
-<li class="chapter" data-level="4.86" data-path="data.html"><a href="data.html#t1-3.76-3.42-3.89-2.98"><i class="fa fa-check"></i><b>4.86</b> 2 2.00 t1 3.76 3.42 3.89 2.98</a></li>
-<li class="chapter" data-level="4.87" data-path="data.html"><a href="data.html#t1-3.26-2.42-3.25-3.03"><i class="fa fa-check"></i><b>4.87</b> 3 3.00 t1 3.26 2.42 3.25 3.03</a></li>
-<li class="chapter" data-level="4.88" data-path="data.html"><a href="data.html#t1-3.77-3.42-2.93-3.16"><i class="fa fa-check"></i><b>4.88</b> 4 4.00 t1 3.77 3.42 2.93 3.16</a></li>
-<li class="chapter" data-level="4.89" data-path="data.html"><a href="data.html#t1-2.19-1.45-3.20-3.41"><i class="fa fa-check"></i><b>4.89</b> 5 5.00 t1 2.19 1.45 3.20 3.41</a></li>
-<li class="chapter" data-level="4.90" data-path="data.html"><a href="data.html#t1-2.56-2.48-5.48-2.37"><i class="fa fa-check"></i><b>4.90</b> 6 6.00 t1 2.56 2.48 5.48 2.37</a></li>
-<li class="chapter" data-level="4.91" data-path="data.html"><a href="data.html#t1-2.28-2.72-3.47-3.64"><i class="fa fa-check"></i><b>4.91</b> 7 7.00 t1 2.28 2.72 3.47 3.64</a></li>
-<li class="chapter" data-level="4.92" data-path="data.html"><a href="data.html#t1-3.23-4.01-4.33-1.80"><i class="fa fa-check"></i><b>4.92</b> 8 8.00 t1 3.23 4.01 4.33 1.80</a></li>
-<li class="chapter" data-level="4.93" data-path="data.html"><a href="data.html#t1-1.84-2.53-3.67-4.35"><i class="fa fa-check"></i><b>4.93</b> 9 9.00 t1 1.84 2.53 3.67 4.35</a></li>
-<li class="chapter" data-level="4.94" data-path="data.html"><a href="data.html#t1-3.25-3.30-2.86-2.40"><i class="fa fa-check"></i><b>4.94</b> 10 10.0 t1 3.25 3.30 2.86 2.40</a></li>
-<li class="chapter" data-level="4.95" data-path="data.html"><a href="data.html#with-390-more-rows-and-2-more-variables-openness-id"><i class="fa fa-check"></i><b>4.95</b> # … with 390 more rows, and 2 more variables: openness <dbl>, id <int></a><ul>
-<li class="chapter" data-level="4.95.1" data-path="data.html"><a href="data.html#final-note-on-reshaping-data"><i class="fa fa-check"></i><b>4.95.1</b> Final note on reshaping data</a></li>
+<li class="chapter" data-level="5" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>5</b> Data</a><ul>
+<li class="chapter" data-level="5.1" data-path="data.html"><a href="data.html#loading"><i class="fa fa-check"></i><b>5.1</b> Loading</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="data.html"><a href="data.html#one-day-we-will-have-a-summary-table-here"><i class="fa fa-check"></i><b>5.1.1</b> One day we will have a summary table here</a></li>
+<li class="chapter" data-level="5.1.2" data-path="data.html"><a href="data.html#csv-files"><i class="fa fa-check"></i><b>5.1.2</b> .csv files</a></li>
+<li class="chapter" data-level="5.1.3" data-path="data.html"><a href="data.html#defaults"><i class="fa fa-check"></i><b>5.1.3</b> Defaults</a></li>
+<li class="chapter" data-level="5.1.4" data-path="data.html"><a href="data.html#a-brief-interlude-into-formats-for-data-in-r"><i class="fa fa-check"></i><b>5.1.4</b> A brief interlude into formats for data in R</a></li>
+<li class="chapter" data-level="5.1.5" data-path="data.html"><a href="data.html#format-issues"><i class="fa fa-check"></i><b>5.1.5</b> Format issues?</a></li>
+<li class="chapter" data-level="5.1.6" data-path="data.html"><a href="data.html#sav-files"><i class="fa fa-check"></i><b>5.1.6</b> .sav files</a></li>
+<li class="chapter" data-level="5.1.7" data-path="data.html"><a href="data.html#rio-for-general-import"><i class="fa fa-check"></i><b>5.1.7</b> <code>rio</code> for general import</a></li>
 </ul></li>
-<li class="chapter" data-level="4.96" data-path="data.html"><a href="data.html#summarizing"><i class="fa fa-check"></i><b>4.96</b> Summarizing</a><ul>
-<li class="chapter" data-level="4.96.1" data-path="data.html"><a href="data.html#basic-summarization"><i class="fa fa-check"></i><b>4.96.1</b> Basic Summarization</a></li>
+<li class="chapter" data-level="5.2" data-path="data.html"><a href="data.html#saving"><i class="fa fa-check"></i><b>5.2</b> Saving</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="data.html"><a href="data.html#rdata-files"><i class="fa fa-check"></i><b>5.2.1</b> .RData files</a></li>
+<li class="chapter" data-level="5.2.2" data-path="data.html"><a href="data.html#sink"><i class="fa fa-check"></i><b>5.2.2</b> <code>sink</code></a></li>
 </ul></li>
-<li class="chapter" data-level="4.97" data-path="data.html"><a href="data.html#depth-table-price-x-y"><i class="fa fa-check"></i><b>4.97</b> depth table price x y</a></li>
-<li class="chapter" data-level="4.98" data-path="data.html"><a href="data.html#section-45"><i class="fa fa-check"></i><b>4.98</b> 61.749405 57.457184 3932.799722 5.731157 5.734526</a></li>
-<li class="chapter" data-level="4.99" data-path="data.html"><a href="data.html#warning-in-mean.defaultnewx-i-argument-is-not-numeric-or"><i class="fa fa-check"></i><b>4.99</b> Warning in mean.default(newX[, i], …): argument is not numeric or</a></li>
-<li class="chapter" data-level="4.100" data-path="data.html"><a href="data.html#logical-returning-na"><i class="fa fa-check"></i><b>4.100</b> logical: returning NA</a></li>
-<li class="chapter" data-level="4.101" data-path="data.html"><a href="data.html#warning-in-mean.defaultnewx-i-argument-is-not-numeric-or-1"><i class="fa fa-check"></i><b>4.101</b> Warning in mean.default(newX[, i], …): argument is not numeric or</a></li>
-<li class="chapter" data-level="4.102" data-path="data.html"><a href="data.html#logical-returning-na-1"><i class="fa fa-check"></i><b>4.102</b> logical: returning NA</a></li>
-<li class="chapter" data-level="4.103" data-path="data.html"><a href="data.html#warning-in-mean.defaultnewx-i-argument-is-not-numeric-or-2"><i class="fa fa-check"></i><b>4.103</b> Warning in mean.default(newX[, i], …): argument is not numeric or</a></li>
-<li class="chapter" data-level="4.104" data-path="data.html"><a href="data.html#logical-returning-na-2"><i class="fa fa-check"></i><b>4.104</b> logical: returning NA</a></li>
-<li class="chapter" data-level="4.105" data-path="data.html"><a href="data.html#warning-in-mean.defaultnewx-i-argument-is-not-numeric-or-3"><i class="fa fa-check"></i><b>4.105</b> Warning in mean.default(newX[, i], …): argument is not numeric or</a></li>
-<li class="chapter" data-level="4.106" data-path="data.html"><a href="data.html#logical-returning-na-3"><i class="fa fa-check"></i><b>4.106</b> logical: returning NA</a></li>
-<li class="chapter" data-level="4.107" data-path="data.html"><a href="data.html#warning-in-mean.defaultnewx-i-argument-is-not-numeric-or-4"><i class="fa fa-check"></i><b>4.107</b> Warning in mean.default(newX[, i], …): argument is not numeric or</a></li>
-<li class="chapter" data-level="4.108" data-path="data.html"><a href="data.html#logical-returning-na-4"><i class="fa fa-check"></i><b>4.108</b> logical: returning NA</a></li>
-<li class="chapter" data-level="4.109" data-path="data.html"><a href="data.html#warning-in-mean.defaultnewx-i-argument-is-not-numeric-or-5"><i class="fa fa-check"></i><b>4.109</b> Warning in mean.default(newX[, i], …): argument is not numeric or</a></li>
-<li class="chapter" data-level="4.110" data-path="data.html"><a href="data.html#logical-returning-na-5"><i class="fa fa-check"></i><b>4.110</b> logical: returning NA</a></li>
-<li class="chapter" data-level="4.111" data-path="data.html"><a href="data.html#warning-in-mean.defaultnewx-i-argument-is-not-numeric-or-6"><i class="fa fa-check"></i><b>4.111</b> Warning in mean.default(newX[, i], …): argument is not numeric or</a></li>
-<li class="chapter" data-level="4.112" data-path="data.html"><a href="data.html#logical-returning-na-6"><i class="fa fa-check"></i><b>4.112</b> logical: returning NA</a></li>
-<li class="chapter" data-level="4.113" data-path="data.html"><a href="data.html#warning-in-mean.defaultnewx-i-argument-is-not-numeric-or-7"><i class="fa fa-check"></i><b>4.113</b> Warning in mean.default(newX[, i], …): argument is not numeric or</a></li>
-<li class="chapter" data-level="4.114" data-path="data.html"><a href="data.html#logical-returning-na-7"><i class="fa fa-check"></i><b>4.114</b> logical: returning NA</a></li>
-<li class="chapter" data-level="4.115" data-path="data.html"><a href="data.html#warning-in-mean.defaultnewx-i-argument-is-not-numeric-or-8"><i class="fa fa-check"></i><b>4.115</b> Warning in mean.default(newX[, i], …): argument is not numeric or</a></li>
-<li class="chapter" data-level="4.116" data-path="data.html"><a href="data.html#logical-returning-na-8"><i class="fa fa-check"></i><b>4.116</b> logical: returning NA</a></li>
-<li class="chapter" data-level="4.117" data-path="data.html"><a href="data.html#warning-in-mean.defaultnewx-i-argument-is-not-numeric-or-9"><i class="fa fa-check"></i><b>4.117</b> Warning in mean.default(newX[, i], …): argument is not numeric or</a></li>
-<li class="chapter" data-level="4.118" data-path="data.html"><a href="data.html#logical-returning-na-9"><i class="fa fa-check"></i><b>4.118</b> logical: returning NA</a></li>
-<li class="chapter" data-level="4.119" data-path="data.html"><a href="data.html#carat-cut-color-clarity-depth-table-price-x-y"><i class="fa fa-check"></i><b>4.119</b> carat cut color clarity depth table price x y</a></li>
-<li class="chapter" data-level="4.120" data-path="data.html"><a href="data.html#na-na-na-na-na-na-na-na-na"><i class="fa fa-check"></i><b>4.120</b> NA NA NA NA NA NA NA NA NA</a></li>
-<li class="chapter" data-level="4.121" data-path="data.html"><a href="data.html#z"><i class="fa fa-check"></i><b>4.121</b> z</a></li>
-<li class="chapter" data-level="4.122" data-path="data.html"><a href="data.html#na"><i class="fa fa-check"></i><b>4.122</b> NA</a><ul>
-<li class="chapter" data-level="4.122.1" data-path="data.html"><a href="data.html#grouped-summarization"><i class="fa fa-check"></i><b>4.122.1</b> Grouped Summarization</a></li>
+<li class="chapter" data-level="5.3" data-path="data.html"><a href="data.html#indexing"><i class="fa fa-check"></i><b>5.3</b> Indexing</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="data.html"><a href="data.html#logical-indexing"><i class="fa fa-check"></i><b>5.3.1</b> Logical indexing</a></li>
+<li class="chapter" data-level="5.3.2" data-path="data.html"><a href="data.html#assignment-with-indexing"><i class="fa fa-check"></i><b>5.3.2</b> Assignment with Indexing</a></li>
 </ul></li>
-<li class="chapter" data-level="4.123" data-path="data.html"><a href="data.html#section-46"><i class="fa fa-check"></i><b>4.123</b> ————————————————————————-</a></li>
-<li class="chapter" data-level="4.124" data-path="data.html"><a href="data.html#you-have-loaded-plyr-after-dplyr---this-is-likely-to-cause-problems.-1"><i class="fa fa-check"></i><b>4.124</b> You have loaded plyr after dplyr - this is likely to cause problems.</a></li>
-<li class="chapter" data-level="4.125" data-path="data.html"><a href="data.html#if-you-need-functions-from-both-plyr-and-dplyr-please-load-plyr-first-then-dplyr-1"><i class="fa fa-check"></i><b>4.125</b> If you need functions from both plyr and dplyr, please load plyr first, then dplyr:</a></li>
-<li class="chapter" data-level="4.126" data-path="data.html"><a href="data.html#libraryplyr-librarydplyr-1"><i class="fa fa-check"></i><b>4.126</b> library(plyr); library(dplyr)</a></li>
-<li class="chapter" data-level="4.127" data-path="data.html"><a href="data.html#section-47"><i class="fa fa-check"></i><b>4.127</b> ————————————————————————-</a></li>
-<li class="chapter" data-level="4.128" data-path="data.html"><a href="data.html#section-48"><i class="fa fa-check"></i><b>4.128</b> </a></li>
-<li class="chapter" data-level="4.129" data-path="data.html"><a href="data.html#attaching-package-plyr-1"><i class="fa fa-check"></i><b>4.129</b> Attaching package: ‘plyr’</a></li>
-<li class="chapter" data-level="4.130" data-path="data.html"><a href="data.html#the-following-object-is-masked-from-packagepurrr"><i class="fa fa-check"></i><b>4.130</b> The following object is masked from ‘package:purrr’:</a></li>
-<li class="chapter" data-level="4.131" data-path="data.html"><a href="data.html#section-49"><i class="fa fa-check"></i><b>4.131</b> </a></li>
-<li class="chapter" data-level="4.132" data-path="data.html"><a href="data.html#compact-1"><i class="fa fa-check"></i><b>4.132</b> compact</a></li>
-<li class="chapter" data-level="4.133" data-path="data.html"><a href="data.html#the-following-objects-are-masked-from-packagedplyr"><i class="fa fa-check"></i><b>4.133</b> The following objects are masked from ‘package:dplyr’:</a></li>
-<li class="chapter" data-level="4.134" data-path="data.html"><a href="data.html#section-50"><i class="fa fa-check"></i><b>4.134</b> </a></li>
-<li class="chapter" data-level="4.135" data-path="data.html"><a href="data.html#arrange-count-desc-failwith-id-mutate-rename-summarise-1"><i class="fa fa-check"></i><b>4.135</b> arrange, count, desc, failwith, id, mutate, rename, summarise,</a></li>
-<li class="chapter" data-level="4.136" data-path="data.html"><a href="data.html#summarize-1"><i class="fa fa-check"></i><b>4.136</b> summarize</a><ul>
-<li class="chapter" data-level="4.136.1" data-path="data.html"><a href="data.html#mutation"><i class="fa fa-check"></i><b>4.136.1</b> Mutation</a></li>
+<li class="chapter" data-level="5.4" data-path="data.html"><a href="data.html#basic-manipulation"><i class="fa fa-check"></i><b>5.4</b> Basic Manipulation</a></li>
+<li class="chapter" data-level="5.5" data-path="data.html"><a href="data.html#piping-syntax"><i class="fa fa-check"></i><b>5.5</b> Piping Syntax</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="data.html"><a href="data.html#why-use-pipes"><i class="fa fa-check"></i><b>5.5.1</b> Why use pipes?</a></li>
+<li class="chapter" data-level="5.5.2" data-path="data.html"><a href="data.html#saving-the-output-of-your-pipe"><i class="fa fa-check"></i><b>5.5.2</b> Saving the output of your pipe</a></li>
 </ul></li>
-<li class="chapter" data-level="4.137" data-path="data.html"><a href="data.html#type-specific-operations"><i class="fa fa-check"></i><b>4.137</b> Type-specific Operations</a><ul>
-<li class="chapter" data-level="4.137.1" data-path="data.html"><a href="data.html#working-with-factors"><i class="fa fa-check"></i><b>4.137.1</b> Working with Factors</a></li>
+<li class="chapter" data-level="5.6" data-path="data.html"><a href="data.html#reshaping"><i class="fa fa-check"></i><b>5.6</b> Reshaping</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="data.html"><a href="data.html#wide-vs.long-data"><i class="fa fa-check"></i><b>5.6.1</b> Wide vs. Long Data</a></li>
+<li class="chapter" data-level="5.6.2" data-path="data.html"><a href="data.html#wide-to-long"><i class="fa fa-check"></i><b>5.6.2</b> Wide to Long</a></li>
+<li class="chapter" data-level="5.6.3" data-path="data.html"><a href="data.html#long-to-wide"><i class="fa fa-check"></i><b>5.6.3</b> Long to wide</a></li>
+<li class="chapter" data-level="5.6.4" data-path="data.html"><a href="data.html#final-note-on-reshaping-data"><i class="fa fa-check"></i><b>5.6.4</b> Final note on reshaping data</a></li>
 </ul></li>
-<li class="chapter" data-level="4.138" data-path="data.html"><a href="data.html#loading-required-package-gapminder"><i class="fa fa-check"></i><b>4.138</b> Loading required package: gapminder</a></li>
-<li class="chapter" data-level="4.139" data-path="data.html"><a href="data.html#factor"><i class="fa fa-check"></i><b>4.139</b> [1] “factor”</a></li>
-<li class="chapter" data-level="4.140" data-path="data.html"><a href="data.html#numeric"><i class="fa fa-check"></i><b>4.140</b> [1] “numeric”</a></li>
-<li class="chapter" data-level="4.141" data-path="data.html"><a href="data.html#africa-americas-asia-europe-oceania"><i class="fa fa-check"></i><b>4.141</b> [1] “Africa” “Americas” “Asia” “Europe” “Oceania”</a></li>
-<li class="chapter" data-level="4.142" data-path="data.html"><a href="data.html#dont-know-how-to-automatically-pick-scale-for-object-of-type-null.-defaulting-to-continuous."><i class="fa fa-check"></i><b>4.142</b> Don’t know how to automatically pick scale for object of type NULL. Defaulting to continuous.</a></li>
-<li class="chapter" data-level="4.143" data-path="data.html"><a href="data.html#resources"><i class="fa fa-check"></i><b>4.143</b> Resources</a></li>
-<li class="chapter" data-level="4.144" data-path="data.html"><a href="data.html#true"><i class="fa fa-check"></i><b>4.144</b> [1] TRUE</a></li>
-<li class="chapter" data-level="4.145" data-path="data.html"><a href="data.html#true-1"><i class="fa fa-check"></i><b>4.145</b> [1] TRUE</a></li>
-<li class="chapter" data-level="4.146" data-path="data.html"><a href="data.html#true-2"><i class="fa fa-check"></i><b>4.146</b> [1] TRUE</a></li>
-<li class="chapter" data-level="4.147" data-path="data.html"><a href="data.html#true-3"><i class="fa fa-check"></i><b>4.147</b> [1] TRUE</a></li>
-<li class="chapter" data-level="4.148" data-path="data.html"><a href="data.html#true-4"><i class="fa fa-check"></i><b>4.148</b> [1] TRUE</a></li>
+<li class="chapter" data-level="5.7" data-path="data.html"><a href="data.html#summarizing"><i class="fa fa-check"></i><b>5.7</b> Summarizing</a><ul>
+<li class="chapter" data-level="5.7.1" data-path="data.html"><a href="data.html#basic-summarization"><i class="fa fa-check"></i><b>5.7.1</b> Basic Summarization</a></li>
+<li class="chapter" data-level="5.7.2" data-path="data.html"><a href="data.html#grouped-summarization"><i class="fa fa-check"></i><b>5.7.2</b> Grouped Summarization</a></li>
+<li class="chapter" data-level="5.7.3" data-path="data.html"><a href="data.html#mutation"><i class="fa fa-check"></i><b>5.7.3</b> Mutation</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="plotting.html"><a href="plotting.html"><i class="fa fa-check"></i><b>5</b> Plotting</a><ul>
-<li class="chapter" data-level="5.1" data-path="plotting.html"><a href="plotting.html#r-graphics-structure"><i class="fa fa-check"></i><b>5.1</b> R Graphics Structure</a></li>
-<li class="chapter" data-level="5.2" data-path="plotting.html"><a href="plotting.html#base-graphics"><i class="fa fa-check"></i><b>5.2</b> Base graphics</a></li>
-<li class="chapter" data-level="5.3" data-path="plotting.html"><a href="plotting.html#ggplot2"><i class="fa fa-check"></i><b>5.3</b> ggplot2</a><ul>
-<li class="chapter" data-level="5.3.1" data-path="plotting.html"><a href="plotting.html#layers"><i class="fa fa-check"></i><b>5.3.1</b> Layers</a></li>
-<li class="chapter" data-level="5.3.2" data-path="plotting.html"><a href="plotting.html#aesthetic-mappings"><i class="fa fa-check"></i><b>5.3.2</b> (aes)thetic mappings</a></li>
+<li class="chapter" data-level="5.8" data-path="data.html"><a href="data.html#type-specific-operations"><i class="fa fa-check"></i><b>5.8</b> Type-specific Operations</a><ul>
+<li class="chapter" data-level="5.8.1" data-path="data.html"><a href="data.html#working-with-factors"><i class="fa fa-check"></i><b>5.8.1</b> Working with Factors</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="plotting.html"><a href="plotting.html#adj-alpha-angle-bg-cex"><i class="fa fa-check"></i><b>5.4</b> [1] “adj” “alpha” “angle” “bg” “cex”</a></li>
-<li class="chapter" data-level="5.5" data-path="plotting.html"><a href="plotting.html#col-color-colour-fg-fill"><i class="fa fa-check"></i><b>5.5</b> [6] “col” “color” “colour” “fg” “fill”</a></li>
-<li class="chapter" data-level="5.6" data-path="plotting.html"><a href="plotting.html#group-hjust-label-linetype-lower"><i class="fa fa-check"></i><b>5.6</b> [11] “group” “hjust” “label” “linetype” “lower”</a></li>
-<li class="chapter" data-level="5.7" data-path="plotting.html"><a href="plotting.html#lty-lwd-max-middle-min"><i class="fa fa-check"></i><b>5.7</b> [16] “lty” “lwd” “max” “middle” “min”</a></li>
-<li class="chapter" data-level="5.8" data-path="plotting.html"><a href="plotting.html#pch-radius-sample-shape-size"><i class="fa fa-check"></i><b>5.8</b> [21] “pch” “radius” “sample” “shape” “size”</a></li>
-<li class="chapter" data-level="5.9" data-path="plotting.html"><a href="plotting.html#srt-upper-vjust-weight-width"><i class="fa fa-check"></i><b>5.9</b> [26] “srt” “upper” “vjust” “weight” “width”</a></li>
-<li class="chapter" data-level="5.10" data-path="plotting.html"><a href="plotting.html#x-xend-xmax-xmin-xintercept"><i class="fa fa-check"></i><b>5.10</b> [31] “x” “xend” “xmax” “xmin” “xintercept”</a></li>
-<li class="chapter" data-level="5.11" data-path="plotting.html"><a href="plotting.html#y-yend-ymax-ymin-yintercept"><i class="fa fa-check"></i><b>5.11</b> [36] “y” “yend” “ymax” “ymin” “yintercept”</a></li>
-<li class="chapter" data-level="5.12" data-path="plotting.html"><a href="plotting.html#z-1"><i class="fa fa-check"></i><b>5.12</b> [41] “z”</a></li>
-<li class="chapter" data-level="5.13" data-path="plotting.html"><a href="plotting.html#section-51"><i class="fa fa-check"></i><b>5.13</b> <ggproto object: Class GeomPoint, Geom, gg></a></li>
-<li class="chapter" data-level="5.14" data-path="plotting.html"><a href="plotting.html#aesthetics-function"><i class="fa fa-check"></i><b>5.14</b> aesthetics: function</a></li>
-<li class="chapter" data-level="5.15" data-path="plotting.html"><a href="plotting.html#default_aes-uneval"><i class="fa fa-check"></i><b>5.15</b> default_aes: uneval</a></li>
-<li class="chapter" data-level="5.16" data-path="plotting.html"><a href="plotting.html#draw_group-function"><i class="fa fa-check"></i><b>5.16</b> draw_group: function</a></li>
-<li class="chapter" data-level="5.17" data-path="plotting.html"><a href="plotting.html#draw_key-function"><i class="fa fa-check"></i><b>5.17</b> draw_key: function</a></li>
-<li class="chapter" data-level="5.18" data-path="plotting.html"><a href="plotting.html#draw_layer-function"><i class="fa fa-check"></i><b>5.18</b> draw_layer: function</a></li>
-<li class="chapter" data-level="5.19" data-path="plotting.html"><a href="plotting.html#draw_panel-function"><i class="fa fa-check"></i><b>5.19</b> draw_panel: function</a></li>
-<li class="chapter" data-level="5.20" data-path="plotting.html"><a href="plotting.html#extra_params-na.rm"><i class="fa fa-check"></i><b>5.20</b> extra_params: na.rm</a></li>
-<li class="chapter" data-level="5.21" data-path="plotting.html"><a href="plotting.html#handle_na-function"><i class="fa fa-check"></i><b>5.21</b> handle_na: function</a></li>
-<li class="chapter" data-level="5.22" data-path="plotting.html"><a href="plotting.html#non_missing_aes-size-shape-colour"><i class="fa fa-check"></i><b>5.22</b> non_missing_aes: size shape colour</a></li>
-<li class="chapter" data-level="5.23" data-path="plotting.html"><a href="plotting.html#optional_aes"><i class="fa fa-check"></i><b>5.23</b> optional_aes:</a></li>
-<li class="chapter" data-level="5.24" data-path="plotting.html"><a href="plotting.html#parameters-function"><i class="fa fa-check"></i><b>5.24</b> parameters: function</a></li>
-<li class="chapter" data-level="5.25" data-path="plotting.html"><a href="plotting.html#required_aes-x-y"><i class="fa fa-check"></i><b>5.25</b> required_aes: x y</a></li>
-<li class="chapter" data-level="5.26" data-path="plotting.html"><a href="plotting.html#setup_data-function"><i class="fa fa-check"></i><b>5.26</b> setup_data: function</a></li>
-<li class="chapter" data-level="5.27" data-path="plotting.html"><a href="plotting.html#use_defaults-function"><i class="fa fa-check"></i><b>5.27</b> use_defaults: function</a></li>
-<li class="chapter" data-level="5.28" data-path="plotting.html"><a href="plotting.html#super"><i class="fa fa-check"></i><b>5.28</b> super: <ggproto object: Class Geom, gg></a></li>
-<li class="chapter" data-level="5.29" data-path="plotting.html"><a href="plotting.html#fair-good-very-good-premium-ideal"><i class="fa fa-check"></i><b>5.29</b> [1] “Fair” “Good” “Very Good” “Premium” “Ideal”</a></li>
-<li class="chapter" data-level="5.30" data-path="plotting.html"><a href="plotting.html#d-e-f-g-h-i-j"><i class="fa fa-check"></i><b>5.30</b> [1] “D” “E” “F” “G” “H” “I” “J”</a><ul>
-<li class="chapter" data-level="5.30.1" data-path="plotting.html"><a href="plotting.html#geoms-stats"><i class="fa fa-check"></i><b>5.30.1</b> Geoms &amp; Stats</a></li>
+<li class="chapter" data-level="5.9" data-path="data.html"><a href="data.html#resources"><i class="fa fa-check"></i><b>5.9</b> Resources</a></li>
 </ul></li>
-<li class="chapter" data-level="5.31" data-path="plotting.html"><a href="plotting.html#loading-required-package-methods"><i class="fa fa-check"></i><b>5.31</b> Loading required package: methods</a><ul>
-<li class="chapter" data-level="5.31.1" data-path="plotting.html"><a href="plotting.html#position"><i class="fa fa-check"></i><b>5.31.1</b> Position</a></li>
+<li class="chapter" data-level="6" data-path="plotting.html"><a href="plotting.html"><i class="fa fa-check"></i><b>6</b> Plotting</a><ul>
+<li class="chapter" data-level="6.1" data-path="plotting.html"><a href="plotting.html#r-graphics-structure"><i class="fa fa-check"></i><b>6.1</b> R Graphics Structure</a></li>
+<li class="chapter" data-level="6.2" data-path="plotting.html"><a href="plotting.html#base-graphics"><i class="fa fa-check"></i><b>6.2</b> Base graphics</a></li>
+<li class="chapter" data-level="6.3" data-path="plotting.html"><a href="plotting.html#ggplot2"><i class="fa fa-check"></i><b>6.3</b> ggplot2</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="plotting.html"><a href="plotting.html#layers"><i class="fa fa-check"></i><b>6.3.1</b> Layers</a></li>
+<li class="chapter" data-level="6.3.2" data-path="plotting.html"><a href="plotting.html#aesthetic-mappings"><i class="fa fa-check"></i><b>6.3.2</b> (aes)thetic mappings</a></li>
+<li class="chapter" data-level="6.3.3" data-path="plotting.html"><a href="plotting.html#geoms-stats"><i class="fa fa-check"></i><b>6.3.3</b> Geoms &amp; Stats</a></li>
+<li class="chapter" data-level="6.3.4" data-path="plotting.html"><a href="plotting.html#position"><i class="fa fa-check"></i><b>6.3.4</b> Position</a></li>
+<li class="chapter" data-level="6.3.5" data-path="plotting.html"><a href="plotting.html#scales"><i class="fa fa-check"></i><b>6.3.5</b> Scales</a></li>
+<li class="chapter" data-level="6.3.6" data-path="plotting.html"><a href="plotting.html#facets"><i class="fa fa-check"></i><b>6.3.6</b> Facets</a></li>
+<li class="chapter" data-level="6.3.7" data-path="plotting.html"><a href="plotting.html#coordinate-systems"><i class="fa fa-check"></i><b>6.3.7</b> Coordinate Systems</a></li>
+<li class="chapter" data-level="6.3.8" data-path="plotting.html"><a href="plotting.html#themes"><i class="fa fa-check"></i><b>6.3.8</b> Themes</a></li>
+<li class="chapter" data-level="6.3.9" data-path="plotting.html"><a href="plotting.html#extensions"><i class="fa fa-check"></i><b>6.3.9</b> Extensions</a></li>
 </ul></li>
-<li class="chapter" data-level="5.32" data-path="plotting.html"><a href="plotting.html#stat_bin-using-bins-30.-pick-better-value-with-binwidth."><i class="fa fa-check"></i><b>5.32</b> <code>stat_bin()</code> using <code>bins = 30</code>. Pick better value with <code>binwidth</code>.</a></li>
-<li class="chapter" data-level="5.33" data-path="plotting.html"><a href="plotting.html#stat_bin-using-bins-30.-pick-better-value-with-binwidth.-1"><i class="fa fa-check"></i><b>5.33</b> <code>stat_bin()</code> using <code>bins = 30</code>. Pick better value with <code>binwidth</code>.</a><ul>
-<li class="chapter" data-level="5.33.1" data-path="plotting.html"><a href="plotting.html#scales"><i class="fa fa-check"></i><b>5.33.1</b> Scales</a></li>
+<li class="chapter" data-level="6.4" data-path="plotting.html"><a href="plotting.html#lattice"><i class="fa fa-check"></i><b>6.4</b> Lattice</a></li>
+<li class="chapter" data-level="6.5" data-path="plotting.html"><a href="plotting.html#rendering"><i class="fa fa-check"></i><b>6.5</b> Rendering</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="plotting.html"><a href="plotting.html#using-graphics-engines"><i class="fa fa-check"></i><b>6.5.1</b> Using Graphics Engines</a></li>
+<li class="chapter" data-level="6.5.2" data-path="plotting.html"><a href="plotting.html#ggsave"><i class="fa fa-check"></i><b>6.5.2</b> ggsave</a></li>
 </ul></li>
-<li class="chapter" data-level="5.34" data-path="plotting.html"><a href="plotting.html#warning-removed-124-rows-containing-non-finite-values-stat_smooth."><i class="fa fa-check"></i><b>5.34</b> Warning: Removed 124 rows containing non-finite values (stat_smooth).</a></li>
-<li class="chapter" data-level="5.35" data-path="plotting.html"><a href="plotting.html#warning-removed-194-rows-containing-missing-values-geom_point."><i class="fa fa-check"></i><b>5.35</b> Warning: Removed 194 rows containing missing values (geom_point).</a><ul>
-<li class="chapter" data-level="5.35.1" data-path="plotting.html"><a href="plotting.html#facets"><i class="fa fa-check"></i><b>5.35.1</b> Facets</a></li>
-<li class="chapter" data-level="5.35.2" data-path="plotting.html"><a href="plotting.html#coordinate-systems"><i class="fa fa-check"></i><b>5.35.2</b> Coordinate Systems</a></li>
-<li class="chapter" data-level="5.35.3" data-path="plotting.html"><a href="plotting.html#themes"><i class="fa fa-check"></i><b>5.35.3</b> Themes</a></li>
-<li class="chapter" data-level="5.35.4" data-path="plotting.html"><a href="plotting.html#extensions"><i class="fa fa-check"></i><b>5.35.4</b> Extensions</a></li>
+<li class="chapter" data-level="6.6" data-path="plotting.html"><a href="plotting.html#grid"><i class="fa fa-check"></i><b>6.6</b> Grid</a></li>
+<li class="chapter" data-level="6.7" data-path="plotting.html"><a href="plotting.html#references-1"><i class="fa fa-check"></i><b>6.7</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="5.36" data-path="plotting.html"><a href="plotting.html#lattice"><i class="fa fa-check"></i><b>5.36</b> Lattice</a></li>
-<li class="chapter" data-level="5.37" data-path="plotting.html"><a href="plotting.html#rendering"><i class="fa fa-check"></i><b>5.37</b> Rendering</a><ul>
-<li class="chapter" data-level="5.37.1" data-path="plotting.html"><a href="plotting.html#using-graphics-engines"><i class="fa fa-check"></i><b>5.37.1</b> Using Graphics Engines</a></li>
-<li class="chapter" data-level="5.37.2" data-path="plotting.html"><a href="plotting.html#ggsave"><i class="fa fa-check"></i><b>5.37.2</b> ggsave</a></li>
+<li class="chapter" data-level="7" data-path="control-flow.html"><a href="control-flow.html"><i class="fa fa-check"></i><b>7</b> Control Flow</a><ul>
+<li class="chapter" data-level="7.1" data-path="control-flow.html"><a href="control-flow.html#for-loops"><i class="fa fa-check"></i><b>7.1</b> For Loops</a></li>
+<li class="chapter" data-level="7.2" data-path="control-flow.html"><a href="control-flow.html#while-loops"><i class="fa fa-check"></i><b>7.2</b> While Loops</a></li>
+<li class="chapter" data-level="7.3" data-path="control-flow.html"><a href="control-flow.html#ifthen-statements"><i class="fa fa-check"></i><b>7.3</b> If/Then Statements</a></li>
+<li class="chapter" data-level="7.4" data-path="control-flow.html"><a href="control-flow.html#apply-functions"><i class="fa fa-check"></i><b>7.4</b> Apply functions</a></li>
 </ul></li>
-<li class="chapter" data-level="5.38" data-path="plotting.html"><a href="plotting.html#grid"><i class="fa fa-check"></i><b>5.38</b> Grid</a></li>
-<li class="chapter" data-level="5.39" data-path="plotting.html"><a href="plotting.html#t-l-b-r-z-clip-name"><i class="fa fa-check"></i><b>5.39</b> t l b r z clip name</a></li>
-<li class="chapter" data-level="5.40" data-path="plotting.html"><a href="plotting.html#on-background"><i class="fa fa-check"></i><b>5.40</b> 18 1 1 10 7 0 on background</a></li>
-<li class="chapter" data-level="5.41" data-path="plotting.html"><a href="plotting.html#off-spacer"><i class="fa fa-check"></i><b>5.41</b> 1 5 3 5 3 5 off spacer</a></li>
-<li class="chapter" data-level="5.42" data-path="plotting.html"><a href="plotting.html#off-axis-l"><i class="fa fa-check"></i><b>5.42</b> 2 6 3 6 3 7 off axis-l</a></li>
-<li class="chapter" data-level="5.43" data-path="plotting.html"><a href="plotting.html#off-spacer-1"><i class="fa fa-check"></i><b>5.43</b> 3 7 3 7 3 3 off spacer</a></li>
-<li class="chapter" data-level="5.44" data-path="plotting.html"><a href="plotting.html#off-axis-t"><i class="fa fa-check"></i><b>5.44</b> 4 5 4 5 4 6 off axis-t</a></li>
-<li class="chapter" data-level="5.45" data-path="plotting.html"><a href="plotting.html#on-panel"><i class="fa fa-check"></i><b>5.45</b> 5 6 4 6 4 1 on panel</a></li>
-<li class="chapter" data-level="5.46" data-path="plotting.html"><a href="plotting.html#off-axis-b"><i class="fa fa-check"></i><b>5.46</b> 6 7 4 7 4 9 off axis-b</a></li>
-<li class="chapter" data-level="5.47" data-path="plotting.html"><a href="plotting.html#off-spacer-2"><i class="fa fa-check"></i><b>5.47</b> 7 5 5 5 5 4 off spacer</a></li>
-<li class="chapter" data-level="5.48" data-path="plotting.html"><a href="plotting.html#off-axis-r"><i class="fa fa-check"></i><b>5.48</b> 8 6 5 6 5 8 off axis-r</a></li>
-<li class="chapter" data-level="5.49" data-path="plotting.html"><a href="plotting.html#off-spacer-3"><i class="fa fa-check"></i><b>5.49</b> 9 7 5 7 5 2 off spacer</a></li>
-<li class="chapter" data-level="5.50" data-path="plotting.html"><a href="plotting.html#off-xlab-t"><i class="fa fa-check"></i><b>5.50</b> 10 4 4 4 4 10 off xlab-t</a></li>
-<li class="chapter" data-level="5.51" data-path="plotting.html"><a href="plotting.html#off-xlab-b"><i class="fa fa-check"></i><b>5.51</b> 11 8 4 8 4 11 off xlab-b</a></li>
-<li class="chapter" data-level="5.52" data-path="plotting.html"><a href="plotting.html#off-ylab-l"><i class="fa fa-check"></i><b>5.52</b> 12 6 2 6 2 12 off ylab-l</a></li>
-<li class="chapter" data-level="5.53" data-path="plotting.html"><a href="plotting.html#off-ylab-r"><i class="fa fa-check"></i><b>5.53</b> 13 6 6 6 6 13 off ylab-r</a></li>
-<li class="chapter" data-level="5.54" data-path="plotting.html"><a href="plotting.html#off-guide-box"><i class="fa fa-check"></i><b>5.54</b> 14 6 4 6 4 14 off guide-box</a></li>
-<li class="chapter" data-level="5.55" data-path="plotting.html"><a href="plotting.html#off-subtitle"><i class="fa fa-check"></i><b>5.55</b> 15 3 4 3 4 15 off subtitle</a></li>
-<li class="chapter" data-level="5.56" data-path="plotting.html"><a href="plotting.html#off-title"><i class="fa fa-check"></i><b>5.56</b> 16 2 4 2 4 16 off title</a></li>
-<li class="chapter" data-level="5.57" data-path="plotting.html"><a href="plotting.html#off-caption"><i class="fa fa-check"></i><b>5.57</b> 17 9 4 9 4 17 off caption</a></li>
-<li class="chapter" data-level="5.58" data-path="plotting.html"><a href="plotting.html#pt-0cm"><i class="fa fa-check"></i><b>5.58</b> [1] 5.5pt 0cm</a></li>
-<li class="chapter" data-level="5.59" data-path="plotting.html"><a href="plotting.html#cm-0cm"><i class="fa fa-check"></i><b>5.59</b> [3] 0cm 0cm</a></li>
-<li class="chapter" data-level="5.60" data-path="plotting.html"><a href="plotting.html#cm-1null"><i class="fa fa-check"></i><b>5.60</b> [5] 0cm 1null</a></li>
-<li class="chapter" data-level="5.61" data-path="plotting.html"><a href="plotting.html#sum2.75pt-1grobheight-1grobheight"><i class="fa fa-check"></i><b>5.61</b> [7] sum(2.75pt, 1grobheight) 1grobheight</a></li>
-<li class="chapter" data-level="5.62" data-path="plotting.html"><a href="plotting.html#cm-5.5pt"><i class="fa fa-check"></i><b>5.62</b> [9] 0cm 5.5pt</a></li>
-<li class="chapter" data-level="5.63" data-path="plotting.html"><a href="plotting.html#pt-1grobwidth-sum1grobwidth-2.75pt"><i class="fa fa-check"></i><b>5.63</b> [1] 5.5pt 1grobwidth sum(1grobwidth, 2.75pt)</a></li>
-<li class="chapter" data-level="5.64" data-path="plotting.html"><a href="plotting.html#null-0cm-0cm"><i class="fa fa-check"></i><b>5.64</b> [4] 1null 0cm 0cm</a></li>
-<li class="chapter" data-level="5.65" data-path="plotting.html"><a href="plotting.html#pt"><i class="fa fa-check"></i><b>5.65</b> [7] 5.5pt</a></li>
-<li class="chapter" data-level="5.66" data-path="plotting.html"><a href="plotting.html#section-52"><i class="fa fa-check"></i><b>5.66</b> [[1]]</a></li>
-<li class="chapter" data-level="5.67" data-path="plotting.html"><a href="plotting.html#zerogrobplot.background..zerogrob.3075"><i class="fa fa-check"></i><b>5.67</b> zeroGrob[plot.background..zeroGrob.3075]</a></li>
-<li class="chapter" data-level="5.68" data-path="plotting.html"><a href="plotting.html#section-53"><i class="fa fa-check"></i><b>5.68</b> </a></li>
-<li class="chapter" data-level="5.69" data-path="plotting.html"><a href="plotting.html#section-54"><i class="fa fa-check"></i><b>5.69</b> [<a href="data.html#section-12">2</a>]</a></li>
-<li class="chapter" data-level="5.70" data-path="plotting.html"><a href="plotting.html#zerogrobnull"><i class="fa fa-check"></i><b>5.70</b> zeroGrob[NULL]</a></li>
-<li class="chapter" data-level="5.71" data-path="plotting.html"><a href="plotting.html#section-55"><i class="fa fa-check"></i><b>5.71</b> </a></li>
-<li class="chapter" data-level="5.72" data-path="plotting.html"><a href="plotting.html#section-56"><i class="fa fa-check"></i><b>5.72</b> [[3]]</a></li>
-<li class="chapter" data-level="5.73" data-path="plotting.html"><a href="plotting.html#absolutegrobgrid.absolutegrob.3036"><i class="fa fa-check"></i><b>5.73</b> absoluteGrob[GRID.absoluteGrob.3036]</a></li>
-<li class="chapter" data-level="5.74" data-path="plotting.html"><a href="plotting.html#section-57"><i class="fa fa-check"></i><b>5.74</b> </a></li>
-<li class="chapter" data-level="5.75" data-path="plotting.html"><a href="plotting.html#section-58"><i class="fa fa-check"></i><b>5.75</b> [[4]]</a></li>
-<li class="chapter" data-level="5.76" data-path="plotting.html"><a href="plotting.html#zerogrobnull-1"><i class="fa fa-check"></i><b>5.76</b> zeroGrob[NULL]</a></li>
-<li class="chapter" data-level="5.77" data-path="plotting.html"><a href="plotting.html#section-59"><i class="fa fa-check"></i><b>5.77</b> </a></li>
-<li class="chapter" data-level="5.78" data-path="plotting.html"><a href="plotting.html#section-60"><i class="fa fa-check"></i><b>5.78</b> [[5]]</a></li>
-<li class="chapter" data-level="5.79" data-path="plotting.html"><a href="plotting.html#zerogrobnull-2"><i class="fa fa-check"></i><b>5.79</b> zeroGrob[NULL]</a></li>
-<li class="chapter" data-level="5.80" data-path="plotting.html"><a href="plotting.html#section-61"><i class="fa fa-check"></i><b>5.80</b> </a></li>
-<li class="chapter" data-level="5.81" data-path="plotting.html"><a href="plotting.html#section-62"><i class="fa fa-check"></i><b>5.81</b> [[6]]</a></li>
-<li class="chapter" data-level="5.82" data-path="plotting.html"><a href="plotting.html#gtreepanel-1.gtree.3024"><i class="fa fa-check"></i><b>5.82</b> gTree[panel-1.gTree.3024]</a></li>
-<li class="chapter" data-level="5.83" data-path="plotting.html"><a href="plotting.html#section-63"><i class="fa fa-check"></i><b>5.83</b> </a></li>
-<li class="chapter" data-level="5.84" data-path="plotting.html"><a href="plotting.html#section-64"><i class="fa fa-check"></i><b>5.84</b> [[7]]</a></li>
-<li class="chapter" data-level="5.85" data-path="plotting.html"><a href="plotting.html#absolutegrobgrid.absolutegrob.3030"><i class="fa fa-check"></i><b>5.85</b> absoluteGrob[GRID.absoluteGrob.3030]</a></li>
-<li class="chapter" data-level="5.86" data-path="plotting.html"><a href="plotting.html#section-65"><i class="fa fa-check"></i><b>5.86</b> </a></li>
-<li class="chapter" data-level="5.87" data-path="plotting.html"><a href="plotting.html#section-66"><i class="fa fa-check"></i><b>5.87</b> [[8]]</a></li>
-<li class="chapter" data-level="5.88" data-path="plotting.html"><a href="plotting.html#zerogrobnull-3"><i class="fa fa-check"></i><b>5.88</b> zeroGrob[NULL]</a></li>
-<li class="chapter" data-level="5.89" data-path="plotting.html"><a href="plotting.html#section-67"><i class="fa fa-check"></i><b>5.89</b> </a></li>
-<li class="chapter" data-level="5.90" data-path="plotting.html"><a href="plotting.html#section-68"><i class="fa fa-check"></i><b>5.90</b> [[9]]</a></li>
-<li class="chapter" data-level="5.91" data-path="plotting.html"><a href="plotting.html#zerogrobnull-4"><i class="fa fa-check"></i><b>5.91</b> zeroGrob[NULL]</a></li>
-<li class="chapter" data-level="5.92" data-path="plotting.html"><a href="plotting.html#section-69"><i class="fa fa-check"></i><b>5.92</b> </a></li>
-<li class="chapter" data-level="5.93" data-path="plotting.html"><a href="plotting.html#section-70"><i class="fa fa-check"></i><b>5.93</b> [[10]]</a></li>
-<li class="chapter" data-level="5.94" data-path="plotting.html"><a href="plotting.html#zerogrobnull-5"><i class="fa fa-check"></i><b>5.94</b> zeroGrob[NULL]</a></li>
-<li class="chapter" data-level="5.95" data-path="plotting.html"><a href="plotting.html#section-71"><i class="fa fa-check"></i><b>5.95</b> </a></li>
-<li class="chapter" data-level="5.96" data-path="plotting.html"><a href="plotting.html#section-72"><i class="fa fa-check"></i><b>5.96</b> [[11]]</a></li>
-<li class="chapter" data-level="5.97" data-path="plotting.html"><a href="plotting.html#zerogrobnull-6"><i class="fa fa-check"></i><b>5.97</b> zeroGrob[NULL]</a></li>
-<li class="chapter" data-level="5.98" data-path="plotting.html"><a href="plotting.html#section-73"><i class="fa fa-check"></i><b>5.98</b> </a></li>
-<li class="chapter" data-level="5.99" data-path="plotting.html"><a href="plotting.html#section-74"><i class="fa fa-check"></i><b>5.99</b> [[12]]</a></li>
-<li class="chapter" data-level="5.100" data-path="plotting.html"><a href="plotting.html#titlegrobaxis.title.x.bottom..titlegrob.3039"><i class="fa fa-check"></i><b>5.100</b> titleGrob[axis.title.x.bottom..titleGrob.3039]</a></li>
-<li class="chapter" data-level="5.101" data-path="plotting.html"><a href="plotting.html#section-75"><i class="fa fa-check"></i><b>5.101</b> </a></li>
-<li class="chapter" data-level="5.102" data-path="plotting.html"><a href="plotting.html#section-76"><i class="fa fa-check"></i><b>5.102</b> [[13]]</a></li>
-<li class="chapter" data-level="5.103" data-path="plotting.html"><a href="plotting.html#titlegrobaxis.title.y.left..titlegrob.3042"><i class="fa fa-check"></i><b>5.103</b> titleGrob[axis.title.y.left..titleGrob.3042]</a></li>
-<li class="chapter" data-level="5.104" data-path="plotting.html"><a href="plotting.html#section-77"><i class="fa fa-check"></i><b>5.104</b> </a></li>
-<li class="chapter" data-level="5.105" data-path="plotting.html"><a href="plotting.html#section-78"><i class="fa fa-check"></i><b>5.105</b> [[14]]</a></li>
-<li class="chapter" data-level="5.106" data-path="plotting.html"><a href="plotting.html#zerogrobnull-7"><i class="fa fa-check"></i><b>5.106</b> zeroGrob[NULL]</a></li>
-<li class="chapter" data-level="5.107" data-path="plotting.html"><a href="plotting.html#section-79"><i class="fa fa-check"></i><b>5.107</b> </a></li>
-<li class="chapter" data-level="5.108" data-path="plotting.html"><a href="plotting.html#section-80"><i class="fa fa-check"></i><b>5.108</b> [<a href="data.html#section-30">15</a>]</a></li>
-<li class="chapter" data-level="5.109" data-path="plotting.html"><a href="plotting.html#tablegrob-3-x-3-guide-box-2-grobs"><i class="fa fa-check"></i><b>5.109</b> TableGrob (3 x 3) “guide-box”: 2 grobs</a></li>
-<li class="chapter" data-level="5.110" data-path="plotting.html"><a href="plotting.html#z-cells-name"><i class="fa fa-check"></i><b>5.110</b> z cells name</a></li>
-<li class="chapter" data-level="5.111" data-path="plotting.html"><a href="plotting.html#d9cc4e523da50b6c36763eedff87c-1-2-22-2-guides"><i class="fa fa-check"></i><b>5.111</b> 99_281d9cc4e523da50b6c36763eedff87c 1 (2-2,2-2) guides</a></li>
-<li class="chapter" data-level="5.112" data-path="plotting.html"><a href="plotting.html#legend.box.background"><i class="fa fa-check"></i><b>5.112</b> 0 (1-3,1-3) legend.box.background</a></li>
-<li class="chapter" data-level="5.113" data-path="plotting.html"><a href="plotting.html#grob"><i class="fa fa-check"></i><b>5.113</b> grob</a></li>
-<li class="chapter" data-level="5.114" data-path="plotting.html"><a href="plotting.html#d9cc4e523da50b6c36763eedff87c-gtablelayout"><i class="fa fa-check"></i><b>5.114</b> 99_281d9cc4e523da50b6c36763eedff87c gtable[layout]</a></li>
-<li class="chapter" data-level="5.115" data-path="plotting.html"><a href="plotting.html#zerogrobnull-8"><i class="fa fa-check"></i><b>5.115</b> zeroGrob[NULL]</a></li>
-<li class="chapter" data-level="5.116" data-path="plotting.html"><a href="plotting.html#section-81"><i class="fa fa-check"></i><b>5.116</b> </a></li>
-<li class="chapter" data-level="5.117" data-path="plotting.html"><a href="plotting.html#section-82"><i class="fa fa-check"></i><b>5.117</b> [[16]]</a></li>
-<li class="chapter" data-level="5.118" data-path="plotting.html"><a href="plotting.html#zerogrobplot.subtitle..zerogrob.3073"><i class="fa fa-check"></i><b>5.118</b> zeroGrob[plot.subtitle..zeroGrob.3073]</a></li>
-<li class="chapter" data-level="5.119" data-path="plotting.html"><a href="plotting.html#section-83"><i class="fa fa-check"></i><b>5.119</b> </a></li>
-<li class="chapter" data-level="5.120" data-path="plotting.html"><a href="plotting.html#section-84"><i class="fa fa-check"></i><b>5.120</b> [[17]]</a></li>
-<li class="chapter" data-level="5.121" data-path="plotting.html"><a href="plotting.html#zerogrobplot.title..zerogrob.3072"><i class="fa fa-check"></i><b>5.121</b> zeroGrob[plot.title..zeroGrob.3072]</a></li>
-<li class="chapter" data-level="5.122" data-path="plotting.html"><a href="plotting.html#section-85"><i class="fa fa-check"></i><b>5.122</b> </a></li>
-<li class="chapter" data-level="5.123" data-path="plotting.html"><a href="plotting.html#section-86"><i class="fa fa-check"></i><b>5.123</b> [[18]]</a></li>
-<li class="chapter" data-level="5.124" data-path="plotting.html"><a href="plotting.html#zerogrobplot.caption..zerogrob.3074"><i class="fa fa-check"></i><b>5.124</b> zeroGrob[plot.caption..zeroGrob.3074]</a></li>
-<li class="chapter" data-level="5.125" data-path="plotting.html"><a href="plotting.html#polygongeom_ribbon.polygon.3002-polygongeom_ribbon.polygon.3004-polygongeom_ribbon.polygon.3006-polygongeom_ribbon.polygon.3008-polygongeom_ribbon.polygon.3010"><i class="fa fa-check"></i><b>5.125</b> (polygon[geom_ribbon.polygon.3002], polygon[geom_ribbon.polygon.3004], polygon[geom_ribbon.polygon.3006], polygon[geom_ribbon.polygon.3008], polygon[geom_ribbon.polygon.3010])</a></li>
-<li class="chapter" data-level="5.126" data-path="plotting.html"><a href="plotting.html#t-l-b-r-z-clip-name-1"><i class="fa fa-check"></i><b>5.126</b> t l b r z clip name</a></li>
-<li class="chapter" data-level="5.127" data-path="plotting.html"><a href="plotting.html#on-background-1"><i class="fa fa-check"></i><b>5.127</b> 18 2 1 11 7 0 on background</a></li>
-<li class="chapter" data-level="5.128" data-path="plotting.html"><a href="plotting.html#off-spacer-4"><i class="fa fa-check"></i><b>5.128</b> 1 6 3 6 3 5 off spacer</a></li>
-<li class="chapter" data-level="5.129" data-path="plotting.html"><a href="plotting.html#off-axis-l-1"><i class="fa fa-check"></i><b>5.129</b> 2 7 3 7 3 7 off axis-l</a></li>
-<li class="chapter" data-level="5.130" data-path="plotting.html"><a href="plotting.html#off-spacer-5"><i class="fa fa-check"></i><b>5.130</b> 3 8 3 8 3 3 off spacer</a></li>
-<li class="chapter" data-level="5.131" data-path="plotting.html"><a href="plotting.html#off-axis-t-1"><i class="fa fa-check"></i><b>5.131</b> 4 6 4 6 4 6 off axis-t</a></li>
-<li class="chapter" data-level="5.132" data-path="plotting.html"><a href="plotting.html#on-panel-1"><i class="fa fa-check"></i><b>5.132</b> 5 7 4 7 4 1 on panel</a></li>
-<li class="chapter" data-level="5.133" data-path="plotting.html"><a href="plotting.html#off-axis-b-1"><i class="fa fa-check"></i><b>5.133</b> 6 8 4 8 4 9 off axis-b</a></li>
-<li class="chapter" data-level="5.134" data-path="plotting.html"><a href="plotting.html#off-spacer-6"><i class="fa fa-check"></i><b>5.134</b> 7 6 5 6 5 4 off spacer</a></li>
-<li class="chapter" data-level="5.135" data-path="plotting.html"><a href="plotting.html#off-axis-r-1"><i class="fa fa-check"></i><b>5.135</b> 8 7 5 7 5 8 off axis-r</a></li>
-<li class="chapter" data-level="5.136" data-path="plotting.html"><a href="plotting.html#off-spacer-7"><i class="fa fa-check"></i><b>5.136</b> 9 8 5 8 5 2 off spacer</a></li>
-<li class="chapter" data-level="5.137" data-path="plotting.html"><a href="plotting.html#off-xlab-t-1"><i class="fa fa-check"></i><b>5.137</b> 10 5 4 5 4 10 off xlab-t</a></li>
-<li class="chapter" data-level="5.138" data-path="plotting.html"><a href="plotting.html#off-xlab-b-1"><i class="fa fa-check"></i><b>5.138</b> 11 9 4 9 4 11 off xlab-b</a></li>
-<li class="chapter" data-level="5.139" data-path="plotting.html"><a href="plotting.html#off-ylab-l-1"><i class="fa fa-check"></i><b>5.139</b> 12 7 2 7 2 12 off ylab-l</a></li>
-<li class="chapter" data-level="5.140" data-path="plotting.html"><a href="plotting.html#off-ylab-r-1"><i class="fa fa-check"></i><b>5.140</b> 13 7 6 7 6 13 off ylab-r</a></li>
-<li class="chapter" data-level="5.141" data-path="plotting.html"><a href="plotting.html#off-guide-box-1"><i class="fa fa-check"></i><b>5.141</b> 14 7 4 7 4 14 off guide-box</a></li>
-<li class="chapter" data-level="5.142" data-path="plotting.html"><a href="plotting.html#off-subtitle-1"><i class="fa fa-check"></i><b>5.142</b> 15 4 4 4 4 15 off subtitle</a></li>
-<li class="chapter" data-level="5.143" data-path="plotting.html"><a href="plotting.html#off-title-1"><i class="fa fa-check"></i><b>5.143</b> 16 3 4 3 4 16 off title</a></li>
-<li class="chapter" data-level="5.144" data-path="plotting.html"><a href="plotting.html#off-caption-1"><i class="fa fa-check"></i><b>5.144</b> 17 10 4 10 4 17 off caption</a></li>
-<li class="chapter" data-level="5.145" data-path="plotting.html"><a href="plotting.html#t-l-b-r-z-clip-name-2"><i class="fa fa-check"></i><b>5.145</b> t l b r z clip name</a></li>
-<li class="chapter" data-level="5.146" data-path="plotting.html"><a href="plotting.html#on-background-2"><i class="fa fa-check"></i><b>5.146</b> 18 2 1 11 7 0 on background</a></li>
-<li class="chapter" data-level="5.147" data-path="plotting.html"><a href="plotting.html#off-spacer-8"><i class="fa fa-check"></i><b>5.147</b> 1 6 3 6 3 5 off spacer</a></li>
-<li class="chapter" data-level="5.148" data-path="plotting.html"><a href="plotting.html#off-axis-l-2"><i class="fa fa-check"></i><b>5.148</b> 2 7 3 7 3 7 off axis-l</a></li>
-<li class="chapter" data-level="5.149" data-path="plotting.html"><a href="plotting.html#off-spacer-9"><i class="fa fa-check"></i><b>5.149</b> 3 8 3 8 3 3 off spacer</a></li>
-<li class="chapter" data-level="5.150" data-path="plotting.html"><a href="plotting.html#off-axis-t-2"><i class="fa fa-check"></i><b>5.150</b> 4 6 4 6 4 6 off axis-t</a></li>
-<li class="chapter" data-level="5.151" data-path="plotting.html"><a href="plotting.html#on-panel-2"><i class="fa fa-check"></i><b>5.151</b> 5 7 4 7 4 1 on panel</a></li>
-<li class="chapter" data-level="5.152" data-path="plotting.html"><a href="plotting.html#off-axis-b-2"><i class="fa fa-check"></i><b>5.152</b> 6 8 4 8 4 9 off axis-b</a></li>
-<li class="chapter" data-level="5.153" data-path="plotting.html"><a href="plotting.html#off-spacer-10"><i class="fa fa-check"></i><b>5.153</b> 7 6 5 6 5 4 off spacer</a></li>
-<li class="chapter" data-level="5.154" data-path="plotting.html"><a href="plotting.html#off-axis-r-2"><i class="fa fa-check"></i><b>5.154</b> 8 7 5 7 5 8 off axis-r</a></li>
-<li class="chapter" data-level="5.155" data-path="plotting.html"><a href="plotting.html#off-spacer-11"><i class="fa fa-check"></i><b>5.155</b> 9 8 5 8 5 2 off spacer</a></li>
-<li class="chapter" data-level="5.156" data-path="plotting.html"><a href="plotting.html#off-xlab-t-2"><i class="fa fa-check"></i><b>5.156</b> 10 5 4 5 4 10 off xlab-t</a></li>
-<li class="chapter" data-level="5.157" data-path="plotting.html"><a href="plotting.html#off-xlab-b-2"><i class="fa fa-check"></i><b>5.157</b> 11 9 4 9 4 11 off xlab-b</a></li>
-<li class="chapter" data-level="5.158" data-path="plotting.html"><a href="plotting.html#off-ylab-l-2"><i class="fa fa-check"></i><b>5.158</b> 12 7 2 7 2 12 off ylab-l</a></li>
-<li class="chapter" data-level="5.159" data-path="plotting.html"><a href="plotting.html#off-ylab-r-2"><i class="fa fa-check"></i><b>5.159</b> 13 7 6 7 6 13 off ylab-r</a></li>
-<li class="chapter" data-level="5.160" data-path="plotting.html"><a href="plotting.html#off-guide-box-2"><i class="fa fa-check"></i><b>5.160</b> 14 7 4 7 4 14 off guide-box</a></li>
-<li class="chapter" data-level="5.161" data-path="plotting.html"><a href="plotting.html#off-subtitle-2"><i class="fa fa-check"></i><b>5.161</b> 15 4 4 4 4 15 off subtitle</a></li>
-<li class="chapter" data-level="5.162" data-path="plotting.html"><a href="plotting.html#off-title-2"><i class="fa fa-check"></i><b>5.162</b> 16 3 4 3 4 16 off title</a></li>
-<li class="chapter" data-level="5.163" data-path="plotting.html"><a href="plotting.html#off-caption-2"><i class="fa fa-check"></i><b>5.163</b> 17 10 4 10 4 17 off caption</a></li>
-<li class="chapter" data-level="5.164" data-path="plotting.html"><a href="plotting.html#references"><i class="fa fa-check"></i><b>5.164</b> References</a></li>
+<li class="chapter" data-level="8" data-path="functions-1.html"><a href="functions-1.html"><i class="fa fa-check"></i><b>8</b> Functions</a><ul>
+<li class="chapter" data-level="8.1" data-path="functions-1.html"><a href="functions-1.html#form"><i class="fa fa-check"></i><b>8.1</b> Form</a></li>
+<li class="chapter" data-level="8.2" data-path="functions-1.html"><a href="functions-1.html#environments-and-scoping"><i class="fa fa-check"></i><b>8.2</b> Environments and Scoping</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="functions-1.html"><a href="functions-1.html#function-environments"><i class="fa fa-check"></i><b>8.2.1</b> Function Environments</a></li>
+<li class="chapter" data-level="8.2.2" data-path="functions-1.html"><a href="functions-1.html#querying-environments"><i class="fa fa-check"></i><b>8.2.2</b> Querying environments</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="control-flow.html"><a href="control-flow.html"><i class="fa fa-check"></i><b>6</b> Control Flow</a><ul>
-<li class="chapter" data-level="6.1" data-path="control-flow.html"><a href="control-flow.html#for-loops"><i class="fa fa-check"></i><b>6.1</b> For Loops</a></li>
-<li class="chapter" data-level="6.2" data-path="control-flow.html"><a href="control-flow.html#section-87"><i class="fa fa-check"></i><b>6.2</b> [1] 1</a></li>
-<li class="chapter" data-level="6.3" data-path="control-flow.html"><a href="control-flow.html#section-88"><i class="fa fa-check"></i><b>6.3</b> [1] 4</a></li>
-<li class="chapter" data-level="6.4" data-path="control-flow.html"><a href="control-flow.html#section-89"><i class="fa fa-check"></i><b>6.4</b> [1] 9</a></li>
-<li class="chapter" data-level="6.5" data-path="control-flow.html"><a href="control-flow.html#section-90"><i class="fa fa-check"></i><b>6.5</b> [1] 16</a></li>
-<li class="chapter" data-level="6.6" data-path="control-flow.html"><a href="control-flow.html#section-91"><i class="fa fa-check"></i><b>6.6</b> [1] 25</a></li>
-<li class="chapter" data-level="6.7" data-path="control-flow.html"><a href="control-flow.html#section-92"><i class="fa fa-check"></i><b>6.7</b> [1] 36</a></li>
-<li class="chapter" data-level="6.8" data-path="control-flow.html"><a href="control-flow.html#section-93"><i class="fa fa-check"></i><b>6.8</b> [1] 49</a></li>
-<li class="chapter" data-level="6.9" data-path="control-flow.html"><a href="control-flow.html#section-94"><i class="fa fa-check"></i><b>6.9</b> [1] 64</a></li>
-<li class="chapter" data-level="6.10" data-path="control-flow.html"><a href="control-flow.html#section-95"><i class="fa fa-check"></i><b>6.10</b> [1] 81</a></li>
-<li class="chapter" data-level="6.11" data-path="control-flow.html"><a href="control-flow.html#section-96"><i class="fa fa-check"></i><b>6.11</b> [1] 100</a></li>
-<li class="chapter" data-level="6.12" data-path="control-flow.html"><a href="control-flow.html#while-loops"><i class="fa fa-check"></i><b>6.12</b> While Loops</a></li>
-<li class="chapter" data-level="6.13" data-path="control-flow.html"><a href="control-flow.html#section-97"><i class="fa fa-check"></i><b>6.13</b> [1] 1</a></li>
-<li class="chapter" data-level="6.14" data-path="control-flow.html"><a href="control-flow.html#section-98"><i class="fa fa-check"></i><b>6.14</b> [1] 2</a></li>
-<li class="chapter" data-level="6.15" data-path="control-flow.html"><a href="control-flow.html#section-99"><i class="fa fa-check"></i><b>6.15</b> [1] 3</a></li>
-<li class="chapter" data-level="6.16" data-path="control-flow.html"><a href="control-flow.html#section-100"><i class="fa fa-check"></i><b>6.16</b> [1] 4</a></li>
-<li class="chapter" data-level="6.17" data-path="control-flow.html"><a href="control-flow.html#section-101"><i class="fa fa-check"></i><b>6.17</b> [1] 5</a></li>
-<li class="chapter" data-level="6.18" data-path="control-flow.html"><a href="control-flow.html#section-102"><i class="fa fa-check"></i><b>6.18</b> [1] 6</a></li>
-<li class="chapter" data-level="6.19" data-path="control-flow.html"><a href="control-flow.html#section-103"><i class="fa fa-check"></i><b>6.19</b> [1] 7</a></li>
-<li class="chapter" data-level="6.20" data-path="control-flow.html"><a href="control-flow.html#section-104"><i class="fa fa-check"></i><b>6.20</b> [1] 8</a></li>
-<li class="chapter" data-level="6.21" data-path="control-flow.html"><a href="control-flow.html#section-105"><i class="fa fa-check"></i><b>6.21</b> [1] 9</a></li>
-<li class="chapter" data-level="6.22" data-path="control-flow.html"><a href="control-flow.html#section-106"><i class="fa fa-check"></i><b>6.22</b> [1] 10</a></li>
-<li class="chapter" data-level="6.23" data-path="control-flow.html"><a href="control-flow.html#ifthen-statements"><i class="fa fa-check"></i><b>6.23</b> If/Then Statements</a></li>
-<li class="chapter" data-level="6.24" data-path="control-flow.html"><a href="control-flow.html#this-number-is-greater-than-5."><i class="fa fa-check"></i><b>6.24</b> [1] “This number is greater than 5.”</a></li>
-<li class="chapter" data-level="6.25" data-path="control-flow.html"><a href="control-flow.html#apply-functions"><i class="fa fa-check"></i><b>6.25</b> Apply functions</a></li>
-<li class="chapter" data-level="6.26" data-path="control-flow.html"><a href="control-flow.html#section-107"><i class="fa fa-check"></i><b>6.26</b> [,1] [,2] [,3]</a></li>
-<li class="chapter" data-level="6.27" data-path="control-flow.html"><a href="control-flow.html#section-108"><i class="fa fa-check"></i><b>6.27</b> [1,] 1 2 3</a></li>
-<li class="chapter" data-level="6.28" data-path="control-flow.html"><a href="control-flow.html#section-109"><i class="fa fa-check"></i><b>6.28</b> [2,] 1 2 3</a></li>
-<li class="chapter" data-level="6.29" data-path="control-flow.html"><a href="control-flow.html#section-110"><i class="fa fa-check"></i><b>6.29</b> [3,] 1 2 3</a></li>
-<li class="chapter" data-level="6.30" data-path="control-flow.html"><a href="control-flow.html#section-111"><i class="fa fa-check"></i><b>6.30</b> [1] 3 6 9</a></li>
-<li class="chapter" data-level="6.31" data-path="control-flow.html"><a href="control-flow.html#section-112"><i class="fa fa-check"></i><b>6.31</b> [1] 6 6 6</a></li>
-<li class="chapter" data-level="6.32" data-path="control-flow.html"><a href="control-flow.html#section-113"><i class="fa fa-check"></i><b>6.32</b> [[1]]</a></li>
-<li class="chapter" data-level="6.33" data-path="control-flow.html"><a href="control-flow.html#section-114"><i class="fa fa-check"></i><b>6.33</b> [1] 1</a></li>
-<li class="chapter" data-level="6.34" data-path="control-flow.html"><a href="control-flow.html#section-115"><i class="fa fa-check"></i><b>6.34</b> </a></li>
-<li class="chapter" data-level="6.35" data-path="control-flow.html"><a href="control-flow.html#section-116"><i class="fa fa-check"></i><b>6.35</b> [<a href="data.html#section-12">2</a>]</a></li>
-<li class="chapter" data-level="6.36" data-path="control-flow.html"><a href="control-flow.html#section-117"><i class="fa fa-check"></i><b>6.36</b> [1] 4</a></li>
-<li class="chapter" data-level="6.37" data-path="control-flow.html"><a href="control-flow.html#section-118"><i class="fa fa-check"></i><b>6.37</b> </a></li>
-<li class="chapter" data-level="6.38" data-path="control-flow.html"><a href="control-flow.html#section-119"><i class="fa fa-check"></i><b>6.38</b> [[3]]</a></li>
-<li class="chapter" data-level="6.39" data-path="control-flow.html"><a href="control-flow.html#section-120"><i class="fa fa-check"></i><b>6.39</b> [1] 9</a></li>
-<li class="chapter" data-level="6.40" data-path="control-flow.html"><a href="control-flow.html#section-121"><i class="fa fa-check"></i><b>6.40</b> </a></li>
-<li class="chapter" data-level="6.41" data-path="control-flow.html"><a href="control-flow.html#section-122"><i class="fa fa-check"></i><b>6.41</b> [[4]]</a></li>
-<li class="chapter" data-level="6.42" data-path="control-flow.html"><a href="control-flow.html#section-123"><i class="fa fa-check"></i><b>6.42</b> [1] 16</a></li>
-<li class="chapter" data-level="6.43" data-path="control-flow.html"><a href="control-flow.html#section-124"><i class="fa fa-check"></i><b>6.43</b> </a></li>
-<li class="chapter" data-level="6.44" data-path="control-flow.html"><a href="control-flow.html#section-125"><i class="fa fa-check"></i><b>6.44</b> [[5]]</a></li>
-<li class="chapter" data-level="6.45" data-path="control-flow.html"><a href="control-flow.html#section-126"><i class="fa fa-check"></i><b>6.45</b> [1] 25</a></li>
-<li class="chapter" data-level="6.46" data-path="control-flow.html"><a href="control-flow.html#section-127"><i class="fa fa-check"></i><b>6.46</b> </a></li>
-<li class="chapter" data-level="6.47" data-path="control-flow.html"><a href="control-flow.html#section-128"><i class="fa fa-check"></i><b>6.47</b> [[6]]</a></li>
-<li class="chapter" data-level="6.48" data-path="control-flow.html"><a href="control-flow.html#section-129"><i class="fa fa-check"></i><b>6.48</b> [1] 36</a></li>
-<li class="chapter" data-level="6.49" data-path="control-flow.html"><a href="control-flow.html#section-130"><i class="fa fa-check"></i><b>6.49</b> </a></li>
-<li class="chapter" data-level="6.50" data-path="control-flow.html"><a href="control-flow.html#section-131"><i class="fa fa-check"></i><b>6.50</b> [[7]]</a></li>
-<li class="chapter" data-level="6.51" data-path="control-flow.html"><a href="control-flow.html#section-132"><i class="fa fa-check"></i><b>6.51</b> [1] 49</a></li>
-<li class="chapter" data-level="6.52" data-path="control-flow.html"><a href="control-flow.html#section-133"><i class="fa fa-check"></i><b>6.52</b> </a></li>
-<li class="chapter" data-level="6.53" data-path="control-flow.html"><a href="control-flow.html#section-134"><i class="fa fa-check"></i><b>6.53</b> [[8]]</a></li>
-<li class="chapter" data-level="6.54" data-path="control-flow.html"><a href="control-flow.html#section-135"><i class="fa fa-check"></i><b>6.54</b> [1] 64</a></li>
-<li class="chapter" data-level="6.55" data-path="control-flow.html"><a href="control-flow.html#section-136"><i class="fa fa-check"></i><b>6.55</b> </a></li>
-<li class="chapter" data-level="6.56" data-path="control-flow.html"><a href="control-flow.html#section-137"><i class="fa fa-check"></i><b>6.56</b> [[9]]</a></li>
-<li class="chapter" data-level="6.57" data-path="control-flow.html"><a href="control-flow.html#section-138"><i class="fa fa-check"></i><b>6.57</b> [1] 81</a></li>
-<li class="chapter" data-level="6.58" data-path="control-flow.html"><a href="control-flow.html#section-139"><i class="fa fa-check"></i><b>6.58</b> </a></li>
-<li class="chapter" data-level="6.59" data-path="control-flow.html"><a href="control-flow.html#section-140"><i class="fa fa-check"></i><b>6.59</b> [[10]]</a></li>
-<li class="chapter" data-level="6.60" data-path="control-flow.html"><a href="control-flow.html#section-141"><i class="fa fa-check"></i><b>6.60</b> [1] 100</a></li>
-<li class="chapter" data-level="6.61" data-path="control-flow.html"><a href="control-flow.html#section-142"><i class="fa fa-check"></i><b>6.61</b> [1] 1 4 9 16 25 36 49 64 81 100</a></li>
+<li class="chapter" data-level="8.3" data-path="functions-1.html"><a href="functions-1.html#arguments"><i class="fa fa-check"></i><b>8.3</b> Arguments</a></li>
+<li class="chapter" data-level="8.4" data-path="functions-1.html"><a href="functions-1.html#todo"><i class="fa fa-check"></i><b>8.4</b> Todo:</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="functions-1.html"><a href="functions-1.html"><i class="fa fa-check"></i><b>7</b> Functions</a></li>
-<li class="chapter" data-level="8" data-path="useful-functions.html"><a href="useful-functions.html"><i class="fa fa-check"></i><b>8</b> Useful Functions</a><ul>
-<li class="chapter" data-level="8.1" data-path="useful-functions.html"><a href="useful-functions.html#workspace"><i class="fa fa-check"></i><b>8.1</b> Workspace</a></li>
-<li class="chapter" data-level="8.2" data-path="useful-functions.html"><a href="useful-functions.html#objects-2"><i class="fa fa-check"></i><b>8.2</b> Objects</a></li>
-<li class="chapter" data-level="8.3" data-path="useful-functions.html"><a href="useful-functions.html#iteration"><i class="fa fa-check"></i><b>8.3</b> Iteration</a></li>
+<li class="chapter" data-level="9" data-path="useful-functions.html"><a href="useful-functions.html"><i class="fa fa-check"></i><b>9</b> Useful Functions</a><ul>
+<li class="chapter" data-level="9.1" data-path="useful-functions.html"><a href="useful-functions.html#workspace"><i class="fa fa-check"></i><b>9.1</b> Workspace</a></li>
+<li class="chapter" data-level="9.2" data-path="useful-functions.html"><a href="useful-functions.html#objects-2"><i class="fa fa-check"></i><b>9.2</b> Objects</a></li>
+<li class="chapter" data-level="9.3" data-path="useful-functions.html"><a href="useful-functions.html#iteration"><i class="fa fa-check"></i><b>9.3</b> Iteration</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="style-tips.html"><a href="style-tips.html"><i class="fa fa-check"></i><b>9</b> Style Tips</a><ul>
-<li class="chapter" data-level="9.1" data-path="style-tips.html"><a href="style-tips.html#nothing-here-except-a-reminder-to-jonny-that-they-should-make-this-page"><i class="fa fa-check"></i><b>9.1</b> NOTHING HERE EXCEPT A REMINDER TO JONNY THAT THEY SHOULD MAKE THIS PAGE</a></li>
+<li class="chapter" data-level="10" data-path="style-tips.html"><a href="style-tips.html"><i class="fa fa-check"></i><b>10</b> Style Tips</a><ul>
+<li class="chapter" data-level="10.1" data-path="style-tips.html"><a href="style-tips.html#nothing-here-except-a-reminder-to-jonny-that-they-should-make-this-page"><i class="fa fa-check"></i><b>10.1</b> NOTHING HERE EXCEPT A REMINDER TO JONNY THAT THEY SHOULD MAKE THIS PAGE</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="how-do-i.html"><a href="how-do-i.html"><i class="fa fa-check"></i><b>10</b> How do I…</a><ul>
-<li class="chapter" data-level="10.1" data-path="how-do-i.html"><a href="how-do-i.html#yeeeeeeep-same-thing-here-nothing-but-a-slim-breeze-whistling-through-yer-earwells-the-tickle-tells-ya-it-dont-exist-yet"><i class="fa fa-check"></i><b>10.1</b> YEEEEEEEP SAME THING HERE NOTHING BUT A SLIM BREEZE WHISTLING THROUGH YER EARWELLS, THE TICKLE TELLS YA IT DONT EXIST YET</a></li>
+<li class="chapter" data-level="11" data-path="how-do-i.html"><a href="how-do-i.html"><i class="fa fa-check"></i><b>11</b> How do I…</a><ul>
+<li class="chapter" data-level="11.1" data-path="how-do-i.html"><a href="how-do-i.html#yeeeeeeep-same-thing-here-nothing-but-a-slim-breeze-whistling-through-yer-earwells-the-tickle-tells-ya-it-dont-exist-yet"><i class="fa fa-check"></i><b>11.1</b> YEEEEEEEP SAME THING HERE NOTHING BUT A SLIM BREEZE WHISTLING THROUGH YER EARWELLS, THE TICKLE TELLS YA IT DONT EXIST YET</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="resources-1.html"><a href="resources-1.html"><i class="fa fa-check"></i><b>11</b> Resources</a></li>
+<li class="chapter" data-level="12" data-path="resources-1.html"><a href="resources-1.html"><i class="fa fa-check"></i><b>12</b> Resources</a></li>
 </ul>
 
       </nav>
@@ -655,110 +264,226 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="functions-1" class="section level1">
-<h1><span class="header-section-number">7</span> Functions</h1>
-<p>Stolen without changes from <a href="https://github.com/kdestasio/2018_dataSciSem">Krista’s lesson</a>. A stub, a work-in-progress.</p>
-<pre><code># General form
-
-function_name &lt;- function(var){
-    Do something
-    return(new_variable)
-}</code></pre>
+<h1><span class="header-section-number">8</span> Functions</h1>
+<div id="form" class="section level2">
+<h2><span class="header-section-number">8.1</span> Form</h2>
+<p>The general form of a function is</p>
+<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb521-1" data-line-number="1">function_name &lt;-<span class="st"> </span><span class="cf">function</span>(arguments){</a>
+<a class="sourceLine" id="cb521-2" data-line-number="2">    <span class="co">#Do something</span></a>
+<a class="sourceLine" id="cb521-3" data-line-number="3">    <span class="kw">return</span>(output)</a>
+<a class="sourceLine" id="cb521-4" data-line-number="4">}</a></code></pre></div>
 <p>Functions have:</p>
 <ol style="list-style-type: decimal">
-<li>A name</li>
-<li>Inputs, or arguments, within the function</li>
-<li>A body. This is the code between <code>{ }</code></li>
+<li>An argument list, or <code>formals()</code> - what is passed to the function</li>
+<li>A <code>body()</code>. Typically, this is the code between <code>{curly braces}</code>, but can be any syntactically complete statement - <code>{}</code> denote a code “block” that is not evaluated until the end of the block, rather than evaluated line-by-line as is otherwise the case.</li>
+<li>An <code>environment()</code>, or the list of symbol (name)/value pairs known to the function.</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">inverse &lt;-<span class="st"> </span>function(x){
-    inverse &lt;-<span class="st"> </span><span class="dv">1</span>/x
-    <span class="kw">return</span>(inverse)
-}
-
-<span class="kw">inverse</span>(<span class="dv">2</span>)</code></pre></div>
+<p>For example…</p>
+<div class="sourceCode" id="cb522"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb522-1" data-line-number="1">inverse &lt;-<span class="st"> </span><span class="cf">function</span>(invert_me){</a>
+<a class="sourceLine" id="cb522-2" data-line-number="2">    inverse &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span>invert_me</a>
+<a class="sourceLine" id="cb522-3" data-line-number="3">    <span class="kw">return</span>(inverse)</a>
+<a class="sourceLine" id="cb522-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb522-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb522-6" data-line-number="6"><span class="kw">inverse</span>(<span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## [1] 0.5</code></pre>
-<p>Another example of a function</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get data from each subject&#39;s directory and make a data frame for each subject</span>
+<p>We can interrogate the parts of a function</p>
+<div class="sourceCode" id="cb524"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb524-1" data-line-number="1"><span class="kw">formals</span>(inverse)</a></code></pre></div>
+<pre><code>## $invert_me</code></pre>
+<div class="sourceCode" id="cb526"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb526-1" data-line-number="1"><span class="kw">body</span>(inverse)</a></code></pre></div>
+<pre><code>## {
+##     inverse &lt;- 1/invert_me
+##     return(inverse)
+## }</code></pre>
+<div class="sourceCode" id="cb528"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb528-1" data-line-number="1"><span class="kw">environment</span>(inverse)</a></code></pre></div>
+<pre><code>## &lt;environment: R_GlobalEnv&gt;</code></pre>
+</div>
+<div id="environments-and-scoping" class="section level2">
+<h2><span class="header-section-number">8.2</span> Environments and Scoping</h2>
+<div id="function-environments" class="section level3">
+<h3><span class="header-section-number">8.2.1</span> Function Environments</h3>
+<p>Functions create their own private collection of variables that are distinct from those in the global environment.</p>
+<p>For example, what’s going on here?</p>
+<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb530-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb530-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb530-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb530-4" data-line-number="4">whos_who &lt;-<span class="st"> </span><span class="cf">function</span>(){</a>
+<a class="sourceLine" id="cb530-5" data-line-number="5">  x &lt;-<span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb530-6" data-line-number="6">  <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;x is&quot;</span>, x))</a>
+<a class="sourceLine" id="cb530-7" data-line-number="7">  <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;y is&quot;</span>, y))</a>
+<a class="sourceLine" id="cb530-8" data-line-number="8">}</a>
+<a class="sourceLine" id="cb530-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb530-10" data-line-number="10"><span class="kw">whos_who</span>()</a></code></pre></div>
+<pre><code>## [1] &quot;x is 2&quot;
+## [1] &quot;y is 3&quot;</code></pre>
+<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb532-1" data-line-number="1"><span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;but x is also&quot;</span>, x))</a></code></pre></div>
+<pre><code>## [1] &quot;but x is also 1&quot;</code></pre>
+<p>We define x and y to be 1 and 3 respectively, and then a function that defines x to be 2. When we call the function, it tells us that x is 2 and 3, but outside the function x is 1.</p>
+<p>The assignment <code>x &lt;- 2</code> is <strong>scoped</strong>, or defined locally in the function’s environment. <strong>Lexical scoping</strong> is the process by which functions lookup the values associated with different names. In this case, <code>x</code> is defined locally, but <code>y</code> is not. Functions inherit the enviroment that they were defined in, or their <strong>enclosing environment</strong>, in this case the global environment – a function and its attached environment is called a <strong>closure</strong>.</p>
+<div class="sourceCode" id="cb534"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb534-1" data-line-number="1"><span class="kw">environment</span>(whos_who)</a></code></pre></div>
+<pre><code>## &lt;environment: R_GlobalEnv&gt;</code></pre>
+<p>If a function doesn’t find a variable locally, it ascends the environments it is nested within until it finds (or doesn’t find) a match. If one defines a function within another function, the innermost function will preserve the environment of the outer function – which can be used to make “function factories:”</p>
+<div class="sourceCode" id="cb536"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb536-1" data-line-number="1"><span class="co"># example from http://adv-r.had.co.nz/Environments.html#function-envs</span></a>
+<a class="sourceLine" id="cb536-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb536-3" data-line-number="3">plus &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb536-4" data-line-number="4">  <span class="cf">function</span>(y){</a>
+<a class="sourceLine" id="cb536-5" data-line-number="5">    x <span class="op">+</span><span class="st"> </span>y</a>
+<a class="sourceLine" id="cb536-6" data-line-number="6">  }</a>
+<a class="sourceLine" id="cb536-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb536-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb536-9" data-line-number="9">plus_one &lt;-<span class="st"> </span><span class="kw">plus</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb536-10" data-line-number="10">plus_two &lt;-<span class="st"> </span><span class="kw">plus</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb536-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb536-12" data-line-number="12"><span class="kw">plus_one</span>(<span class="dv">1</span>)</a></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<div class="sourceCode" id="cb538"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb538-1" data-line-number="1"><span class="kw">plus_two</span>(<span class="dv">2</span>)</a></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<p>the <code>plus</code> function itself returns a function with the environment created when <code>plus</code> is called. Since <code>x</code> is defined in the returned function’s (eg. <code>plus_one</code>) <strong>enclosing environment</strong> it will always be able to use that value even if there is another <code>x</code> in the global environment.</p>
+<p>While a function will always preserve its enclosing environment, its <strong>execution environment</strong>, or the environment created when the function is called, is created fresh each time. This <strong>fresh start</strong> principle gives functions their utility as dissociable building blocks for more complicated code – if a function does one thing and does it well, it can be used in whatever context that operation needs to be performed without fear or prejudice from its previous experiences.</p>
+<p>Functions also have a <strong>binding environment(s)</strong>, or the environments that have a binding between a name and the function. We will skip these for now as they will become more relevant when it comes time to write packages, but more information can be found here: <a href="Advanced%20R%20-%20Function%20Environments">http://adv-r.had.co.nz/Environments.html#function-envs</a></p>
+</div>
+<div id="querying-environments" class="section level3">
+<h3><span class="header-section-number">8.2.2</span> Querying environments</h3>
+<p>The global environment, which we are used to working in, is itself nested within a series of environments:</p>
+<ol style="list-style-type: decimal">
+<li>A series of package environments (or <strong>namespaces</strong>) that provide the names of any loaded (<code>library/require()</code>’d) packages</li>
+<li>The base environment that provides the names of the base functions</li>
+<li>The empty environment, the parent of all environments.</li>
+</ol>
+<div class="figure">
+<img src="guide_files/globalenv.png" alt="http://adv-r.had.co.nz/Environments.html" />
+<p class="caption"><a href="http://adv-r.had.co.nz/Environments.html" class="uri">http://adv-r.had.co.nz/Environments.html</a></p>
+</div>
+<p>You can see the loaded packages, or search path, with <code>search</code></p>
+<div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb540-1" data-line-number="1"><span class="kw">search</span>()</a></code></pre></div>
+<pre><code>## [1] &quot;.GlobalEnv&quot;        &quot;package:stats&quot;     &quot;package:graphics&quot; 
+## [4] &quot;package:grDevices&quot; &quot;package:utils&quot;     &quot;package:datasets&quot; 
+## [7] &quot;Autoloads&quot;         &quot;package:base&quot;</code></pre>
+<p>One can make a symbol to reference an environment with <code>as.environment</code></p>
+<div class="sourceCode" id="cb542"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb542-1" data-line-number="1">env &lt;-<span class="st"> </span><span class="kw">as.environment</span>(<span class="st">&#39;.GlobalEnv&#39;</span>)</a></code></pre></div>
+<p>and query its contents with <code>ls.str()</code></p>
+<div class="sourceCode" id="cb543"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb543-1" data-line-number="1"><span class="kw">ls.str</span>(env)</a></code></pre></div>
+<pre><code>## env : &lt;environment: R_GlobalEnv&gt; 
+## inverse : function (invert_me)  
+## logits2ps : function (x)  
+## plus : function (x)  
+## plus_one : function (y)  
+## plus_two : function (y)  
+## whos_who : function ()  
+## x :  num 1
+## y :  num 3</code></pre>
+<p>if you’re lost deep in a twisted spire of environments and need to get something specifically, you can do so with <code>get</code> (although fixing the structure of your code is usually a better idea ;p)</p>
+<div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb545-1" data-line-number="1"><span class="co"># create a new environment</span></a>
+<a class="sourceLine" id="cb545-2" data-line-number="2">new_env &lt;-<span class="st"> </span><span class="kw">new.env</span>()</a>
+<a class="sourceLine" id="cb545-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb545-4" data-line-number="4"><span class="co"># assignation works like a list</span></a>
+<a class="sourceLine" id="cb545-5" data-line-number="5">new_env<span class="op">$</span>new_var &lt;-<span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb545-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb545-7" data-line-number="7"><span class="co"># attaching an environment adds it to our search path</span></a>
+<a class="sourceLine" id="cb545-8" data-line-number="8"><span class="kw">attach</span>(new_env)</a>
+<a class="sourceLine" id="cb545-9" data-line-number="9"><span class="kw">search</span>()</a></code></pre></div>
+<pre><code>## [1] &quot;.GlobalEnv&quot;        &quot;new_env&quot;           &quot;package:stats&quot;    
+## [4] &quot;package:graphics&quot;  &quot;package:grDevices&quot; &quot;package:utils&quot;    
+## [7] &quot;package:datasets&quot;  &quot;Autoloads&quot;         &quot;package:base&quot;</code></pre>
+<div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb547-1" data-line-number="1">new_var</a></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<div class="sourceCode" id="cb549"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb549-1" data-line-number="1"><span class="kw">detach</span>(new_env)</a>
+<a class="sourceLine" id="cb549-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb549-3" data-line-number="3"><span class="co"># we now make a new assignation in the global environment, which will be searched before any attached environment</span></a>
+<a class="sourceLine" id="cb549-4" data-line-number="4">new_var &lt;-<span class="st"> </span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb549-5" data-line-number="5">new_var</a></code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb551-1" data-line-number="1"><span class="kw">attach</span>(new_env)</a></code></pre></div>
+<pre><code>## The following object is masked _by_ .GlobalEnv:
+## 
+##     new_var</code></pre>
+<div class="sourceCode" id="cb553"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb553-1" data-line-number="1">new_var</a></code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<div class="sourceCode" id="cb555"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb555-1" data-line-number="1"><span class="kw">detach</span>(new_env)</a>
+<a class="sourceLine" id="cb555-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb555-3" data-line-number="3"><span class="co"># we can skip the masking of the global environment with get</span></a>
+<a class="sourceLine" id="cb555-4" data-line-number="4"><span class="kw">get</span>(<span class="st">&quot;new_var&quot;</span>, <span class="dt">envir=</span>new_env)</a></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+</div>
+</div>
+<div id="arguments" class="section level2">
+<h2><span class="header-section-number">8.3</span> Arguments</h2>
+<p>The names of the variables used within the function and the structure of their input are the <strong>formal arguments</strong> of a function, but the variables that are given to a function each time are also called arguments. Where ambiguous, refer to the latter as arguments.</p>
+<p>Arguments can be specified by position or name. Partial names also work, but that typically makes for confusing code. Arguments are first matched by name and then by position.</p>
+<div class="sourceCode" id="cb557"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb557-1" data-line-number="1">profit_maker &lt;-<span class="st"> </span><span class="cf">function</span>(good_idea, stealing, depth){</a>
+<a class="sourceLine" id="cb557-2" data-line-number="2">  <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;Momma said i should&quot;</span>, good_idea, </a>
+<a class="sourceLine" id="cb557-3" data-line-number="3">              <span class="st">&quot;but instead I stole&quot;</span>, stealing, </a>
+<a class="sourceLine" id="cb557-4" data-line-number="4">              <span class="st">&quot;dollars and buried it in a hole&quot;</span>, depth, <span class="st">&quot;feet deep&quot;</span>))</a>
+<a class="sourceLine" id="cb557-5" data-line-number="5">}</a>
+<a class="sourceLine" id="cb557-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb557-7" data-line-number="7"><span class="kw">profit_maker</span>(<span class="st">&quot;say mean things about barn animals&quot;</span>, <span class="dv">100</span>, <span class="dv">1000</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;Momma said i should say mean things about barn animals but instead I stole 100 dollars and buried it in a hole 1000 feet deep&quot;</code></pre>
+<div class="sourceCode" id="cb559"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb559-1" data-line-number="1"><span class="kw">profit_maker</span>(<span class="dt">depth=</span><span class="dv">100</span>, <span class="dt">stealing=</span><span class="dv">1</span>, <span class="dt">good_idea=</span><span class="st">&quot;keep my bellybutton open&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;Momma said i should keep my bellybutton open but instead I stole 1 dollars and buried it in a hole 100 feet deep&quot;</code></pre>
+<p>Formal arguments can be defined with default values, so if an argument is not passed the default is used.</p>
+<div class="sourceCode" id="cb561"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb561-1" data-line-number="1">whats_it_cost &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">cost=</span><span class="dv">10</span>){</a>
+<a class="sourceLine" id="cb561-2" data-line-number="2">  <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;i dunno like&quot;</span>, cost, <span class="st">&quot;bucks&quot;</span>))</a>
+<a class="sourceLine" id="cb561-3" data-line-number="3">}</a>
+<a class="sourceLine" id="cb561-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb561-5" data-line-number="5"><span class="kw">whats_it_cost</span>()</a></code></pre></div>
+<pre><code>## [1] &quot;i dunno like 10 bucks&quot;</code></pre>
+<p>This is useful in situations where a function should do one thing most of the time, but if asked nicely should do something else.</p>
+<div class="sourceCode" id="cb563"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb563-1" data-line-number="1">ice_cream &lt;-<span class="st"> </span><span class="cf">function</span>(scoops, <span class="dt">round=</span><span class="ot">FALSE</span>){</a>
+<a class="sourceLine" id="cb563-2" data-line-number="2">  <span class="cf">if</span> (round <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>){</a>
+<a class="sourceLine" id="cb563-3" data-line-number="3">    <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;here ya go kid,&quot;</span>, scoops, <span class="st">&quot;scoops of hot fresh ice cream&quot;</span>))</a>
+<a class="sourceLine" id="cb563-4" data-line-number="4">  } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb563-5" data-line-number="5">    <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;listen kid i&#39;m gonna give you&quot;</span>, <span class="kw">floor</span>(scoops), <span class="st">&quot;scoops and you can get out of my shop&quot;</span>))</a>
+<a class="sourceLine" id="cb563-6" data-line-number="6">  }</a>
+<a class="sourceLine" id="cb563-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb563-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb563-9" data-line-number="9">what_i_want &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>)<span class="op">*</span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb563-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb563-11" data-line-number="11"><span class="kw">ice_cream</span>(what_i_want)</a></code></pre></div>
+<pre><code>## [1] &quot;here ya go kid, 0.957180238328874 scoops of hot fresh ice cream&quot;</code></pre>
+<div class="sourceCode" id="cb565"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb565-1" data-line-number="1"><span class="kw">ice_cream</span>(what_i_want, <span class="dt">round=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;listen kid i&#39;m gonna give you 0 scoops and you can get out of my shop&quot;</code></pre>
+<p>Default arguments can be used to make code more efficient while still being flexible. For example if the same value needs to be computed in a number of different functions, it can instead be passed. If the default is set to NULL you can check if you need to perform the computation.</p>
+<div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb567-1" data-line-number="1"><span class="co"># precompute some image&#39;s x gradient stupidly</span></a>
+<a class="sourceLine" id="cb567-2" data-line-number="2">image &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">runif</span>(<span class="dv">100</span>), <span class="dt">nrow=</span><span class="dv">10</span>, <span class="dt">ncol=</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb567-3" data-line-number="3">grad &lt;-<span class="st"> </span><span class="kw">diff</span>(image)</a>
+<a class="sourceLine" id="cb567-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb567-5" data-line-number="5">image_operation_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="cf">function</span>(image, <span class="dt">grad=</span><span class="ot">NULL</span>){</a>
+<a class="sourceLine" id="cb567-6" data-line-number="6">  <span class="cf">if</span> (<span class="kw">is.null</span>(grad)){</a>
+<a class="sourceLine" id="cb567-7" data-line-number="7">    grad &lt;-<span class="st"> </span><span class="kw">diff</span>(image)</a>
+<a class="sourceLine" id="cb567-8" data-line-number="8">  }</a>
+<a class="sourceLine" id="cb567-9" data-line-number="9">  <span class="co"># do some stuff to the image</span></a>
+<a class="sourceLine" id="cb567-10" data-line-number="10">}</a>
+<a class="sourceLine" id="cb567-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb567-12" data-line-number="12">image_operation_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="cf">function</span>(image, <span class="dt">grad=</span><span class="ot">NULL</span>){</a>
+<a class="sourceLine" id="cb567-13" data-line-number="13">  <span class="cf">if</span> (<span class="kw">is.null</span>(grad)){</a>
+<a class="sourceLine" id="cb567-14" data-line-number="14">    grad &lt;-<span class="st"> </span><span class="kw">diff</span>(image)</a>
+<a class="sourceLine" id="cb567-15" data-line-number="15">  }</a>
+<a class="sourceLine" id="cb567-16" data-line-number="16">  <span class="co"># do some stuff to the image</span></a>
+<a class="sourceLine" id="cb567-17" data-line-number="17">}</a></code></pre></div>
+<p>Additionally, oen can use <code>...</code> to specify an arbitrary number of arguments. This is commonly used in the S3 object system where the arguments passed as <code>...</code> are simply passed on to the method calls from the generic method.</p>
+<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb568-1" data-line-number="1">print_whatever &lt;-<span class="st"> </span><span class="cf">function</span>(...){</a>
+<a class="sourceLine" id="cb568-2" data-line-number="2">  args &lt;-<span class="st"> </span><span class="kw">list</span>(...)</a>
+<a class="sourceLine" id="cb568-3" data-line-number="3">  anames &lt;-<span class="st"> </span><span class="kw">names</span>(args)</a>
+<a class="sourceLine" id="cb568-4" data-line-number="4">  <span class="cf">for</span> (a <span class="cf">in</span> anames){</a>
+<a class="sourceLine" id="cb568-5" data-line-number="5">    <span class="kw">print</span>(<span class="kw">paste</span>(a, <span class="st">&quot;:&quot;</span>, args[a]))</a>
+<a class="sourceLine" id="cb568-6" data-line-number="6">  }</a>
+<a class="sourceLine" id="cb568-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb568-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb568-9" data-line-number="9"><span class="kw">print_whatever</span>(<span class="dt">apple=</span><span class="st">&quot;banana&quot;</span>, <span class="dt">coconut=</span><span class="st">&quot;hospital visit&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;apple : banana&quot;
+## [1] &quot;coconut : hospital visit&quot;</code></pre>
+</div>
+<div id="todo" class="section level2">
+<h2><span class="header-section-number">8.4</span> Todo:</h2>
+<ul>
+<li>Scoping from R Faq 3.3.1</li>
+</ul>
+<div class="sourceCode" id="cb570"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb570-1" data-line-number="1"><span class="co"># S4 Methods are stored in environments </span></a>
+<a class="sourceLine" id="cb570-2" data-line-number="2">nM &lt;-<span class="st"> </span><span class="kw">asNamespace</span>(<span class="st">&quot;Matrix&quot;</span>)</a>
+<a class="sourceLine" id="cb570-3" data-line-number="3"><span class="kw">sort</span>(<span class="kw">grep</span>(<span class="st">&quot;^[.]__T__&quot;</span>, <span class="kw">names</span>(nM), <span class="dt">value=</span><span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb570-4" data-line-number="4">meth.Ops &lt;-<span class="st"> </span>nM<span class="op">$</span><span class="st">`</span><span class="dt">.__T__Ops:base</span><span class="st">`</span></a>
+<a class="sourceLine" id="cb570-5" data-line-number="5"><span class="kw">head</span>(<span class="kw">sort</span>(<span class="kw">names</span>(meth.Ops)))</a></code></pre></div>
 
-create_df &lt;-<span class="st"> </span>function(subjects) {
-    df &lt;-<span class="st"> </span><span class="kw">data.frame</span>() <span class="co"># make an empty data frame</span>
-    for (sub in subjects) {
-        data_file =<span class="st"> </span><span class="kw">list.files</span>(<span class="kw">paste0</span>(data_dir, sub), <span class="dt">pattern =</span> <span class="st">&quot;*.csv&quot;</span>) <span class="co"># list of csv files in the subject&#39;s datadir</span>
-        path_tmp &lt;-<span class="st"> </span><span class="kw">paste0</span>(data_dir, sub, <span class="st">&quot;/&quot;</span>, data_file) <span class="co"># path to subject&#39;s data file</span>
-        df_tmp &lt;-<span class="st"> </span><span class="kw">read.csv</span>(path_tmp, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>) <span class="co"># read in the data</span>
-        df_tmp$id &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">as.character</span>(sub), <span class="kw">nrow</span>(df_tmp)) <span class="co"># make a column for the subject ID based</span>
-        df &lt;-<span class="st"> </span><span class="kw">rbind</span>(df, df_tmp) <span class="co"># add the subject&#39;s data to the main data frame</span>
-    }
-  <span class="kw">return</span>(df) <span class="co"># name the data frame &#39;dat&#39; and make available in the global environment</span>
-}</code></pre></div>
-<p>Use the function</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># dat &lt;- create_df(subjects = subjects)</span>
-<span class="co"># head(dat)</span></code></pre></div>
-<blockquote>
-<p>Scoping from R Faq 3.3.1</p>
-</blockquote>
-<p>NOT REAL YET!</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># S4 Methods are stored in environments </span>
-nM &lt;-<span class="st"> </span><span class="kw">asNamespace</span>(<span class="st">&quot;Matrix&quot;</span>)
-<span class="kw">sort</span>(<span class="kw">grep</span>(<span class="st">&quot;^[.]__T__&quot;</span>, <span class="kw">names</span>(nM), <span class="dt">value=</span><span class="ot">TRUE</span>))</code></pre></div>
-<pre><code>##   [1] &quot;.__T__-:base&quot;                &quot;.__T__!:base&quot;               
-##   [3] &quot;.__T__[:base&quot;                &quot;.__T__[&lt;-:base&quot;             
-##   [5] &quot;.__T__*:base&quot;                &quot;.__T__/:base&quot;               
-##   [7] &quot;.__T__&amp;:base&quot;                &quot;.__T__%*%:base&quot;             
-##   [9] &quot;.__T__%/%:base&quot;              &quot;.__T__%&amp;%:Matrix&quot;           
-##  [11] &quot;.__T__%%:base&quot;               &quot;.__T__^:base&quot;               
-##  [13] &quot;.__T__+:base&quot;                &quot;.__T__all:base&quot;             
-##  [15] &quot;.__T__all.equal:base&quot;        &quot;.__T__any:base&quot;             
-##  [17] &quot;.__T__anyNA:base&quot;            &quot;.__T__Arith:base&quot;           
-##  [19] &quot;.__T__as.array:base&quot;         &quot;.__T__as.integer:base&quot;      
-##  [21] &quot;.__T__as.logical:base&quot;       &quot;.__T__as.matrix:base&quot;       
-##  [23] &quot;.__T__as.numeric:base&quot;       &quot;.__T__as.vector:base&quot;       
-##  [25] &quot;.__T__band:Matrix&quot;           &quot;.__T__BunchKaufman:Matrix&quot;  
-##  [27] &quot;.__T__cbind2:methods&quot;        &quot;.__T__chol:base&quot;            
-##  [29] &quot;.__T__chol2inv:base&quot;         &quot;.__T__Cholesky:Matrix&quot;      
-##  [31] &quot;.__T__coerce:methods&quot;        &quot;.__T__coerce&lt;-:methods&quot;     
-##  [33] &quot;.__T__colMeans:base&quot;         &quot;.__T__colSums:base&quot;         
-##  [35] &quot;.__T__Compare:methods&quot;       &quot;.__T__cov2cor:stats&quot;        
-##  [37] &quot;.__T__crossprod:base&quot;        &quot;.__T__determinant:base&quot;     
-##  [39] &quot;.__T__diag:base&quot;             &quot;.__T__diag&lt;-:base&quot;          
-##  [41] &quot;.__T__diff:base&quot;             &quot;.__T__dim:base&quot;             
-##  [43] &quot;.__T__dim&lt;-:base&quot;            &quot;.__T__dimnames:base&quot;        
-##  [45] &quot;.__T__dimnames&lt;-:base&quot;       &quot;.__T__drop:base&quot;            
-##  [47] &quot;.__T__expand:Matrix&quot;         &quot;.__T__expm:Matrix&quot;          
-##  [49] &quot;.__T__facmul:Matrix&quot;         &quot;.__T__forceSymmetric:Matrix&quot;
-##  [51] &quot;.__T__format:base&quot;           &quot;.__T__head:utils&quot;           
-##  [53] &quot;.__T__image:graphics&quot;        &quot;.__T__initialize:methods&quot;   
-##  [55] &quot;.__T__is.finite:base&quot;        &quot;.__T__is.infinite:base&quot;     
-##  [57] &quot;.__T__is.na:base&quot;            &quot;.__T__isDiagonal:Matrix&quot;    
-##  [59] &quot;.__T__isSymmetric:base&quot;      &quot;.__T__isTriangular:Matrix&quot;  
-##  [61] &quot;.__T__kronecker:base&quot;        &quot;.__T__length:base&quot;          
-##  [63] &quot;.__T__Logic:base&quot;            &quot;.__T__lu:Matrix&quot;            
-##  [65] &quot;.__T__Math:base&quot;             &quot;.__T__Math2:methods&quot;        
-##  [67] &quot;.__T__mean:base&quot;             &quot;.__T__nnzero:Matrix&quot;        
-##  [69] &quot;.__T__norm:base&quot;             &quot;.__T__Ops:base&quot;             
-##  [71] &quot;.__T__pack:Matrix&quot;           &quot;.__T__print:base&quot;           
-##  [73] &quot;.__T__prod:base&quot;             &quot;.__T__qr:base&quot;              
-##  [75] &quot;.__T__qr.coef:base&quot;          &quot;.__T__qr.fitted:base&quot;       
-##  [77] &quot;.__T__qr.Q:base&quot;             &quot;.__T__qr.qty:base&quot;          
-##  [79] &quot;.__T__qr.qy:base&quot;            &quot;.__T__qr.R:base&quot;            
-##  [81] &quot;.__T__qr.resid:base&quot;         &quot;.__T__rbind2:methods&quot;       
-##  [83] &quot;.__T__rcond:base&quot;            &quot;.__T__rep:base&quot;             
-##  [85] &quot;.__T__rowMeans:base&quot;         &quot;.__T__rowSums:base&quot;         
-##  [87] &quot;.__T__Schur:Matrix&quot;          &quot;.__T__show:methods&quot;         
-##  [89] &quot;.__T__skewpart:Matrix&quot;       &quot;.__T__solve:base&quot;           
-##  [91] &quot;.__T__sum:base&quot;              &quot;.__T__summary:base&quot;         
-##  [93] &quot;.__T__Summary:base&quot;          &quot;.__T__symmpart:Matrix&quot;      
-##  [95] &quot;.__T__t:base&quot;                &quot;.__T__tail:utils&quot;           
-##  [97] &quot;.__T__tcrossprod:base&quot;       &quot;.__T__toeplitz:stats&quot;       
-##  [99] &quot;.__T__tril:Matrix&quot;           &quot;.__T__triu:Matrix&quot;          
-## [101] &quot;.__T__unname:base&quot;           &quot;.__T__unpack:Matrix&quot;        
-## [103] &quot;.__T__update:stats&quot;          &quot;.__T__updown:Matrix&quot;        
-## [105] &quot;.__T__which:base&quot;            &quot;.__T__writeMM:Matrix&quot;       
-## [107] &quot;.__T__zapsmall:base&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">meth.Ops &lt;-<span class="st"> </span>nM$<span class="st">`</span><span class="dt">.__T__Ops:base</span><span class="st">`</span>
-<span class="kw">head</span>(<span class="kw">sort</span>(<span class="kw">names</span>(meth.Ops)))</code></pre></div>
-<pre><code>## [1] &quot;abIndex#abIndex&quot; &quot;abIndex#ANY&quot;     &quot;ANY#abIndex&quot;     &quot;ANY#ddiMatrix&quot;  
-## [5] &quot;ANY#ldiMatrix&quot;   &quot;ANY#Matrix&quot;</code></pre>
-
+</div>
 </div>
             </section>
 
@@ -807,19 +532,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

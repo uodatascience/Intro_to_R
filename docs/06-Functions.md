@@ -11,27 +11,28 @@ order: 2
 ---
 # Functions
 
-Stolen without changes from [Krista's lesson](https://github.com/kdestasio/2018_dataSciSem). A stub, a work-in-progress.
+## Form
 
-```
-# General form
+The general form of a function is
 
-function_name <- function(var){
-    Do something
-    return(new_variable)
+```r
+function_name <- function(arguments){
+    #Do something
+    return(output)
 }
 ```
 
 Functions have:
 
-1. A name
-2. Inputs, or arguments, within the function
-3. A body. This is the code between `{ }`
+1. An argument list, or `formals()` - what is passed to the function
+2. A `body()`. Typically, this is the code between `{curly braces}`, but can be any syntactically complete statement - `{}` denote a code "block" that is not evaluated until the end of the block, rather than evaluated line-by-line as is otherwise the case.
+3. An `environment()`, or the list of symbol (name)/value pairs known to the function.
 
+For example...
 
 ```r
-inverse <- function(x){
-    inverse <- 1/x
+inverse <- function(invert_me){
+    inverse <- 1/invert_me
     return(inverse)
 }
 
@@ -42,110 +43,372 @@ inverse(2)
 ## [1] 0.5
 ```
 
-Another example of a function
-
+We can interrogate the parts of a function
 
 
 ```r
-# get data from each subject's directory and make a data frame for each subject
+formals(inverse)
+```
 
-create_df <- function(subjects) {
-    df <- data.frame() # make an empty data frame
-    for (sub in subjects) {
-        data_file = list.files(paste0(data_dir, sub), pattern = "*.csv") # list of csv files in the subject's datadir
-        path_tmp <- paste0(data_dir, sub, "/", data_file) # path to subject's data file
-        df_tmp <- read.csv(path_tmp, sep = ",") # read in the data
-        df_tmp$id <- rep(as.character(sub), nrow(df_tmp)) # make a column for the subject ID based
-        df <- rbind(df, df_tmp) # add the subject's data to the main data frame
-    }
-  return(df) # name the data frame 'dat' and make available in the global environment
+```
+## $invert_me
+```
+
+```r
+body(inverse)
+```
+
+```
+## {
+##     inverse <- 1/invert_me
+##     return(inverse)
+## }
+```
+
+```r
+environment(inverse)
+```
+
+```
+## <environment: R_GlobalEnv>
+```
+
+## Environments and Scoping
+
+### Function Environments 
+
+Functions create their own private collection of variables that are distinct from those in the global environment. 
+
+For example, what's going on here?
+
+
+```r
+x <- 1
+y <- 3
+
+whos_who <- function(){
+  x <- 2
+  print(paste("x is", x))
+  print(paste("y is", y))
+}
+
+whos_who()
+```
+
+```
+## [1] "x is 2"
+## [1] "y is 3"
+```
+
+```r
+print(paste("but x is also", x))
+```
+
+```
+## [1] "but x is also 1"
+```
+
+We define x and y to be 1 and 3 respectively, and then a function that defines x to be 2. When we call the function, it tells us that x is 2 and 3, but outside the function x is 1. 
+
+The assignment `x <- 2` is **scoped**, or defined locally in the function's environment. **Lexical scoping** is the process by which functions lookup the values associated with different names. In this case, `x` is defined locally, but `y` is not. Functions inherit the enviroment that they were defined in, or their **enclosing environment**, in this case the global environment -- a function and its attached environment is called a **closure**.
+
+
+```r
+environment(whos_who)
+```
+
+```
+## <environment: R_GlobalEnv>
+```
+
+If a function doesn't find a variable locally, it ascends the environments it is nested within until it finds (or doesn't find) a match. If one defines a function within another function, the innermost function will preserve the environment of the outer function -- which can be used to make "function factories:"
+
+
+```r
+# example from http://adv-r.had.co.nz/Environments.html#function-envs
+
+plus <- function(x){
+  function(y){
+    x + y
+  }
+}
+
+plus_one <- plus(1)
+plus_two <- plus(2)
+
+plus_one(1)
+```
+
+```
+## [1] 2
+```
+
+```r
+plus_two(2)
+```
+
+```
+## [1] 4
+```
+
+the `plus` function itself returns a function with the environment created when `plus` is called. Since `x` is defined in the returned function's (eg. `plus_one`) **enclosing environment** it will always be able to use that value even if there is another `x` in the global environment. 
+
+While a function will always preserve its enclosing environment, its **execution environment**, or the environment created when the function is called, is created fresh each time. This **fresh start** principle gives functions their utility as dissociable building blocks for more complicated code -- if a function does one thing and does it well, it can be used in whatever context that operation needs to be performed without fear or prejudice from its previous experiences.
+
+Functions also have a **binding environment(s)**, or the environments that have a binding between a name and the function. We will skip these for now as they will become more relevant when it comes time to write packages, but more information can be found here: [http://adv-r.had.co.nz/Environments.html#function-envs](Advanced R - Function Environments)
+
+### Querying environments
+
+The global environment, which we are used to working in, is itself nested within a series of environments:
+
+1. A series of package environments (or **namespaces**) that provide the names of any loaded (`library/require()`'d) packages
+2. The base environment that provides the names of the base functions
+3. The empty environment, the parent of all environments.
+
+![http://adv-r.had.co.nz/Environments.html](guide_files/globalenv.png)
+
+You can see the loaded packages, or search path, with `search`
+
+```r
+search()
+```
+
+```
+## [1] ".GlobalEnv"        "package:stats"     "package:graphics" 
+## [4] "package:grDevices" "package:utils"     "package:datasets" 
+## [7] "Autoloads"         "package:base"
+```
+
+One can make a symbol to reference an environment with `as.environment`
+
+```r
+env <- as.environment('.GlobalEnv')
+```
+
+and query its contents with `ls.str()`
+
+
+```r
+ls.str(env)
+```
+
+```
+## env : <environment: R_GlobalEnv> 
+## inverse : function (invert_me)  
+## logits2ps : function (x)  
+## plus : function (x)  
+## plus_one : function (y)  
+## plus_two : function (y)  
+## whos_who : function ()  
+## x :  num 1
+## y :  num 3
+```
+
+if you're lost deep in a twisted spire of environments and need to get something specifically, you can do so with `get` (although fixing the structure of your code is usually a better idea ;p)
+
+
+```r
+# create a new environment
+new_env <- new.env()
+
+# assignation works like a list
+new_env$new_var <- 5
+
+# attaching an environment adds it to our search path
+attach(new_env)
+search()
+```
+
+```
+## [1] ".GlobalEnv"        "new_env"           "package:stats"    
+## [4] "package:graphics"  "package:grDevices" "package:utils"    
+## [7] "package:datasets"  "Autoloads"         "package:base"
+```
+
+```r
+new_var
+```
+
+```
+## [1] 5
+```
+
+```r
+detach(new_env)
+
+# we now make a new assignation in the global environment, which will be searched before any attached environment
+new_var <- 10
+new_var
+```
+
+```
+## [1] 10
+```
+
+```r
+attach(new_env)
+```
+
+```
+## The following object is masked _by_ .GlobalEnv:
+## 
+##     new_var
+```
+
+```r
+new_var
+```
+
+```
+## [1] 10
+```
+
+```r
+detach(new_env)
+
+# we can skip the masking of the global environment with get
+get("new_var", envir=new_env)
+```
+
+```
+## [1] 5
+```
+
+## Arguments
+
+The names of the variables used within the function and the structure of their input are the **formal arguments** of a function, but the variables that are given to a function each time are also called arguments. Where ambiguous, refer to the latter as arguments.
+
+Arguments can be specified by position or name. Partial names also work, but that typically makes for confusing code. Arguments are first matched by name and then by position.
+
+
+```r
+profit_maker <- function(good_idea, stealing, depth){
+  print(paste("Momma said i should", good_idea, 
+              "but instead I stole", stealing, 
+              "dollars and buried it in a hole", depth, "feet deep"))
+}
+
+profit_maker("say mean things about barn animals", 100, 1000)
+```
+
+```
+## [1] "Momma said i should say mean things about barn animals but instead I stole 100 dollars and buried it in a hole 1000 feet deep"
+```
+
+```r
+profit_maker(depth=100, stealing=1, good_idea="keep my bellybutton open")
+```
+
+```
+## [1] "Momma said i should keep my bellybutton open but instead I stole 1 dollars and buried it in a hole 100 feet deep"
+```
+
+Formal arguments can be defined with default values, so if an argument is not passed the default is used.
+
+
+```r
+whats_it_cost <- function(cost=10){
+  print(paste("i dunno like", cost, "bucks"))
+}
+
+whats_it_cost()
+```
+
+```
+## [1] "i dunno like 10 bucks"
+```
+
+This is useful in situations where a function should do one thing most of the time, but if asked nicely should do something else.
+
+
+```r
+ice_cream <- function(scoops, round=FALSE){
+  if (round == FALSE){
+    print(paste("here ya go kid,", scoops, "scoops of hot fresh ice cream"))
+  } else {
+    print(paste("listen kid i'm gonna give you", floor(scoops), "scoops and you can get out of my shop"))
+  }
+}
+
+what_i_want <- runif(1)*10
+
+ice_cream(what_i_want)
+```
+
+```
+## [1] "here ya go kid, 0.957180238328874 scoops of hot fresh ice cream"
+```
+
+```r
+ice_cream(what_i_want, round=TRUE)
+```
+
+```
+## [1] "listen kid i'm gonna give you 0 scoops and you can get out of my shop"
+```
+
+Default arguments can be used to make code more efficient while still being flexible. For example if the same value needs to be computed in a number of different functions, it can instead be passed. If the default is set to NULL you can check if you need to perform the computation.
+
+
+```r
+# precompute some image's x gradient stupidly
+image <- matrix(runif(100), nrow=10, ncol=10)
+grad <- diff(image)
+
+image_operation_1 <- function(image, grad=NULL){
+  if (is.null(grad)){
+    grad <- diff(image)
+  }
+  # do some stuff to the image
+}
+
+image_operation_2 <- function(image, grad=NULL){
+  if (is.null(grad)){
+    grad <- diff(image)
+  }
+  # do some stuff to the image
 }
 ```
 
-
-Use the function
+Additionally, oen can use `...` to specify an arbitrary number of arguments. This is commonly used in the S3 object system where the arguments passed as `...` are simply passed on to the method calls from the generic method.
 
 
 ```r
-# dat <- create_df(subjects = subjects)
-# head(dat)
+print_whatever <- function(...){
+  args <- list(...)
+  anames <- names(args)
+  for (a in anames){
+    print(paste(a, ":", args[a]))
+  }
+}
+
+print_whatever(apple="banana", coconut="hospital visit")
 ```
 
-> Scoping from R Faq 3.3.1
+```
+## [1] "apple : banana"
+## [1] "coconut : hospital visit"
+```
 
-NOT REAL YET!
+
+
+
+
+
+
+
+
+
+## Todo:
+
+* Scoping from R Faq 3.3.1
 
 
 ```r
 # S4 Methods are stored in environments 
 nM <- asNamespace("Matrix")
 sort(grep("^[.]__T__", names(nM), value=TRUE))
-```
-
-```
-##   [1] ".__T__-:base"                ".__T__!:base"               
-##   [3] ".__T__[:base"                ".__T__[<-:base"             
-##   [5] ".__T__*:base"                ".__T__/:base"               
-##   [7] ".__T__&:base"                ".__T__%*%:base"             
-##   [9] ".__T__%/%:base"              ".__T__%&%:Matrix"           
-##  [11] ".__T__%%:base"               ".__T__^:base"               
-##  [13] ".__T__+:base"                ".__T__all:base"             
-##  [15] ".__T__all.equal:base"        ".__T__any:base"             
-##  [17] ".__T__anyNA:base"            ".__T__Arith:base"           
-##  [19] ".__T__as.array:base"         ".__T__as.integer:base"      
-##  [21] ".__T__as.logical:base"       ".__T__as.matrix:base"       
-##  [23] ".__T__as.numeric:base"       ".__T__as.vector:base"       
-##  [25] ".__T__band:Matrix"           ".__T__BunchKaufman:Matrix"  
-##  [27] ".__T__cbind2:methods"        ".__T__chol:base"            
-##  [29] ".__T__chol2inv:base"         ".__T__Cholesky:Matrix"      
-##  [31] ".__T__coerce:methods"        ".__T__coerce<-:methods"     
-##  [33] ".__T__colMeans:base"         ".__T__colSums:base"         
-##  [35] ".__T__Compare:methods"       ".__T__cov2cor:stats"        
-##  [37] ".__T__crossprod:base"        ".__T__determinant:base"     
-##  [39] ".__T__diag:base"             ".__T__diag<-:base"          
-##  [41] ".__T__diff:base"             ".__T__dim:base"             
-##  [43] ".__T__dim<-:base"            ".__T__dimnames:base"        
-##  [45] ".__T__dimnames<-:base"       ".__T__drop:base"            
-##  [47] ".__T__expand:Matrix"         ".__T__expm:Matrix"          
-##  [49] ".__T__facmul:Matrix"         ".__T__forceSymmetric:Matrix"
-##  [51] ".__T__format:base"           ".__T__head:utils"           
-##  [53] ".__T__image:graphics"        ".__T__initialize:methods"   
-##  [55] ".__T__is.finite:base"        ".__T__is.infinite:base"     
-##  [57] ".__T__is.na:base"            ".__T__isDiagonal:Matrix"    
-##  [59] ".__T__isSymmetric:base"      ".__T__isTriangular:Matrix"  
-##  [61] ".__T__kronecker:base"        ".__T__length:base"          
-##  [63] ".__T__Logic:base"            ".__T__lu:Matrix"            
-##  [65] ".__T__Math:base"             ".__T__Math2:methods"        
-##  [67] ".__T__mean:base"             ".__T__nnzero:Matrix"        
-##  [69] ".__T__norm:base"             ".__T__Ops:base"             
-##  [71] ".__T__pack:Matrix"           ".__T__print:base"           
-##  [73] ".__T__prod:base"             ".__T__qr:base"              
-##  [75] ".__T__qr.coef:base"          ".__T__qr.fitted:base"       
-##  [77] ".__T__qr.Q:base"             ".__T__qr.qty:base"          
-##  [79] ".__T__qr.qy:base"            ".__T__qr.R:base"            
-##  [81] ".__T__qr.resid:base"         ".__T__rbind2:methods"       
-##  [83] ".__T__rcond:base"            ".__T__rep:base"             
-##  [85] ".__T__rowMeans:base"         ".__T__rowSums:base"         
-##  [87] ".__T__Schur:Matrix"          ".__T__show:methods"         
-##  [89] ".__T__skewpart:Matrix"       ".__T__solve:base"           
-##  [91] ".__T__sum:base"              ".__T__summary:base"         
-##  [93] ".__T__Summary:base"          ".__T__symmpart:Matrix"      
-##  [95] ".__T__t:base"                ".__T__tail:utils"           
-##  [97] ".__T__tcrossprod:base"       ".__T__toeplitz:stats"       
-##  [99] ".__T__tril:Matrix"           ".__T__triu:Matrix"          
-## [101] ".__T__unname:base"           ".__T__unpack:Matrix"        
-## [103] ".__T__update:stats"          ".__T__updown:Matrix"        
-## [105] ".__T__which:base"            ".__T__writeMM:Matrix"       
-## [107] ".__T__zapsmall:base"
-```
-
-```r
 meth.Ops <- nM$`.__T__Ops:base`
 head(sort(names(meth.Ops)))
-```
-
-```
-## [1] "abIndex#abIndex" "abIndex#ANY"     "ANY#abIndex"     "ANY#ddiMatrix"  
-## [5] "ANY#ldiMatrix"   "ANY#Matrix"
 ```
 

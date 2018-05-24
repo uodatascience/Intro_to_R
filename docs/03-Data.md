@@ -2014,7 +2014,7 @@ library(ggplot2)
   geom_bar(stat = "identity"))
 ```
 
-<img src="03-Data_files/figure-html/gapminder manipulation-1.png" width="672" />
+<img src="03-Data_files/figure-html4/gapminder manipulation-1.png" width="672" />
 
 ```r
 # This graph would look better if we re-ordered the levels of "continent". Let's do it. 
@@ -2029,7 +2029,7 @@ gapminder$continent <- factor(gapminder$continent,
 ## Don't know how to automatically pick scale for object of type NULL. Defaulting to continuous.
 ```
 
-<img src="03-Data_files/figure-html/gapminder manipulation-2.png" width="672" />
+<img src="03-Data_files/figure-html4/gapminder manipulation-2.png" width="672" />
 
 
 ## Resources

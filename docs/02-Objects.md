@@ -1042,7 +1042,7 @@ plot.default
 ##             ...)
 ##     invisible()
 ## }
-## <bytecode: 0x7f8679715400>
+## <bytecode: 0x7fd1833e5c00>
 ## <environment: namespace:graphics>
 ```
 
@@ -1054,7 +1054,7 @@ aq <- datasets::airquality
 plot(lm(Ozone ~ Month, data=aq))
 ```
 
-<img src="02-Objects_files/figure-html/unnamed-chunk-30-1.png" width="672" /><img src="02-Objects_files/figure-html/unnamed-chunk-30-2.png" width="672" /><img src="02-Objects_files/figure-html/unnamed-chunk-30-3.png" width="672" /><img src="02-Objects_files/figure-html/unnamed-chunk-30-4.png" width="672" />
+<img src="02-Objects_files/figure-html4/unnamed-chunk-30-1.png" width="672" /><img src="02-Objects_files/figure-html4/unnamed-chunk-30-2.png" width="672" /><img src="02-Objects_files/figure-html4/unnamed-chunk-30-3.png" width="672" /><img src="02-Objects_files/figure-html4/unnamed-chunk-30-4.png" width="672" />
 
 is different than this nonsensical model
 
@@ -1063,7 +1063,7 @@ is different than this nonsensical model
 plot(lme4::lmer(Ozone ~ 0 + (Day | Month), data=aq))
 ```
 
-<img src="02-Objects_files/figure-html/unnamed-chunk-31-1.png" width="672" />
+<img src="02-Objects_files/figure-html4/unnamed-chunk-31-1.png" width="672" />
 
 ### Example: Extending S3 Objects
 > http://adv-r.had.co.nz/OO-essentials.html "Creating new methods and generics"
