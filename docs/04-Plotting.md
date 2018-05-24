@@ -581,11 +581,11 @@ ggplot(diamond_sub, aes(x=table, y=depth))+
 ```
 
 ```
-## Warning: Removed 140 rows containing non-finite values (stat_smooth).
+## Warning: Removed 124 rows containing non-finite values (stat_smooth).
 ```
 
 ```
-## Warning: Removed 197 rows containing missing values (geom_point).
+## Warning: Removed 194 rows containing missing values (geom_point).
 ```
 
 <img src="04-Plotting_files/figure-html/unnamed-chunk-35-1.png" width="672" />

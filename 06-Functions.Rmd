@@ -53,7 +53,7 @@ create_df <- function(subjects) {
         df_tmp$id <- rep(as.character(sub), nrow(df_tmp)) # make a column for the subject ID based
         df <- rbind(df, df_tmp) # add the subject's data to the main data frame
     }
-  assign("dat", df, envir = .GlobalEnv) # name the data frame 'dat' and make available in the global environment
+  return(df) # name the data frame 'dat' and make available in the global environment
 }
 ```
 
@@ -61,8 +61,8 @@ create_df <- function(subjects) {
 Use the function
 
 ```{r Import - get subject data}
-#create_df(subjects = subjects)
-#head(dat)
+# dat <- create_df(subjects = subjects)
+# head(dat)
 ```
 
 > Scoping from R Faq 3.3.1
