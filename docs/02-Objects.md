@@ -374,7 +374,7 @@ methods(class="integer")
 ```
 
 ```
-## [1] as.data.frame
+## [1] as.data.frame coerce        Ops          
 ## see '?methods' for accessing help and source code
 ```
 
@@ -383,10 +383,11 @@ methods(class="character")
 ```
 
 ```
-## [1] all.equal                as.data.frame           
-## [3] as.Date                  as.POSIXlt              
-## [5] as.raster                formula                 
-## [7] getDLLRegisteredRoutines
+##  [1] all.equal                as.data.frame           
+##  [3] as.Date                  as.POSIXlt              
+##  [5] as.raster                coerce                  
+##  [7] coerce<-                 formula                 
+##  [9] getDLLRegisteredRoutines Ops                     
 ## see '?methods' for accessing help and source code
 ```
 
@@ -755,7 +756,8 @@ methods(class="list")
 ```
 
 ```
-## [1] all.equal     as.data.frame relist        within       
+## [1] all.equal     as.data.frame coerce        Ops           relist       
+## [6] type.convert  within       
 ## see '?methods' for accessing help and source code
 ```
 
@@ -764,9 +766,10 @@ methods(class="matrix")
 ```
 
 ```
-##  [1] anyDuplicated as.data.frame as.raster     boxplot       determinant  
-##  [6] duplicated    edit          head          isSymmetric   relist       
-## [11] subset        summary       tail          unique       
+##  [1] anyDuplicated as.data.frame as.raster     boxplot       coerce       
+##  [6] determinant   duplicated    edit          head          initialize   
+## [11] isSymmetric   Math          Math2         Ops           relist       
+## [16] subset        summary       tail          unique       
 ## see '?methods' for accessing help and source code
 ```
 
@@ -797,11 +800,11 @@ attributes(df)
 ## $names
 ## [1] "little_ones" "big_ones"   
 ## 
-## $row.names
-## [1] 1 2 3 4 5
-## 
 ## $class
 ## [1] "data.frame"
+## 
+## $row.names
+## [1] 1 2 3 4 5
 ```
 
 data frames can be used like lists of vectors
@@ -965,12 +968,13 @@ methods(class="Date") # list the methods that this class has
 ```
 ##  [1] -             [             [[            [<-           +            
 ##  [6] as.character  as.data.frame as.list       as.POSIXct    as.POSIXlt   
-## [11] Axis          c             cut           diff          format       
-## [16] hist          is.numeric    julian        Math          mean         
-## [21] months        Ops           pretty        print         quarters     
-## [26] rep           round         seq           split         str          
-## [31] summary       Summary       trunc         weekdays      weighted.mean
-## [36] xtfrm        
+## [11] Axis          c             coerce        cut           diff         
+## [16] format        hist          initialize    is.numeric    julian       
+## [21] length<-      Math          mean          months        Ops          
+## [26] pretty        print         quarters      rep           round        
+## [31] seq           show          slotsFromS3   split         str          
+## [36] summary       Summary       trunc         weekdays      weighted.mean
+## [41] xtfrm        
 ## see '?methods' for accessing help and source code
 ```
 
@@ -1042,7 +1046,7 @@ plot.default
 ##             ...)
 ##     invisible()
 ## }
-## <bytecode: 0x7fd1833e5c00>
+## <bytecode: 0x7f9df2e75370>
 ## <environment: namespace:graphics>
 ```
 
@@ -1054,7 +1058,7 @@ aq <- datasets::airquality
 plot(lm(Ozone ~ Month, data=aq))
 ```
 
-<img src="02-Objects_files/figure-html4/unnamed-chunk-30-1.png" width="672" /><img src="02-Objects_files/figure-html4/unnamed-chunk-30-2.png" width="672" /><img src="02-Objects_files/figure-html4/unnamed-chunk-30-3.png" width="672" /><img src="02-Objects_files/figure-html4/unnamed-chunk-30-4.png" width="672" />
+<img src="02-Objects_files/figure-html/unnamed-chunk-30-1.png" width="672" /><img src="02-Objects_files/figure-html/unnamed-chunk-30-2.png" width="672" /><img src="02-Objects_files/figure-html/unnamed-chunk-30-3.png" width="672" /><img src="02-Objects_files/figure-html/unnamed-chunk-30-4.png" width="672" />
 
 is different than this nonsensical model
 
@@ -1063,7 +1067,7 @@ is different than this nonsensical model
 plot(lme4::lmer(Ozone ~ 0 + (Day | Month), data=aq))
 ```
 
-<img src="02-Objects_files/figure-html4/unnamed-chunk-31-1.png" width="672" />
+<img src="02-Objects_files/figure-html/unnamed-chunk-31-1.png" width="672" />
 
 ### Example: Extending S3 Objects
 > http://adv-r.had.co.nz/OO-essentials.html "Creating new methods and generics"

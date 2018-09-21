@@ -51,7 +51,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -64,13 +64,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -235,9 +233,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.4" data-path="functions-1.html"><a href="functions-1.html#todo"><i class="fa fa-check"></i><b>8.4</b> Todo:</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="useful-functions.html"><a href="useful-functions.html"><i class="fa fa-check"></i><b>9</b> Useful Functions</a><ul>
-<li class="chapter" data-level="9.1" data-path="useful-functions.html"><a href="useful-functions.html#workspace"><i class="fa fa-check"></i><b>9.1</b> Workspace</a></li>
-<li class="chapter" data-level="9.2" data-path="useful-functions.html"><a href="useful-functions.html#objects-2"><i class="fa fa-check"></i><b>9.2</b> Objects</a></li>
-<li class="chapter" data-level="9.3" data-path="useful-functions.html"><a href="useful-functions.html#iteration"><i class="fa fa-check"></i><b>9.3</b> Iteration</a></li>
+<li class="chapter" data-level="9.1" data-path="useful-functions.html"><a href="useful-functions.html#rstudio-keyboard-shortcuts"><i class="fa fa-check"></i><b>9.1</b> RStudio Keyboard Shortcuts</a></li>
+<li class="chapter" data-level="9.2" data-path="useful-functions.html"><a href="useful-functions.html#workspace"><i class="fa fa-check"></i><b>9.2</b> Workspace</a></li>
+<li class="chapter" data-level="9.3" data-path="useful-functions.html"><a href="useful-functions.html#objects-2"><i class="fa fa-check"></i><b>9.3</b> Objects</a></li>
+<li class="chapter" data-level="9.4" data-path="useful-functions.html"><a href="useful-functions.html#functions-2"><i class="fa fa-check"></i><b>9.4</b> Functions</a></li>
+<li class="chapter" data-level="9.5" data-path="useful-functions.html"><a href="useful-functions.html#iteration"><i class="fa fa-check"></i><b>9.5</b> Iteration</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="style-tips.html"><a href="style-tips.html"><i class="fa fa-check"></i><b>10</b> Style Tips</a><ul>
 <li class="chapter" data-level="10.1" data-path="style-tips.html"><a href="style-tips.html#nothing-here-except-a-reminder-to-jonny-that-they-should-make-this-page"><i class="fa fa-check"></i><b>10.1</b> NOTHING HERE EXCEPT A REMINDER TO JONNY THAT THEY SHOULD MAKE THIS PAGE</a></li>
@@ -354,7 +354,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>##     CRAN 
 ## &quot;@CRAN@&quot;</code></pre>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">.libPaths</span>()</a></code></pre></div>
-<pre><code>## [1] &quot;/Library/Frameworks/R.framework/Versions/3.4/Resources/library&quot;</code></pre>
+<pre><code>## [1] &quot;/Library/Frameworks/R.framework/Versions/3.5/Resources/library&quot;</code></pre>
 <p>Most packages we use will come from cran, and if you ever need to modify or find package files for any reason, there they shall be.</p>
 <p>Now we have the package tidyverse, and can use it whenever we want. I’m so excited that I’m going touse one of the packages within the tidyverse called ggplot to make a simple plot of our spinal tap influenced dataset!!!!!</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">ggplot</span>(<span class="dt">data=</span>amp_volume_dataframe, <span class="kw">aes</span>(<span class="dt">x=</span>Bands, <span class="dt">y =</span> amp_volumes))<span class="op">+</span></a>
@@ -364,30 +364,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">search</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;.GlobalEnv&quot;        &quot;package:stats&quot;     &quot;package:graphics&quot; 
 ## [4] &quot;package:grDevices&quot; &quot;package:utils&quot;     &quot;package:datasets&quot; 
-## [7] &quot;Autoloads&quot;         &quot;package:base&quot;</code></pre>
+## [7] &quot;package:methods&quot;   &quot;Autoloads&quot;         &quot;package:base&quot;</code></pre>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
-<pre><code>## ── Attaching packages ────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
-<pre><code>## ✔ ggplot2 2.2.1.9000     ✔ purrr   0.2.4     
-## ✔ tibble  1.4.2          ✔ dplyr   0.7.4     
-## ✔ tidyr   0.8.0          ✔ stringr 1.3.0     
-## ✔ readr   1.1.1          ✔ forcats 0.3.0</code></pre>
-<pre><code>## ── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>## ── Attaching packages ─────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>## ✔ ggplot2 3.0.0     ✔ purrr   0.2.5
+## ✔ tibble  1.4.2     ✔ dplyr   0.7.6
+## ✔ tidyr   0.8.1     ✔ stringr 1.3.1
+## ✔ readr   1.1.1     ✔ forcats 0.3.0</code></pre>
+<pre><code>## ── Conflicts ────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
-## ✖ dplyr::vars()   masks ggplot2::vars()</code></pre>
+## ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw">search</span>()</a></code></pre></div>
 <pre><code>##  [1] &quot;.GlobalEnv&quot;        &quot;package:forcats&quot;   &quot;package:stringr&quot;  
 ##  [4] &quot;package:dplyr&quot;     &quot;package:purrr&quot;     &quot;package:readr&quot;    
 ##  [7] &quot;package:tidyr&quot;     &quot;package:tibble&quot;    &quot;package:ggplot2&quot;  
 ## [10] &quot;package:tidyverse&quot; &quot;package:stats&quot;     &quot;package:graphics&quot; 
 ## [13] &quot;package:grDevices&quot; &quot;package:utils&quot;     &quot;package:datasets&quot; 
-## [16] &quot;Autoloads&quot;         &quot;package:base&quot;</code></pre>
+## [16] &quot;package:methods&quot;   &quot;Autoloads&quot;         &quot;package:base&quot;</code></pre>
 <p>Importantly, you have to call all of the libraries you will use each time you start a new session in R. You may want to get in the habit of putting a bunch of library calls at the top of your script.</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
 <p>And now let’s try to use ggplot</p>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw">ggplot</span>(<span class="dt">data=</span>amp_volume_dataframe, <span class="kw">aes</span>(<span class="dt">x=</span>Bands, <span class="dt">y =</span> amp_volumes))<span class="op">+</span></a>
 <a class="sourceLine" id="cb34-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_col</span>()</a></code></pre></div>
-<p><img src="01-Introduction_files/figure-html4/GGPlot%20works!-1.png" width="672" />
+<p><img src="01-Introduction_files/figure-html/GGPlot%20works!-1.png" width="672" />
 It worked! We’ll spend some time talking about ggplot (led by Jonny) a little later on, so don’t worry about what that code means. Soon you’ll know.</p>
 <p>What happens when two packages have functions with the same name? for example, both dplyr and plyr have functions named “summarise” that behave slightly differently. We can solve these “namespace conflicts” by being specific about where we load the library in our search paths. If we want to load the functions from plyr, but keep all our existing references to dplyr, we could do something like this (although if you’ve already loaded tidyverse, this won’t do anything because these packages are loaded by tidyverse)</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="kw">library</span>(plyr, <span class="dt">pos=</span><span class="dv">100</span>) <span class="co"># We can put it at an arbitrarily high number, it will be after everything but the base functions</span></a></code></pre></div>
@@ -409,7 +408,7 @@ It worked! We’ll spend some time talking about ggplot (led by Jonny) a little 
 <p>Or, we could make our code more explicit. We can directly reference a package’s functions without loading the library by using <code>::</code>, for example with</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1">ggplot2<span class="op">::</span><span class="kw">ggplot</span>(<span class="dt">data=</span>amp_volume_dataframe, ggplot2<span class="op">::</span><span class="kw">aes</span>(<span class="dt">x=</span>Bands, <span class="dt">y =</span> amp_volumes))<span class="op">+</span></a>
 <a class="sourceLine" id="cb43-2" data-line-number="2"><span class="st">  </span>ggplot2<span class="op">::</span><span class="kw">geom_col</span>()</a></code></pre></div>
-<p><img src="01-Introduction_files/figure-html4/direct%20function%20reference-1.png" width="672" /></p>
+<p><img src="01-Introduction_files/figure-html/direct%20function%20reference-1.png" width="672" /></p>
 </div>
 <div id="some-useful-basic-syntax" class="section level2">
 <h2><span class="header-section-number">3.4</span> Some useful basic syntax</h2>

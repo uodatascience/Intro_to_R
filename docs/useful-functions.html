@@ -51,7 +51,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -64,13 +64,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -235,9 +233,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.4" data-path="functions-1.html"><a href="functions-1.html#todo"><i class="fa fa-check"></i><b>8.4</b> Todo:</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="useful-functions.html"><a href="useful-functions.html"><i class="fa fa-check"></i><b>9</b> Useful Functions</a><ul>
-<li class="chapter" data-level="9.1" data-path="useful-functions.html"><a href="useful-functions.html#workspace"><i class="fa fa-check"></i><b>9.1</b> Workspace</a></li>
-<li class="chapter" data-level="9.2" data-path="useful-functions.html"><a href="useful-functions.html#objects-2"><i class="fa fa-check"></i><b>9.2</b> Objects</a></li>
-<li class="chapter" data-level="9.3" data-path="useful-functions.html"><a href="useful-functions.html#iteration"><i class="fa fa-check"></i><b>9.3</b> Iteration</a></li>
+<li class="chapter" data-level="9.1" data-path="useful-functions.html"><a href="useful-functions.html#rstudio-keyboard-shortcuts"><i class="fa fa-check"></i><b>9.1</b> RStudio Keyboard Shortcuts</a></li>
+<li class="chapter" data-level="9.2" data-path="useful-functions.html"><a href="useful-functions.html#workspace"><i class="fa fa-check"></i><b>9.2</b> Workspace</a></li>
+<li class="chapter" data-level="9.3" data-path="useful-functions.html"><a href="useful-functions.html#objects-2"><i class="fa fa-check"></i><b>9.3</b> Objects</a></li>
+<li class="chapter" data-level="9.4" data-path="useful-functions.html"><a href="useful-functions.html#functions-2"><i class="fa fa-check"></i><b>9.4</b> Functions</a></li>
+<li class="chapter" data-level="9.5" data-path="useful-functions.html"><a href="useful-functions.html#iteration"><i class="fa fa-check"></i><b>9.5</b> Iteration</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="style-tips.html"><a href="style-tips.html"><i class="fa fa-check"></i><b>10</b> Style Tips</a><ul>
 <li class="chapter" data-level="10.1" data-path="style-tips.html"><a href="style-tips.html#nothing-here-except-a-reminder-to-jonny-that-they-should-make-this-page"><i class="fa fa-check"></i><b>10.1</b> NOTHING HERE EXCEPT A REMINDER TO JONNY THAT THEY SHOULD MAKE THIS PAGE</a></li>
@@ -265,8 +265,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="useful-functions" class="section level1">
 <h1><span class="header-section-number">9</span> Useful Functions</h1>
+<div id="rstudio-keyboard-shortcuts" class="section level2">
+<h2><span class="header-section-number">9.1</span> RStudio Keyboard Shortcuts</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>cmd+return</code></td>
+<td>execute current line or selection</td>
+</tr>
+<tr class="even">
+<td><code>ctrl+l</code></td>
+<td>clear console output</td>
+</tr>
+<tr class="odd">
+<td><code>ctrl+1/2/3</code></td>
+<td>move cursor to source/console/help respectively</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div id="workspace" class="section level2">
-<h2><span class="header-section-number">9.1</span> Workspace</h2>
+<h2><span class="header-section-number">9.2</span> Workspace</h2>
 <table>
 <thead>
 <tr class="header">
@@ -303,7 +328,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 </div>
 <div id="objects-2" class="section level2">
-<h2><span class="header-section-number">9.2</span> Objects</h2>
+<h2><span class="header-section-number">9.3</span> Objects</h2>
 <table>
 <thead>
 <tr class="header">
@@ -320,11 +345,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td>pryr::otype</td>
 <td>Get object’s type system (base, S3, S4, RC)</td>
 </tr>
+<tr class="odd">
+<td>names(x)</td>
+<td>Gets the object’s names, eg. for dataframes, the column names</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="functions-2" class="section level2">
+<h2><span class="header-section-number">9.4</span> Functions</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Function function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>args(fxn)</td>
+<td>prints the arguments and defaults of function <code>fxn</code></td>
+</tr>
 </tbody>
 </table>
 </div>
 <div id="iteration" class="section level2">
-<h2><span class="header-section-number">9.3</span> Iteration</h2>
+<h2><span class="header-section-number">9.5</span> Iteration</h2>
 <table>
 <thead>
 <tr class="header">

@@ -51,7 +51,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -64,13 +64,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -235,9 +233,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.4" data-path="functions-1.html"><a href="functions-1.html#todo"><i class="fa fa-check"></i><b>8.4</b> Todo:</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="useful-functions.html"><a href="useful-functions.html"><i class="fa fa-check"></i><b>9</b> Useful Functions</a><ul>
-<li class="chapter" data-level="9.1" data-path="useful-functions.html"><a href="useful-functions.html#workspace"><i class="fa fa-check"></i><b>9.1</b> Workspace</a></li>
-<li class="chapter" data-level="9.2" data-path="useful-functions.html"><a href="useful-functions.html#objects-2"><i class="fa fa-check"></i><b>9.2</b> Objects</a></li>
-<li class="chapter" data-level="9.3" data-path="useful-functions.html"><a href="useful-functions.html#iteration"><i class="fa fa-check"></i><b>9.3</b> Iteration</a></li>
+<li class="chapter" data-level="9.1" data-path="useful-functions.html"><a href="useful-functions.html#rstudio-keyboard-shortcuts"><i class="fa fa-check"></i><b>9.1</b> RStudio Keyboard Shortcuts</a></li>
+<li class="chapter" data-level="9.2" data-path="useful-functions.html"><a href="useful-functions.html#workspace"><i class="fa fa-check"></i><b>9.2</b> Workspace</a></li>
+<li class="chapter" data-level="9.3" data-path="useful-functions.html"><a href="useful-functions.html#objects-2"><i class="fa fa-check"></i><b>9.3</b> Objects</a></li>
+<li class="chapter" data-level="9.4" data-path="useful-functions.html"><a href="useful-functions.html#functions-2"><i class="fa fa-check"></i><b>9.4</b> Functions</a></li>
+<li class="chapter" data-level="9.5" data-path="useful-functions.html"><a href="useful-functions.html#iteration"><i class="fa fa-check"></i><b>9.5</b> Iteration</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="style-tips.html"><a href="style-tips.html"><i class="fa fa-check"></i><b>10</b> Style Tips</a><ul>
 <li class="chapter" data-level="10.1" data-path="style-tips.html"><a href="style-tips.html#nothing-here-except-a-reminder-to-jonny-that-they-should-make-this-page"><i class="fa fa-check"></i><b>10.1</b> NOTHING HERE EXCEPT A REMINDER TO JONNY THAT THEY SHOULD MAKE THIS PAGE</a></li>
@@ -498,13 +498,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] &quot;1&quot;</code></pre>
 <p>Each of the different atomic vector types has different methods (we’ll come back to how methods work in a bit), which explains why we can <code>1 + 1</code> but not <code>&quot;1&quot; + &quot;1&quot;</code>. Notice how the <code>integer</code> class has a set of methods called “Arith” (see <code>?Arith</code>, an S4 group of generic functions, something we won’t talk about until section 5) but <code>character</code> doesn’t.</p>
 <div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1"><span class="kw">methods</span>(<span class="dt">class=</span><span class="st">&quot;integer&quot;</span>)</a></code></pre></div>
-<pre><code>## [1] as.data.frame
+<pre><code>## [1] as.data.frame coerce        Ops          
 ## see &#39;?methods&#39; for accessing help and source code</code></pre>
 <div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" data-line-number="1"><span class="kw">methods</span>(<span class="dt">class=</span><span class="st">&quot;character&quot;</span>)</a></code></pre></div>
-<pre><code>## [1] all.equal                as.data.frame           
-## [3] as.Date                  as.POSIXlt              
-## [5] as.raster                formula                 
-## [7] getDLLRegisteredRoutines
+<pre><code>##  [1] all.equal                as.data.frame           
+##  [3] as.Date                  as.POSIXlt              
+##  [5] as.raster                coerce                  
+##  [7] coerce&lt;-                 formula                 
+##  [9] getDLLRegisteredRoutines Ops                     
 ## see &#39;?methods&#39; for accessing help and source code</code></pre>
 <p>To make a vector that preserves the types of its elements, make a <code>list</code> instead</p>
 <div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" data-line-number="1">a_list &lt;-<span class="st"> </span><span class="kw">list</span>(1L,<span class="dv">2</span>,<span class="st">&quot;3&quot;</span>)</a>
@@ -692,12 +693,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [3,]    7    8    9</code></pre>
 <p>Arrays and matrices also have new methods that lists and vectors dont.</p>
 <div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" data-line-number="1"><span class="kw">methods</span>(<span class="dt">class=</span><span class="st">&quot;list&quot;</span>)</a></code></pre></div>
-<pre><code>## [1] all.equal     as.data.frame relist        within       
+<pre><code>## [1] all.equal     as.data.frame coerce        Ops           relist       
+## [6] type.convert  within       
 ## see &#39;?methods&#39; for accessing help and source code</code></pre>
 <div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" data-line-number="1"><span class="kw">methods</span>(<span class="dt">class=</span><span class="st">&quot;matrix&quot;</span>)</a></code></pre></div>
-<pre><code>##  [1] anyDuplicated as.data.frame as.raster     boxplot       determinant  
-##  [6] duplicated    edit          head          isSymmetric   relist       
-## [11] subset        summary       tail          unique       
+<pre><code>##  [1] anyDuplicated as.data.frame as.raster     boxplot       coerce       
+##  [6] determinant   duplicated    edit          head          initialize   
+## [11] isSymmetric   Math          Math2         Ops           relist       
+## [16] subset        summary       tail          unique       
 ## see &#39;?methods&#39; for accessing help and source code</code></pre>
 </div>
 <div id="data-frames" class="section level3">
@@ -716,11 +719,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## $names
 ## [1] &quot;little_ones&quot; &quot;big_ones&quot;   
 ## 
-## $row.names
-## [1] 1 2 3 4 5
-## 
 ## $class
-## [1] &quot;data.frame&quot;</code></pre>
+## [1] &quot;data.frame&quot;
+## 
+## $row.names
+## [1] 1 2 3 4 5</code></pre>
 <p>data frames can be used like lists of vectors</p>
 <div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" data-line-number="1">df[<span class="dv">1</span>]</a></code></pre></div>
 <pre><code>##   little_ones
@@ -790,12 +793,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" data-line-number="1"><span class="kw">methods</span>(<span class="dt">class=</span><span class="st">&quot;Date&quot;</span>) <span class="co"># list the methods that this class has</span></a></code></pre></div>
 <pre><code>##  [1] -             [             [[            [&lt;-           +            
 ##  [6] as.character  as.data.frame as.list       as.POSIXct    as.POSIXlt   
-## [11] Axis          c             cut           diff          format       
-## [16] hist          is.numeric    julian        Math          mean         
-## [21] months        Ops           pretty        print         quarters     
-## [26] rep           round         seq           split         str          
-## [31] summary       Summary       trunc         weekdays      weighted.mean
-## [36] xtfrm        
+## [11] Axis          c             coerce        cut           diff         
+## [16] format        hist          initialize    is.numeric    julian       
+## [21] length&lt;-      Math          mean          months        Ops          
+## [26] pretty        print         quarters      rep           round        
+## [31] seq           show          slotsFromS3   split         str          
+## [36] summary       Summary       trunc         weekdays      weighted.mean
+## [41] xtfrm        
 ## see &#39;?methods&#39; for accessing help and source code</code></pre>
 <p>By default, the source code of S3 methods is not visible to R, one can retreive it with `utils::getS3method``</p>
 <p>The <code>plot</code> base function is an s3 generic method.</p>
@@ -851,15 +855,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##             ...)
 ##     invisible()
 ## }
-## &lt;bytecode: 0x7fd1833e5c00&gt;
+## &lt;bytecode: 0x7f9df2e75370&gt;
 ## &lt;environment: namespace:graphics&gt;</code></pre>
 <p>If the first argument to <code>plot</code> has its own <code>plot</code> method (ie. that it is exported by the object’s package namespace, more about this in section 5), that function is called instead. That’s why</p>
 <div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" data-line-number="1">aq &lt;-<span class="st"> </span>datasets<span class="op">::</span>airquality</a>
 <a class="sourceLine" id="cb193-2" data-line-number="2"><span class="kw">plot</span>(<span class="kw">lm</span>(Ozone <span class="op">~</span><span class="st"> </span>Month, <span class="dt">data=</span>aq))</a></code></pre></div>
-<p><img src="02-Objects_files/figure-html4/unnamed-chunk-30-1.png" width="672" /><img src="02-Objects_files/figure-html4/unnamed-chunk-30-2.png" width="672" /><img src="02-Objects_files/figure-html4/unnamed-chunk-30-3.png" width="672" /><img src="02-Objects_files/figure-html4/unnamed-chunk-30-4.png" width="672" /></p>
+<p><img src="02-Objects_files/figure-html/unnamed-chunk-30-1.png" width="672" /><img src="02-Objects_files/figure-html/unnamed-chunk-30-2.png" width="672" /><img src="02-Objects_files/figure-html/unnamed-chunk-30-3.png" width="672" /><img src="02-Objects_files/figure-html/unnamed-chunk-30-4.png" width="672" /></p>
 <p>is different than this nonsensical model</p>
 <div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" data-line-number="1"><span class="kw">plot</span>(lme4<span class="op">::</span><span class="kw">lmer</span>(Ozone <span class="op">~</span><span class="st"> </span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>(Day <span class="op">|</span><span class="st"> </span>Month), <span class="dt">data=</span>aq))</a></code></pre></div>
-<p><img src="02-Objects_files/figure-html4/unnamed-chunk-31-1.png" width="672" /></p>
+<p><img src="02-Objects_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <div id="example-extending-s3-objects" class="section level3">
 <h3><span class="header-section-number">4.4.1</span> Example: Extending S3 Objects</h3>
 <blockquote>

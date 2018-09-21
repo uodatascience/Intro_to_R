@@ -51,7 +51,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -64,13 +64,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -235,9 +233,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.4" data-path="functions-1.html"><a href="functions-1.html#todo"><i class="fa fa-check"></i><b>8.4</b> Todo:</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="useful-functions.html"><a href="useful-functions.html"><i class="fa fa-check"></i><b>9</b> Useful Functions</a><ul>
-<li class="chapter" data-level="9.1" data-path="useful-functions.html"><a href="useful-functions.html#workspace"><i class="fa fa-check"></i><b>9.1</b> Workspace</a></li>
-<li class="chapter" data-level="9.2" data-path="useful-functions.html"><a href="useful-functions.html#objects-2"><i class="fa fa-check"></i><b>9.2</b> Objects</a></li>
-<li class="chapter" data-level="9.3" data-path="useful-functions.html"><a href="useful-functions.html#iteration"><i class="fa fa-check"></i><b>9.3</b> Iteration</a></li>
+<li class="chapter" data-level="9.1" data-path="useful-functions.html"><a href="useful-functions.html#rstudio-keyboard-shortcuts"><i class="fa fa-check"></i><b>9.1</b> RStudio Keyboard Shortcuts</a></li>
+<li class="chapter" data-level="9.2" data-path="useful-functions.html"><a href="useful-functions.html#workspace"><i class="fa fa-check"></i><b>9.2</b> Workspace</a></li>
+<li class="chapter" data-level="9.3" data-path="useful-functions.html"><a href="useful-functions.html#objects-2"><i class="fa fa-check"></i><b>9.3</b> Objects</a></li>
+<li class="chapter" data-level="9.4" data-path="useful-functions.html"><a href="useful-functions.html#functions-2"><i class="fa fa-check"></i><b>9.4</b> Functions</a></li>
+<li class="chapter" data-level="9.5" data-path="useful-functions.html"><a href="useful-functions.html#iteration"><i class="fa fa-check"></i><b>9.5</b> Iteration</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="style-tips.html"><a href="style-tips.html"><i class="fa fa-check"></i><b>10</b> Style Tips</a><ul>
 <li class="chapter" data-level="10.1" data-path="style-tips.html"><a href="style-tips.html#nothing-here-except-a-reminder-to-jonny-that-they-should-make-this-page"><i class="fa fa-check"></i><b>10.1</b> NOTHING HERE EXCEPT A REMINDER TO JONNY THAT THEY SHOULD MAKE THIS PAGE</a></li>
@@ -313,46 +313,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Base R graphics are made with a series of function calls, typically starting with a function that ‘creates’ the plot (like, say, <code>plot()</code>), and subsequent functions that modify that same plot. <code>par()</code> is used to set graphical parameters. <a href="https://www.stat.auckland.ac.nz/~paul/R/parMemnonics.html">Paul Murrell has compiled a mnemonic table</a> to help remember the different parameters of <code>par()</code>.</p>
 <p>We won’t discuss base graphics in much detail, as I haven’t seen a situation where using <code>ggplot2</code> isn’t a better idea.</p>
 <p>(An example from <a href="https://www.stat.auckland.ac.nz/~paul/RG2e/examples-stdplots.R" class="uri">https://www.stat.auckland.ac.nz/~paul/RG2e/examples-stdplots.R</a>)</p>
-<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb424-1" data-line-number="1"><span class="co"># Scatterplot</span></a>
-<a class="sourceLine" id="cb424-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb424-3" data-line-number="3"><span class="co"># make data</span></a>
-<a class="sourceLine" id="cb424-4" data-line-number="4">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">12</span>, <span class="dv">16</span>)</a>
-<a class="sourceLine" id="cb424-5" data-line-number="5">y1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">1.3</span>, <span class="fl">1.9</span>, <span class="fl">3.4</span>, <span class="fl">3.9</span>, <span class="fl">4.8</span>)</a>
-<a class="sourceLine" id="cb424-6" data-line-number="6">y2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="fl">.8</span>, <span class="fl">.5</span>, <span class="fl">.45</span>, <span class="fl">.4</span>, <span class="fl">.3</span>)</a>
-<a class="sourceLine" id="cb424-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb424-8" data-line-number="8"><span class="co"># Set axis label style (las), (mar)gins, text size (cex)</span></a>
-<a class="sourceLine" id="cb424-9" data-line-number="9"><span class="kw">par</span>(<span class="dt">las=</span><span class="dv">1</span>, <span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">4</span>), <span class="dt">cex=</span>.<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb424-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb424-11" data-line-number="11"><span class="co"># Create the plot and add objects</span></a>
-<a class="sourceLine" id="cb424-12" data-line-number="12"><span class="kw">plot.new</span>()</a>
-<a class="sourceLine" id="cb424-13" data-line-number="13"><span class="kw">plot.window</span>(<span class="kw">range</span>(x), <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">6</span>))</a>
-<a class="sourceLine" id="cb424-14" data-line-number="14"><span class="kw">lines</span>(x, y1)</a>
-<a class="sourceLine" id="cb424-15" data-line-number="15"><span class="kw">lines</span>(x, y2)</a>
-<a class="sourceLine" id="cb424-16" data-line-number="16"><span class="kw">points</span>(x, y1, <span class="dt">pch=</span><span class="dv">16</span>, <span class="dt">cex=</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb424-17" data-line-number="17"><span class="kw">points</span>(x, y2, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&quot;white&quot;</span>, <span class="dt">cex=</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb424-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb424-19" data-line-number="19"><span class="co"># Further parameter adjustments</span></a>
-<a class="sourceLine" id="cb424-20" data-line-number="20"><span class="kw">par</span>(<span class="dt">col=</span><span class="st">&quot;gray50&quot;</span>, <span class="dt">fg=</span><span class="st">&quot;gray50&quot;</span>, <span class="dt">col.axis=</span><span class="st">&quot;gray50&quot;</span>)</a>
-<a class="sourceLine" id="cb424-21" data-line-number="21"><span class="kw">axis</span>(<span class="dv">1</span>, <span class="dt">at=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">16</span>, <span class="dv">4</span>))</a>
-<a class="sourceLine" id="cb424-22" data-line-number="22"><span class="kw">axis</span>(<span class="dv">2</span>, <span class="dt">at=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb424-23" data-line-number="23"><span class="kw">axis</span>(<span class="dv">4</span>, <span class="dt">at=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb424-24" data-line-number="24"><span class="kw">box</span>(<span class="dt">bty=</span><span class="st">&quot;u&quot;</span>)</a>
-<a class="sourceLine" id="cb424-25" data-line-number="25"><span class="kw">mtext</span>(<span class="st">&quot;Travel Time (s)&quot;</span>, <span class="dt">side=</span><span class="dv">1</span>, <span class="dt">line=</span><span class="dv">2</span>, <span class="dt">cex=</span><span class="fl">0.8</span>)</a>
-<a class="sourceLine" id="cb424-26" data-line-number="26"><span class="kw">mtext</span>(<span class="st">&quot;Responses per Travel&quot;</span>, <span class="dt">side=</span><span class="dv">2</span>, <span class="dt">line=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">0</span>, <span class="dt">cex=</span><span class="fl">0.8</span>)</a>
-<a class="sourceLine" id="cb424-27" data-line-number="27"><span class="kw">mtext</span>(<span class="st">&quot;Responses per Second&quot;</span>, <span class="dt">side=</span><span class="dv">4</span>, <span class="dt">line=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">0</span>, <span class="dt">cex=</span><span class="fl">0.8</span>)</a>
-<a class="sourceLine" id="cb424-28" data-line-number="28"><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="fl">5.1</span>, <span class="fl">4.1</span>, <span class="fl">4.1</span>, <span class="fl">2.1</span>), <span class="dt">col=</span><span class="st">&quot;black&quot;</span>, <span class="dt">fg=</span><span class="st">&quot;black&quot;</span>, <span class="dt">col.axis=</span><span class="st">&quot;black&quot;</span>)</a>
-<a class="sourceLine" id="cb424-29" data-line-number="29"><span class="kw">text</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="st">&quot;Bird 131&quot;</span>)</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-1-1.png" width="672" /></p>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb423-1" data-line-number="1"><span class="co"># Scatterplot</span></a>
+<a class="sourceLine" id="cb423-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb423-3" data-line-number="3"><span class="co"># make data</span></a>
+<a class="sourceLine" id="cb423-4" data-line-number="4">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">12</span>, <span class="dv">16</span>)</a>
+<a class="sourceLine" id="cb423-5" data-line-number="5">y1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">1.3</span>, <span class="fl">1.9</span>, <span class="fl">3.4</span>, <span class="fl">3.9</span>, <span class="fl">4.8</span>)</a>
+<a class="sourceLine" id="cb423-6" data-line-number="6">y2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="fl">.8</span>, <span class="fl">.5</span>, <span class="fl">.45</span>, <span class="fl">.4</span>, <span class="fl">.3</span>)</a>
+<a class="sourceLine" id="cb423-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb423-8" data-line-number="8"><span class="co"># Set axis label style (las), (mar)gins, text size (cex)</span></a>
+<a class="sourceLine" id="cb423-9" data-line-number="9"><span class="kw">par</span>(<span class="dt">las=</span><span class="dv">1</span>, <span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">4</span>), <span class="dt">cex=</span>.<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb423-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb423-11" data-line-number="11"><span class="co"># Create the plot and add objects</span></a>
+<a class="sourceLine" id="cb423-12" data-line-number="12"><span class="kw">plot.new</span>()</a>
+<a class="sourceLine" id="cb423-13" data-line-number="13"><span class="kw">plot.window</span>(<span class="kw">range</span>(x), <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">6</span>))</a>
+<a class="sourceLine" id="cb423-14" data-line-number="14"><span class="kw">lines</span>(x, y1)</a>
+<a class="sourceLine" id="cb423-15" data-line-number="15"><span class="kw">lines</span>(x, y2)</a>
+<a class="sourceLine" id="cb423-16" data-line-number="16"><span class="kw">points</span>(x, y1, <span class="dt">pch=</span><span class="dv">16</span>, <span class="dt">cex=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb423-17" data-line-number="17"><span class="kw">points</span>(x, y2, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&quot;white&quot;</span>, <span class="dt">cex=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb423-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb423-19" data-line-number="19"><span class="co"># Further parameter adjustments</span></a>
+<a class="sourceLine" id="cb423-20" data-line-number="20"><span class="kw">par</span>(<span class="dt">col=</span><span class="st">&quot;gray50&quot;</span>, <span class="dt">fg=</span><span class="st">&quot;gray50&quot;</span>, <span class="dt">col.axis=</span><span class="st">&quot;gray50&quot;</span>)</a>
+<a class="sourceLine" id="cb423-21" data-line-number="21"><span class="kw">axis</span>(<span class="dv">1</span>, <span class="dt">at=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">16</span>, <span class="dv">4</span>))</a>
+<a class="sourceLine" id="cb423-22" data-line-number="22"><span class="kw">axis</span>(<span class="dv">2</span>, <span class="dt">at=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb423-23" data-line-number="23"><span class="kw">axis</span>(<span class="dv">4</span>, <span class="dt">at=</span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb423-24" data-line-number="24"><span class="kw">box</span>(<span class="dt">bty=</span><span class="st">&quot;u&quot;</span>)</a>
+<a class="sourceLine" id="cb423-25" data-line-number="25"><span class="kw">mtext</span>(<span class="st">&quot;Travel Time (s)&quot;</span>, <span class="dt">side=</span><span class="dv">1</span>, <span class="dt">line=</span><span class="dv">2</span>, <span class="dt">cex=</span><span class="fl">0.8</span>)</a>
+<a class="sourceLine" id="cb423-26" data-line-number="26"><span class="kw">mtext</span>(<span class="st">&quot;Responses per Travel&quot;</span>, <span class="dt">side=</span><span class="dv">2</span>, <span class="dt">line=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">0</span>, <span class="dt">cex=</span><span class="fl">0.8</span>)</a>
+<a class="sourceLine" id="cb423-27" data-line-number="27"><span class="kw">mtext</span>(<span class="st">&quot;Responses per Second&quot;</span>, <span class="dt">side=</span><span class="dv">4</span>, <span class="dt">line=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">0</span>, <span class="dt">cex=</span><span class="fl">0.8</span>)</a>
+<a class="sourceLine" id="cb423-28" data-line-number="28"><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="fl">5.1</span>, <span class="fl">4.1</span>, <span class="fl">4.1</span>, <span class="fl">2.1</span>), <span class="dt">col=</span><span class="st">&quot;black&quot;</span>, <span class="dt">fg=</span><span class="st">&quot;black&quot;</span>, <span class="dt">col.axis=</span><span class="st">&quot;black&quot;</span>)</a>
+<a class="sourceLine" id="cb423-29" data-line-number="29"><span class="kw">text</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="st">&quot;Bird 131&quot;</span>)</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 </div>
 <div id="ggplot2" class="section level2">
 <h2><span class="header-section-number">6.3</span> ggplot2</h2>
 <p>For a more complete guide see <a href="https://github.com/hadley/ggplot2-book">the book</a> and for a more complete reference see <a href="http://ggplot2.tidyverse.org/reference/">the documentation</a>.</p>
 <p>To get started, the only thing your data needs to be is a) be, b) a dataframe, c) “long”, and d) properly classed. By properly classed I don’t mean it needs to be the diamonds dataset, I mean that each column in your dataframe should be explicitly cast as the datatype you intend it to be - as.factor() your factors and as.numeric() your numbers.</p>
 <p>But we are gonna use diamonds because we are properly classed.</p>
-<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb425-1" data-line-number="1"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb425-2" data-line-number="2">pander<span class="op">::</span><span class="kw">pander</span>(</a>
-<a class="sourceLine" id="cb425-3" data-line-number="3">  <span class="kw">head</span>(diamonds)</a>
-<a class="sourceLine" id="cb425-4" data-line-number="4">)</a></code></pre></div>
+<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb424-1" data-line-number="1"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb424-2" data-line-number="2">pander<span class="op">::</span><span class="kw">pander</span>(</a>
+<a class="sourceLine" id="cb424-3" data-line-number="3">  <span class="kw">head</span>(diamonds)</a>
+<a class="sourceLine" id="cb424-4" data-line-number="4">)</a></code></pre></div>
 <table style="width:100%;">
 <colgroup>
 <col width="9%" />
@@ -455,8 +455,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb426-1" data-line-number="1"><span class="co"># But we don&#39;t want to plot 50000 points every time so</span></a>
-<a class="sourceLine" id="cb426-2" data-line-number="2">diamond_sub &lt;-<span class="st"> </span>diamonds[<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(diamonds), <span class="dv">500</span>, <span class="dt">replace=</span><span class="ot">FALSE</span>),]</a></code></pre></div>
+<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb425-1" data-line-number="1"><span class="co"># But we don&#39;t want to plot 50000 points every time so</span></a>
+<a class="sourceLine" id="cb425-2" data-line-number="2">diamond_sub &lt;-<span class="st"> </span>diamonds[<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(diamonds), <span class="dv">500</span>, <span class="dt">replace=</span><span class="ot">FALSE</span>),]</a></code></pre></div>
 <div id="layers" class="section level3">
 <h3><span class="header-section-number">6.3.1</span> Layers</h3>
 <p>What is a statistical graphic? The good ole boys <a href="http://www.springer.com/us/book/9780387245447">Wilkinson</a> and <a href="http://www.tandfonline.com/doi/abs/10.1198/jcgs.2009.07098">Wickham</a> tell us that they are</p>
@@ -486,14 +486,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="aesthetic-mappings" class="section level3">
 <h3><span class="header-section-number">6.3.2</span> (aes)thetic mappings</h3>
 <p>Lets get ahead of ourselves and make a plot because we haven’t made one yet and our console is whining in the backseat.</p>
-<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb427-1" data-line-number="1">g &lt;-<span class="st"> </span><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price))<span class="op">+</span></a>
-<a class="sourceLine" id="cb427-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()</a>
-<a class="sourceLine" id="cb427-3" data-line-number="3">g</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-3-1.png" width="672" /></p>
+<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb426-1" data-line-number="1">g &lt;-<span class="st"> </span><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price))<span class="op">+</span></a>
+<a class="sourceLine" id="cb426-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()</a>
+<a class="sourceLine" id="cb426-3" data-line-number="3">g</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>We made a ggplot object named “g” that is attached to the dataframe “diamond_sub” <code>g &lt;- ggplot(diamond_sub,</code> and has the aesthetic parameters “x” and “y” mapped to the columns “carat” and “price,” respectively <code>aes(x=carat, y=price))</code>. Then we added <code>+</code> another element to our plot, <code>geom_point()</code> which tells us that we want our aesthetic mapping represented geometrically as points. Note that we have to add parentheses to tell R that we want that function evaluated even if we don’t pass any arguments. We then rendered the plot by calling the variable name <code>g</code>.</p>
 <p>Each geom (or more precisely, each stat, but we’ll get to that in a bit) has a certain subset of aes’s that apply to it (don’t we all).</p>
 <p>You can list all aes’s with</p>
-<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb428-1" data-line-number="1">ggplot2<span class="op">:::</span>.all_aesthetics</a></code></pre></div>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb427-1" data-line-number="1">ggplot2<span class="op">:::</span>.all_aesthetics</a></code></pre></div>
 <pre><code>##  [1] &quot;adj&quot;        &quot;alpha&quot;      &quot;angle&quot;      &quot;bg&quot;         &quot;cex&quot;       
 ##  [6] &quot;col&quot;        &quot;color&quot;      &quot;colour&quot;     &quot;fg&quot;         &quot;fill&quot;      
 ## [11] &quot;group&quot;      &quot;hjust&quot;      &quot;label&quot;      &quot;linetype&quot;   &quot;lower&quot;     
@@ -504,7 +504,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [36] &quot;y&quot;          &quot;yend&quot;       &quot;ymax&quot;       &quot;ymin&quot;       &quot;yintercept&quot;
 ## [41] &quot;z&quot;</code></pre>
 <p>or by doing the same on the proto version of any geom, like</p>
-<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb430-1" data-line-number="1">ggplot2<span class="op">:::</span>GeomPoint</a></code></pre></div>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb429-1" data-line-number="1">ggplot2<span class="op">:::</span>GeomPoint</a></code></pre></div>
 <pre><code>## &lt;ggproto object: Class GeomPoint, Geom, gg&gt;
 ##     aesthetics: function
 ##     default_aes: uneval
@@ -524,57 +524,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Note the “required_aes” and “non_missing_aes” for required and optional aes, respectively.</p>
 <p>In general, you’ll always be able to map color (or colour, color is just an alias), x, and y. Commonly you’ll also be able to map fill for things that take up area.</p>
 <p>Aesthetics declared in the original call to <code>ggplot</code>, unless otherwise specified, apply to each added element. Within a given element, you can add, override, or remove aesthetics, like so:</p>
-<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb432-1" data-line-number="1"><span class="co"># Add coloring by ... color ... to the points</span></a>
-<a class="sourceLine" id="cb432-2" data-line-number="2"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price))<span class="op">+</span></a>
-<a class="sourceLine" id="cb432-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb432-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color=</span>color))</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-6-1.png" width="672" /></p>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb431-1" data-line-number="1"><span class="co"># Add coloring by ... color ... to the points</span></a>
+<a class="sourceLine" id="cb431-2" data-line-number="2"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price))<span class="op">+</span></a>
+<a class="sourceLine" id="cb431-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb431-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color=</span>color))</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>You can make the same plot (except for order) in a worse way by specifying color in the base ggplot call and removing it with NULL from the lines.</p>
-<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb433-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price, <span class="dt">color=</span>color))<span class="op">+</span></a>
-<a class="sourceLine" id="cb433-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb433-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">color=</span><span class="ot">NULL</span>))</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-7-1.png" width="672" /></p>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb432-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price, <span class="dt">color=</span>color))<span class="op">+</span></a>
+<a class="sourceLine" id="cb432-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb432-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">color=</span><span class="ot">NULL</span>))</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Damn those are some ugly graphs, but this guide is about “can” not “should.” Notice how the order in which you add elements matters - the points are ‘on top of’ the lines in the first plot because the <code>geom_point</code> call came second, and vice-versa in the second plot.</p>
 <p>You can also perform operations within the aes(), say if you want to fatten out a ribbon without it being a big goofy line</p>
-<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb434-1" data-line-number="1"><span class="co"># The economics dataset with an added &#39;epoch&#39; factor to recolor every 100 points.</span></a>
-<a class="sourceLine" id="cb434-2" data-line-number="2">economics_epoch &lt;-<span class="st"> </span>economics</a>
-<a class="sourceLine" id="cb434-3" data-line-number="3">economics_epoch<span class="op">$</span>epoch &lt;-<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">100</span>),</a>
-<a class="sourceLine" id="cb434-4" data-line-number="4">                                     <span class="kw">rep</span>(<span class="dv">2</span>,<span class="dv">100</span>),</a>
-<a class="sourceLine" id="cb434-5" data-line-number="5">                                     <span class="kw">rep</span>(<span class="dv">3</span>,<span class="dv">100</span>),</a>
-<a class="sourceLine" id="cb434-6" data-line-number="6">                                     <span class="kw">rep</span>(<span class="dv">4</span>,<span class="dv">274</span>)))</a>
-<a class="sourceLine" id="cb434-7" data-line-number="7"><span class="kw">ggplot</span>(economics_epoch, <span class="kw">aes</span>(<span class="dt">x=</span>date,<span class="dt">color=</span>epoch))<span class="op">+</span></a>
-<a class="sourceLine" id="cb434-8" data-line-number="8"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>unemploy), <span class="dt">size=</span><span class="dv">10</span>)</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb433-1" data-line-number="1"><span class="co"># The economics dataset with an added &#39;epoch&#39; factor to recolor every 100 points.</span></a>
+<a class="sourceLine" id="cb433-2" data-line-number="2">economics_epoch &lt;-<span class="st"> </span>economics</a>
+<a class="sourceLine" id="cb433-3" data-line-number="3">economics_epoch<span class="op">$</span>epoch &lt;-<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">100</span>),</a>
+<a class="sourceLine" id="cb433-4" data-line-number="4">                                     <span class="kw">rep</span>(<span class="dv">2</span>,<span class="dv">100</span>),</a>
+<a class="sourceLine" id="cb433-5" data-line-number="5">                                     <span class="kw">rep</span>(<span class="dv">3</span>,<span class="dv">100</span>),</a>
+<a class="sourceLine" id="cb433-6" data-line-number="6">                                     <span class="kw">rep</span>(<span class="dv">4</span>,<span class="dv">274</span>)))</a>
+<a class="sourceLine" id="cb433-7" data-line-number="7"><span class="kw">ggplot</span>(economics_epoch, <span class="kw">aes</span>(<span class="dt">x=</span>date,<span class="dt">color=</span>epoch))<span class="op">+</span></a>
+<a class="sourceLine" id="cb433-8" data-line-number="8"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span>unemploy), <span class="dt">size=</span><span class="dv">10</span>)</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>So goofy. Compared to…</p>
-<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb435-1" data-line-number="1"><span class="kw">ggplot</span>(economics_epoch, <span class="kw">aes</span>(<span class="dt">x=</span>date,<span class="dt">fill=</span>epoch))<span class="op">+</span></a>
-<a class="sourceLine" id="cb435-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymax=</span>unemploy,<span class="dt">ymin=</span>unemploy<span class="dv">-1000</span>))</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb434-1" data-line-number="1"><span class="kw">ggplot</span>(economics_epoch, <span class="kw">aes</span>(<span class="dt">x=</span>date,<span class="dt">fill=</span>epoch))<span class="op">+</span></a>
+<a class="sourceLine" id="cb434-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymax=</span>unemploy,<span class="dt">ymin=</span>unemploy<span class="dv">-1000</span>))</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Also, it’s common to confuse “fill” and “color.” You can see the difference:</p>
-<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb436-1" data-line-number="1"><span class="kw">ggplot</span>(economics_epoch, <span class="kw">aes</span>(<span class="dt">x=</span>date,<span class="dt">color=</span>epoch))<span class="op">+</span></a>
-<a class="sourceLine" id="cb436-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymax=</span>unemploy,<span class="dt">ymin=</span>unemploy<span class="dv">-1000</span>))</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-10-1.png" width="672" /></p>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb435-1" data-line-number="1"><span class="kw">ggplot</span>(economics_epoch, <span class="kw">aes</span>(<span class="dt">x=</span>date,<span class="dt">color=</span>epoch))<span class="op">+</span></a>
+<a class="sourceLine" id="cb435-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymax=</span>unemploy,<span class="dt">ymin=</span>unemploy<span class="dv">-1000</span>))</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>And if you wanted to use both for different reasons because you’re a maniac</p>
-<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb437-1" data-line-number="1"><span class="kw">ggplot</span>(economics_epoch, <span class="kw">aes</span>(<span class="dt">x=</span>date,<span class="dt">color=</span>epoch, <span class="dt">fill=</span><span class="kw">rev</span>(epoch)))<span class="op">+</span></a>
-<a class="sourceLine" id="cb437-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymax=</span>unemploy,<span class="dt">ymin=</span>unemploy<span class="dv">-1000</span>))</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-11-1.png" width="672" /></p>
+<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb436-1" data-line-number="1"><span class="kw">ggplot</span>(economics_epoch, <span class="kw">aes</span>(<span class="dt">x=</span>date,<span class="dt">color=</span>epoch, <span class="dt">fill=</span><span class="kw">rev</span>(epoch)))<span class="op">+</span></a>
+<a class="sourceLine" id="cb436-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymax=</span>unemploy,<span class="dt">ymin=</span>unemploy<span class="dv">-1000</span>))</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>You can also assign single values to an aes, though as we’ll see, it’s usually better to do that in a scale. You can give colors using <a href="http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf">color names</a> or <a href="https://coolors.co">RGB hex values</a> passed outside the aes argument - remember the aes is a mapping from the data to the geom! Assigning a <code>fill</code> within the <code>aes</code> argument assumes you mean that your hex value is a level in a factor (and who could blame it), but assigning it outside the <code>aes</code> argument means that you are sending that color to the geom directly.</p>
-<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb438-1" data-line-number="1"><span class="kw">ggplot</span>(economics_epoch, <span class="kw">aes</span>(<span class="dt">x=</span>date))<span class="op">+</span></a>
-<a class="sourceLine" id="cb438-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymax=</span>unemploy,<span class="dt">ymin=</span>unemploy<span class="dv">-1000</span>), <span class="dt">fill=</span><span class="st">&quot;#F0A125&quot;</span>)</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-12-1.png" width="672" /></p>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb437-1" data-line-number="1"><span class="kw">ggplot</span>(economics_epoch, <span class="kw">aes</span>(<span class="dt">x=</span>date))<span class="op">+</span></a>
+<a class="sourceLine" id="cb437-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymax=</span>unemploy,<span class="dt">ymin=</span>unemploy<span class="dv">-1000</span>), <span class="dt">fill=</span><span class="st">&quot;#F0A125&quot;</span>)</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>ggplot will do its best to figure out how to split your data when combining multiple aesthetics, but here is one extra trick:</p>
 <p>Say you want to split your data by two factors but don’t want to make a new column in your dataframe or color them. You can use the <code>interaction()</code> function like (ignore the use of theme(), we’ll get to that):</p>
-<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb439-1" data-line-number="1"><span class="co"># we have two factors, cut and color, with the levels...</span></a>
-<a class="sourceLine" id="cb439-2" data-line-number="2"><span class="kw">levels</span>(diamond_sub<span class="op">$</span>cut)</a></code></pre></div>
+<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb438-1" data-line-number="1"><span class="co"># we have two factors, cut and color, with the levels...</span></a>
+<a class="sourceLine" id="cb438-2" data-line-number="2"><span class="kw">levels</span>(diamond_sub<span class="op">$</span>cut)</a></code></pre></div>
 <pre><code>## [1] &quot;Fair&quot;      &quot;Good&quot;      &quot;Very Good&quot; &quot;Premium&quot;   &quot;Ideal&quot;</code></pre>
-<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb441-1" data-line-number="1"><span class="kw">levels</span>(diamond_sub<span class="op">$</span>color)</a></code></pre></div>
+<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb440-1" data-line-number="1"><span class="kw">levels</span>(diamond_sub<span class="op">$</span>color)</a></code></pre></div>
 <pre><code>## [1] &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot;</code></pre>
-<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb443-1" data-line-number="1"><span class="co"># and we want to make a plot with all their permutations:</span></a>
-<a class="sourceLine" id="cb443-2" data-line-number="2"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">interaction</span>(cut,color)))<span class="op">+</span></a>
-<a class="sourceLine" id="cb443-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_bar</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb443-4" data-line-number="4"><span class="st">  </span><span class="kw">theme</span>(</a>
-<a class="sourceLine" id="cb443-5" data-line-number="5">    <span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">90</span>)</a>
-<a class="sourceLine" id="cb443-6" data-line-number="6">  )</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-13-1.png" width="672" /></p>
+<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb442-1" data-line-number="1"><span class="co"># and we want to make a plot with all their permutations:</span></a>
+<a class="sourceLine" id="cb442-2" data-line-number="2"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">interaction</span>(cut,color)))<span class="op">+</span></a>
+<a class="sourceLine" id="cb442-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_bar</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb442-4" data-line-number="4"><span class="st">  </span><span class="kw">theme</span>(</a>
+<a class="sourceLine" id="cb442-5" data-line-number="5">    <span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">90</span>)</a>
+<a class="sourceLine" id="cb442-6" data-line-number="6">  )</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>I’ll give ya a list of all the aesthetics by shapes once we know what a stat is.</p>
 </div>
 <div id="geoms-stats" class="section level3">
@@ -585,108 +585,110 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="guide_files/geoms_stat_aes.png" /></p>
 <p>A few examples of how to represent frequency data by manipulating stat:</p>
 <p>A classic histogram</p>
-<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb444-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>price))<span class="op">+</span></a>
-<a class="sourceLine" id="cb444-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">color=</span><span class="st">&quot;white&quot;</span>, <span class="dt">bins =</span> <span class="dv">20</span>)</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-14-1.png" width="672" /></p>
+<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb443-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>price))<span class="op">+</span></a>
+<a class="sourceLine" id="cb443-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">color=</span><span class="st">&quot;white&quot;</span>, <span class="dt">bins =</span> <span class="dv">20</span>)</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>This is equivalent to the call</p>
-<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb445-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>price))<span class="op">+</span></a>
-<a class="sourceLine" id="cb445-2" data-line-number="2"><span class="st">  </span><span class="kw">stat_bin</span>(<span class="dt">geom=</span><span class="st">&quot;bar&quot;</span>, <span class="dt">color=</span><span class="st">&quot;white&quot;</span>, <span class="dt">bins =</span> <span class="dv">20</span>)</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-15-1.png" width="672" /></p>
+<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb444-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>price))<span class="op">+</span></a>
+<a class="sourceLine" id="cb444-2" data-line-number="2"><span class="st">  </span><span class="kw">stat_bin</span>(<span class="dt">geom=</span><span class="st">&quot;bar&quot;</span>, <span class="dt">color=</span><span class="st">&quot;white&quot;</span>, <span class="dt">bins =</span> <span class="dv">20</span>)</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>But calling it this way allows us to use whatever geom we’d like</p>
-<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb446-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>price))<span class="op">+</span></a>
-<a class="sourceLine" id="cb446-2" data-line-number="2"><span class="st">  </span><span class="kw">stat_bin</span>(<span class="dt">geom=</span><span class="st">&quot;step&quot;</span>, <span class="dt">color=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">bins =</span> <span class="dv">20</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb446-3" data-line-number="3"><span class="st">  </span><span class="kw">stat_bin</span>(<span class="dt">geom=</span><span class="st">&quot;point&quot;</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>, <span class="dt">bins =</span> <span class="dv">20</span>)</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-16-1.png" width="672" /></p>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb445-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>price))<span class="op">+</span></a>
+<a class="sourceLine" id="cb445-2" data-line-number="2"><span class="st">  </span><span class="kw">stat_bin</span>(<span class="dt">geom=</span><span class="st">&quot;step&quot;</span>, <span class="dt">color=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">bins =</span> <span class="dv">20</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb445-3" data-line-number="3"><span class="st">  </span><span class="kw">stat_bin</span>(<span class="dt">geom=</span><span class="st">&quot;point&quot;</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>, <span class="dt">bins =</span> <span class="dv">20</span>)</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>If instead one wants the scale as a density,</p>
-<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb447-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>price))<span class="op">+</span></a>
-<a class="sourceLine" id="cb447-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">y=</span>..density..), <span class="dt">color=</span><span class="st">&quot;white&quot;</span>, <span class="dt">bins =</span> <span class="dv">20</span>)</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-17-1.png" width="672" /></p>
+<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb446-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>price))<span class="op">+</span></a>
+<a class="sourceLine" id="cb446-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">y=</span>..density..), <span class="dt">color=</span><span class="st">&quot;white&quot;</span>, <span class="dt">bins =</span> <span class="dv">20</span>)</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>Other stats can be accessed by calling another geom that uses it as their default. We can estimate a density kernel like:</p>
+<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb447-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>price))<span class="op">+</span></a>
+<a class="sourceLine" id="cb447-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">y=</span>..density..), <span class="dt">color=</span><span class="st">&quot;white&quot;</span>, <span class="dt">bins =</span> <span class="dv">20</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb447-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_density</span>()</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>Yikes, our kernel is a little soft. We can adjust the bandwidth of the kernel (as its standard deviation)…</p>
 <div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb448-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>price))<span class="op">+</span></a>
 <a class="sourceLine" id="cb448-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">y=</span>..density..), <span class="dt">color=</span><span class="st">&quot;white&quot;</span>, <span class="dt">bins =</span> <span class="dv">20</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb448-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_density</span>()</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-18-1.png" width="672" /></p>
-<p>Yikes, our kernel is a little soft. We can adjust the bandwidth of the kernel (as its standard deviation)…</p>
-<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb449-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>price))<span class="op">+</span></a>
-<a class="sourceLine" id="cb449-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">y=</span>..density..), <span class="dt">color=</span><span class="st">&quot;white&quot;</span>, <span class="dt">bins =</span> <span class="dv">20</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb449-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">bw=</span><span class="dv">300</span>)</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-19-1.png" width="672" /></p>
+<a class="sourceLine" id="cb448-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">bw=</span><span class="dv">300</span>)</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <p>How about some two dimensional data? I need lines. thankfully we can directly perform linear models in ggplot.</p>
-<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb450-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>table, <span class="dt">y=</span>depth))<span class="op">+</span></a>
-<a class="sourceLine" id="cb450-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span><span class="fl">0.2</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb450-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>)</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-20-1.png" width="672" /></p>
+<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb449-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>table, <span class="dt">y=</span>depth))<span class="op">+</span></a>
+<a class="sourceLine" id="cb449-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span><span class="fl">0.2</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb449-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>, <span class="dt">se=</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>And if you want your confidence intervals right there with ya too</p>
-<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb451-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>depth, <span class="dt">y=</span>table))<span class="op">+</span></a>
-<a class="sourceLine" id="cb451-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span><span class="fl">0.2</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb451-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">color=</span><span class="st">&quot;red&quot;</span>, <span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">level=</span><span class="fl">0.99</span>)</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-21-1.png" width="672" /></p>
+<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb450-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>depth, <span class="dt">y=</span>table))<span class="op">+</span></a>
+<a class="sourceLine" id="cb450-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span><span class="fl">0.2</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb450-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">color=</span><span class="st">&quot;red&quot;</span>, <span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">level=</span><span class="fl">0.99</span>)</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <p>We can also perform a few other smoothing/estimation operations, for example</p>
-<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb452-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>table, <span class="dt">y=</span>depth))<span class="op">+</span></a>
-<a class="sourceLine" id="cb452-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span><span class="fl">0.2</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb452-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;loess&quot;</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>)</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-22-1.png" width="672" /></p>
+<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb451-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>table, <span class="dt">y=</span>depth))<span class="op">+</span></a>
+<a class="sourceLine" id="cb451-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span><span class="fl">0.2</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb451-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;loess&quot;</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <p>And with a bit of convincing, ggplot will even do logistic regression for us</p>
-<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb453-1" data-line-number="1"><span class="kw">ggplot</span>(midwest, <span class="kw">aes</span>(<span class="dt">x=</span>percbelowpoverty, <span class="dt">y=</span>inmetro))<span class="op">+</span></a>
-<a class="sourceLine" id="cb453-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span><span class="fl">0.1</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb453-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;glm&quot;</span>, <span class="dt">method.args=</span><span class="kw">list</span>(<span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>), <span class="dt">color=</span><span class="st">&quot;red&quot;</span>)</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-23-1.png" width="672" /></p>
+<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb452-1" data-line-number="1"><span class="kw">ggplot</span>(midwest, <span class="kw">aes</span>(<span class="dt">x=</span>percbelowpoverty, <span class="dt">y=</span>inmetro))<span class="op">+</span></a>
+<a class="sourceLine" id="cb452-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span><span class="fl">0.1</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb452-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;glm&quot;</span>, <span class="dt">method.args=</span><span class="kw">list</span>(<span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>), <span class="dt">color=</span><span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <p>As we saw before, most geoms can be controlled directly by calling their related stat. When doing so, we can select which geom we’d like to plot our error bars with.</p>
-<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb454-1" data-line-number="1"><span class="kw">ggplot</span>(economics, <span class="kw">aes</span>(<span class="dt">x=</span>date, <span class="dt">y=</span>unemploy))<span class="op">+</span></a>
-<a class="sourceLine" id="cb454-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">color=</span><span class="st">&quot;gray&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb454-3" data-line-number="3"><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">geom=</span><span class="st">&quot;linerange&quot;</span>, <span class="dt">size =</span> <span class="fl">0.5</span>, <span class="dt">method=</span><span class="st">&quot;loess&quot;</span>, <span class="dt">level=</span><span class="fl">0.99</span>)</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-24-1.png" width="672" /></p>
+<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb453-1" data-line-number="1"><span class="kw">ggplot</span>(economics, <span class="kw">aes</span>(<span class="dt">x=</span>date, <span class="dt">y=</span>unemploy))<span class="op">+</span></a>
+<a class="sourceLine" id="cb453-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">color=</span><span class="st">&quot;gray&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb453-3" data-line-number="3"><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">geom=</span><span class="st">&quot;linerange&quot;</span>, <span class="dt">size =</span> <span class="fl">0.5</span>, <span class="dt">method=</span><span class="st">&quot;loess&quot;</span>, <span class="dt">level=</span><span class="fl">0.99</span>)</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <p>How about some denser data. Remember our very first plot? There’s a whole lot more data that we randomly ignored. What if we weren’t some fraudulators and didn’t conveniently “lose our data?”</p>
-<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb455-1" data-line-number="1"><span class="kw">ggplot</span>(diamonds, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price))<span class="op">+</span></a>
-<a class="sourceLine" id="cb455-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span><span class="fl">0.02</span>)</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-25-1.png" width="672" /></p>
+<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb454-1" data-line-number="1"><span class="kw">ggplot</span>(diamonds, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price))<span class="op">+</span></a>
+<a class="sourceLine" id="cb454-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span><span class="fl">0.02</span>)</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <p>Wow that’s cool and smoky and all, but is it a good representation of the data?. If we summarize it with some hexagons …</p>
-<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb456-1" data-line-number="1"><span class="kw">ggplot</span>(diamonds, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price))<span class="op">+</span></a>
-<a class="sourceLine" id="cb456-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_hex</span>(<span class="dt">bins=</span><span class="dv">50</span>)</a></code></pre></div>
-<pre><code>## Loading required package: methods</code></pre>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-26-1.png" width="672" /></p>
+<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb455-1" data-line-number="1"><span class="kw">ggplot</span>(diamonds, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price))<span class="op">+</span></a>
+<a class="sourceLine" id="cb455-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_hex</span>(<span class="dt">bins=</span><span class="dv">50</span>)</a></code></pre></div>
+<pre><code>## Warning: Computation failed in `stat_binhex()`:
+## Package `hexbin` required for `stat_binhex`.
+## Please install and try again.</code></pre>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <p>Turns out it’s really easy to misrepresent your data if it’s not presented in a quantitatively meaningful way. Most of the density of our plot is in the lowest left section. Let’s try one more visualization method. Notice the <code>..density..</code> notation. Since density is a computed function, it is wrapped in a sorta weird half ellipse to make sure it doesn’t conflict with the dataframe in case it has a variable called density.</p>
+<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb457-1" data-line-number="1"><span class="kw">ggplot</span>(diamonds, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price))<span class="op">+</span></a>
+<a class="sourceLine" id="cb457-2" data-line-number="2"><span class="st">  </span><span class="kw">scale_color_distiller</span>(<span class="dt">palette=</span><span class="st">&quot;Spectral&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb457-3" data-line-number="3"><span class="st">  </span><span class="kw">stat_density_2d</span>(<span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="kw">aes</span>(<span class="dt">size =</span> ..density.., <span class="dt">color=</span> ..density..), <span class="dt">alpha=</span><span class="fl">0.6</span>, <span class="dt">n=</span><span class="dv">75</span>, <span class="dt">contour =</span> F)<span class="op">+</span></a>
+<a class="sourceLine" id="cb457-4" data-line-number="4"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill=</span><span class="st">&quot;#000000&quot;</span>),</a>
+<a class="sourceLine" id="cb457-5" data-line-number="5">        <span class="dt">panel.grid =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb457-6" data-line-number="6">        <span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 <div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb458-1" data-line-number="1"><span class="kw">ggplot</span>(diamonds, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price))<span class="op">+</span></a>
 <a class="sourceLine" id="cb458-2" data-line-number="2"><span class="st">  </span><span class="kw">scale_color_distiller</span>(<span class="dt">palette=</span><span class="st">&quot;Spectral&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb458-3" data-line-number="3"><span class="st">  </span><span class="kw">stat_density_2d</span>(<span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="kw">aes</span>(<span class="dt">size =</span> ..density.., <span class="dt">color=</span> ..density..), <span class="dt">alpha=</span><span class="fl">0.6</span>, <span class="dt">n=</span><span class="dv">75</span>, <span class="dt">contour =</span> F)<span class="op">+</span></a>
+<a class="sourceLine" id="cb458-3" data-line-number="3"><span class="st">  </span><span class="kw">stat_density_2d</span>(<span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="kw">aes</span>(<span class="dt">size =</span> ..density.., <span class="dt">color=</span> ..density.., <span class="dt">alpha=</span> ..density..), <span class="dt">n=</span><span class="dv">75</span>, <span class="dt">contour =</span> F)<span class="op">+</span></a>
 <a class="sourceLine" id="cb458-4" data-line-number="4"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill=</span><span class="st">&quot;#000000&quot;</span>),</a>
 <a class="sourceLine" id="cb458-5" data-line-number="5">        <span class="dt">panel.grid =</span> <span class="kw">element_blank</span>(),</a>
 <a class="sourceLine" id="cb458-6" data-line-number="6">        <span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-27-1.png" width="672" /></p>
-<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb459-1" data-line-number="1"><span class="kw">ggplot</span>(diamonds, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price))<span class="op">+</span></a>
-<a class="sourceLine" id="cb459-2" data-line-number="2"><span class="st">  </span><span class="kw">scale_color_distiller</span>(<span class="dt">palette=</span><span class="st">&quot;Spectral&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb459-3" data-line-number="3"><span class="st">  </span><span class="kw">stat_density_2d</span>(<span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="kw">aes</span>(<span class="dt">size =</span> ..density.., <span class="dt">color=</span> ..density.., <span class="dt">alpha=</span> ..density..), <span class="dt">n=</span><span class="dv">75</span>, <span class="dt">contour =</span> F)<span class="op">+</span></a>
-<a class="sourceLine" id="cb459-4" data-line-number="4"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill=</span><span class="st">&quot;#000000&quot;</span>),</a>
-<a class="sourceLine" id="cb459-5" data-line-number="5">        <span class="dt">panel.grid =</span> <span class="kw">element_blank</span>(),</a>
-<a class="sourceLine" id="cb459-6" data-line-number="6">        <span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-28-1.png" width="672" /></p>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 </div>
 <div id="position" class="section level3">
 <h3><span class="header-section-number">6.3.4</span> Position</h3>
 <p>Is also important but I’m not covering it formally right now. ve most deel vis it.</p>
 <p>Until I do, if your bar charts aren’t looking right just monkey around on google with the phrase <code>dodge</code></p>
-<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb460-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>price, <span class="dt">fill=</span>cut))<span class="op">+</span></a>
-<a class="sourceLine" id="cb460-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_histogram</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb459-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>price, <span class="dt">fill=</span>cut))<span class="op">+</span></a>
+<a class="sourceLine" id="cb459-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_histogram</span>()</a></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-29-1.png" width="672" /></p>
-<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb462-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>price, <span class="dt">fill=</span>cut))<span class="op">+</span></a>
-<a class="sourceLine" id="cb462-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>)</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb461-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>price, <span class="dt">fill=</span>cut))<span class="op">+</span></a>
+<a class="sourceLine" id="cb461-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>)</a></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-30-1.png" width="672" /></p>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 <p>and maybe jitter</p>
+<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb463-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>cut, <span class="dt">y=</span>price))<span class="op">+</span></a>
+<a class="sourceLine" id="cb463-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb464-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>cut, <span class="dt">y=</span>price))<span class="op">+</span></a>
-<a class="sourceLine" id="cb464-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-31-1.png" width="672" /></p>
-<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb465-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>cut, <span class="dt">y=</span>price))<span class="op">+</span></a>
-<a class="sourceLine" id="cb465-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">position=</span><span class="kw">position_jitter</span>(<span class="dt">width=</span><span class="fl">0.25</span>))</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-32-1.png" width="672" /></p>
+<a class="sourceLine" id="cb464-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">position=</span><span class="kw">position_jitter</span>(<span class="dt">width=</span><span class="fl">0.25</span>))</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
 <p>and maybe one more with <code>fill</code></p>
+<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb465-1" data-line-number="1"><span class="kw">ggplot</span>(diamonds, <span class="kw">aes</span>(<span class="dt">x=</span>price, <span class="dt">fill=</span>cut))<span class="op">+</span></a>
+<a class="sourceLine" id="cb465-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins=</span><span class="dv">50</span>)</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
 <div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb466-1" data-line-number="1"><span class="kw">ggplot</span>(diamonds, <span class="kw">aes</span>(<span class="dt">x=</span>price, <span class="dt">fill=</span>cut))<span class="op">+</span></a>
-<a class="sourceLine" id="cb466-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins=</span><span class="dv">50</span>)</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-33-1.png" width="672" /></p>
-<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb467-1" data-line-number="1"><span class="kw">ggplot</span>(diamonds, <span class="kw">aes</span>(<span class="dt">x=</span>price, <span class="dt">fill=</span>cut))<span class="op">+</span></a>
-<a class="sourceLine" id="cb467-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins=</span><span class="dv">50</span>, <span class="dt">position=</span><span class="st">&quot;fill&quot;</span>)</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-34-1.png" width="672" /></p>
+<a class="sourceLine" id="cb466-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins=</span><span class="dv">50</span>, <span class="dt">position=</span><span class="st">&quot;fill&quot;</span>)</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
 </div>
 <div id="scales" class="section level3">
 <h3><span class="header-section-number">6.3.5</span> Scales</h3>
@@ -706,30 +708,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="axis-limits" class="section level4">
 <h4><span class="header-section-number">6.3.5.1</span> Axis limits</h4>
 <p>If you want to set axis limits manually, rather than allowing ggplot to figure them out for you…</p>
-<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb468-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>table, <span class="dt">y=</span>depth))<span class="op">+</span></a>
-<a class="sourceLine" id="cb468-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span><span class="fl">0.8</span>, <span class="dt">position=</span><span class="kw">position_jitter</span>(<span class="dt">width=</span>.<span class="dv">25</span>))<span class="op">+</span></a>
-<a class="sourceLine" id="cb468-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;loess&quot;</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb468-4" data-line-number="4"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">56</span>, <span class="dv">60</span>))</a></code></pre></div>
-<pre><code>## Warning: Removed 130 rows containing non-finite values (stat_smooth).</code></pre>
-<pre><code>## Warning: Removed 191 rows containing missing values (geom_point).</code></pre>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-35-1.png" width="672" /></p>
+<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb467-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>table, <span class="dt">y=</span>depth))<span class="op">+</span></a>
+<a class="sourceLine" id="cb467-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha=</span><span class="fl">0.8</span>, <span class="dt">position=</span><span class="kw">position_jitter</span>(<span class="dt">width=</span>.<span class="dv">25</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb467-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;loess&quot;</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb467-4" data-line-number="4"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">56</span>, <span class="dv">60</span>))</a></code></pre></div>
+<pre><code>## Warning: Removed 139 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 208 rows containing missing values (geom_point).</code></pre>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 </div>
 <div id="color-brewer" class="section level4">
 <h4><span class="header-section-number">6.3.5.2</span> Color Brewer</h4>
 <p>If you don’t want to manually input colors and want to just follow best principles, color brewer is a godsend. Visit the <a href="http://colorbrewer2.org">color brewer website</a> to see available color palettes. Or we can use a tool from RColorBrewer (to be covered in extensions):</p>
-<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb471-1" data-line-number="1">brewplot &lt;-<span class="st"> </span>RColorBrewer<span class="op">::</span><span class="kw">display.brewer.all</span>()</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-36-1.png" width="672" /></p>
+<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb470-1" data-line-number="1">brewplot &lt;-<span class="st"> </span>RColorBrewer<span class="op">::</span><span class="kw">display.brewer.all</span>()</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
 <p>To simply drop it in to any plot:</p>
-<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb472-1" data-line-number="1"><span class="kw">ggplot</span>(economics_epoch, <span class="kw">aes</span>(<span class="dt">x=</span>date,<span class="dt">fill=</span>epoch))<span class="op">+</span></a>
-<a class="sourceLine" id="cb472-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymax=</span>unemploy,<span class="dt">ymin=</span>unemploy<span class="dv">-1000</span>))<span class="op">+</span></a>
-<a class="sourceLine" id="cb472-3" data-line-number="3"><span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Set1&quot;</span>)</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-37-1.png" width="672" /></p>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb471-1" data-line-number="1"><span class="kw">ggplot</span>(economics_epoch, <span class="kw">aes</span>(<span class="dt">x=</span>date,<span class="dt">fill=</span>epoch))<span class="op">+</span></a>
+<a class="sourceLine" id="cb471-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymax=</span>unemploy,<span class="dt">ymin=</span>unemploy<span class="dv">-1000</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb471-3" data-line-number="3"><span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Set1&quot;</span>)</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
 <p>And the continuous variant is called “Distiller”</p>
-<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb473-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>carat,<span class="dt">y=</span>price,<span class="dt">color=</span>price))<span class="op">+</span></a>
-<a class="sourceLine" id="cb473-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb473-3" data-line-number="3"><span class="st">  </span><span class="kw">scale_color_distiller</span>(<span class="dt">palette=</span><span class="st">&quot;RdPu&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb473-4" data-line-number="4"><span class="st">  </span><span class="kw">theme_dark</span>()</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-38-1.png" width="672" /></p>
+<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb472-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>carat,<span class="dt">y=</span>price,<span class="dt">color=</span>price))<span class="op">+</span></a>
+<a class="sourceLine" id="cb472-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb472-3" data-line-number="3"><span class="st">  </span><span class="kw">scale_color_distiller</span>(<span class="dt">palette=</span><span class="st">&quot;RdPu&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb472-4" data-line-number="4"><span class="st">  </span><span class="kw">theme_dark</span>()</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 </div>
 <div id="manual-colors" class="section level4">
 <h4><span class="header-section-number">6.3.5.3</span> Manual Colors</h4>
@@ -740,12 +742,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="facets" class="section level3">
 <h3><span class="header-section-number">6.3.6</span> Facets</h3>
 <p>(Skipping detailed description for now… but)</p>
-<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb474-1" data-line-number="1"><span class="kw">ggplot</span>(diamonds, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price))<span class="op">+</span></a>
-<a class="sourceLine" id="cb474-2" data-line-number="2"><span class="st">  </span><span class="kw">stat_density_2d</span>(<span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="kw">aes</span>(<span class="dt">size =</span> ..density.., <span class="dt">color =</span> ..density..), </a>
-<a class="sourceLine" id="cb474-3" data-line-number="3">                  <span class="dt">n=</span><span class="dv">10</span>, <span class="dt">contour =</span> F)<span class="op">+</span></a>
-<a class="sourceLine" id="cb474-4" data-line-number="4"><span class="st">  </span><span class="kw">scale_color_distiller</span>(<span class="dt">palette=</span><span class="st">&quot;RdPu&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb474-5" data-line-number="5"><span class="st">  </span><span class="kw">facet_grid</span>(cut<span class="op">~</span>color)</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-39-1.png" width="672" /></p>
+<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb473-1" data-line-number="1"><span class="kw">ggplot</span>(diamonds, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price))<span class="op">+</span></a>
+<a class="sourceLine" id="cb473-2" data-line-number="2"><span class="st">  </span><span class="kw">stat_density_2d</span>(<span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="kw">aes</span>(<span class="dt">size =</span> ..density.., <span class="dt">color =</span> ..density..), </a>
+<a class="sourceLine" id="cb473-3" data-line-number="3">                  <span class="dt">n=</span><span class="dv">10</span>, <span class="dt">contour =</span> F)<span class="op">+</span></a>
+<a class="sourceLine" id="cb473-4" data-line-number="4"><span class="st">  </span><span class="kw">scale_color_distiller</span>(<span class="dt">palette=</span><span class="st">&quot;RdPu&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb473-5" data-line-number="5"><span class="st">  </span><span class="kw">facet_grid</span>(cut<span class="op">~</span>color)</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 </div>
 <div id="coordinate-systems" class="section level3">
 <h3><span class="header-section-number">6.3.7</span> Coordinate Systems</h3>
@@ -772,70 +774,70 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <code>axis.title = element_text(),</code>
 <code>axis.title.x = element_text()</code></p>
 <p>ggplot comes with a few built-in themes:</p>
+<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb474-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>carat,<span class="dt">y=</span>price,<span class="dt">color=</span>price))<span class="op">+</span></a>
+<a class="sourceLine" id="cb474-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb474-3" data-line-number="3"><span class="st">  </span><span class="kw">theme_minimal</span>()</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
 <div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb475-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>carat,<span class="dt">y=</span>price,<span class="dt">color=</span>price))<span class="op">+</span></a>
 <a class="sourceLine" id="cb475-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb475-3" data-line-number="3"><span class="st">  </span><span class="kw">theme_minimal</span>()</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-40-1.png" width="672" /></p>
-<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb476-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>carat,<span class="dt">y=</span>price,<span class="dt">color=</span>price))<span class="op">+</span></a>
-<a class="sourceLine" id="cb476-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb476-3" data-line-number="3"><span class="st">  </span><span class="kw">theme_void</span>()</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-41-1.png" width="672" /></p>
+<a class="sourceLine" id="cb475-3" data-line-number="3"><span class="st">  </span><span class="kw">theme_void</span>()</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
 <div id="removing-elements" class="section level4">
 <h4><span class="header-section-number">6.3.8.1</span> Removing elements</h4>
 <p>Sometimes you want to be all draped in pearls and roses, and other times you just need your black turtleneck. To remove items, replace them with a blank element:</p>
-<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb477-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>carat,<span class="dt">y=</span>price,<span class="dt">color=</span>price))<span class="op">+</span></a>
-<a class="sourceLine" id="cb477-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb477-3" data-line-number="3"><span class="st">  </span><span class="kw">theme</span>(</a>
-<a class="sourceLine" id="cb477-4" data-line-number="4">    <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),</a>
-<a class="sourceLine" id="cb477-5" data-line-number="5">    <span class="dt">panel.grid       =</span> <span class="kw">element_blank</span>(),</a>
-<a class="sourceLine" id="cb477-6" data-line-number="6">    <span class="dt">axis.text        =</span> <span class="kw">element_blank</span>(),</a>
-<a class="sourceLine" id="cb477-7" data-line-number="7">    <span class="dt">axis.ticks       =</span> <span class="kw">element_blank</span>(),</a>
-<a class="sourceLine" id="cb477-8" data-line-number="8">    <span class="dt">axis.title       =</span> <span class="kw">element_blank</span>(),</a>
-<a class="sourceLine" id="cb477-9" data-line-number="9">    <span class="dt">axis.line        =</span> <span class="kw">element_line</span>(),</a>
-<a class="sourceLine" id="cb477-10" data-line-number="10">    <span class="dt">legend.position  =</span> <span class="st">&quot;none&quot;</span></a>
-<a class="sourceLine" id="cb477-11" data-line-number="11">  )</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-42-1.png" width="672" /></p>
+<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb476-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>carat,<span class="dt">y=</span>price,<span class="dt">color=</span>price))<span class="op">+</span></a>
+<a class="sourceLine" id="cb476-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb476-3" data-line-number="3"><span class="st">  </span><span class="kw">theme</span>(</a>
+<a class="sourceLine" id="cb476-4" data-line-number="4">    <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb476-5" data-line-number="5">    <span class="dt">panel.grid       =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb476-6" data-line-number="6">    <span class="dt">axis.text        =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb476-7" data-line-number="7">    <span class="dt">axis.ticks       =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb476-8" data-line-number="8">    <span class="dt">axis.title       =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb476-9" data-line-number="9">    <span class="dt">axis.line        =</span> <span class="kw">element_line</span>(),</a>
+<a class="sourceLine" id="cb476-10" data-line-number="10">    <span class="dt">legend.position  =</span> <span class="st">&quot;none&quot;</span></a>
+<a class="sourceLine" id="cb476-11" data-line-number="11">  )</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
 <p>And sometimes you just want to make a mockery of your audience’s eyes like you’ve got your hands in the MS paint bucket again. Notice how since we are in a “g” rammar of “g” raphics (“plot”) (“2”) things work as we expect them to</p>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb477-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>carat,<span class="dt">y=</span>price))<span class="op">+</span></a>
+<a class="sourceLine" id="cb477-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">color=</span><span class="st">&quot;pink&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb477-3" data-line-number="3"><span class="st">  </span><span class="kw">theme</span>(</a>
+<a class="sourceLine" id="cb477-4" data-line-number="4">    <span class="dt">panel.background=</span> <span class="kw">element_rect</span>(<span class="dt">fill=</span><span class="st">&quot;yellow&quot;</span>),</a>
+<a class="sourceLine" id="cb477-5" data-line-number="5">    <span class="dt">panel.grid      =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb477-6" data-line-number="6">    <span class="dt">axis.text       =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb477-7" data-line-number="7">    <span class="dt">axis.ticks      =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb477-8" data-line-number="8">    <span class="dt">axis.title      =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb477-9" data-line-number="9">    <span class="dt">axis.line       =</span> <span class="kw">element_line</span>(),</a>
+<a class="sourceLine" id="cb477-10" data-line-number="10">    <span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span></a>
+<a class="sourceLine" id="cb477-11" data-line-number="11">  )</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<p>A useful tool here is the direct specification of sizes with units. The general syntax for units are unit(number, “unit_type”), for example if you are trying to shout about how big those numbers are and dont understand what axis ticks are for</p>
 <div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb478-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>carat,<span class="dt">y=</span>price))<span class="op">+</span></a>
-<a class="sourceLine" id="cb478-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">color=</span><span class="st">&quot;pink&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb478-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
 <a class="sourceLine" id="cb478-3" data-line-number="3"><span class="st">  </span><span class="kw">theme</span>(</a>
-<a class="sourceLine" id="cb478-4" data-line-number="4">    <span class="dt">panel.background=</span> <span class="kw">element_rect</span>(<span class="dt">fill=</span><span class="st">&quot;yellow&quot;</span>),</a>
+<a class="sourceLine" id="cb478-4" data-line-number="4">    <span class="dt">panel.background=</span> <span class="kw">element_blank</span>(),</a>
 <a class="sourceLine" id="cb478-5" data-line-number="5">    <span class="dt">panel.grid      =</span> <span class="kw">element_blank</span>(),</a>
-<a class="sourceLine" id="cb478-6" data-line-number="6">    <span class="dt">axis.text       =</span> <span class="kw">element_blank</span>(),</a>
-<a class="sourceLine" id="cb478-7" data-line-number="7">    <span class="dt">axis.ticks      =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb478-6" data-line-number="6">    <span class="dt">axis.text       =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="kw">unit</span>(<span class="dv">24</span>,<span class="st">&quot;pt&quot;</span>)),</a>
+<a class="sourceLine" id="cb478-7" data-line-number="7">    <span class="dt">axis.ticks      =</span> <span class="kw">element_line</span>(<span class="dt">arrow=</span><span class="kw">arrow</span>(<span class="dt">type=</span><span class="st">&quot;closed&quot;</span>)),</a>
 <a class="sourceLine" id="cb478-8" data-line-number="8">    <span class="dt">axis.title      =</span> <span class="kw">element_blank</span>(),</a>
 <a class="sourceLine" id="cb478-9" data-line-number="9">    <span class="dt">axis.line       =</span> <span class="kw">element_line</span>(),</a>
 <a class="sourceLine" id="cb478-10" data-line-number="10">    <span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span></a>
 <a class="sourceLine" id="cb478-11" data-line-number="11">  )</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-43-1.png" width="672" /></p>
-<p>A useful tool here is the direct specification of sizes with units. The general syntax for units are unit(number, “unit_type”), for example if you are trying to shout about how big those numbers are and dont understand what axis ticks are for</p>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<p>Uh oh, who is screwing with our medicine? Our text is now hopelessly buried beneath our arrows. We can fix that by adjusting our margins. The margins are set in the order top, right, bottom, left. Since that doesn’t really make sense, they advise you to remember the phrase “trouble” and that actually works. Notice the inheritance. Even though we make settings for the x and y axis text specifically, it still retains our 24 point mistake. Margins can also be used with the plot.background to eliminate excess space, and can be set to negative numbers.</p>
 <div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb479-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>carat,<span class="dt">y=</span>price))<span class="op">+</span></a>
 <a class="sourceLine" id="cb479-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
 <a class="sourceLine" id="cb479-3" data-line-number="3"><span class="st">  </span><span class="kw">theme</span>(</a>
 <a class="sourceLine" id="cb479-4" data-line-number="4">    <span class="dt">panel.background=</span> <span class="kw">element_blank</span>(),</a>
 <a class="sourceLine" id="cb479-5" data-line-number="5">    <span class="dt">panel.grid      =</span> <span class="kw">element_blank</span>(),</a>
 <a class="sourceLine" id="cb479-6" data-line-number="6">    <span class="dt">axis.text       =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="kw">unit</span>(<span class="dv">24</span>,<span class="st">&quot;pt&quot;</span>)),</a>
-<a class="sourceLine" id="cb479-7" data-line-number="7">    <span class="dt">axis.ticks      =</span> <span class="kw">element_line</span>(<span class="dt">arrow=</span><span class="kw">arrow</span>(<span class="dt">type=</span><span class="st">&quot;closed&quot;</span>)),</a>
-<a class="sourceLine" id="cb479-8" data-line-number="8">    <span class="dt">axis.title      =</span> <span class="kw">element_blank</span>(),</a>
-<a class="sourceLine" id="cb479-9" data-line-number="9">    <span class="dt">axis.line       =</span> <span class="kw">element_line</span>(),</a>
-<a class="sourceLine" id="cb479-10" data-line-number="10">    <span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span></a>
-<a class="sourceLine" id="cb479-11" data-line-number="11">  )</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-44-1.png" width="672" /></p>
-<p>Uh oh, who is screwing with our medicine? Our text is now hopelessly buried beneath our arrows. We can fix that by adjusting our margins. The margins are set in the order top, right, bottom, left. Since that doesn’t really make sense, they advise you to remember the phrase “trouble” and that actually works. Notice the inheritance. Even though we make settings for the x and y axis text specifically, it still retains our 24 point mistake. Margins can also be used with the plot.background to eliminate excess space, and can be set to negative numbers.</p>
-<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb480-1" data-line-number="1"><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>carat,<span class="dt">y=</span>price))<span class="op">+</span></a>
-<a class="sourceLine" id="cb480-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb480-3" data-line-number="3"><span class="st">  </span><span class="kw">theme</span>(</a>
-<a class="sourceLine" id="cb480-4" data-line-number="4">    <span class="dt">panel.background=</span> <span class="kw">element_blank</span>(),</a>
-<a class="sourceLine" id="cb480-5" data-line-number="5">    <span class="dt">panel.grid      =</span> <span class="kw">element_blank</span>(),</a>
-<a class="sourceLine" id="cb480-6" data-line-number="6">    <span class="dt">axis.text       =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="kw">unit</span>(<span class="dv">24</span>,<span class="st">&quot;pt&quot;</span>)),</a>
-<a class="sourceLine" id="cb480-7" data-line-number="7">    <span class="dt">axis.text.x    =</span> <span class="kw">element_text</span>(<span class="dt">margin=</span> <span class="kw">margin</span>(<span class="dv">20</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>, <span class="dt">unit=</span><span class="st">&quot;pt&quot;</span>)),</a>
-<a class="sourceLine" id="cb480-8" data-line-number="8">    <span class="dt">axis.text.y     =</span> <span class="kw">element_text</span>(<span class="dt">margin=</span> <span class="kw">margin</span>(<span class="dv">0</span>,<span class="dv">20</span>,<span class="dv">0</span>,<span class="dv">0</span>, <span class="dt">unit=</span><span class="st">&quot;pt&quot;</span>)),</a>
-<a class="sourceLine" id="cb480-9" data-line-number="9">    <span class="dt">axis.ticks      =</span> <span class="kw">element_line</span>(<span class="dt">arrow=</span><span class="kw">arrow</span>(<span class="dt">type=</span><span class="st">&quot;closed&quot;</span>)),</a>
-<a class="sourceLine" id="cb480-10" data-line-number="10">    <span class="dt">axis.title      =</span> <span class="kw">element_blank</span>(),</a>
-<a class="sourceLine" id="cb480-11" data-line-number="11">    <span class="dt">axis.line       =</span> <span class="kw">element_line</span>(),</a>
-<a class="sourceLine" id="cb480-12" data-line-number="12">    <span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span></a>
-<a class="sourceLine" id="cb480-13" data-line-number="13">  )</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-45-1.png" width="672" /></p>
+<a class="sourceLine" id="cb479-7" data-line-number="7">    <span class="dt">axis.text.x    =</span> <span class="kw">element_text</span>(<span class="dt">margin=</span> <span class="kw">margin</span>(<span class="dv">20</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>, <span class="dt">unit=</span><span class="st">&quot;pt&quot;</span>)),</a>
+<a class="sourceLine" id="cb479-8" data-line-number="8">    <span class="dt">axis.text.y     =</span> <span class="kw">element_text</span>(<span class="dt">margin=</span> <span class="kw">margin</span>(<span class="dv">0</span>,<span class="dv">20</span>,<span class="dv">0</span>,<span class="dv">0</span>, <span class="dt">unit=</span><span class="st">&quot;pt&quot;</span>)),</a>
+<a class="sourceLine" id="cb479-9" data-line-number="9">    <span class="dt">axis.ticks      =</span> <span class="kw">element_line</span>(<span class="dt">arrow=</span><span class="kw">arrow</span>(<span class="dt">type=</span><span class="st">&quot;closed&quot;</span>)),</a>
+<a class="sourceLine" id="cb479-10" data-line-number="10">    <span class="dt">axis.title      =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb479-11" data-line-number="11">    <span class="dt">axis.line       =</span> <span class="kw">element_line</span>(),</a>
+<a class="sourceLine" id="cb479-12" data-line-number="12">    <span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span></a>
+<a class="sourceLine" id="cb479-13" data-line-number="13">  )</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
 </div>
 </div>
 <div id="extensions" class="section level3">
@@ -861,30 +863,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="ggsave" class="section level3">
 <h3><span class="header-section-number">6.5.2</span> ggsave</h3>
 <p>What happens when we just try to export our figure window?</p>
-<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb481-1" data-line-number="1"><span class="co"># Scales lets us change the y axis numbers from scientific notation to decimal notation</span></a>
-<a class="sourceLine" id="cb481-2" data-line-number="2"><span class="kw">library</span>(scales)</a>
-<a class="sourceLine" id="cb481-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb481-4" data-line-number="4">g.price_density &lt;-<span class="st"> </span><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>price, <span class="dt">y=</span>..density.., <span class="dt">fill=</span>cut))<span class="op">+</span></a>
-<a class="sourceLine" id="cb481-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">position=</span><span class="st">&quot;stack&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb481-6" data-line-number="6"><span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Set1&quot;</span>, <span class="dt">guide=</span><span class="kw">guide_legend</span>(<span class="dt">title=</span><span class="st">&quot;Cut&quot;</span>))<span class="op">+</span></a>
-<a class="sourceLine" id="cb481-7" data-line-number="7"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">name=</span><span class="st">&quot;Density&quot;</span>, <span class="dt">labels=</span>comma)<span class="op">+</span></a>
-<a class="sourceLine" id="cb481-8" data-line-number="8"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name=</span><span class="st">&quot;Price&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb481-9" data-line-number="9"><span class="st">  </span><span class="kw">theme_minimal</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb481-10" data-line-number="10"><span class="st">  </span><span class="kw">theme</span>(</a>
-<a class="sourceLine" id="cb481-11" data-line-number="11">    <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(),</a>
-<a class="sourceLine" id="cb481-12" data-line-number="12">    <span class="dt">legend.position  =</span> <span class="kw">c</span>(.<span class="dv">8</span>,.<span class="dv">65</span>)</a>
-<a class="sourceLine" id="cb481-13" data-line-number="13">  )</a>
-<a class="sourceLine" id="cb481-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb481-15" data-line-number="15"><span class="co"># Saving figure by clicking &quot;export&quot; from figure window</span></a></code></pre></div>
+<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb480-1" data-line-number="1"><span class="co"># Scales lets us change the y axis numbers from scientific notation to decimal notation</span></a>
+<a class="sourceLine" id="cb480-2" data-line-number="2"><span class="kw">library</span>(scales)</a>
+<a class="sourceLine" id="cb480-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb480-4" data-line-number="4">g.price_density &lt;-<span class="st"> </span><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>price, <span class="dt">y=</span>..density.., <span class="dt">fill=</span>cut))<span class="op">+</span></a>
+<a class="sourceLine" id="cb480-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">position=</span><span class="st">&quot;stack&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb480-6" data-line-number="6"><span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Set1&quot;</span>, <span class="dt">guide=</span><span class="kw">guide_legend</span>(<span class="dt">title=</span><span class="st">&quot;Cut&quot;</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb480-7" data-line-number="7"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">name=</span><span class="st">&quot;Density&quot;</span>, <span class="dt">labels=</span>comma)<span class="op">+</span></a>
+<a class="sourceLine" id="cb480-8" data-line-number="8"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name=</span><span class="st">&quot;Price&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb480-9" data-line-number="9"><span class="st">  </span><span class="kw">theme_minimal</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb480-10" data-line-number="10"><span class="st">  </span><span class="kw">theme</span>(</a>
+<a class="sourceLine" id="cb480-11" data-line-number="11">    <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb480-12" data-line-number="12">    <span class="dt">legend.position  =</span> <span class="kw">c</span>(.<span class="dv">8</span>,.<span class="dv">65</span>)</a>
+<a class="sourceLine" id="cb480-13" data-line-number="13">  )</a>
+<a class="sourceLine" id="cb480-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb480-15" data-line-number="15"><span class="co"># Saving figure by clicking &quot;export&quot; from figure window</span></a></code></pre></div>
 <p><img src="guide_files/Rplot01.png" /></p>
 <p>Good god what have you done to the boy. Since the rendering is dependeng on the size of the plotting environment ggplot has rendered it into, our plot comes out looking very sad indeed.</p>
 <p>The basic tool for exporting ggplot figures is the function ggsave. It allows us to explicitly specify the size, resolution, rendering engine, etc. Ggplot has many saving “devices,” or rendering engines, the basic categories of which are raster engines (like png) - which convert your plot into a series of pixels and color values, and vector engines (like pdf or svg) that leave the plot as a set of logical instructions. You should preserve your plots as vectors as long as you possibly can, as they are lossless representations of the image, and allow you to edit it by element in another program.</p>
-<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb482-1" data-line-number="1"><span class="kw">ggsave</span>(<span class="st">&quot;price_density_plot.png&quot;</span>, g.price_density,</a>
-<a class="sourceLine" id="cb482-2" data-line-number="2">       <span class="dt">path=</span><span class="st">&quot;guide_files&quot;</span>, <span class="co"># you can use relative or absolute paths</span></a>
-<a class="sourceLine" id="cb482-3" data-line-number="3">       <span class="dt">device=</span><span class="st">&quot;png&quot;</span>,</a>
-<a class="sourceLine" id="cb482-4" data-line-number="4">       <span class="dt">width=</span><span class="kw">unit</span>(<span class="dv">6</span>,<span class="st">&quot;in&quot;</span>), <span class="dt">height=</span><span class="kw">unit</span>(<span class="dv">4</span>,<span class="st">&quot;in&quot;</span>),</a>
-<a class="sourceLine" id="cb482-5" data-line-number="5">       <span class="dt">dpi=</span><span class="dv">300</span></a>
-<a class="sourceLine" id="cb482-6" data-line-number="6">)</a></code></pre></div>
+<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb481-1" data-line-number="1"><span class="kw">ggsave</span>(<span class="st">&quot;price_density_plot.png&quot;</span>, g.price_density,</a>
+<a class="sourceLine" id="cb481-2" data-line-number="2">       <span class="dt">path=</span><span class="st">&quot;guide_files&quot;</span>, <span class="co"># you can use relative or absolute paths</span></a>
+<a class="sourceLine" id="cb481-3" data-line-number="3">       <span class="dt">device=</span><span class="st">&quot;png&quot;</span>,</a>
+<a class="sourceLine" id="cb481-4" data-line-number="4">       <span class="dt">width=</span><span class="kw">unit</span>(<span class="dv">6</span>,<span class="st">&quot;in&quot;</span>), <span class="dt">height=</span><span class="kw">unit</span>(<span class="dv">4</span>,<span class="st">&quot;in&quot;</span>),</a>
+<a class="sourceLine" id="cb481-5" data-line-number="5">       <span class="dt">dpi=</span><span class="dv">300</span></a>
+<a class="sourceLine" id="cb481-6" data-line-number="6">)</a></code></pre></div>
 <p><img src="guide_files/price_density_plot.png" />
 Much better.</p>
 </div>
@@ -892,48 +894,50 @@ Much better.</p>
 <div id="grid" class="section level2">
 <h2><span class="header-section-number">6.6</span> Grid</h2>
 <p>Ok, we might know what a statistical plot is, but what is a ggplot? Ggplot follows the <a href="https://www.stat.auckland.ac.nz/~paul/RGraphics/chapter5.pdf">grid graphics model</a>, which is a set of primitive graphical elements like circles, lines, rectangles, that have some notion of their position within a “viewport” (ggplot’s panels). GRaphical OBjects in grid are called “grobs,” and we can convert our plot to be able to directly manipulate its grobs.</p>
-<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb483-1" data-line-number="1">g.grob &lt;-<span class="st"> </span><span class="kw">ggplotGrob</span>(g.price_density)</a></code></pre></div>
+<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb482-1" data-line-number="1">g.grob &lt;-<span class="st"> </span><span class="kw">ggplotGrob</span>(g.price_density)</a></code></pre></div>
 <p>Your plot’s layout information is in its <code>layout</code>, <code>heights</code>, and <code>widths</code> attributes. Each of the numbers in the layout matrix corresponds to a width (for the “t”(op), and “b”(ottom) columns), or height (for the “l” and “r”). Each grob has its outer extent specified by these values, so the background has its top at position 1, left at position 1, bottom at 10 and right at 7 - the largest values of each, predictably. By default, heights and widths of undeclared elements are “null” or “grobheight” units that depend on the size of the viewport. You can set them explicitly as you might expect with <code>g.grob$heights[5] &lt;- unit(5,&quot;in&quot;)</code> or whatever. This becomes critical for ensuring axes across multiple plots are the same size.</p>
 <p>The “children” or “grobs” of the main grob object contain each of the literal graphical objects, and they behave just like the parent.</p>
-<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb484-1" data-line-number="1">g.grob<span class="op">$</span>layout</a></code></pre></div>
-<pre><code>##    t l  b r  z clip       name
-## 18 1 1 10 7  0   on background
-## 1  5 3  5 3  5  off     spacer
-## 2  6 3  6 3  7  off     axis-l
-## 3  7 3  7 3  3  off     spacer
-## 4  5 4  5 4  6  off     axis-t
-## 5  6 4  6 4  1   on      panel
-## 6  7 4  7 4  9  off     axis-b
-## 7  5 5  5 5  4  off     spacer
-## 8  6 5  6 5  8  off     axis-r
-## 9  7 5  7 5  2  off     spacer
-## 10 4 4  4 4 10  off     xlab-t
-## 11 8 4  8 4 11  off     xlab-b
-## 12 6 2  6 2 12  off     ylab-l
-## 13 6 6  6 6 13  off     ylab-r
-## 14 6 4  6 4 14  off  guide-box
-## 15 3 4  3 4 15  off   subtitle
-## 16 2 4  2 4 16  off      title
-## 17 9 4  9 4 17  off    caption</code></pre>
-<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb486-1" data-line-number="1">g.grob<span class="op">$</span>heights</a></code></pre></div>
+<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb483-1" data-line-number="1">g.grob<span class="op">$</span>layout</a></code></pre></div>
+<pre><code>##     t l  b r  z clip       name
+## 19  1 1 12 9  0   on background
+## 1   6 4  6 4  5  off     spacer
+## 2   7 4  7 4  7  off     axis-l
+## 3   8 4  8 4  3  off     spacer
+## 4   6 5  6 5  6  off     axis-t
+## 5   7 5  7 5  1   on      panel
+## 6   8 5  8 5  9  off     axis-b
+## 7   6 6  6 6  4  off     spacer
+## 8   7 6  7 6  8  off     axis-r
+## 9   8 6  8 6  2  off     spacer
+## 10  5 5  5 5 10  off     xlab-t
+## 11  9 5  9 5 11  off     xlab-b
+## 12  7 3  7 3 12  off     ylab-l
+## 13  7 7  7 7 13  off     ylab-r
+## 14  7 5  7 5 14  off  guide-box
+## 15  4 5  4 5 15  off   subtitle
+## 16  3 5  3 5 16  off      title
+## 17 10 5 10 5 17  off    caption
+## 18  2 2  2 2 18  off        tag</code></pre>
+<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb485-1" data-line-number="1">g.grob<span class="op">$</span>heights</a></code></pre></div>
 <pre><code>##  [1] 5.5pt                    0cm                     
 ##  [3] 0cm                      0cm                     
-##  [5] 0cm                      1null                   
-##  [7] sum(2.75pt, 1grobheight) 1grobheight             
-##  [9] 0cm                      5.5pt</code></pre>
-<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb488-1" data-line-number="1">g.grob<span class="op">$</span>widths</a></code></pre></div>
-<pre><code>## [1] 5.5pt                   1grobwidth              sum(1grobwidth, 2.75pt)
-## [4] 1null                   0cm                     0cm                    
-## [7] 5.5pt</code></pre>
-<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb490-1" data-line-number="1">g.grob<span class="op">$</span>grobs</a></code></pre></div>
+##  [5] 0cm                      0cm                     
+##  [7] 1null                    sum(2.75pt, 1grobheight)
+##  [9] 1grobheight              0cm                     
+## [11] 0pt                      5.5pt</code></pre>
+<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb487-1" data-line-number="1">g.grob<span class="op">$</span>widths</a></code></pre></div>
+<pre><code>## [1] 5.5pt                   0cm                     1grobwidth             
+## [4] sum(1grobwidth, 2.75pt) 1null                   0cm                    
+## [7] 0cm                     0pt                     5.5pt</code></pre>
+<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb489-1" data-line-number="1">g.grob<span class="op">$</span>grobs</a></code></pre></div>
 <pre><code>## [[1]]
-## zeroGrob[plot.background..zeroGrob.3075] 
+## zeroGrob[plot.background..zeroGrob.3163] 
 ## 
 ## [[2]]
 ## zeroGrob[NULL] 
 ## 
 ## [[3]]
-## absoluteGrob[GRID.absoluteGrob.3036] 
+## absoluteGrob[GRID.absoluteGrob.3117] 
 ## 
 ## [[4]]
 ## zeroGrob[NULL] 
@@ -942,10 +946,10 @@ Much better.</p>
 ## zeroGrob[NULL] 
 ## 
 ## [[6]]
-## gTree[panel-1.gTree.3024] 
+## gTree[panel-1.gTree.3105] 
 ## 
 ## [[7]]
-## absoluteGrob[GRID.absoluteGrob.3030] 
+## absoluteGrob[GRID.absoluteGrob.3111] 
 ## 
 ## [[8]]
 ## zeroGrob[NULL] 
@@ -960,10 +964,10 @@ Much better.</p>
 ## zeroGrob[NULL] 
 ## 
 ## [[12]]
-## titleGrob[axis.title.x.bottom..titleGrob.3039] 
+## titleGrob[axis.title.x.bottom..titleGrob.3120] 
 ## 
 ## [[13]]
-## titleGrob[axis.title.y.left..titleGrob.3042] 
+## titleGrob[axis.title.y.left..titleGrob.3123] 
 ## 
 ## [[14]]
 ## zeroGrob[NULL] 
@@ -978,182 +982,187 @@ Much better.</p>
 ##                                     zeroGrob[NULL]
 ## 
 ## [[16]]
-## zeroGrob[plot.subtitle..zeroGrob.3073] 
+## zeroGrob[plot.subtitle..zeroGrob.3160] 
 ## 
 ## [[17]]
-## zeroGrob[plot.title..zeroGrob.3072] 
+## zeroGrob[plot.title..zeroGrob.3159] 
 ## 
 ## [[18]]
-## zeroGrob[plot.caption..zeroGrob.3074]</code></pre>
+## zeroGrob[plot.caption..zeroGrob.3162] 
+## 
+## [[19]]
+## zeroGrob[plot.tag..zeroGrob.3161]</code></pre>
 <p>We can see that deep down at the core of our plot is just a bunch of polygons. I arrived at these numbers by just listing them recursively (calling <code>g.grob$grobs</code>, seeing which one I needed, etc.). We can directly edit the graphical properties of these polygons (<code>gp</code>) as you might expect. We then</p>
-<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb492-1" data-line-number="1"><span class="co"># We have to load the grid library to do some commands, might as well load it now</span></a>
-<a class="sourceLine" id="cb492-2" data-line-number="2"><span class="kw">library</span>(grid)</a>
-<a class="sourceLine" id="cb492-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb492-4" data-line-number="4">g.grob<span class="op">$</span>grobs[[<span class="dv">6</span>]]<span class="op">$</span>children[[<span class="dv">3</span>]]<span class="op">$</span>children</a></code></pre></div>
-<pre><code>## (polygon[geom_ribbon.polygon.3002], polygon[geom_ribbon.polygon.3004], polygon[geom_ribbon.polygon.3006], polygon[geom_ribbon.polygon.3008], polygon[geom_ribbon.polygon.3010])</code></pre>
-<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb494-1" data-line-number="1">g.grob<span class="op">$</span>grobs[[<span class="dv">6</span>]]<span class="op">$</span>children[[<span class="dv">3</span>]]<span class="op">$</span>children[[<span class="dv">1</span>]]<span class="op">$</span>gp<span class="op">$</span>lwd &lt;-<span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb494-2" data-line-number="2">g.grob<span class="op">$</span>grobs[[<span class="dv">6</span>]]<span class="op">$</span>children[[<span class="dv">3</span>]]<span class="op">$</span>children[[<span class="dv">1</span>]]<span class="op">$</span>gp<span class="op">$</span>fill &lt;-<span class="st"> &quot;#FF51FD&quot;</span></a>
-<a class="sourceLine" id="cb494-3" data-line-number="3">g.grob<span class="op">$</span>grobs[[<span class="dv">6</span>]]<span class="op">$</span>children[[<span class="dv">3</span>]]<span class="op">$</span>children[[<span class="dv">1</span>]]<span class="op">$</span>gp<span class="op">$</span>col &lt;-<span class="st"> &quot;yellow&quot;</span></a>
-<a class="sourceLine" id="cb494-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb494-5" data-line-number="5"><span class="co"># grid.newpage() clears the current viewport (so your plots don&#39;t just keep stacking up)</span></a>
-<a class="sourceLine" id="cb494-6" data-line-number="6"><span class="co"># grid.draw() redraws our grob in the current viewport</span></a>
-<a class="sourceLine" id="cb494-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb494-8" data-line-number="8"><span class="kw">grid.newpage</span>()</a>
-<a class="sourceLine" id="cb494-9" data-line-number="9"><span class="kw">grid.draw</span>(g.grob)</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-50-1.png" width="672" /></p>
+<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb491-1" data-line-number="1"><span class="co"># We have to load the grid library to do some commands, might as well load it now</span></a>
+<a class="sourceLine" id="cb491-2" data-line-number="2"><span class="kw">library</span>(grid)</a>
+<a class="sourceLine" id="cb491-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb491-4" data-line-number="4">g.grob<span class="op">$</span>grobs[[<span class="dv">6</span>]]<span class="op">$</span>children[[<span class="dv">3</span>]]<span class="op">$</span>children</a></code></pre></div>
+<pre><code>## (polygon[geom_ribbon.polygon.3083], polygon[geom_ribbon.polygon.3085], polygon[geom_ribbon.polygon.3087], polygon[geom_ribbon.polygon.3089], polygon[geom_ribbon.polygon.3091])</code></pre>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb493-1" data-line-number="1">g.grob<span class="op">$</span>grobs[[<span class="dv">6</span>]]<span class="op">$</span>children[[<span class="dv">3</span>]]<span class="op">$</span>children[[<span class="dv">1</span>]]<span class="op">$</span>gp<span class="op">$</span>lwd &lt;-<span class="st"> </span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb493-2" data-line-number="2">g.grob<span class="op">$</span>grobs[[<span class="dv">6</span>]]<span class="op">$</span>children[[<span class="dv">3</span>]]<span class="op">$</span>children[[<span class="dv">1</span>]]<span class="op">$</span>gp<span class="op">$</span>fill &lt;-<span class="st"> &quot;#FF51FD&quot;</span></a>
+<a class="sourceLine" id="cb493-3" data-line-number="3">g.grob<span class="op">$</span>grobs[[<span class="dv">6</span>]]<span class="op">$</span>children[[<span class="dv">3</span>]]<span class="op">$</span>children[[<span class="dv">1</span>]]<span class="op">$</span>gp<span class="op">$</span>col &lt;-<span class="st"> &quot;yellow&quot;</span></a>
+<a class="sourceLine" id="cb493-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb493-5" data-line-number="5"><span class="co"># grid.newpage() clears the current viewport (so your plots don&#39;t just keep stacking up)</span></a>
+<a class="sourceLine" id="cb493-6" data-line-number="6"><span class="co"># grid.draw() redraws our grob in the current viewport</span></a>
+<a class="sourceLine" id="cb493-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb493-8" data-line-number="8"><span class="kw">grid.newpage</span>()</a>
+<a class="sourceLine" id="cb493-9" data-line-number="9"><span class="kw">grid.draw</span>(g.grob)</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
 <p>I have no idea why you keep wanting to do this to your plots. Lets try to use grid to arrange two plots that we couldn’t using ggplot alone. Let’s try to get density plots next to our scatterplot</p>
-<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb495-1" data-line-number="1"><span class="co"># We&#39;ll need &quot;gtable&quot; to tread the grids like a table</span></a>
-<a class="sourceLine" id="cb495-2" data-line-number="2"><span class="kw">library</span>(gtable)</a>
-<a class="sourceLine" id="cb495-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb495-4" data-line-number="4">g.scatter &lt;-<span class="st"> </span><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price, <span class="dt">color=</span>cut))<span class="op">+</span></a>
-<a class="sourceLine" id="cb495-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="fl">0.5</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb495-6" data-line-number="6"><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Set1&quot;</span>, <span class="dt">guide=</span><span class="kw">guide_legend</span>(<span class="dt">title=</span><span class="st">&quot;Cut&quot;</span>))<span class="op">+</span></a>
-<a class="sourceLine" id="cb495-7" data-line-number="7"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">name=</span><span class="st">&quot;Price&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb495-8" data-line-number="8"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name=</span><span class="st">&quot;Carat&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb495-9" data-line-number="9"><span class="st">  </span><span class="kw">theme_minimal</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb495-10" data-line-number="10"><span class="st">  </span><span class="kw">theme</span>(</a>
-<a class="sourceLine" id="cb495-11" data-line-number="11">    <span class="dt">legend.position=</span><span class="kw">c</span>(<span class="fl">0.15</span>,<span class="fl">0.8</span>),</a>
-<a class="sourceLine" id="cb495-12" data-line-number="12">    <span class="dt">legend.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill=</span><span class="st">&quot;#EFEFEF&quot;</span>)</a>
-<a class="sourceLine" id="cb495-13" data-line-number="13">  )</a>
-<a class="sourceLine" id="cb495-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb495-15" data-line-number="15">g.density_x &lt;-<span class="st"> </span><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>..density.., <span class="dt">fill=</span>cut))<span class="op">+</span></a>
-<a class="sourceLine" id="cb495-16" data-line-number="16"><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">position=</span><span class="st">&quot;stack&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb495-17" data-line-number="17"><span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Set1&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb495-18" data-line-number="18"><span class="st">  </span><span class="co">#scale_x_continuous(expand=c(0,0))+</span></a>
-<a class="sourceLine" id="cb495-19" data-line-number="19"><span class="st">  </span><span class="kw">theme_void</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb495-20" data-line-number="20"><span class="st">  </span><span class="kw">theme</span>(</a>
-<a class="sourceLine" id="cb495-21" data-line-number="21">    <span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span></a>
-<a class="sourceLine" id="cb495-22" data-line-number="22">  )</a>
-<a class="sourceLine" id="cb495-23" data-line-number="23"></a>
-<a class="sourceLine" id="cb495-24" data-line-number="24">g.density_y &lt;-<span class="st"> </span><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>price, <span class="dt">y=</span>..density.., <span class="dt">fill=</span>cut))<span class="op">+</span></a>
-<a class="sourceLine" id="cb495-25" data-line-number="25"><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">position=</span><span class="st">&quot;stack&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb495-26" data-line-number="26"><span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Set1&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb495-27" data-line-number="27"><span class="st">  </span><span class="co">#scale_x_continuous(expand=c(0,0))+</span></a>
-<a class="sourceLine" id="cb495-28" data-line-number="28"><span class="st">  </span><span class="kw">coord_flip</span>()<span class="op">+</span><span class="st"> </span><span class="co"># Flip the coordinates so x is y, y i x</span></a>
-<a class="sourceLine" id="cb495-29" data-line-number="29"><span class="st">  </span><span class="kw">theme_void</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb495-30" data-line-number="30"><span class="st">  </span><span class="kw">theme</span>(</a>
-<a class="sourceLine" id="cb495-31" data-line-number="31">    <span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span></a>
-<a class="sourceLine" id="cb495-32" data-line-number="32">  )</a>
-<a class="sourceLine" id="cb495-33" data-line-number="33"></a>
-<a class="sourceLine" id="cb495-34" data-line-number="34"><span class="co"># Make our grobs</span></a>
-<a class="sourceLine" id="cb495-35" data-line-number="35">g.scatter_grob   &lt;-<span class="st"> </span><span class="kw">ggplotGrob</span>(g.scatter)</a>
-<a class="sourceLine" id="cb495-36" data-line-number="36">g.density_x_grob &lt;-<span class="st"> </span><span class="kw">ggplotGrob</span>(g.density_x)</a>
-<a class="sourceLine" id="cb495-37" data-line-number="37">g.density_y_grob &lt;-<span class="st"> </span><span class="kw">ggplotGrob</span>(g.density_y)</a>
-<a class="sourceLine" id="cb495-38" data-line-number="38"></a>
-<a class="sourceLine" id="cb495-39" data-line-number="39"><span class="co"># Add a row and a column to the scatterplot where we&#39;ll add our density plots</span></a>
-<a class="sourceLine" id="cb495-40" data-line-number="40">g.scatter_grob &lt;-<span class="st"> </span><span class="kw">gtable_add_rows</span>(g.scatter_grob,</a>
-<a class="sourceLine" id="cb495-41" data-line-number="41">                                  <span class="kw">unit</span>(<span class="fl">0.1</span>,<span class="st">&quot;npc&quot;</span>), <span class="co"># npc is a unit that&#39;s defined by the viewport</span></a>
-<a class="sourceLine" id="cb495-42" data-line-number="42">                                  <span class="dv">0</span>) <span class="co"># position - we add to the top</span></a>
-<a class="sourceLine" id="cb495-43" data-line-number="43">g.scatter_grob &lt;-<span class="st"> </span><span class="kw">gtable_add_cols</span>(g.scatter_grob,</a>
-<a class="sourceLine" id="cb495-44" data-line-number="44">                                  <span class="kw">unit</span>(<span class="fl">0.1</span>,<span class="st">&quot;npc&quot;</span>), <span class="co"># npc is a unit that&#39;s defined by the viewport</span></a>
-<a class="sourceLine" id="cb495-45" data-line-number="45">                                  <span class="dv">-1</span>) <span class="co"># position - we add on the right</span></a>
-<a class="sourceLine" id="cb495-46" data-line-number="46"></a>
-<a class="sourceLine" id="cb495-47" data-line-number="47"><span class="co"># Let&#39;s check our layout</span></a>
-<a class="sourceLine" id="cb495-48" data-line-number="48">g.scatter_grob<span class="op">$</span>layout</a></code></pre></div>
+<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb494-1" data-line-number="1"><span class="co"># We&#39;ll need &quot;gtable&quot; to tread the grids like a table</span></a>
+<a class="sourceLine" id="cb494-2" data-line-number="2"><span class="kw">library</span>(gtable)</a>
+<a class="sourceLine" id="cb494-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb494-4" data-line-number="4">g.scatter &lt;-<span class="st"> </span><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price, <span class="dt">color=</span>cut))<span class="op">+</span></a>
+<a class="sourceLine" id="cb494-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="fl">0.5</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb494-6" data-line-number="6"><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Set1&quot;</span>, <span class="dt">guide=</span><span class="kw">guide_legend</span>(<span class="dt">title=</span><span class="st">&quot;Cut&quot;</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb494-7" data-line-number="7"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">name=</span><span class="st">&quot;Price&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb494-8" data-line-number="8"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name=</span><span class="st">&quot;Carat&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb494-9" data-line-number="9"><span class="st">  </span><span class="kw">theme_minimal</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb494-10" data-line-number="10"><span class="st">  </span><span class="kw">theme</span>(</a>
+<a class="sourceLine" id="cb494-11" data-line-number="11">    <span class="dt">legend.position=</span><span class="kw">c</span>(<span class="fl">0.15</span>,<span class="fl">0.8</span>),</a>
+<a class="sourceLine" id="cb494-12" data-line-number="12">    <span class="dt">legend.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill=</span><span class="st">&quot;#EFEFEF&quot;</span>)</a>
+<a class="sourceLine" id="cb494-13" data-line-number="13">  )</a>
+<a class="sourceLine" id="cb494-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb494-15" data-line-number="15">g.density_x &lt;-<span class="st"> </span><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>..density.., <span class="dt">fill=</span>cut))<span class="op">+</span></a>
+<a class="sourceLine" id="cb494-16" data-line-number="16"><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">position=</span><span class="st">&quot;stack&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb494-17" data-line-number="17"><span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Set1&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb494-18" data-line-number="18"><span class="st">  </span><span class="co">#scale_x_continuous(expand=c(0,0))+</span></a>
+<a class="sourceLine" id="cb494-19" data-line-number="19"><span class="st">  </span><span class="kw">theme_void</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb494-20" data-line-number="20"><span class="st">  </span><span class="kw">theme</span>(</a>
+<a class="sourceLine" id="cb494-21" data-line-number="21">    <span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span></a>
+<a class="sourceLine" id="cb494-22" data-line-number="22">  )</a>
+<a class="sourceLine" id="cb494-23" data-line-number="23"></a>
+<a class="sourceLine" id="cb494-24" data-line-number="24">g.density_y &lt;-<span class="st"> </span><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>price, <span class="dt">y=</span>..density.., <span class="dt">fill=</span>cut))<span class="op">+</span></a>
+<a class="sourceLine" id="cb494-25" data-line-number="25"><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">position=</span><span class="st">&quot;stack&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb494-26" data-line-number="26"><span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Set1&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb494-27" data-line-number="27"><span class="st">  </span><span class="co">#scale_x_continuous(expand=c(0,0))+</span></a>
+<a class="sourceLine" id="cb494-28" data-line-number="28"><span class="st">  </span><span class="kw">coord_flip</span>()<span class="op">+</span><span class="st"> </span><span class="co"># Flip the coordinates so x is y, y i x</span></a>
+<a class="sourceLine" id="cb494-29" data-line-number="29"><span class="st">  </span><span class="kw">theme_void</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb494-30" data-line-number="30"><span class="st">  </span><span class="kw">theme</span>(</a>
+<a class="sourceLine" id="cb494-31" data-line-number="31">    <span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span></a>
+<a class="sourceLine" id="cb494-32" data-line-number="32">  )</a>
+<a class="sourceLine" id="cb494-33" data-line-number="33"></a>
+<a class="sourceLine" id="cb494-34" data-line-number="34"><span class="co"># Make our grobs</span></a>
+<a class="sourceLine" id="cb494-35" data-line-number="35">g.scatter_grob   &lt;-<span class="st"> </span><span class="kw">ggplotGrob</span>(g.scatter)</a>
+<a class="sourceLine" id="cb494-36" data-line-number="36">g.density_x_grob &lt;-<span class="st"> </span><span class="kw">ggplotGrob</span>(g.density_x)</a>
+<a class="sourceLine" id="cb494-37" data-line-number="37">g.density_y_grob &lt;-<span class="st"> </span><span class="kw">ggplotGrob</span>(g.density_y)</a>
+<a class="sourceLine" id="cb494-38" data-line-number="38"></a>
+<a class="sourceLine" id="cb494-39" data-line-number="39"><span class="co"># Add a row and a column to the scatterplot where we&#39;ll add our density plots</span></a>
+<a class="sourceLine" id="cb494-40" data-line-number="40">g.scatter_grob &lt;-<span class="st"> </span><span class="kw">gtable_add_rows</span>(g.scatter_grob,</a>
+<a class="sourceLine" id="cb494-41" data-line-number="41">                                  <span class="kw">unit</span>(<span class="fl">0.1</span>,<span class="st">&quot;npc&quot;</span>), <span class="co"># npc is a unit that&#39;s defined by the viewport</span></a>
+<a class="sourceLine" id="cb494-42" data-line-number="42">                                  <span class="dv">0</span>) <span class="co"># position - we add to the top</span></a>
+<a class="sourceLine" id="cb494-43" data-line-number="43">g.scatter_grob &lt;-<span class="st"> </span><span class="kw">gtable_add_cols</span>(g.scatter_grob,</a>
+<a class="sourceLine" id="cb494-44" data-line-number="44">                                  <span class="kw">unit</span>(<span class="fl">0.1</span>,<span class="st">&quot;npc&quot;</span>), <span class="co"># npc is a unit that&#39;s defined by the viewport</span></a>
+<a class="sourceLine" id="cb494-45" data-line-number="45">                                  <span class="dv">-1</span>) <span class="co"># position - we add on the right</span></a>
+<a class="sourceLine" id="cb494-46" data-line-number="46"></a>
+<a class="sourceLine" id="cb494-47" data-line-number="47"><span class="co"># Let&#39;s check our layout</span></a>
+<a class="sourceLine" id="cb494-48" data-line-number="48">g.scatter_grob<span class="op">$</span>layout</a></code></pre></div>
 <pre><code>##     t l  b r  z clip       name
-## 18  2 1 11 7  0   on background
-## 1   6 3  6 3  5  off     spacer
-## 2   7 3  7 3  7  off     axis-l
-## 3   8 3  8 3  3  off     spacer
-## 4   6 4  6 4  6  off     axis-t
-## 5   7 4  7 4  1   on      panel
-## 6   8 4  8 4  9  off     axis-b
-## 7   6 5  6 5  4  off     spacer
-## 8   7 5  7 5  8  off     axis-r
-## 9   8 5  8 5  2  off     spacer
-## 10  5 4  5 4 10  off     xlab-t
-## 11  9 4  9 4 11  off     xlab-b
-## 12  7 2  7 2 12  off     ylab-l
-## 13  7 6  7 6 13  off     ylab-r
-## 14  7 4  7 4 14  off  guide-box
-## 15  4 4  4 4 15  off   subtitle
-## 16  3 4  3 4 16  off      title
-## 17 10 4 10 4 17  off    caption</code></pre>
-<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb497-1" data-line-number="1"><span class="co"># Now we add the density grobs</span></a>
-<a class="sourceLine" id="cb497-2" data-line-number="2">g.scatter_grob &lt;-<span class="st"> </span><span class="kw">gtable_add_grob</span>(g.scatter_grob, g.density_x_grob, </a>
-<a class="sourceLine" id="cb497-3" data-line-number="3">                                  <span class="dt">t =</span> <span class="dv">1</span>, <span class="dt">l =</span> <span class="dv">4</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">r =</span> <span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb497-4" data-line-number="4">g.scatter_grob &lt;-<span class="st"> </span><span class="kw">gtable_add_grob</span>(g.scatter_grob, g.density_y_grob, </a>
-<a class="sourceLine" id="cb497-5" data-line-number="5">                                  <span class="dt">t =</span> <span class="dv">4</span>, <span class="dt">l =</span> <span class="dv">8</span>, <span class="dt">b =</span> <span class="dv">7</span>, <span class="dt">r =</span> <span class="dv">8</span>)</a>
-<a class="sourceLine" id="cb497-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb497-7" data-line-number="7"><span class="kw">grid.newpage</span>()</a>
-<a class="sourceLine" id="cb497-8" data-line-number="8"><span class="kw">grid.draw</span>(g.scatter_grob)</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-51-1.png" width="672" /></p>
+## 19  2 1 13 9  0   on background
+## 1   7 4  7 4  5  off     spacer
+## 2   8 4  8 4  7  off     axis-l
+## 3   9 4  9 4  3  off     spacer
+## 4   7 5  7 5  6  off     axis-t
+## 5   8 5  8 5  1   on      panel
+## 6   9 5  9 5  9  off     axis-b
+## 7   7 6  7 6  4  off     spacer
+## 8   8 6  8 6  8  off     axis-r
+## 9   9 6  9 6  2  off     spacer
+## 10  6 5  6 5 10  off     xlab-t
+## 11 10 5 10 5 11  off     xlab-b
+## 12  8 3  8 3 12  off     ylab-l
+## 13  8 7  8 7 13  off     ylab-r
+## 14  8 5  8 5 14  off  guide-box
+## 15  5 5  5 5 15  off   subtitle
+## 16  4 5  4 5 16  off      title
+## 17 11 5 11 5 17  off    caption
+## 18  3 2  3 2 18  off        tag</code></pre>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb496-1" data-line-number="1"><span class="co"># Now we add the density grobs</span></a>
+<a class="sourceLine" id="cb496-2" data-line-number="2">g.scatter_grob &lt;-<span class="st"> </span><span class="kw">gtable_add_grob</span>(g.scatter_grob, g.density_x_grob, </a>
+<a class="sourceLine" id="cb496-3" data-line-number="3">                                  <span class="dt">t =</span> <span class="dv">1</span>, <span class="dt">l =</span> <span class="dv">4</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">r =</span> <span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb496-4" data-line-number="4">g.scatter_grob &lt;-<span class="st"> </span><span class="kw">gtable_add_grob</span>(g.scatter_grob, g.density_y_grob, </a>
+<a class="sourceLine" id="cb496-5" data-line-number="5">                                  <span class="dt">t =</span> <span class="dv">4</span>, <span class="dt">l =</span> <span class="dv">8</span>, <span class="dt">b =</span> <span class="dv">7</span>, <span class="dt">r =</span> <span class="dv">8</span>)</a>
+<a class="sourceLine" id="cb496-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb496-7" data-line-number="7"><span class="kw">grid.newpage</span>()</a>
+<a class="sourceLine" id="cb496-8" data-line-number="8"><span class="kw">grid.draw</span>(g.scatter_grob)</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
 <p>Uh oh, we’re a little misaligned. We can expand our x-axes to make the density plots fill the entire space</p>
-<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb498-1" data-line-number="1"><span class="co"># We&#39;ll need &quot;gtable&quot; to tread the grids like a table</span></a>
-<a class="sourceLine" id="cb498-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb498-3" data-line-number="3">g.scatter &lt;-<span class="st"> </span><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price, <span class="dt">color=</span>cut))<span class="op">+</span></a>
-<a class="sourceLine" id="cb498-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="fl">0.5</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb498-5" data-line-number="5"><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Set1&quot;</span>, <span class="dt">guide=</span><span class="kw">guide_legend</span>(<span class="dt">title=</span><span class="st">&quot;Cut&quot;</span>))<span class="op">+</span></a>
-<a class="sourceLine" id="cb498-6" data-line-number="6"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">name=</span><span class="st">&quot;Price&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb498-7" data-line-number="7"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name=</span><span class="st">&quot;Carat&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb498-8" data-line-number="8"><span class="st">  </span><span class="kw">theme_minimal</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb498-9" data-line-number="9"><span class="st">  </span><span class="kw">theme</span>(</a>
-<a class="sourceLine" id="cb498-10" data-line-number="10">    <span class="dt">legend.position=</span><span class="kw">c</span>(<span class="fl">0.15</span>,<span class="fl">0.8</span>),</a>
-<a class="sourceLine" id="cb498-11" data-line-number="11">    <span class="dt">legend.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill=</span><span class="st">&quot;#EFEFEF&quot;</span>)</a>
-<a class="sourceLine" id="cb498-12" data-line-number="12">  )</a>
-<a class="sourceLine" id="cb498-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb498-14" data-line-number="14">g.density_x &lt;-<span class="st"> </span><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>..density.., <span class="dt">fill=</span>cut))<span class="op">+</span></a>
-<a class="sourceLine" id="cb498-15" data-line-number="15"><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">position=</span><span class="st">&quot;stack&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb498-16" data-line-number="16"><span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Set1&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb498-17" data-line-number="17"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">expand=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>))<span class="op">+</span></a>
-<a class="sourceLine" id="cb498-18" data-line-number="18"><span class="st">  </span><span class="kw">theme_void</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb498-19" data-line-number="19"><span class="st">  </span><span class="kw">theme</span>(</a>
-<a class="sourceLine" id="cb498-20" data-line-number="20">    <span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span></a>
-<a class="sourceLine" id="cb498-21" data-line-number="21">  )</a>
-<a class="sourceLine" id="cb498-22" data-line-number="22"></a>
-<a class="sourceLine" id="cb498-23" data-line-number="23">g.density_y &lt;-<span class="st"> </span><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>price, <span class="dt">y=</span>..density.., <span class="dt">fill=</span>cut))<span class="op">+</span></a>
-<a class="sourceLine" id="cb498-24" data-line-number="24"><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">position=</span><span class="st">&quot;stack&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb498-25" data-line-number="25"><span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Set1&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb498-26" data-line-number="26"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">expand=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>))<span class="op">+</span></a>
-<a class="sourceLine" id="cb498-27" data-line-number="27"><span class="st">  </span><span class="kw">coord_flip</span>()<span class="op">+</span><span class="st"> </span><span class="co"># Flip the coordinates so x is y, y i x</span></a>
-<a class="sourceLine" id="cb498-28" data-line-number="28"><span class="st">  </span><span class="kw">theme_void</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb498-29" data-line-number="29"><span class="st">  </span><span class="kw">theme</span>(</a>
-<a class="sourceLine" id="cb498-30" data-line-number="30">    <span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span></a>
-<a class="sourceLine" id="cb498-31" data-line-number="31">  )</a>
-<a class="sourceLine" id="cb498-32" data-line-number="32"></a>
-<a class="sourceLine" id="cb498-33" data-line-number="33"><span class="co"># Make our grobs</span></a>
-<a class="sourceLine" id="cb498-34" data-line-number="34">g.scatter_grob   &lt;-<span class="st"> </span><span class="kw">ggplotGrob</span>(g.scatter)</a>
-<a class="sourceLine" id="cb498-35" data-line-number="35">g.density_x_grob &lt;-<span class="st"> </span><span class="kw">ggplotGrob</span>(g.density_x)</a>
-<a class="sourceLine" id="cb498-36" data-line-number="36">g.density_y_grob &lt;-<span class="st"> </span><span class="kw">ggplotGrob</span>(g.density_y)</a>
-<a class="sourceLine" id="cb498-37" data-line-number="37"></a>
-<a class="sourceLine" id="cb498-38" data-line-number="38"><span class="co"># Add a row and a column to the scatterplot where we&#39;ll add our density plots</span></a>
-<a class="sourceLine" id="cb498-39" data-line-number="39">g.scatter_grob &lt;-<span class="st"> </span><span class="kw">gtable_add_rows</span>(g.scatter_grob,</a>
-<a class="sourceLine" id="cb498-40" data-line-number="40">                                  <span class="kw">unit</span>(<span class="fl">0.1</span>,<span class="st">&quot;npc&quot;</span>), <span class="co"># npc is a unit that&#39;s defined by the viewport</span></a>
-<a class="sourceLine" id="cb498-41" data-line-number="41">                                  <span class="dv">0</span>) <span class="co"># position - we add to the top</span></a>
-<a class="sourceLine" id="cb498-42" data-line-number="42">g.scatter_grob &lt;-<span class="st"> </span><span class="kw">gtable_add_cols</span>(g.scatter_grob,</a>
-<a class="sourceLine" id="cb498-43" data-line-number="43">                                  <span class="kw">unit</span>(<span class="fl">0.1</span>,<span class="st">&quot;npc&quot;</span>), <span class="co"># npc is a unit that&#39;s defined by the viewport</span></a>
-<a class="sourceLine" id="cb498-44" data-line-number="44">                                  <span class="dv">-1</span>) <span class="co"># position - we add on the right</span></a>
-<a class="sourceLine" id="cb498-45" data-line-number="45"></a>
-<a class="sourceLine" id="cb498-46" data-line-number="46"><span class="co"># Let&#39;s check our layout</span></a>
-<a class="sourceLine" id="cb498-47" data-line-number="47">g.scatter_grob<span class="op">$</span>layout</a></code></pre></div>
+<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb497-1" data-line-number="1"><span class="co"># We&#39;ll need &quot;gtable&quot; to tread the grids like a table</span></a>
+<a class="sourceLine" id="cb497-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb497-3" data-line-number="3">g.scatter &lt;-<span class="st"> </span><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>price, <span class="dt">color=</span>cut))<span class="op">+</span></a>
+<a class="sourceLine" id="cb497-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="fl">0.5</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb497-5" data-line-number="5"><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Set1&quot;</span>, <span class="dt">guide=</span><span class="kw">guide_legend</span>(<span class="dt">title=</span><span class="st">&quot;Cut&quot;</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb497-6" data-line-number="6"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">name=</span><span class="st">&quot;Price&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb497-7" data-line-number="7"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">name=</span><span class="st">&quot;Carat&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb497-8" data-line-number="8"><span class="st">  </span><span class="kw">theme_minimal</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb497-9" data-line-number="9"><span class="st">  </span><span class="kw">theme</span>(</a>
+<a class="sourceLine" id="cb497-10" data-line-number="10">    <span class="dt">legend.position=</span><span class="kw">c</span>(<span class="fl">0.15</span>,<span class="fl">0.8</span>),</a>
+<a class="sourceLine" id="cb497-11" data-line-number="11">    <span class="dt">legend.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill=</span><span class="st">&quot;#EFEFEF&quot;</span>)</a>
+<a class="sourceLine" id="cb497-12" data-line-number="12">  )</a>
+<a class="sourceLine" id="cb497-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb497-14" data-line-number="14">g.density_x &lt;-<span class="st"> </span><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>carat, <span class="dt">y=</span>..density.., <span class="dt">fill=</span>cut))<span class="op">+</span></a>
+<a class="sourceLine" id="cb497-15" data-line-number="15"><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">position=</span><span class="st">&quot;stack&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb497-16" data-line-number="16"><span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Set1&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb497-17" data-line-number="17"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">expand=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb497-18" data-line-number="18"><span class="st">  </span><span class="kw">theme_void</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb497-19" data-line-number="19"><span class="st">  </span><span class="kw">theme</span>(</a>
+<a class="sourceLine" id="cb497-20" data-line-number="20">    <span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span></a>
+<a class="sourceLine" id="cb497-21" data-line-number="21">  )</a>
+<a class="sourceLine" id="cb497-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb497-23" data-line-number="23">g.density_y &lt;-<span class="st"> </span><span class="kw">ggplot</span>(diamond_sub, <span class="kw">aes</span>(<span class="dt">x=</span>price, <span class="dt">y=</span>..density.., <span class="dt">fill=</span>cut))<span class="op">+</span></a>
+<a class="sourceLine" id="cb497-24" data-line-number="24"><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">position=</span><span class="st">&quot;stack&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb497-25" data-line-number="25"><span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Set1&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb497-26" data-line-number="26"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">expand=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb497-27" data-line-number="27"><span class="st">  </span><span class="kw">coord_flip</span>()<span class="op">+</span><span class="st"> </span><span class="co"># Flip the coordinates so x is y, y i x</span></a>
+<a class="sourceLine" id="cb497-28" data-line-number="28"><span class="st">  </span><span class="kw">theme_void</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb497-29" data-line-number="29"><span class="st">  </span><span class="kw">theme</span>(</a>
+<a class="sourceLine" id="cb497-30" data-line-number="30">    <span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span></a>
+<a class="sourceLine" id="cb497-31" data-line-number="31">  )</a>
+<a class="sourceLine" id="cb497-32" data-line-number="32"></a>
+<a class="sourceLine" id="cb497-33" data-line-number="33"><span class="co"># Make our grobs</span></a>
+<a class="sourceLine" id="cb497-34" data-line-number="34">g.scatter_grob   &lt;-<span class="st"> </span><span class="kw">ggplotGrob</span>(g.scatter)</a>
+<a class="sourceLine" id="cb497-35" data-line-number="35">g.density_x_grob &lt;-<span class="st"> </span><span class="kw">ggplotGrob</span>(g.density_x)</a>
+<a class="sourceLine" id="cb497-36" data-line-number="36">g.density_y_grob &lt;-<span class="st"> </span><span class="kw">ggplotGrob</span>(g.density_y)</a>
+<a class="sourceLine" id="cb497-37" data-line-number="37"></a>
+<a class="sourceLine" id="cb497-38" data-line-number="38"><span class="co"># Add a row and a column to the scatterplot where we&#39;ll add our density plots</span></a>
+<a class="sourceLine" id="cb497-39" data-line-number="39">g.scatter_grob &lt;-<span class="st"> </span><span class="kw">gtable_add_rows</span>(g.scatter_grob,</a>
+<a class="sourceLine" id="cb497-40" data-line-number="40">                                  <span class="kw">unit</span>(<span class="fl">0.1</span>,<span class="st">&quot;npc&quot;</span>), <span class="co"># npc is a unit that&#39;s defined by the viewport</span></a>
+<a class="sourceLine" id="cb497-41" data-line-number="41">                                  <span class="dv">0</span>) <span class="co"># position - we add to the top</span></a>
+<a class="sourceLine" id="cb497-42" data-line-number="42">g.scatter_grob &lt;-<span class="st"> </span><span class="kw">gtable_add_cols</span>(g.scatter_grob,</a>
+<a class="sourceLine" id="cb497-43" data-line-number="43">                                  <span class="kw">unit</span>(<span class="fl">0.1</span>,<span class="st">&quot;npc&quot;</span>), <span class="co"># npc is a unit that&#39;s defined by the viewport</span></a>
+<a class="sourceLine" id="cb497-44" data-line-number="44">                                  <span class="dv">-1</span>) <span class="co"># position - we add on the right</span></a>
+<a class="sourceLine" id="cb497-45" data-line-number="45"></a>
+<a class="sourceLine" id="cb497-46" data-line-number="46"><span class="co"># Let&#39;s check our layout</span></a>
+<a class="sourceLine" id="cb497-47" data-line-number="47">g.scatter_grob<span class="op">$</span>layout</a></code></pre></div>
 <pre><code>##     t l  b r  z clip       name
-## 18  2 1 11 7  0   on background
-## 1   6 3  6 3  5  off     spacer
-## 2   7 3  7 3  7  off     axis-l
-## 3   8 3  8 3  3  off     spacer
-## 4   6 4  6 4  6  off     axis-t
-## 5   7 4  7 4  1   on      panel
-## 6   8 4  8 4  9  off     axis-b
-## 7   6 5  6 5  4  off     spacer
-## 8   7 5  7 5  8  off     axis-r
-## 9   8 5  8 5  2  off     spacer
-## 10  5 4  5 4 10  off     xlab-t
-## 11  9 4  9 4 11  off     xlab-b
-## 12  7 2  7 2 12  off     ylab-l
-## 13  7 6  7 6 13  off     ylab-r
-## 14  7 4  7 4 14  off  guide-box
-## 15  4 4  4 4 15  off   subtitle
-## 16  3 4  3 4 16  off      title
-## 17 10 4 10 4 17  off    caption</code></pre>
-<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb500-1" data-line-number="1"><span class="co"># Now we add the density grobs</span></a>
-<a class="sourceLine" id="cb500-2" data-line-number="2">g.scatter_grob &lt;-<span class="st"> </span><span class="kw">gtable_add_grob</span>(g.scatter_grob, g.density_x_grob, </a>
-<a class="sourceLine" id="cb500-3" data-line-number="3">                                  <span class="dt">t =</span> <span class="dv">1</span>, <span class="dt">l =</span> <span class="dv">4</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">r =</span> <span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb500-4" data-line-number="4">g.scatter_grob &lt;-<span class="st"> </span><span class="kw">gtable_add_grob</span>(g.scatter_grob, g.density_y_grob, </a>
-<a class="sourceLine" id="cb500-5" data-line-number="5">                                  <span class="dt">t =</span> <span class="dv">4</span>, <span class="dt">l =</span> <span class="dv">8</span>, <span class="dt">b =</span> <span class="dv">7</span>, <span class="dt">r =</span> <span class="dv">8</span>)</a>
-<a class="sourceLine" id="cb500-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb500-7" data-line-number="7"><span class="kw">grid.newpage</span>()</a>
-<a class="sourceLine" id="cb500-8" data-line-number="8"><span class="kw">grid.draw</span>(g.scatter_grob)</a></code></pre></div>
-<p><img src="04-Plotting_files/figure-html4/unnamed-chunk-52-1.png" width="672" /></p>
+## 19  2 1 13 9  0   on background
+## 1   7 4  7 4  5  off     spacer
+## 2   8 4  8 4  7  off     axis-l
+## 3   9 4  9 4  3  off     spacer
+## 4   7 5  7 5  6  off     axis-t
+## 5   8 5  8 5  1   on      panel
+## 6   9 5  9 5  9  off     axis-b
+## 7   7 6  7 6  4  off     spacer
+## 8   8 6  8 6  8  off     axis-r
+## 9   9 6  9 6  2  off     spacer
+## 10  6 5  6 5 10  off     xlab-t
+## 11 10 5 10 5 11  off     xlab-b
+## 12  8 3  8 3 12  off     ylab-l
+## 13  8 7  8 7 13  off     ylab-r
+## 14  8 5  8 5 14  off  guide-box
+## 15  5 5  5 5 15  off   subtitle
+## 16  4 5  4 5 16  off      title
+## 17 11 5 11 5 17  off    caption
+## 18  3 2  3 2 18  off        tag</code></pre>
+<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb499-1" data-line-number="1"><span class="co"># Now we add the density grobs</span></a>
+<a class="sourceLine" id="cb499-2" data-line-number="2">g.scatter_grob &lt;-<span class="st"> </span><span class="kw">gtable_add_grob</span>(g.scatter_grob, g.density_x_grob, </a>
+<a class="sourceLine" id="cb499-3" data-line-number="3">                                  <span class="dt">t =</span> <span class="dv">1</span>, <span class="dt">l =</span> <span class="dv">4</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">r =</span> <span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb499-4" data-line-number="4">g.scatter_grob &lt;-<span class="st"> </span><span class="kw">gtable_add_grob</span>(g.scatter_grob, g.density_y_grob, </a>
+<a class="sourceLine" id="cb499-5" data-line-number="5">                                  <span class="dt">t =</span> <span class="dv">4</span>, <span class="dt">l =</span> <span class="dv">8</span>, <span class="dt">b =</span> <span class="dv">7</span>, <span class="dt">r =</span> <span class="dv">8</span>)</a>
+<a class="sourceLine" id="cb499-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb499-7" data-line-number="7"><span class="kw">grid.newpage</span>()</a>
+<a class="sourceLine" id="cb499-8" data-line-number="8"><span class="kw">grid.draw</span>(g.scatter_grob)</a></code></pre></div>
+<p><img src="04-Plotting_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
 <p>Todo: adding raw grobs</p>
 </div>
 <div id="references-1" class="section level2">

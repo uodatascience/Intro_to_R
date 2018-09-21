@@ -246,6 +246,7 @@ print_whatever(apple="banana", coconut="hospital visit")
 
 ## Todo:
 
+* infix functions
 * Scoping from R Faq 3.3.1
 
 ```{r, eval=FALSE}

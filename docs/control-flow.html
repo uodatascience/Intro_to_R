@@ -51,7 +51,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -64,13 +64,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -235,9 +233,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.4" data-path="functions-1.html"><a href="functions-1.html#todo"><i class="fa fa-check"></i><b>8.4</b> Todo:</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="useful-functions.html"><a href="useful-functions.html"><i class="fa fa-check"></i><b>9</b> Useful Functions</a><ul>
-<li class="chapter" data-level="9.1" data-path="useful-functions.html"><a href="useful-functions.html#workspace"><i class="fa fa-check"></i><b>9.1</b> Workspace</a></li>
-<li class="chapter" data-level="9.2" data-path="useful-functions.html"><a href="useful-functions.html#objects-2"><i class="fa fa-check"></i><b>9.2</b> Objects</a></li>
-<li class="chapter" data-level="9.3" data-path="useful-functions.html"><a href="useful-functions.html#iteration"><i class="fa fa-check"></i><b>9.3</b> Iteration</a></li>
+<li class="chapter" data-level="9.1" data-path="useful-functions.html"><a href="useful-functions.html#rstudio-keyboard-shortcuts"><i class="fa fa-check"></i><b>9.1</b> RStudio Keyboard Shortcuts</a></li>
+<li class="chapter" data-level="9.2" data-path="useful-functions.html"><a href="useful-functions.html#workspace"><i class="fa fa-check"></i><b>9.2</b> Workspace</a></li>
+<li class="chapter" data-level="9.3" data-path="useful-functions.html"><a href="useful-functions.html#objects-2"><i class="fa fa-check"></i><b>9.3</b> Objects</a></li>
+<li class="chapter" data-level="9.4" data-path="useful-functions.html"><a href="useful-functions.html#functions-2"><i class="fa fa-check"></i><b>9.4</b> Functions</a></li>
+<li class="chapter" data-level="9.5" data-path="useful-functions.html"><a href="useful-functions.html#iteration"><i class="fa fa-check"></i><b>9.5</b> Iteration</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="style-tips.html"><a href="style-tips.html"><i class="fa fa-check"></i><b>10</b> Style Tips</a><ul>
 <li class="chapter" data-level="10.1" data-path="style-tips.html"><a href="style-tips.html#nothing-here-except-a-reminder-to-jonny-that-they-should-make-this-page"><i class="fa fa-check"></i><b>10.1</b> NOTHING HERE EXCEPT A REMINDER TO JONNY THAT THEY SHOULD MAKE THIS PAGE</a></li>
@@ -273,10 +273,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 for (variable in sequence){
     Do something
 }</code></pre>
-<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb502-1" data-line-number="1"><span class="cf">for</span> (i <span class="cf">in</span> (<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)) {</a>
-<a class="sourceLine" id="cb502-2" data-line-number="2">  x &lt;-<span class="st"> </span>i<span class="op">^</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb502-3" data-line-number="3">  <span class="kw">print</span>(x)</a>
-<a class="sourceLine" id="cb502-4" data-line-number="4">}</a></code></pre></div>
+<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb501-1" data-line-number="1"><span class="cf">for</span> (i <span class="cf">in</span> (<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)) {</a>
+<a class="sourceLine" id="cb501-2" data-line-number="2">  x &lt;-<span class="st"> </span>i<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb501-3" data-line-number="3">  <span class="kw">print</span>(x)</a>
+<a class="sourceLine" id="cb501-4" data-line-number="4">}</a></code></pre></div>
 <pre><code>## [1] 1
 ## [1] 4
 ## [1] 9
@@ -295,12 +295,12 @@ for (variable in sequence){
 while (condition){
     Do something
 }</code></pre>
-<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb505-1" data-line-number="1">i &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb505-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb505-3" data-line-number="3"><span class="cf">while</span> (i <span class="op">&lt;</span><span class="st"> </span><span class="dv">11</span>){</a>
-<a class="sourceLine" id="cb505-4" data-line-number="4">  <span class="kw">print</span>(i)</a>
-<a class="sourceLine" id="cb505-5" data-line-number="5">  i &lt;-<span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb505-6" data-line-number="6">}</a></code></pre></div>
+<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb504-1" data-line-number="1">i &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb504-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb504-3" data-line-number="3"><span class="cf">while</span> (i <span class="op">&lt;</span><span class="st"> </span><span class="dv">11</span>){</a>
+<a class="sourceLine" id="cb504-4" data-line-number="4">  <span class="kw">print</span>(i)</a>
+<a class="sourceLine" id="cb504-5" data-line-number="5">  i &lt;-<span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb504-6" data-line-number="6">}</a></code></pre></div>
 <pre><code>## [1] 1
 ## [1] 2
 ## [1] 3
@@ -321,11 +321,11 @@ if (condition){
 } else {
     Do something different
 }</code></pre>
-<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb508-1" data-line-number="1"><span class="cf">if</span> (i <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>) {</a>
-<a class="sourceLine" id="cb508-2" data-line-number="2">  <span class="kw">print</span>(<span class="st">&quot;This number is greater than 5.&quot;</span>)</a>
-<a class="sourceLine" id="cb508-3" data-line-number="3">} <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb508-4" data-line-number="4">  <span class="kw">print</span>(<span class="st">&quot;This number is less than 5.&quot;</span>)</a>
-<a class="sourceLine" id="cb508-5" data-line-number="5">}</a></code></pre></div>
+<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb507-1" data-line-number="1"><span class="cf">if</span> (i <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>) {</a>
+<a class="sourceLine" id="cb507-2" data-line-number="2">  <span class="kw">print</span>(<span class="st">&quot;This number is greater than 5.&quot;</span>)</a>
+<a class="sourceLine" id="cb507-3" data-line-number="3">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb507-4" data-line-number="4">  <span class="kw">print</span>(<span class="st">&quot;This number is less than 5.&quot;</span>)</a>
+<a class="sourceLine" id="cb507-5" data-line-number="5">}</a></code></pre></div>
 <pre><code>## [1] &quot;This number is greater than 5.&quot;</code></pre>
 </div>
 <div id="apply-functions" class="section level2">
@@ -358,17 +358,17 @@ if (condition){
 </tbody>
 </table>
 <p><code>apply()</code> functions are a type <strong>functional</strong>, i.e. a function that takes a function as an input and returns a vector or a list as output. This can be used as an alternative to for loops.</p>
-<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb510-1" data-line-number="1">X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">data =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>, <span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>, <span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">3</span>, <span class="dt">byrow =</span> T)</a>
-<a class="sourceLine" id="cb510-2" data-line-number="2">X</a></code></pre></div>
+<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb509-1" data-line-number="1">X &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">data =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>, <span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>, <span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">3</span>, <span class="dt">byrow =</span> T)</a>
+<a class="sourceLine" id="cb509-2" data-line-number="2">X</a></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    2    3
 ## [2,]    1    2    3
 ## [3,]    1    2    3</code></pre>
-<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb512-1" data-line-number="1"><span class="co"># Sum the values of each column with `apply()`</span></a>
-<a class="sourceLine" id="cb512-2" data-line-number="2"><span class="kw">apply</span>(X, <span class="dv">2</span>, sum) <span class="co"># the second argument refers to a vector giving the subscripts which the function will be applied over, e.g. for a matrix 1 indicates rows, 2 indicates columns. The third argument specifies the function to be applied</span></a></code></pre></div>
+<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb511-1" data-line-number="1"><span class="co"># Sum the values of each column with `apply()`</span></a>
+<a class="sourceLine" id="cb511-2" data-line-number="2"><span class="kw">apply</span>(X, <span class="dv">2</span>, sum) <span class="co"># the second argument refers to a vector giving the subscripts which the function will be applied over, e.g. for a matrix 1 indicates rows, 2 indicates columns. The third argument specifies the function to be applied</span></a></code></pre></div>
 <pre><code>## [1] 3 6 9</code></pre>
-<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb514-1" data-line-number="1"><span class="co"># Now sum the values of each row</span></a>
-<a class="sourceLine" id="cb514-2" data-line-number="2"><span class="kw">apply</span>(X, <span class="dv">1</span>, sum)</a></code></pre></div>
+<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb513-1" data-line-number="1"><span class="co"># Now sum the values of each row</span></a>
+<a class="sourceLine" id="cb513-2" data-line-number="2"><span class="kw">apply</span>(X, <span class="dv">1</span>, sum)</a></code></pre></div>
 <pre><code>## [1] 6 6 6</code></pre>
 <p><code>lapply()</code> takes a function, applies it to each element in a list, and returns the results in the form of a list. Recall the for loop from the above example:</p>
 <pre><code>for (i in (1:10)){
@@ -376,7 +376,7 @@ if (condition){
   print(x)
 }</code></pre>
 <p>We can accomplish the same result without using a for loop by instead using <code>lapply()</code>. Notice that <code>lapply()</code> returns a list.</p>
-<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb517-1" data-line-number="1"><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="cf">function</span>(x) x<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb516-1" data-line-number="1"><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="cf">function</span>(x) x<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## [[1]]
 ## [1] 1
 ## 
@@ -407,7 +407,7 @@ if (condition){
 ## [[10]]
 ## [1] 100</code></pre>
 <p>If we want to get back an atomic vector instead of a list, we can use <code>sapply()</code>.</p>
-<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb519-1" data-line-number="1"><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="cf">function</span>(x) x<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb518-1" data-line-number="1"><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="cf">function</span>(x) x<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
 <pre><code>##  [1]   1   4   9  16  25  36  49  64  81 100</code></pre>
 
 </div>

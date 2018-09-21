@@ -176,7 +176,7 @@ search()
 ```
 ## [1] ".GlobalEnv"        "package:stats"     "package:graphics" 
 ## [4] "package:grDevices" "package:utils"     "package:datasets" 
-## [7] "Autoloads"         "package:base"
+## [7] "package:methods"   "Autoloads"         "package:base"
 ```
 
 One can make a symbol to reference an environment with `as.environment`
@@ -220,9 +220,10 @@ search()
 ```
 
 ```
-## [1] ".GlobalEnv"        "new_env"           "package:stats"    
-## [4] "package:graphics"  "package:grDevices" "package:utils"    
-## [7] "package:datasets"  "Autoloads"         "package:base"
+##  [1] ".GlobalEnv"        "new_env"           "package:stats"    
+##  [4] "package:graphics"  "package:grDevices" "package:utils"    
+##  [7] "package:datasets"  "package:methods"   "Autoloads"        
+## [10] "package:base"
 ```
 
 ```r
@@ -336,7 +337,7 @@ ice_cream(what_i_want)
 ```
 
 ```
-## [1] "here ya go kid, 0.957180238328874 scoops of hot fresh ice cream"
+## [1] "here ya go kid, 9.44425942841917 scoops of hot fresh ice cream"
 ```
 
 ```r
@@ -344,7 +345,7 @@ ice_cream(what_i_want, round=TRUE)
 ```
 
 ```
-## [1] "listen kid i'm gonna give you 0 scoops and you can get out of my shop"
+## [1] "listen kid i'm gonna give you 9 scoops and you can get out of my shop"
 ```
 
 Default arguments can be used to make code more efficient while still being flexible. For example if the same value needs to be computed in a number of different functions, it can instead be passed. If the default is set to NULL you can check if you need to perform the computation.
@@ -401,6 +402,7 @@ print_whatever(apple="banana", coconut="hospital visit")
 
 ## Todo:
 
+* infix functions
 * Scoping from R Faq 3.3.1
 
 

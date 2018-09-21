@@ -239,7 +239,7 @@ getOption("repos")
 ```
 
 ```
-## [1] "/Library/Frameworks/R.framework/Versions/3.4/Resources/library"
+## [1] "/Library/Frameworks/R.framework/Versions/3.5/Resources/library"
 ```
 
 Most packages we use will come from cran, and if you ever need to modify or find package files for any reason, there they shall be.
@@ -263,7 +263,7 @@ search()
 ```
 ## [1] ".GlobalEnv"        "package:stats"     "package:graphics" 
 ## [4] "package:grDevices" "package:utils"     "package:datasets" 
-## [7] "Autoloads"         "package:base"
+## [7] "package:methods"   "Autoloads"         "package:base"
 ```
 
 ```r
@@ -271,21 +271,20 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ────────────────────────────────── tidyverse 1.2.1 ──
+## ── Attaching packages ─────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──
 ```
 
 ```
-## ✔ ggplot2 2.2.1.9000     ✔ purrr   0.2.4     
-## ✔ tibble  1.4.2          ✔ dplyr   0.7.4     
-## ✔ tidyr   0.8.0          ✔ stringr 1.3.0     
-## ✔ readr   1.1.1          ✔ forcats 0.3.0
+## ✔ ggplot2 3.0.0     ✔ purrr   0.2.5
+## ✔ tibble  1.4.2     ✔ dplyr   0.7.6
+## ✔ tidyr   0.8.1     ✔ stringr 1.3.1
+## ✔ readr   1.1.1     ✔ forcats 0.3.0
 ```
 
 ```
-## ── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──
+## ── Conflicts ────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
-## ✖ dplyr::vars()   masks ggplot2::vars()
 ```
 
 ```r
@@ -298,7 +297,7 @@ search()
 ##  [7] "package:tidyr"     "package:tibble"    "package:ggplot2"  
 ## [10] "package:tidyverse" "package:stats"     "package:graphics" 
 ## [13] "package:grDevices" "package:utils"     "package:datasets" 
-## [16] "Autoloads"         "package:base"
+## [16] "package:methods"   "Autoloads"         "package:base"
 ```
 
 Importantly, you have to call all of the libraries you will use each time you start a new session in R. You may want to get in the habit of putting a bunch of library calls at the top of your script.
@@ -314,7 +313,7 @@ ggplot(data=amp_volume_dataframe, aes(x=Bands, y = amp_volumes))+
   geom_col()
 ```
 
-<img src="01-Introduction_files/figure-html4/GGPlot works!-1.png" width="672" />
+<img src="01-Introduction_files/figure-html/GGPlot works!-1.png" width="672" />
 It worked! We'll spend some time talking about ggplot (led by Jonny) a little later on, so don't worry about what that code means. Soon you'll know.
 
 What happens when two packages have functions with the same name? for example, both dplyr and plyr have functions named "summarise" that behave slightly differently. We can solve these "namespace conflicts" by being specific about where we load the library in our search paths. If we want to load the functions from plyr, but keep all our existing references to dplyr, we could do something like this (although if you've already loaded tidyverse, this won't do anything because these packages are loaded by tidyverse)
@@ -366,7 +365,7 @@ ggplot2::ggplot(data=amp_volume_dataframe, ggplot2::aes(x=Bands, y = amp_volumes
   ggplot2::geom_col()
 ```
 
-<img src="01-Introduction_files/figure-html4/direct function reference-1.png" width="672" />
+<img src="01-Introduction_files/figure-html/direct function reference-1.png" width="672" />
 
 ## Some useful basic syntax
 

@@ -51,7 +51,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -64,13 +64,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -235,9 +233,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.4" data-path="functions-1.html"><a href="functions-1.html#todo"><i class="fa fa-check"></i><b>8.4</b> Todo:</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="useful-functions.html"><a href="useful-functions.html"><i class="fa fa-check"></i><b>9</b> Useful Functions</a><ul>
-<li class="chapter" data-level="9.1" data-path="useful-functions.html"><a href="useful-functions.html#workspace"><i class="fa fa-check"></i><b>9.1</b> Workspace</a></li>
-<li class="chapter" data-level="9.2" data-path="useful-functions.html"><a href="useful-functions.html#objects-2"><i class="fa fa-check"></i><b>9.2</b> Objects</a></li>
-<li class="chapter" data-level="9.3" data-path="useful-functions.html"><a href="useful-functions.html#iteration"><i class="fa fa-check"></i><b>9.3</b> Iteration</a></li>
+<li class="chapter" data-level="9.1" data-path="useful-functions.html"><a href="useful-functions.html#rstudio-keyboard-shortcuts"><i class="fa fa-check"></i><b>9.1</b> RStudio Keyboard Shortcuts</a></li>
+<li class="chapter" data-level="9.2" data-path="useful-functions.html"><a href="useful-functions.html#workspace"><i class="fa fa-check"></i><b>9.2</b> Workspace</a></li>
+<li class="chapter" data-level="9.3" data-path="useful-functions.html"><a href="useful-functions.html#objects-2"><i class="fa fa-check"></i><b>9.3</b> Objects</a></li>
+<li class="chapter" data-level="9.4" data-path="useful-functions.html"><a href="useful-functions.html#functions-2"><i class="fa fa-check"></i><b>9.4</b> Functions</a></li>
+<li class="chapter" data-level="9.5" data-path="useful-functions.html"><a href="useful-functions.html#iteration"><i class="fa fa-check"></i><b>9.5</b> Iteration</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="style-tips.html"><a href="style-tips.html"><i class="fa fa-check"></i><b>10</b> Style Tips</a><ul>
 <li class="chapter" data-level="10.1" data-path="style-tips.html"><a href="style-tips.html#nothing-here-except-a-reminder-to-jonny-that-they-should-make-this-page"><i class="fa fa-check"></i><b>10.1</b> NOTHING HERE EXCEPT A REMINDER TO JONNY THAT THEY SHOULD MAKE THIS PAGE</a></li>
@@ -268,10 +268,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="form" class="section level2">
 <h2><span class="header-section-number">8.1</span> Form</h2>
 <p>The general form of a function is</p>
-<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb521-1" data-line-number="1">function_name &lt;-<span class="st"> </span><span class="cf">function</span>(arguments){</a>
-<a class="sourceLine" id="cb521-2" data-line-number="2">    <span class="co">#Do something</span></a>
-<a class="sourceLine" id="cb521-3" data-line-number="3">    <span class="kw">return</span>(output)</a>
-<a class="sourceLine" id="cb521-4" data-line-number="4">}</a></code></pre></div>
+<div class="sourceCode" id="cb520"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb520-1" data-line-number="1">function_name &lt;-<span class="st"> </span><span class="cf">function</span>(arguments){</a>
+<a class="sourceLine" id="cb520-2" data-line-number="2">    <span class="co">#Do something</span></a>
+<a class="sourceLine" id="cb520-3" data-line-number="3">    <span class="kw">return</span>(output)</a>
+<a class="sourceLine" id="cb520-4" data-line-number="4">}</a></code></pre></div>
 <p>Functions have:</p>
 <ol style="list-style-type: decimal">
 <li>An argument list, or <code>formals()</code> - what is passed to the function</li>
@@ -279,22 +279,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>An <code>environment()</code>, or the list of symbol (name)/value pairs known to the function.</li>
 </ol>
 <p>For example…</p>
-<div class="sourceCode" id="cb522"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb522-1" data-line-number="1">inverse &lt;-<span class="st"> </span><span class="cf">function</span>(invert_me){</a>
-<a class="sourceLine" id="cb522-2" data-line-number="2">    inverse &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span>invert_me</a>
-<a class="sourceLine" id="cb522-3" data-line-number="3">    <span class="kw">return</span>(inverse)</a>
-<a class="sourceLine" id="cb522-4" data-line-number="4">}</a>
-<a class="sourceLine" id="cb522-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb522-6" data-line-number="6"><span class="kw">inverse</span>(<span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb521-1" data-line-number="1">inverse &lt;-<span class="st"> </span><span class="cf">function</span>(invert_me){</a>
+<a class="sourceLine" id="cb521-2" data-line-number="2">    inverse &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span>invert_me</a>
+<a class="sourceLine" id="cb521-3" data-line-number="3">    <span class="kw">return</span>(inverse)</a>
+<a class="sourceLine" id="cb521-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb521-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb521-6" data-line-number="6"><span class="kw">inverse</span>(<span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## [1] 0.5</code></pre>
 <p>We can interrogate the parts of a function</p>
-<div class="sourceCode" id="cb524"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb524-1" data-line-number="1"><span class="kw">formals</span>(inverse)</a></code></pre></div>
+<div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb523-1" data-line-number="1"><span class="kw">formals</span>(inverse)</a></code></pre></div>
 <pre><code>## $invert_me</code></pre>
-<div class="sourceCode" id="cb526"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb526-1" data-line-number="1"><span class="kw">body</span>(inverse)</a></code></pre></div>
+<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb525-1" data-line-number="1"><span class="kw">body</span>(inverse)</a></code></pre></div>
 <pre><code>## {
 ##     inverse &lt;- 1/invert_me
 ##     return(inverse)
 ## }</code></pre>
-<div class="sourceCode" id="cb528"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb528-1" data-line-number="1"><span class="kw">environment</span>(inverse)</a></code></pre></div>
+<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb527-1" data-line-number="1"><span class="kw">environment</span>(inverse)</a></code></pre></div>
 <pre><code>## &lt;environment: R_GlobalEnv&gt;</code></pre>
 </div>
 <div id="environments-and-scoping" class="section level2">
@@ -303,39 +303,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">8.2.1</span> Function Environments</h3>
 <p>Functions create their own private collection of variables that are distinct from those in the global environment.</p>
 <p>For example, what’s going on here?</p>
-<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb530-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb530-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="dv">3</span></a>
-<a class="sourceLine" id="cb530-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb530-4" data-line-number="4">whos_who &lt;-<span class="st"> </span><span class="cf">function</span>(){</a>
-<a class="sourceLine" id="cb530-5" data-line-number="5">  x &lt;-<span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb530-6" data-line-number="6">  <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;x is&quot;</span>, x))</a>
-<a class="sourceLine" id="cb530-7" data-line-number="7">  <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;y is&quot;</span>, y))</a>
-<a class="sourceLine" id="cb530-8" data-line-number="8">}</a>
-<a class="sourceLine" id="cb530-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb530-10" data-line-number="10"><span class="kw">whos_who</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb529-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb529-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb529-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb529-4" data-line-number="4">whos_who &lt;-<span class="st"> </span><span class="cf">function</span>(){</a>
+<a class="sourceLine" id="cb529-5" data-line-number="5">  x &lt;-<span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb529-6" data-line-number="6">  <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;x is&quot;</span>, x))</a>
+<a class="sourceLine" id="cb529-7" data-line-number="7">  <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;y is&quot;</span>, y))</a>
+<a class="sourceLine" id="cb529-8" data-line-number="8">}</a>
+<a class="sourceLine" id="cb529-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb529-10" data-line-number="10"><span class="kw">whos_who</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;x is 2&quot;
 ## [1] &quot;y is 3&quot;</code></pre>
-<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb532-1" data-line-number="1"><span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;but x is also&quot;</span>, x))</a></code></pre></div>
+<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb531-1" data-line-number="1"><span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;but x is also&quot;</span>, x))</a></code></pre></div>
 <pre><code>## [1] &quot;but x is also 1&quot;</code></pre>
 <p>We define x and y to be 1 and 3 respectively, and then a function that defines x to be 2. When we call the function, it tells us that x is 2 and 3, but outside the function x is 1.</p>
 <p>The assignment <code>x &lt;- 2</code> is <strong>scoped</strong>, or defined locally in the function’s environment. <strong>Lexical scoping</strong> is the process by which functions lookup the values associated with different names. In this case, <code>x</code> is defined locally, but <code>y</code> is not. Functions inherit the enviroment that they were defined in, or their <strong>enclosing environment</strong>, in this case the global environment – a function and its attached environment is called a <strong>closure</strong>.</p>
-<div class="sourceCode" id="cb534"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb534-1" data-line-number="1"><span class="kw">environment</span>(whos_who)</a></code></pre></div>
+<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb533-1" data-line-number="1"><span class="kw">environment</span>(whos_who)</a></code></pre></div>
 <pre><code>## &lt;environment: R_GlobalEnv&gt;</code></pre>
 <p>If a function doesn’t find a variable locally, it ascends the environments it is nested within until it finds (or doesn’t find) a match. If one defines a function within another function, the innermost function will preserve the environment of the outer function – which can be used to make “function factories:”</p>
-<div class="sourceCode" id="cb536"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb536-1" data-line-number="1"><span class="co"># example from http://adv-r.had.co.nz/Environments.html#function-envs</span></a>
-<a class="sourceLine" id="cb536-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb536-3" data-line-number="3">plus &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
-<a class="sourceLine" id="cb536-4" data-line-number="4">  <span class="cf">function</span>(y){</a>
-<a class="sourceLine" id="cb536-5" data-line-number="5">    x <span class="op">+</span><span class="st"> </span>y</a>
-<a class="sourceLine" id="cb536-6" data-line-number="6">  }</a>
-<a class="sourceLine" id="cb536-7" data-line-number="7">}</a>
-<a class="sourceLine" id="cb536-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb536-9" data-line-number="9">plus_one &lt;-<span class="st"> </span><span class="kw">plus</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb536-10" data-line-number="10">plus_two &lt;-<span class="st"> </span><span class="kw">plus</span>(<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb536-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb536-12" data-line-number="12"><span class="kw">plus_one</span>(<span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb535-1" data-line-number="1"><span class="co"># example from http://adv-r.had.co.nz/Environments.html#function-envs</span></a>
+<a class="sourceLine" id="cb535-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb535-3" data-line-number="3">plus &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb535-4" data-line-number="4">  <span class="cf">function</span>(y){</a>
+<a class="sourceLine" id="cb535-5" data-line-number="5">    x <span class="op">+</span><span class="st"> </span>y</a>
+<a class="sourceLine" id="cb535-6" data-line-number="6">  }</a>
+<a class="sourceLine" id="cb535-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb535-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb535-9" data-line-number="9">plus_one &lt;-<span class="st"> </span><span class="kw">plus</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb535-10" data-line-number="10">plus_two &lt;-<span class="st"> </span><span class="kw">plus</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb535-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb535-12" data-line-number="12"><span class="kw">plus_one</span>(<span class="dv">1</span>)</a></code></pre></div>
 <pre><code>## [1] 2</code></pre>
-<div class="sourceCode" id="cb538"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb538-1" data-line-number="1"><span class="kw">plus_two</span>(<span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb537"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb537-1" data-line-number="1"><span class="kw">plus_two</span>(<span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## [1] 4</code></pre>
 <p>the <code>plus</code> function itself returns a function with the environment created when <code>plus</code> is called. Since <code>x</code> is defined in the returned function’s (eg. <code>plus_one</code>) <strong>enclosing environment</strong> it will always be able to use that value even if there is another <code>x</code> in the global environment.</p>
 <p>While a function will always preserve its enclosing environment, its <strong>execution environment</strong>, or the environment created when the function is called, is created fresh each time. This <strong>fresh start</strong> principle gives functions their utility as dissociable building blocks for more complicated code – if a function does one thing and does it well, it can be used in whatever context that operation needs to be performed without fear or prejudice from its previous experiences.</p>
@@ -354,14 +354,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p class="caption"><a href="http://adv-r.had.co.nz/Environments.html" class="uri">http://adv-r.had.co.nz/Environments.html</a></p>
 </div>
 <p>You can see the loaded packages, or search path, with <code>search</code></p>
-<div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb540-1" data-line-number="1"><span class="kw">search</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb539"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb539-1" data-line-number="1"><span class="kw">search</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;.GlobalEnv&quot;        &quot;package:stats&quot;     &quot;package:graphics&quot; 
 ## [4] &quot;package:grDevices&quot; &quot;package:utils&quot;     &quot;package:datasets&quot; 
-## [7] &quot;Autoloads&quot;         &quot;package:base&quot;</code></pre>
+## [7] &quot;package:methods&quot;   &quot;Autoloads&quot;         &quot;package:base&quot;</code></pre>
 <p>One can make a symbol to reference an environment with <code>as.environment</code></p>
-<div class="sourceCode" id="cb542"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb542-1" data-line-number="1">env &lt;-<span class="st"> </span><span class="kw">as.environment</span>(<span class="st">&#39;.GlobalEnv&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb541"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb541-1" data-line-number="1">env &lt;-<span class="st"> </span><span class="kw">as.environment</span>(<span class="st">&#39;.GlobalEnv&#39;</span>)</a></code></pre></div>
 <p>and query its contents with <code>ls.str()</code></p>
-<div class="sourceCode" id="cb543"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb543-1" data-line-number="1"><span class="kw">ls.str</span>(env)</a></code></pre></div>
+<div class="sourceCode" id="cb542"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb542-1" data-line-number="1"><span class="kw">ls.str</span>(env)</a></code></pre></div>
 <pre><code>## env : &lt;environment: R_GlobalEnv&gt; 
 ## inverse : function (invert_me)  
 ## logits2ps : function (x)  
@@ -372,36 +372,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## x :  num 1
 ## y :  num 3</code></pre>
 <p>if you’re lost deep in a twisted spire of environments and need to get something specifically, you can do so with <code>get</code> (although fixing the structure of your code is usually a better idea ;p)</p>
-<div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb545-1" data-line-number="1"><span class="co"># create a new environment</span></a>
-<a class="sourceLine" id="cb545-2" data-line-number="2">new_env &lt;-<span class="st"> </span><span class="kw">new.env</span>()</a>
-<a class="sourceLine" id="cb545-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb545-4" data-line-number="4"><span class="co"># assignation works like a list</span></a>
-<a class="sourceLine" id="cb545-5" data-line-number="5">new_env<span class="op">$</span>new_var &lt;-<span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb545-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb545-7" data-line-number="7"><span class="co"># attaching an environment adds it to our search path</span></a>
-<a class="sourceLine" id="cb545-8" data-line-number="8"><span class="kw">attach</span>(new_env)</a>
-<a class="sourceLine" id="cb545-9" data-line-number="9"><span class="kw">search</span>()</a></code></pre></div>
-<pre><code>## [1] &quot;.GlobalEnv&quot;        &quot;new_env&quot;           &quot;package:stats&quot;    
-## [4] &quot;package:graphics&quot;  &quot;package:grDevices&quot; &quot;package:utils&quot;    
-## [7] &quot;package:datasets&quot;  &quot;Autoloads&quot;         &quot;package:base&quot;</code></pre>
-<div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb547-1" data-line-number="1">new_var</a></code></pre></div>
+<div class="sourceCode" id="cb544"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb544-1" data-line-number="1"><span class="co"># create a new environment</span></a>
+<a class="sourceLine" id="cb544-2" data-line-number="2">new_env &lt;-<span class="st"> </span><span class="kw">new.env</span>()</a>
+<a class="sourceLine" id="cb544-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb544-4" data-line-number="4"><span class="co"># assignation works like a list</span></a>
+<a class="sourceLine" id="cb544-5" data-line-number="5">new_env<span class="op">$</span>new_var &lt;-<span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb544-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb544-7" data-line-number="7"><span class="co"># attaching an environment adds it to our search path</span></a>
+<a class="sourceLine" id="cb544-8" data-line-number="8"><span class="kw">attach</span>(new_env)</a>
+<a class="sourceLine" id="cb544-9" data-line-number="9"><span class="kw">search</span>()</a></code></pre></div>
+<pre><code>##  [1] &quot;.GlobalEnv&quot;        &quot;new_env&quot;           &quot;package:stats&quot;    
+##  [4] &quot;package:graphics&quot;  &quot;package:grDevices&quot; &quot;package:utils&quot;    
+##  [7] &quot;package:datasets&quot;  &quot;package:methods&quot;   &quot;Autoloads&quot;        
+## [10] &quot;package:base&quot;</code></pre>
+<div class="sourceCode" id="cb546"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb546-1" data-line-number="1">new_var</a></code></pre></div>
 <pre><code>## [1] 5</code></pre>
-<div class="sourceCode" id="cb549"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb549-1" data-line-number="1"><span class="kw">detach</span>(new_env)</a>
-<a class="sourceLine" id="cb549-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb549-3" data-line-number="3"><span class="co"># we now make a new assignation in the global environment, which will be searched before any attached environment</span></a>
-<a class="sourceLine" id="cb549-4" data-line-number="4">new_var &lt;-<span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb549-5" data-line-number="5">new_var</a></code></pre></div>
+<div class="sourceCode" id="cb548"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb548-1" data-line-number="1"><span class="kw">detach</span>(new_env)</a>
+<a class="sourceLine" id="cb548-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb548-3" data-line-number="3"><span class="co"># we now make a new assignation in the global environment, which will be searched before any attached environment</span></a>
+<a class="sourceLine" id="cb548-4" data-line-number="4">new_var &lt;-<span class="st"> </span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb548-5" data-line-number="5">new_var</a></code></pre></div>
 <pre><code>## [1] 10</code></pre>
-<div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb551-1" data-line-number="1"><span class="kw">attach</span>(new_env)</a></code></pre></div>
+<div class="sourceCode" id="cb550"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb550-1" data-line-number="1"><span class="kw">attach</span>(new_env)</a></code></pre></div>
 <pre><code>## The following object is masked _by_ .GlobalEnv:
 ## 
 ##     new_var</code></pre>
-<div class="sourceCode" id="cb553"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb553-1" data-line-number="1">new_var</a></code></pre></div>
+<div class="sourceCode" id="cb552"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb552-1" data-line-number="1">new_var</a></code></pre></div>
 <pre><code>## [1] 10</code></pre>
-<div class="sourceCode" id="cb555"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb555-1" data-line-number="1"><span class="kw">detach</span>(new_env)</a>
-<a class="sourceLine" id="cb555-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb555-3" data-line-number="3"><span class="co"># we can skip the masking of the global environment with get</span></a>
-<a class="sourceLine" id="cb555-4" data-line-number="4"><span class="kw">get</span>(<span class="st">&quot;new_var&quot;</span>, <span class="dt">envir=</span>new_env)</a></code></pre></div>
+<div class="sourceCode" id="cb554"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb554-1" data-line-number="1"><span class="kw">detach</span>(new_env)</a>
+<a class="sourceLine" id="cb554-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb554-3" data-line-number="3"><span class="co"># we can skip the masking of the global environment with get</span></a>
+<a class="sourceLine" id="cb554-4" data-line-number="4"><span class="kw">get</span>(<span class="st">&quot;new_var&quot;</span>, <span class="dt">envir=</span>new_env)</a></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 </div>
 </div>
@@ -409,79 +410,80 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">8.3</span> Arguments</h2>
 <p>The names of the variables used within the function and the structure of their input are the <strong>formal arguments</strong> of a function, but the variables that are given to a function each time are also called arguments. Where ambiguous, refer to the latter as arguments.</p>
 <p>Arguments can be specified by position or name. Partial names also work, but that typically makes for confusing code. Arguments are first matched by name and then by position.</p>
-<div class="sourceCode" id="cb557"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb557-1" data-line-number="1">profit_maker &lt;-<span class="st"> </span><span class="cf">function</span>(good_idea, stealing, depth){</a>
-<a class="sourceLine" id="cb557-2" data-line-number="2">  <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;Momma said i should&quot;</span>, good_idea, </a>
-<a class="sourceLine" id="cb557-3" data-line-number="3">              <span class="st">&quot;but instead I stole&quot;</span>, stealing, </a>
-<a class="sourceLine" id="cb557-4" data-line-number="4">              <span class="st">&quot;dollars and buried it in a hole&quot;</span>, depth, <span class="st">&quot;feet deep&quot;</span>))</a>
-<a class="sourceLine" id="cb557-5" data-line-number="5">}</a>
-<a class="sourceLine" id="cb557-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb557-7" data-line-number="7"><span class="kw">profit_maker</span>(<span class="st">&quot;say mean things about barn animals&quot;</span>, <span class="dv">100</span>, <span class="dv">1000</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb556"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb556-1" data-line-number="1">profit_maker &lt;-<span class="st"> </span><span class="cf">function</span>(good_idea, stealing, depth){</a>
+<a class="sourceLine" id="cb556-2" data-line-number="2">  <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;Momma said i should&quot;</span>, good_idea, </a>
+<a class="sourceLine" id="cb556-3" data-line-number="3">              <span class="st">&quot;but instead I stole&quot;</span>, stealing, </a>
+<a class="sourceLine" id="cb556-4" data-line-number="4">              <span class="st">&quot;dollars and buried it in a hole&quot;</span>, depth, <span class="st">&quot;feet deep&quot;</span>))</a>
+<a class="sourceLine" id="cb556-5" data-line-number="5">}</a>
+<a class="sourceLine" id="cb556-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb556-7" data-line-number="7"><span class="kw">profit_maker</span>(<span class="st">&quot;say mean things about barn animals&quot;</span>, <span class="dv">100</span>, <span class="dv">1000</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;Momma said i should say mean things about barn animals but instead I stole 100 dollars and buried it in a hole 1000 feet deep&quot;</code></pre>
-<div class="sourceCode" id="cb559"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb559-1" data-line-number="1"><span class="kw">profit_maker</span>(<span class="dt">depth=</span><span class="dv">100</span>, <span class="dt">stealing=</span><span class="dv">1</span>, <span class="dt">good_idea=</span><span class="st">&quot;keep my bellybutton open&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb558"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb558-1" data-line-number="1"><span class="kw">profit_maker</span>(<span class="dt">depth=</span><span class="dv">100</span>, <span class="dt">stealing=</span><span class="dv">1</span>, <span class="dt">good_idea=</span><span class="st">&quot;keep my bellybutton open&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;Momma said i should keep my bellybutton open but instead I stole 1 dollars and buried it in a hole 100 feet deep&quot;</code></pre>
 <p>Formal arguments can be defined with default values, so if an argument is not passed the default is used.</p>
-<div class="sourceCode" id="cb561"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb561-1" data-line-number="1">whats_it_cost &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">cost=</span><span class="dv">10</span>){</a>
-<a class="sourceLine" id="cb561-2" data-line-number="2">  <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;i dunno like&quot;</span>, cost, <span class="st">&quot;bucks&quot;</span>))</a>
-<a class="sourceLine" id="cb561-3" data-line-number="3">}</a>
-<a class="sourceLine" id="cb561-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb561-5" data-line-number="5"><span class="kw">whats_it_cost</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb560"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb560-1" data-line-number="1">whats_it_cost &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">cost=</span><span class="dv">10</span>){</a>
+<a class="sourceLine" id="cb560-2" data-line-number="2">  <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;i dunno like&quot;</span>, cost, <span class="st">&quot;bucks&quot;</span>))</a>
+<a class="sourceLine" id="cb560-3" data-line-number="3">}</a>
+<a class="sourceLine" id="cb560-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb560-5" data-line-number="5"><span class="kw">whats_it_cost</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;i dunno like 10 bucks&quot;</code></pre>
 <p>This is useful in situations where a function should do one thing most of the time, but if asked nicely should do something else.</p>
-<div class="sourceCode" id="cb563"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb563-1" data-line-number="1">ice_cream &lt;-<span class="st"> </span><span class="cf">function</span>(scoops, <span class="dt">round=</span><span class="ot">FALSE</span>){</a>
-<a class="sourceLine" id="cb563-2" data-line-number="2">  <span class="cf">if</span> (round <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>){</a>
-<a class="sourceLine" id="cb563-3" data-line-number="3">    <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;here ya go kid,&quot;</span>, scoops, <span class="st">&quot;scoops of hot fresh ice cream&quot;</span>))</a>
-<a class="sourceLine" id="cb563-4" data-line-number="4">  } <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb563-5" data-line-number="5">    <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;listen kid i&#39;m gonna give you&quot;</span>, <span class="kw">floor</span>(scoops), <span class="st">&quot;scoops and you can get out of my shop&quot;</span>))</a>
-<a class="sourceLine" id="cb563-6" data-line-number="6">  }</a>
-<a class="sourceLine" id="cb563-7" data-line-number="7">}</a>
-<a class="sourceLine" id="cb563-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb563-9" data-line-number="9">what_i_want &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>)<span class="op">*</span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb563-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb563-11" data-line-number="11"><span class="kw">ice_cream</span>(what_i_want)</a></code></pre></div>
-<pre><code>## [1] &quot;here ya go kid, 0.957180238328874 scoops of hot fresh ice cream&quot;</code></pre>
-<div class="sourceCode" id="cb565"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb565-1" data-line-number="1"><span class="kw">ice_cream</span>(what_i_want, <span class="dt">round=</span><span class="ot">TRUE</span>)</a></code></pre></div>
-<pre><code>## [1] &quot;listen kid i&#39;m gonna give you 0 scoops and you can get out of my shop&quot;</code></pre>
+<div class="sourceCode" id="cb562"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb562-1" data-line-number="1">ice_cream &lt;-<span class="st"> </span><span class="cf">function</span>(scoops, <span class="dt">round=</span><span class="ot">FALSE</span>){</a>
+<a class="sourceLine" id="cb562-2" data-line-number="2">  <span class="cf">if</span> (round <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>){</a>
+<a class="sourceLine" id="cb562-3" data-line-number="3">    <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;here ya go kid,&quot;</span>, scoops, <span class="st">&quot;scoops of hot fresh ice cream&quot;</span>))</a>
+<a class="sourceLine" id="cb562-4" data-line-number="4">  } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb562-5" data-line-number="5">    <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;listen kid i&#39;m gonna give you&quot;</span>, <span class="kw">floor</span>(scoops), <span class="st">&quot;scoops and you can get out of my shop&quot;</span>))</a>
+<a class="sourceLine" id="cb562-6" data-line-number="6">  }</a>
+<a class="sourceLine" id="cb562-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb562-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb562-9" data-line-number="9">what_i_want &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>)<span class="op">*</span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb562-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb562-11" data-line-number="11"><span class="kw">ice_cream</span>(what_i_want)</a></code></pre></div>
+<pre><code>## [1] &quot;here ya go kid, 9.44425942841917 scoops of hot fresh ice cream&quot;</code></pre>
+<div class="sourceCode" id="cb564"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb564-1" data-line-number="1"><span class="kw">ice_cream</span>(what_i_want, <span class="dt">round=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;listen kid i&#39;m gonna give you 9 scoops and you can get out of my shop&quot;</code></pre>
 <p>Default arguments can be used to make code more efficient while still being flexible. For example if the same value needs to be computed in a number of different functions, it can instead be passed. If the default is set to NULL you can check if you need to perform the computation.</p>
-<div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb567-1" data-line-number="1"><span class="co"># precompute some image&#39;s x gradient stupidly</span></a>
-<a class="sourceLine" id="cb567-2" data-line-number="2">image &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">runif</span>(<span class="dv">100</span>), <span class="dt">nrow=</span><span class="dv">10</span>, <span class="dt">ncol=</span><span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb567-3" data-line-number="3">grad &lt;-<span class="st"> </span><span class="kw">diff</span>(image)</a>
-<a class="sourceLine" id="cb567-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb567-5" data-line-number="5">image_operation_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="cf">function</span>(image, <span class="dt">grad=</span><span class="ot">NULL</span>){</a>
-<a class="sourceLine" id="cb567-6" data-line-number="6">  <span class="cf">if</span> (<span class="kw">is.null</span>(grad)){</a>
-<a class="sourceLine" id="cb567-7" data-line-number="7">    grad &lt;-<span class="st"> </span><span class="kw">diff</span>(image)</a>
-<a class="sourceLine" id="cb567-8" data-line-number="8">  }</a>
-<a class="sourceLine" id="cb567-9" data-line-number="9">  <span class="co"># do some stuff to the image</span></a>
-<a class="sourceLine" id="cb567-10" data-line-number="10">}</a>
-<a class="sourceLine" id="cb567-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb567-12" data-line-number="12">image_operation_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="cf">function</span>(image, <span class="dt">grad=</span><span class="ot">NULL</span>){</a>
-<a class="sourceLine" id="cb567-13" data-line-number="13">  <span class="cf">if</span> (<span class="kw">is.null</span>(grad)){</a>
-<a class="sourceLine" id="cb567-14" data-line-number="14">    grad &lt;-<span class="st"> </span><span class="kw">diff</span>(image)</a>
-<a class="sourceLine" id="cb567-15" data-line-number="15">  }</a>
-<a class="sourceLine" id="cb567-16" data-line-number="16">  <span class="co"># do some stuff to the image</span></a>
-<a class="sourceLine" id="cb567-17" data-line-number="17">}</a></code></pre></div>
+<div class="sourceCode" id="cb566"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb566-1" data-line-number="1"><span class="co"># precompute some image&#39;s x gradient stupidly</span></a>
+<a class="sourceLine" id="cb566-2" data-line-number="2">image &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">runif</span>(<span class="dv">100</span>), <span class="dt">nrow=</span><span class="dv">10</span>, <span class="dt">ncol=</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb566-3" data-line-number="3">grad &lt;-<span class="st"> </span><span class="kw">diff</span>(image)</a>
+<a class="sourceLine" id="cb566-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb566-5" data-line-number="5">image_operation_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="cf">function</span>(image, <span class="dt">grad=</span><span class="ot">NULL</span>){</a>
+<a class="sourceLine" id="cb566-6" data-line-number="6">  <span class="cf">if</span> (<span class="kw">is.null</span>(grad)){</a>
+<a class="sourceLine" id="cb566-7" data-line-number="7">    grad &lt;-<span class="st"> </span><span class="kw">diff</span>(image)</a>
+<a class="sourceLine" id="cb566-8" data-line-number="8">  }</a>
+<a class="sourceLine" id="cb566-9" data-line-number="9">  <span class="co"># do some stuff to the image</span></a>
+<a class="sourceLine" id="cb566-10" data-line-number="10">}</a>
+<a class="sourceLine" id="cb566-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb566-12" data-line-number="12">image_operation_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="cf">function</span>(image, <span class="dt">grad=</span><span class="ot">NULL</span>){</a>
+<a class="sourceLine" id="cb566-13" data-line-number="13">  <span class="cf">if</span> (<span class="kw">is.null</span>(grad)){</a>
+<a class="sourceLine" id="cb566-14" data-line-number="14">    grad &lt;-<span class="st"> </span><span class="kw">diff</span>(image)</a>
+<a class="sourceLine" id="cb566-15" data-line-number="15">  }</a>
+<a class="sourceLine" id="cb566-16" data-line-number="16">  <span class="co"># do some stuff to the image</span></a>
+<a class="sourceLine" id="cb566-17" data-line-number="17">}</a></code></pre></div>
 <p>Additionally, oen can use <code>...</code> to specify an arbitrary number of arguments. This is commonly used in the S3 object system where the arguments passed as <code>...</code> are simply passed on to the method calls from the generic method.</p>
-<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb568-1" data-line-number="1">print_whatever &lt;-<span class="st"> </span><span class="cf">function</span>(...){</a>
-<a class="sourceLine" id="cb568-2" data-line-number="2">  args &lt;-<span class="st"> </span><span class="kw">list</span>(...)</a>
-<a class="sourceLine" id="cb568-3" data-line-number="3">  anames &lt;-<span class="st"> </span><span class="kw">names</span>(args)</a>
-<a class="sourceLine" id="cb568-4" data-line-number="4">  <span class="cf">for</span> (a <span class="cf">in</span> anames){</a>
-<a class="sourceLine" id="cb568-5" data-line-number="5">    <span class="kw">print</span>(<span class="kw">paste</span>(a, <span class="st">&quot;:&quot;</span>, args[a]))</a>
-<a class="sourceLine" id="cb568-6" data-line-number="6">  }</a>
-<a class="sourceLine" id="cb568-7" data-line-number="7">}</a>
-<a class="sourceLine" id="cb568-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb568-9" data-line-number="9"><span class="kw">print_whatever</span>(<span class="dt">apple=</span><span class="st">&quot;banana&quot;</span>, <span class="dt">coconut=</span><span class="st">&quot;hospital visit&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb567-1" data-line-number="1">print_whatever &lt;-<span class="st"> </span><span class="cf">function</span>(...){</a>
+<a class="sourceLine" id="cb567-2" data-line-number="2">  args &lt;-<span class="st"> </span><span class="kw">list</span>(...)</a>
+<a class="sourceLine" id="cb567-3" data-line-number="3">  anames &lt;-<span class="st"> </span><span class="kw">names</span>(args)</a>
+<a class="sourceLine" id="cb567-4" data-line-number="4">  <span class="cf">for</span> (a <span class="cf">in</span> anames){</a>
+<a class="sourceLine" id="cb567-5" data-line-number="5">    <span class="kw">print</span>(<span class="kw">paste</span>(a, <span class="st">&quot;:&quot;</span>, args[a]))</a>
+<a class="sourceLine" id="cb567-6" data-line-number="6">  }</a>
+<a class="sourceLine" id="cb567-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb567-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb567-9" data-line-number="9"><span class="kw">print_whatever</span>(<span class="dt">apple=</span><span class="st">&quot;banana&quot;</span>, <span class="dt">coconut=</span><span class="st">&quot;hospital visit&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;apple : banana&quot;
 ## [1] &quot;coconut : hospital visit&quot;</code></pre>
 </div>
 <div id="todo" class="section level2">
 <h2><span class="header-section-number">8.4</span> Todo:</h2>
 <ul>
+<li>infix functions</li>
 <li>Scoping from R Faq 3.3.1</li>
 </ul>
-<div class="sourceCode" id="cb570"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb570-1" data-line-number="1"><span class="co"># S4 Methods are stored in environments </span></a>
-<a class="sourceLine" id="cb570-2" data-line-number="2">nM &lt;-<span class="st"> </span><span class="kw">asNamespace</span>(<span class="st">&quot;Matrix&quot;</span>)</a>
-<a class="sourceLine" id="cb570-3" data-line-number="3"><span class="kw">sort</span>(<span class="kw">grep</span>(<span class="st">&quot;^[.]__T__&quot;</span>, <span class="kw">names</span>(nM), <span class="dt">value=</span><span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb570-4" data-line-number="4">meth.Ops &lt;-<span class="st"> </span>nM<span class="op">$</span><span class="st">`</span><span class="dt">.__T__Ops:base</span><span class="st">`</span></a>
-<a class="sourceLine" id="cb570-5" data-line-number="5"><span class="kw">head</span>(<span class="kw">sort</span>(<span class="kw">names</span>(meth.Ops)))</a></code></pre></div>
+<div class="sourceCode" id="cb569"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb569-1" data-line-number="1"><span class="co"># S4 Methods are stored in environments </span></a>
+<a class="sourceLine" id="cb569-2" data-line-number="2">nM &lt;-<span class="st"> </span><span class="kw">asNamespace</span>(<span class="st">&quot;Matrix&quot;</span>)</a>
+<a class="sourceLine" id="cb569-3" data-line-number="3"><span class="kw">sort</span>(<span class="kw">grep</span>(<span class="st">&quot;^[.]__T__&quot;</span>, <span class="kw">names</span>(nM), <span class="dt">value=</span><span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb569-4" data-line-number="4">meth.Ops &lt;-<span class="st"> </span>nM<span class="op">$</span><span class="st">`</span><span class="dt">.__T__Ops:base</span><span class="st">`</span></a>
+<a class="sourceLine" id="cb569-5" data-line-number="5"><span class="kw">head</span>(<span class="kw">sort</span>(<span class="kw">names</span>(meth.Ops)))</a></code></pre></div>
 
 </div>
 </div>

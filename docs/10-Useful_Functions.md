@@ -12,6 +12,14 @@ order: 100
 
 # Useful Functions
 
+## RStudio Keyboard Shortcuts
+
+Command | Description 
+-------- | ----------
+`cmd+return` | execute current line or selection
+`ctrl+l` | clear console output
+`ctrl+1/2/3` | move cursor to source/console/help respectively
+
 ## Workspace
 
 Function | Function function
@@ -29,6 +37,12 @@ Function | Function function
 ---------- | ----------
 typeof | Get object's base type
 pryr::otype | Get object's type system (base, S3, S4, RC)
+names(x) | Gets the object's names, eg. for dataframes, the column names
+
+## Functions
+Function | Function function
+-------- | ----------
+args(fxn) | prints the arguments and defaults of function `fxn`
 
 ## Iteration
 
